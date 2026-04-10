@@ -38,6 +38,9 @@ If `dist/fikir.css` is missing, run `npm run build` first.
 
 See [playground/README.md](./playground/README.md) for section details.
 
+### Playground Screenshot
+![Fikir CSS v0.2 playground preview](./playground/screenshots/playground-light.svg)
+
 ## Architecture (v0.2)
 Single sources of truth:
 - Naming contract: `contracts/naming.contract.mjs`
