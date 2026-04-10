@@ -1,0 +1,17 @@
+@layer utilities {
+  {{utility.roundedMd}} {
+    border-radius: var(--radius-md);
+  }
+
+  {{utility.roundedLg}} {
+    border-radius: var(--radius-lg);
+  }
+
+  {{utility.shadowSm}} {
+    box-shadow: var(--shadow-sm);
+  }
+
+  {{utility.shadowMd}} {
+    box-shadow: var(--shadow-md);
+  }
+}

@@ -1,0 +1,11 @@
+@layer layouts {
+  .stack {
+    --stack-gap: var(--space-4);
+    display: flex;
+    flex-direction: column;
+  }
+
+  .stack > * + * {
+    margin-block-start: var(--stack-gap);
+  }
+}

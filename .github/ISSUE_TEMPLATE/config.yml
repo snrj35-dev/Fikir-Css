@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Scope question
+    url: https://github.com/<org-or-user>/<repo>/issues/new?template=documentation_or_scope.md
+    about: Use this for v0.2 scope clarification requests.

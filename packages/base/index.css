@@ -1,0 +1,23 @@
+@layer base {
+  html,
+  body {
+    min-block-size: 100%;
+  }
+
+  body {
+    background: var(--color-bg-default);
+    color: var(--color-fg-default);
+    font-family: ui-sans-serif, system-ui, -apple-system, sans-serif;
+    line-height: 1.5;
+  }
+
+  a {
+    color: var(--color-accent);
+    text-underline-offset: 0.2em;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+  }
+}

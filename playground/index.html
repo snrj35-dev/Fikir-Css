@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fikir CSS v0.2 Foundation Playground</title>
+    <link id="fikir-css-bundle" rel="stylesheet" href="../dist/fikir.css" />
+    <link rel="stylesheet" href="./demo.css" />
+  </head>
+  <body>
+    <main class="demo-shell stack">
+      <p id="build-warning" class="build-warning" role="status" hidden>
+        Build output missing: <code>dist/fikir.css</code> is not loaded. Run <code>npm run build</code>.
+      </p>
+
+      <header class="cluster justify-between page-header">
+        <div class="stack">
+          <h1>Fikir CSS v0.2 Foundation Playground</h1>
+          <p class="text-sm">Showcase only: current class surface and layout primitives.</p>
+        </div>
+        <div class="cluster">
+          <span class="badge">Theme</span>
+          <button id="theme-toggle" class="btn btn-outline btn-sm" type="button">Switch to dark</button>
+        </div>
+      </header>
+
+      <section class="section stack">
+        <h2>1) Component Surface</h2>
+        <div class="cluster demo-cards">
+          <article class="card card-elevated card-p-md stack demo-card">
+            <h3>Button</h3>
+            <div class="cluster">
+              <button class="btn btn-primary btn-md">Primary</button>
+              <button class="btn btn-outline btn-md">Outline</button>
+              <button class="btn btn-danger btn-sm">Danger</button>
+            </div>
+          </article>
+
+          <article class="card card-elevated card-p-md stack demo-card">
+            <h3>Input</h3>
+            <input class="input" type="text" value="Input component" />
+            <p class="text-sm">Focusable input with semantic defaults.</p>
+          </article>
+
+          <article class="card card-elevated card-p-md stack demo-card">
+            <h3>Badge + Alert</h3>
+            <div class="cluster">
+              <span class="badge">Default</span>
+              <span class="badge bg-primary-500 text-white">Utility tone</span>
+            </div>
+            <div class="alert alert-danger">Alert danger state.</div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section stack">
+        <h2>2) Layout Primitives</h2>
+        <div class="stack card card-plain card-p-md demo-frame">
+          <h3>`stack` in a settings form</h3>
+          <div class="stack" style="--stack-gap: var(--space-2)">
+            <label class="text-sm">Name</label>
+            <input class="input" type="text" value="Ada Lovelace" />
+            <label class="text-sm">Email</label>
+            <input class="input" type="email" value="ada@example.com" />
+            <div class="cluster">
+              <button class="btn btn-primary btn-sm">Save</button>
+              <button class="btn btn-outline btn-sm">Cancel</button>
+            </div>
+          </div>
+        </div>
+
+        <div class="stack card card-plain card-p-md demo-frame">
+          <h3>`cluster` in an action toolbar</h3>
+          <div class="cluster" style="--cluster-gap: var(--space-2)">
+            <button class="btn btn-outline btn-sm">Filter</button>
+            <button class="btn btn-outline btn-sm">Sort</button>
+            <button class="btn btn-outline btn-sm">Export</button>
+            <span class="badge">12 selected</span>
+          </div>
+        </div>
+
+        <div class="stack card card-plain card-p-md demo-frame">
+          <h3>`sidebar` for dashboard split</h3>
+          <div class="sidebar" style="--sidebar-width: 14rem; --sidebar-gap: var(--space-4)">
+            <aside class="card card-p-sm">
+              <strong>Filters</strong>
+              <div class="stack" style="--stack-gap: var(--space-2)">
+                <label class="text-sm"><input type="checkbox" checked /> Active only</label>
+                <label class="text-sm"><input type="checkbox" /> Include archived</label>
+              </div>
+            </aside>
+            <section class="card card-p-sm stack" style="--stack-gap: var(--space-2)">
+              <strong>Results</strong>
+              <p class="text-sm">This area grows while sidebar stays fixed-width on larger screens.</p>
+              <button class="btn btn-primary btn-sm w-full">Run query</button>
+            </section>
+          </div>
+        </div>
+      </section>
+
+      <section class="section stack">
+        <h2>3) Utility vs Semantic Override (3 examples)</h2>
+        <div class="sidebar" style="--sidebar-width: 22rem; --sidebar-gap: var(--space-4)">
+          <article class="card card-p-md stack demo-frame">
+            <h3>Example A: Button background</h3>
+            <p class="text-sm code-line">`btn btn-primary` vs `bg-red-500`</p>
+            <div class="cluster">
+              <button class="btn btn-primary btn-sm">Semantic only</button>
+              <button class="btn btn-primary btn-sm bg-red-500">Utility override</button>
+            </div>
+          </article>
+
+          <article class="card card-p-md stack demo-frame">
+            <h3>Example B: Card padding</h3>
+            <p class="text-sm code-line">`card-p-sm` vs `p-4`</p>
+            <div class="stack" style="--stack-gap: var(--space-2)">
+              <div class="card card-elevated card-p-sm">Semantic padding</div>
+              <div class="card card-elevated card-p-sm p-4">Utility padding override</div>
+            </div>
+          </article>
+        </div>
+
+        <article class="card card-p-md stack demo-frame">
+          <h3>Example C: Input radius</h3>
+          <p class="text-sm code-line">`input` vs `rounded-lg`</p>
+          <div class="cluster demo-inline-form">
+            <input class="input" type="text" value="Semantic radius" />
+            <input class="input rounded-lg" type="text" value="Utility radius override" />
+          </div>
+        </article>
+      </section>
+
+      <section class="section stack">
+        <h2>4) Light / Dark Theme Preview</h2>
+        <div class="sidebar" style="--sidebar-width: 22rem; --sidebar-gap: var(--space-4)">
+          <article class="theme-panel stack" data-theme="light">
+            <h3>Light panel (`data-theme="light"`)</h3>
+            <div class="card card-elevated card-p-md stack">
+              <span class="badge">Light</span>
+              <input class="input" type="text" value="Light input" />
+              <button class="btn btn-primary btn-sm">Primary action</button>
+            </div>
+          </article>
+
+          <article class="theme-panel stack" data-theme="dark">
+            <h3>Dark panel (`data-theme="dark"`)</h3>
+            <div class="card card-elevated card-p-md stack">
+              <span class="badge">Dark</span>
+              <input class="input" type="text" value="Dark input" />
+              <button class="btn btn-primary btn-sm">Primary action</button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section stack">
+        <h2>5) Recipe Resolver Usage Snapshot</h2>
+        <article class="card card-p-md stack demo-frame">
+          <p class="text-sm">Source: `packages/recipes/button.ts` -> generated resolver output.</p>
+          <pre class="code-block"><code id="recipe-code"></code></pre>
+          <div class="cluster">
+            <span class="badge">Rendered with resolver output</span>
+            <button id="recipe-button" class="btn btn-outline btn-sm">Resolver button</button>
+          </div>
+        </article>
+      </section>
+    </main>
+
+    <script src="./demo.js" defer></script>
+  </body>
+</html>

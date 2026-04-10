@@ -1,0 +1,25 @@
+@layer utilities {
+  {{utility.textXs}} {
+    font-size: var(--font-size-xs);
+  }
+
+  {{utility.textSm}} {
+    font-size: var(--font-size-sm);
+  }
+
+  {{utility.textMd}} {
+    font-size: var(--font-size-md);
+  }
+
+  {{utility.textLg}} {
+    font-size: var(--font-size-lg);
+  }
+
+  {{utility.fontMedium}} {
+    font-weight: 500;
+  }
+
+  {{utility.fontSemibold}} {
+    font-weight: 600;
+  }
+}

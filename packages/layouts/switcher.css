@@ -1,0 +1,12 @@
+@layer layouts {
+  .switcher {
+    --switcher-gap: var(--space-4);
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--switcher-gap);
+  }
+
+  .switcher > * {
+    flex: 1 1 16rem;
+  }
+}

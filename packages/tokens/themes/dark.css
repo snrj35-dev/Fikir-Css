@@ -1,0 +1,9 @@
+@layer base {
+  [data-theme="dark"] {
+    --color-bg-default: oklch(18% 0.01 260);
+    --color-bg-surface: oklch(24% 0.01 260);
+    --color-fg-default: oklch(96% 0.01 260);
+    --color-fg-muted: oklch(84% 0.01 260);
+    --color-border-subtle: oklch(32% 0.01 260);
+  }
+}

@@ -1,0 +1,22 @@
+@layer utilities {
+  {{utility.hoverBgPrimary600}}:hover {
+    background: var(--color-primary-600);
+  }
+
+  {{utility.focusVisibleRingPrimary}}:focus-visible {
+    box-shadow: 0 0 0 3px color-mix(in oklch, var(--color-primary-500) 35%, transparent);
+  }
+
+  {{utility.disabledOpacity50}}:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+
+  [aria-invalid="true"]{{utility.ariaInvalidRingDanger}} {
+    box-shadow: 0 0 0 3px color-mix(in oklch, var(--color-danger) 35%, transparent);
+  }
+
+  [data-open="true"]{{utility.dataOpenShadowLg}} {
+    box-shadow: var(--shadow-md);
+  }
+}

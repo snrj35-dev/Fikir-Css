@@ -1,0 +1,4 @@
+/*
+  Light theme semantic token overrides are declared in packages/tokens/semantic.css via
+  :root, [data-theme="light"] to avoid duplicate token assignments.
+*/

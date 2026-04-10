@@ -1,0 +1,6 @@
+@layer layouts {
+  .center {
+    inline-size: min(100% - (2 * var(--space-4)), var(--container-md));
+    margin-inline: auto;
+  }
+}

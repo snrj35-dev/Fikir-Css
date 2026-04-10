@@ -1,0 +1,33 @@
+@layer utilities {
+  {{utility.bgPrimary500}} {
+    background: var(--color-primary-500);
+  }
+
+  {{utility.bgPrimary600}} {
+    background: var(--color-primary-600);
+  }
+
+  {{utility.bgSurface}} {
+    background: var(--color-bg-surface);
+  }
+
+  {{utility.bgRed500}} {
+    background: var(--color-danger);
+  }
+
+  {{utility.textWhite}} {
+    color: #fff;
+  }
+
+  {{utility.textFgDefault}} {
+    color: var(--color-fg-default);
+  }
+
+  {{utility.borderSubtle}} {
+    border-color: var(--color-border-subtle);
+  }
+
+  {{utility.forceBgRed500}} {
+    background: var(--color-danger) !important;
+  }
+}

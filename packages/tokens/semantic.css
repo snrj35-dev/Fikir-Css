@@ -1,0 +1,12 @@
+@layer base {
+  :root,
+  [data-theme="light"] {
+    --color-bg-default: var(--color-gray-50);
+    --color-bg-surface: #ffffff;
+    --color-fg-default: var(--color-gray-900);
+    --color-fg-muted: var(--color-gray-700);
+    --color-border-subtle: var(--color-gray-300);
+    --color-accent: var(--color-primary-500);
+    --color-danger: var(--color-danger-500);
+  }
+}

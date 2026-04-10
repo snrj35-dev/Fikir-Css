@@ -1,0 +1,21 @@
+@layer utilities {
+  {{utility.flex}} {
+    display: flex;
+  }
+
+  {{utility.inlineFlex}} {
+    display: inline-flex;
+  }
+
+  {{utility.itemsCenter}} {
+    align-items: center;
+  }
+
+  {{utility.justifyBetween}} {
+    justify-content: space-between;
+  }
+
+  {{utility.wFull}} {
+    inline-size: 100%;
+  }
+}

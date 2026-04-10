@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="720" viewBox="0 0 1280 720" role="img" aria-label="Playground dark mode placeholder">
+  <rect width="1280" height="720" fill="#0b1220"/>
+  <rect x="60" y="60" width="1160" height="600" rx="12" fill="#111827" stroke="#334155"/>
+  <text x="90" y="130" font-family="Arial, sans-serif" font-size="40" fill="#f8fafc">Fikir CSS Playground - Dark Screenshot Placeholder</text>
+  <text x="90" y="190" font-family="Arial, sans-serif" font-size="24" fill="#cbd5e1">Replace this file with a real screenshot before publishing.</text>
+</svg>
