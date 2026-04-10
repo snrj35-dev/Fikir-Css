@@ -18,15 +18,14 @@ playground/
 5. Recipe resolver usage snapshot
 
 ## Screenshots
-Light mode (placeholder):
+Light mode:
 
-![Playground light mode placeholder](./screenshots/playground-light.svg)
+![Playground light mode screenshot](./screenshots/playground-light.svg)
 
-Dark mode (placeholder):
+Dark mode:
 
-![Playground dark mode placeholder](./screenshots/playground-dark.svg)
-
-Before publishing, replace these placeholders with real captures from `playground/index.html`.
+![Playground dark mode screenshot](./screenshots/playground-dark.svg)
+These captures are generated from `playground/index.html` with the current `dist/fikir.css` build output.
 
 ## How it binds to current foundation
 - Framework styles: `../dist/fikir.css`
