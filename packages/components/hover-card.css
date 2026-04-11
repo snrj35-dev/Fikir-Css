@@ -1,0 +1,28 @@
+@layer components {
+  {{component.hoverCard}} {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  {{component.hoverCardContent}} {
+    position: absolute;
+    inset-block-start: calc(100% + var(--space-2));
+    inset-inline-start: 0;
+    z-index: 48;
+    display: none;
+    min-inline-size: 16rem;
+    max-inline-size: 24rem;
+    padding: var(--space-3);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border-subtle);
+    background: var(--color-bg-surface);
+    color: var(--color-fg-default);
+    box-shadow: var(--shadow-md);
+  }
+
+  {{component.hoverCard}}[data-open="true"] {{component.hoverCardContent}} {
+    display: grid;
+    gap: var(--space-2);
+  }
+}

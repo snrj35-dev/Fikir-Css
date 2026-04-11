@@ -1,0 +1,52 @@
+@layer components {
+  {{component.searchBox}} {
+    display: flex;
+    inline-size: 100%;
+    align-items: stretch;
+  }
+
+  {{component.searchBoxInput}} {
+    flex: 1 1 auto;
+    min-inline-size: 0;
+    min-block-size: 2.5rem;
+    padding-inline: var(--space-3);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-md);
+    background: var(--color-bg-surface);
+    color: var(--color-fg-default);
+  }
+
+  {{component.searchBoxInput}}:focus-visible {
+    border-color: var(--color-accent);
+  }
+
+  {{component.searchBoxAction}} {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-block-size: 2.5rem;
+    padding-inline: var(--space-3);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-md);
+    background: var(--color-primary-500);
+    color: var(--color-gray-50);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+  {{component.searchBox}} > * + * {
+    margin-inline-start: -1px;
+  }
+
+  {{component.searchBox}} > :first-child:not(:last-child) {
+    border-start-end-radius: 0;
+    border-end-end-radius: 0;
+  }
+
+  {{component.searchBox}} > :last-child:not(:first-child) {
+    border-start-start-radius: 0;
+    border-end-start-radius: 0;
+  }
+}

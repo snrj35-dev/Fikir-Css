@@ -1,0 +1,27 @@
+@layer components {
+  {{component.markdownSurface}} {
+    display: grid;
+    gap: var(--space-3);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-md);
+    background: var(--color-bg-surface);
+    color: var(--color-fg-default);
+    padding: var(--space-4);
+  }
+
+  {{component.markdownSurface}} h1,
+  {{component.markdownSurface}} h2,
+  {{component.markdownSurface}} h3,
+  {{component.markdownSurface}} p,
+  {{component.markdownSurface}} ul {
+    margin: 0;
+  }
+
+  {{component.markdownSurface}} ul {
+    padding-inline-start: 1.2rem;
+  }
+
+  {{component.markdownSurface}} pre {
+    margin: 0;
+  }
+}

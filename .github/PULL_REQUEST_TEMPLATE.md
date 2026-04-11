@@ -5,7 +5,7 @@
 ## Scope check
 - [ ] This PR does not introduce a new framework feature
 - [ ] This PR does not add a new architecture layer
-- [ ] This PR stays aligned with v0.2 foundation prototype goals
+- [ ] This PR stays aligned with v0.3 foundation prototype goals
 
 ## Validation
 - [ ] `npm run build`

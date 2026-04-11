@@ -5,5 +5,6 @@
     --color-fg-default: oklch(96% 0.01 260);
     --color-fg-muted: oklch(84% 0.01 260);
     --color-border-subtle: oklch(32% 0.01 260);
+    --color-danger: color-mix(in oklch, var(--color-danger-500) 72%, var(--color-fg-default));
   }
 }

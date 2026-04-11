@@ -1,0 +1,35 @@
+@layer components {
+  {{component.sidebarNav}} {
+    display: grid;
+    gap: var(--space-3);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-md);
+    background: var(--color-bg-surface);
+    color: var(--color-fg-default);
+    padding: var(--space-3);
+  }
+
+  {{component.sidebarNavSection}} {
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  {{component.sidebarNavItem}} {
+    display: inline-flex;
+    align-items: center;
+    justify-content: flex-start;
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-md);
+    background: transparent;
+    color: var(--color-fg-default);
+    text-decoration: none;
+    padding: var(--space-2) var(--space-3);
+  }
+
+  {{component.sidebarNavItem}}[aria-current="page"] {
+    background: var(--color-primary-500);
+    color: var(--color-gray-50);
+    border-color: var(--color-primary-500);
+    font-weight: 700;
+  }
+}

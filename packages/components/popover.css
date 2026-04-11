@@ -1,0 +1,27 @@
+@layer components {
+  {{component.popover}} {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  {{component.popoverContent}} {
+    position: absolute;
+    inset-block-start: calc(100% + var(--space-2));
+    inset-inline-start: 0;
+    z-index: 48;
+    display: none;
+    min-inline-size: 14rem;
+    max-inline-size: 22rem;
+    padding: var(--space-3);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border-subtle);
+    background: var(--color-bg-surface);
+    color: var(--color-fg-default);
+    box-shadow: var(--shadow-md);
+  }
+
+  {{component.popover}}[data-open="true"] {{component.popoverContent}} {
+    display: block;
+  }
+}

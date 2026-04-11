@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fikir CSS App Shell Example</title>
+    <link rel="stylesheet" href="../dist/fikir.css" />
+    <style>
+      body {
+        margin: 0;
+        padding: 1rem;
+      }
+
+      .example-shell {
+        max-width: 1100px;
+        margin: 0 auto;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="example-shell stack" style="--stack-gap: var(--space-3)">
+      <div class="page-header">
+        <div class="page-header-content">
+          <h1 style="margin: 0">App Shell Example</h1>
+          <p class="text-sm" style="margin: 0">Small product shell sample built with current v0.2 surface.</p>
+        </div>
+        <div class="page-header-actions">
+          <button class="btn btn-outline btn-sm" type="button">Export</button>
+          <button class="btn btn-primary btn-sm" type="button">New item</button>
+        </div>
+      </div>
+
+      <div class="app-shell">
+        <header class="app-shell-topbar">
+          <strong>Workspace</strong>
+          <span class="badge">Team</span>
+        </header>
+
+        <div class="app-shell-content">
+          <aside class="app-shell-sidebar">
+            <nav class="sidebar-nav" aria-label="Example sidebar navigation">
+              <section class="sidebar-nav-section">
+                <a class="sidebar-nav-item" href="#" aria-current="page">Overview</a>
+                <a class="sidebar-nav-item" href="#">Projects</a>
+                <a class="sidebar-nav-item" href="#">Members</a>
+              </section>
+            </nav>
+          </aside>
+
+          <main class="app-shell-main">
+            <article class="section-block">
+              <header class="section-header">
+                <h2 style="margin: 0">Active Sprint</h2>
+                <button class="btn btn-outline btn-sm" type="button">Details</button>
+              </header>
+              <div class="section-body">
+                <p class="text-sm" style="margin: 0">Sprint status and team progress summary.</p>
+                <nav class="pagination" aria-label="Example pagination">
+                  <a class="pagination-item" href="#" aria-label="Previous page">Prev</a>
+                  <a class="pagination-item" href="#" aria-current="page">1</a>
+                  <a class="pagination-item" href="#">2</a>
+                  <a class="pagination-item" href="#" aria-label="Next page">Next</a>
+                </nav>
+              </div>
+            </article>
+          </main>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>

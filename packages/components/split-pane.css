@@ -1,0 +1,30 @@
+@layer components {
+  {{component.splitPane}} {
+    --split-pane-gap: var(--space-4);
+    --split-pane-side: 20rem;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: var(--split-pane-gap);
+  }
+
+  @media (min-width: 64rem) {
+    {{component.splitPane}} {
+      grid-template-columns: minmax(var(--split-pane-side), 1fr) minmax(0, 1fr);
+      align-items: start;
+    }
+
+    {{component.splitPane}}[data-split-pane-side="end"] {
+      grid-template-columns: minmax(0, 1fr) minmax(var(--split-pane-side), 1fr);
+    }
+  }
+
+  {{component.splitPanePrimary}},
+  {{component.splitPaneSecondary}} {
+    min-inline-size: 0;
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-md);
+    background: var(--color-bg-surface);
+    color: var(--color-fg-default);
+    padding: var(--space-3);
+  }
+}

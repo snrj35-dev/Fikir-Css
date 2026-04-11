@@ -1,0 +1,36 @@
+@layer components {
+  {{component.progress}} {
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  {{component.progressLabel}} {
+    margin: 0;
+    color: var(--color-fg-muted);
+    font-size: var(--font-size-sm);
+  }
+
+  {{component.progressTrack}} {
+    inline-size: 100%;
+    block-size: 0.5rem;
+    overflow: hidden;
+    border-radius: 999px;
+    background: var(--color-border-subtle);
+  }
+
+  {{component.progressIndicator}} {
+    inline-size: var(--progress-value, 0%);
+    block-size: 100%;
+    border-radius: inherit;
+    background: var(--color-accent);
+    transition: inline-size 180ms ease;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @layer components {
+    {{component.progressIndicator}} {
+      transition: none;
+    }
+  }
+}

@@ -28,7 +28,7 @@ export const recipesContract = {
     },
     buttonSolid: {
       selector: "component.btnSolid",
-      declarations: [["background", "var(--color-primary-500)"], ["color", "#fff"]]
+      declarations: [["background", "var(--color-primary-500)"], ["color", "var(--color-gray-50)"]]
     },
     buttonOutline: {
       selector: "component.btnOutline",
@@ -40,7 +40,7 @@ export const recipesContract = {
     },
     buttonPrimary: {
       selector: "component.btnPrimary",
-      declarations: [["background", "var(--color-primary-500)"], ["color", "#fff"]]
+      declarations: [["background", "var(--color-primary-500)"], ["color", "var(--color-gray-50)"]]
     },
     buttonNeutral: {
       selector: "component.btnNeutral",
@@ -52,7 +52,7 @@ export const recipesContract = {
     },
     buttonDanger: {
       selector: "component.btnDanger",
-      declarations: [["background", "var(--color-danger)"], ["color", "#fff"]]
+      declarations: [["background", "var(--color-danger)"], ["color", "var(--color-gray-50)"]]
     },
     cardBase: {
       selector: "component.card",

@@ -27,28 +27,72 @@
       <section class="section stack">
         <h2>1) Component Surface</h2>
         <div class="cluster demo-cards">
-          <article class="card card-elevated card-p-md stack demo-card">
+          <article id="core-extensions" class="card card-elevated card-p-md stack demo-card">
             <h3>Button</h3>
             <div class="cluster">
               <button class="btn btn-primary btn-md">Primary</button>
               <button class="btn btn-outline btn-md">Outline</button>
               <button class="btn btn-danger btn-sm">Danger</button>
+              <button class="btn btn-neutral btn-sm" disabled>Disabled</button>
             </div>
           </article>
 
           <article class="card card-elevated card-p-md stack demo-card">
-            <h3>Input</h3>
+            <h3>Input + Textarea + Select</h3>
             <input class="input" type="text" value="Input component" />
+            <textarea class="textarea">Textarea component</textarea>
+            <select class="select" aria-label="Demo select">
+              <option value="">Select option</option>
+              <option value="alpha">Alpha</option>
+              <option value="beta">Beta</option>
+            </select>
             <p class="text-sm">Focusable input with semantic defaults.</p>
           </article>
 
           <article class="card card-elevated card-p-md stack demo-card">
             <h3>Badge + Alert</h3>
             <div class="cluster">
-              <span class="badge">Default</span>
-              <span class="badge bg-primary-500 text-white">Utility tone</span>
+              <span class="badge badge-neutral">Neutral</span>
+              <span class="badge badge-primary">Primary</span>
+              <span class="badge badge-danger">Danger</span>
             </div>
-            <div class="alert alert-danger">Alert danger state.</div>
+            <div class="alert alert-danger" role="alert" aria-live="polite">
+              <p class="alert-title">Action required</p>
+              <p class="alert-description">Your billing profile needs verification.</p>
+            </div>
+          </article>
+
+          <article class="card card-elevated card-p-md stack demo-card">
+            <h3>Core Extensions</h3>
+            <div class="cluster">
+              <button class="icon-button icon-button-sm" type="button" aria-label="Open quick menu">
+                <span aria-hidden="true">☰</span>
+              </button>
+              <button class="icon-button icon-button-md" type="button" aria-label="Refresh data">
+                <span aria-hidden="true">↻</span>
+              </button>
+              <button class="icon-button icon-button-lg" type="button" disabled aria-label="Disabled settings">
+                <span aria-hidden="true">⚙</span>
+              </button>
+            </div>
+            <div class="cluster">
+              <a class="link" href="#core-extensions">Primary link</a>
+              <a class="link link-muted" href="#core-extensions">Muted link</a>
+              <a class="link link-danger" href="#core-extensions">Danger link</a>
+            </div>
+            <hr class="divider" />
+            <div class="surface surface-raised stack" style="--stack-gap: var(--space-2)">
+              <span class="visually-hidden">Loading profile summary</span>
+              <div class="cluster">
+                <span class="spinner spinner-sm" aria-hidden="true"></span>
+                <span class="spinner spinner-md" aria-hidden="true"></span>
+                <span class="spinner spinner-lg" aria-hidden="true"></span>
+              </div>
+              <span class="skeleton skeleton-text"></span>
+              <span class="skeleton skeleton-text" style="inline-size: 72%"></span>
+              <span class="skeleton skeleton-block"></span>
+              <span class="skeleton skeleton-circle"></span>
+            </div>
           </article>
         </div>
       </section>
@@ -96,6 +140,29 @@
             </section>
           </div>
         </div>
+
+        <div class="stack card card-plain card-p-md demo-frame">
+          <h3>`container` + `center` + `grid` composition</h3>
+          <div class="container">
+            <div class="center" style="--center-max: 48rem">
+              <div class="grid" style="--grid-min: 11rem; --grid-gap: var(--space-2)">
+                <div class="surface surface-sunken">Card A</div>
+                <div class="surface surface-sunken">Card B</div>
+                <div class="surface surface-sunken">Card C</div>
+                <div class="surface surface-sunken">Card D</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="stack card card-plain card-p-md demo-frame">
+          <h3>`switcher` refinement with fixed card width</h3>
+          <div class="switcher" data-switcher-fixed="true" style="--switcher-min: 12rem; --switcher-gap: var(--space-2)">
+            <div class="surface">Overview</div>
+            <div class="surface">Billing</div>
+            <div class="surface">Security</div>
+          </div>
+        </div>
       </section>
 
       <section class="section stack">
@@ -110,7 +177,7 @@
             </div>
           </article>
 
-          <article class="card card-p-md stack demo-frame">
+          <article class="card card-p-md stack demo-frame" data-pattern="date-picker">
             <h3>Example B: Card padding</h3>
             <p class="text-sm code-line">`card-p-sm` vs `p-4`</p>
             <div class="stack" style="--stack-gap: var(--space-2)">
@@ -164,7 +231,1441 @@
           </div>
         </article>
       </section>
+
+      <section class="section stack">
+        <h2>6) Input Validation Surface</h2>
+        <article class="card card-p-md stack demo-frame">
+          <p class="text-sm">
+            `aria-invalid="true"` + `aria-invalid:ring-danger` birlikte kullanılır; disabled ve readonly görünümü ayrıdır.
+          </p>
+
+          <form class="stack demo-validation-form" novalidate>
+            <div class="field demo-field">
+              <label class="label" for="demo-email-valid">Email (valid)</label>
+              <input id="demo-email-valid" class="input" type="email" value="ada@example.com" />
+              <p class="helper-text">Kullanıcıya ulaşmak için bu adres kullanılacaktır.</p>
+            </div>
+
+            <div class="field demo-field" data-field-invalid="true">
+              <label class="label" for="demo-email-invalid">Email (invalid)</label>
+              <input
+                id="demo-email-invalid"
+                class="input aria-invalid:ring-danger"
+                type="email"
+                value="ada.example.com"
+                aria-invalid="true"
+                aria-describedby="demo-email-invalid-error"
+              />
+              <p id="demo-email-invalid-error" class="error-text">Geçerli bir e-posta adresi girilmelidir.</p>
+            </div>
+
+            <div class="switcher" style="--switcher-gap: var(--space-3)">
+              <div class="field demo-field">
+                <label class="label" for="demo-email-readonly">Email (readonly)</label>
+                <input id="demo-email-readonly" class="input" type="email" value="readonly@example.com" readonly />
+                <p class="helper-text">Bu alan görüntülenir ancak düzenlenmez.</p>
+              </div>
+
+              <div class="field demo-field" data-field-disabled="true">
+                <label class="label" for="demo-email-disabled">Email (disabled)</label>
+                <input
+                  id="demo-email-disabled"
+                  class="input disabled:opacity-50"
+                  type="email"
+                  value="disabled@example.com"
+                  disabled
+                />
+                <p class="helper-text">Bu alan etkileşime kapalıdır.</p>
+              </div>
+            </div>
+          </form>
+        </article>
+      </section>
+
+      <section class="section stack">
+        <h2>7) Card Composition Surface</h2>
+        <article class="card card-elevated card-p-md demo-frame" data-card-layout="stack">
+          <header data-card-slot="header">
+            <strong>Plan: Team</strong>
+          </header>
+
+          <div data-card-slot="body" class="stack" style="--stack-gap: var(--space-2)">
+            <p class="text-sm">Composition spacing is handled by `data-card-layout="stack"`.</p>
+            <p class="text-sm">Footer separator is handled by `data-card-slot="footer"` rule.</p>
+          </div>
+
+          <footer data-card-slot="footer" class="cluster">
+            <button class="btn btn-outline btn-sm">Cancel</button>
+            <button class="btn btn-primary btn-sm">Upgrade</button>
+          </footer>
+        </article>
+      </section>
+
+      <section class="section stack">
+        <h2>8) Choice Controls + Range + OTP</h2>
+        <article class="card card-p-md stack demo-frame">
+          <div class="sidebar demo-choice-grid" style="--sidebar-width: 20rem; --sidebar-gap: var(--space-4)">
+            <div class="field">
+              <span class="label">Checkbox</span>
+              <label class="cluster text-sm">
+                <input class="checkbox" type="checkbox" checked />
+                Email notifications
+              </label>
+              <label class="cluster text-sm">
+                <input class="checkbox" type="checkbox" disabled />
+                Disabled option
+              </label>
+            </div>
+
+            <div class="field">
+              <span class="label">Radio group</span>
+              <label class="cluster text-sm">
+                <input class="radio" type="radio" name="demo-plan" checked />
+                Starter
+              </label>
+              <label class="cluster text-sm">
+                <input class="radio" type="radio" name="demo-plan" />
+                Pro
+              </label>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="cluster text-sm">
+              <input id="demo-switch" class="switch" type="checkbox" checked />
+              Auto-sync
+            </label>
+            <p class="helper-text">Switch visual, checkbox semantics.</p>
+          </div>
+
+          <div class="field">
+            <label class="label" for="demo-volume">Volume</label>
+            <input id="demo-volume" class="range-slider" type="range" min="0" max="100" value="65" />
+            <p class="helper-text">Range slider canonical surface.</p>
+          </div>
+
+          <div class="field">
+            <span class="label">OTP / Pin Input</span>
+            <div class="otp-input" aria-label="Verification code">
+              <div class="otp-input-group">
+                <input class="otp-input-slot" type="text" inputmode="numeric" maxlength="1" value="1" />
+                <input class="otp-input-slot" type="text" inputmode="numeric" maxlength="1" value="9" />
+                <input class="otp-input-slot" type="text" inputmode="numeric" maxlength="1" value="" />
+                <input
+                  class="otp-input-slot"
+                  type="text"
+                  inputmode="numeric"
+                  maxlength="1"
+                  value=""
+                  aria-invalid="true"
+                  aria-label="Last code digit"
+                />
+              </div>
+            </div>
+            <p class="helper-text">Four-slot OTP composition with semantic slot surface.</p>
+          </div>
+        </article>
+      </section>
+
+      <section class="section stack">
+        <h2>9) Input Group Surface</h2>
+        <article class="card card-p-md stack demo-frame">
+          <div class="field">
+            <label class="label" for="demo-username">Username</label>
+            <div class="input-group">
+              <span class="input-group-addon">@</span>
+              <input id="demo-username" class="input" type="text" value="fikircss" />
+            </div>
+            <p class="helper-text">Prefix addon + input composition.</p>
+          </div>
+
+          <div class="field" data-field-invalid="true">
+            <label class="label" for="demo-price">Price</label>
+            <div class="input-group" data-input-group-invalid="true">
+              <input
+                id="demo-price"
+                class="input aria-invalid:ring-danger"
+                type="text"
+                value=""
+                aria-invalid="true"
+                aria-describedby="demo-price-error"
+              />
+              <span class="input-group-addon">USD</span>
+            </div>
+            <p id="demo-price-error" class="error-text">Price değeri zorunludur.</p>
+          </div>
+        </article>
+      </section>
+
+      <section class="section stack">
+        <h2>10) Modal Surface</h2>
+        <article class="card card-p-md stack demo-frame">
+          <p class="text-sm">Modal uses `data-open` state and semantic dialog attributes.</p>
+          <div class="cluster">
+            <button class="btn btn-primary btn-sm" type="button" data-modal-open="demo-modal">Open modal</button>
+          </div>
+        </article>
+
+        <div id="demo-modal" class="modal" data-open="false" aria-hidden="true">
+          <button class="modal-backdrop" type="button" data-modal-close="demo-modal" aria-label="Close modal"></button>
+          <section class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="demo-modal-title">
+            <header class="modal-header">
+              <h3 id="demo-modal-title">Modal Title</h3>
+            </header>
+            <div class="modal-body stack" style="--stack-gap: var(--space-2)">
+              <p class="text-sm">Overlay surface for focused tasks and confirmations.</p>
+              <div class="field">
+                <label class="label" for="demo-modal-input">Quick note</label>
+                <input id="demo-modal-input" class="input" type="text" value="Draft value" />
+              </div>
+            </div>
+            <footer class="modal-footer">
+              <button class="btn btn-outline btn-sm" type="button" data-modal-close="demo-modal">Cancel</button>
+              <button class="btn btn-primary btn-sm" type="button" data-modal-close="demo-modal">Save</button>
+            </footer>
+          </section>
+        </div>
+      </section>
+
+      <section class="section stack">
+        <h2>11) Toast Surface</h2>
+        <article class="card card-p-md stack demo-frame">
+          <p class="text-sm">Toast items use `data-open` and live region semantics.</p>
+          <div class="cluster">
+            <button class="btn btn-primary btn-sm" type="button" data-toast-show="demo-toast-info">Show info toast</button>
+            <button class="btn btn-danger btn-sm" type="button" data-toast-show="demo-toast-danger">
+              Show danger toast
+            </button>
+          </div>
+        </article>
+      </section>
+
+      <section class="section stack">
+        <h2>12) Tooltip Surface</h2>
+        <article class="card card-p-md stack demo-frame">
+          <p class="text-sm">Tooltip state uses `data-open` and `aria-describedby` relation.</p>
+          <div class="cluster" style="--cluster-gap: var(--space-4)">
+            <span
+              class="tooltip"
+              data-open="false"
+              data-tooltip-target
+              data-tooltip-id="demo-tooltip-save"
+              id="demo-tooltip-wrapper-save"
+            >
+              <button
+                class="btn btn-outline btn-sm"
+                type="button"
+                aria-describedby="demo-tooltip-save"
+                aria-label="Save drafts"
+              >
+                Hover or focus me
+              </button>
+              <span id="demo-tooltip-save" class="tooltip-content" role="tooltip">Saves changes as draft.</span>
+            </span>
+
+            <span
+              class="tooltip"
+              data-open="false"
+              data-tooltip-target
+              data-tooltip-id="demo-tooltip-sync"
+              id="demo-tooltip-wrapper-sync"
+            >
+              <button
+                class="btn btn-primary btn-sm"
+                type="button"
+                aria-describedby="demo-tooltip-sync"
+                aria-label="Run sync"
+              >
+                Sync
+              </button>
+              <span id="demo-tooltip-sync" class="tooltip-content" role="tooltip">Runs sync action immediately.</span>
+            </span>
+          </div>
+        </article>
+      </section>
+
+      <section class="section stack">
+        <h2>13) Popover Surface</h2>
+        <article class="card card-p-md stack demo-frame">
+          <p class="text-sm">Popover uses `data-open` with `aria-expanded` and `aria-controls` on trigger.</p>
+          <div class="cluster" style="--cluster-gap: var(--space-4)">
+            <span id="demo-popover-filters" class="popover" data-open="false">
+              <button
+                class="btn btn-outline btn-sm"
+                type="button"
+                data-popover-toggle="demo-popover-filters"
+                aria-expanded="false"
+                aria-controls="demo-popover-filters-content"
+              >
+                Open filters
+              </button>
+              <div id="demo-popover-filters-content" class="popover-content stack" role="dialog" style="--stack-gap: var(--space-2)">
+                <strong>Quick Filters</strong>
+                <label class="cluster text-sm">
+                  <input class="checkbox" type="checkbox" checked />
+                  Active only
+                </label>
+                <label class="cluster text-sm">
+                  <input class="checkbox" type="checkbox" />
+                  Include archived
+                </label>
+                <div class="cluster">
+                  <button class="btn btn-primary btn-sm" type="button" data-popover-close="demo-popover-filters">
+                    Apply
+                  </button>
+                  <button class="btn btn-outline btn-sm" type="button" data-popover-close="demo-popover-filters">
+                    Close
+                  </button>
+                </div>
+              </div>
+            </span>
+          </div>
+        </article>
+      </section>
+
+      <section class="section stack">
+        <h2>14) Dropdown Menu Surface</h2>
+        <article class="card card-p-md stack demo-frame">
+          <p class="text-sm">Dropdown menu uses `data-open` with trigger-controlled `aria-expanded` state.</p>
+          <div class="cluster">
+            <span id="demo-dropdown-account" class="dropdown-menu" data-open="false">
+              <button
+                class="btn btn-outline btn-sm"
+                type="button"
+                data-dropdown-toggle="demo-dropdown-account"
+                aria-expanded="false"
+                aria-controls="demo-dropdown-account-content"
+              >
+                Account menu
+              </button>
+              <div id="demo-dropdown-account-content" class="dropdown-menu-content" role="menu">
+                <button class="dropdown-menu-item" type="button" role="menuitem" data-dropdown-close="demo-dropdown-account">
+                  Profile
+                </button>
+                <button class="dropdown-menu-item" type="button" role="menuitem" data-dropdown-close="demo-dropdown-account">
+                  Billing
+                </button>
+                <button class="dropdown-menu-item" type="button" role="menuitem" data-dropdown-close="demo-dropdown-account">
+                  Sign out
+                </button>
+              </div>
+            </span>
+          </div>
+        </article>
+      </section>
+
+      <section class="section stack">
+        <h2>14.1) Context Menu + Progress + Loading Overlay</h2>
+        <article class="card card-p-md stack demo-frame">
+          <p class="text-sm">Overlay extensions: context actions, progress feedback and in-place loading mask.</p>
+
+          <div class="cluster">
+            <span id="demo-context-menu" class="context-menu" data-open="true">
+              <button
+                class="btn btn-outline btn-sm"
+                type="button"
+                aria-expanded="true"
+                aria-controls="demo-context-menu-content"
+              >
+                Row actions
+              </button>
+              <div id="demo-context-menu-content" class="context-menu-content" role="menu">
+                <button class="context-menu-item" type="button" role="menuitem">Rename</button>
+                <button class="context-menu-item" type="button" role="menuitem">Duplicate</button>
+                <button class="context-menu-item" type="button" role="menuitem">Archive</button>
+              </div>
+            </span>
+          </div>
+
+          <div class="progress" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="68">
+            <p class="progress-label">Sync progress: 68%</p>
+            <div class="progress-track">
+              <div class="progress-indicator" style="--progress-value: 68%"></div>
+            </div>
+          </div>
+
+          <div class="loading-overlay surface surface-sunken" data-loading="true" aria-busy="true">
+            <div class="stack" style="--stack-gap: var(--space-2)">
+              <p class="text-sm">Quarterly report is being prepared.</p>
+              <p class="text-sm">Rows are temporarily locked during sync.</p>
+            </div>
+            <div class="loading-overlay-backdrop"></div>
+            <div class="loading-overlay-content">
+              <span class="spinner spinner-md" aria-hidden="true"></span>
+              <span>Loading report...</span>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="section stack">
+        <h2>15) Drawer Surface</h2>
+        <article class="card card-p-md stack demo-frame">
+          <p class="text-sm">Drawer uses `data-open` state and dialog semantics on side panel.</p>
+          <div class="cluster">
+            <button class="btn btn-primary btn-sm" type="button" data-drawer-open="demo-drawer">Open drawer</button>
+          </div>
+        </article>
+      </section>
+
+      <section class="section stack">
+        <h2>16) Tabs Surface</h2>
+        <article class="card card-p-md stack demo-frame">
+          <p class="text-sm">Tabs use `data-active` on triggers/panels with one active panel at a time.</p>
+          <div id="demo-tabs" class="tabs" data-tabs-root>
+            <div class="tabs-list" role="tablist" aria-label="Settings tabs">
+              <button class="tabs-trigger" role="tab" type="button" data-tabs-trigger="profile" data-active="true">Profile</button>
+              <button class="tabs-trigger" role="tab" type="button" data-tabs-trigger="billing" data-active="false">Billing</button>
+              <button class="tabs-trigger" role="tab" type="button" data-tabs-trigger="security" data-active="false">Security</button>
+            </div>
+
+            <section class="tabs-panel" data-tabs-panel="profile" data-active="true">
+              <p class="text-sm">Profile settings and personal details.</p>
+            </section>
+            <section class="tabs-panel" data-tabs-panel="billing" data-active="false">
+              <p class="text-sm">Billing methods and invoice preferences.</p>
+            </section>
+            <section class="tabs-panel" data-tabs-panel="security" data-active="false">
+              <p class="text-sm">Password, sessions and 2FA controls.</p>
+            </section>
+          </div>
+        </article>
+      </section>
+
+      <section class="section stack">
+        <h2>17) Accordion Surface</h2>
+        <article class="card card-p-md stack demo-frame">
+          <p class="text-sm">Accordion item open state is represented with `data-open` on each item.</p>
+          <div class="accordion" data-accordion-root>
+            <article class="accordion-item" data-open="true">
+              <button class="accordion-trigger" type="button" data-accordion-trigger>Account preferences</button>
+              <div class="accordion-panel">
+                <p class="text-sm">Manage language, timezone and notification defaults.</p>
+              </div>
+            </article>
+            <article class="accordion-item" data-open="false">
+              <button class="accordion-trigger" type="button" data-accordion-trigger>Privacy controls</button>
+              <div class="accordion-panel">
+                <p class="text-sm">Manage visibility and data sharing options.</p>
+              </div>
+            </article>
+          </div>
+        </article>
+      </section>
+
+      <section class="section stack">
+        <h2>18) Pagination Surface</h2>
+        <article class="card card-p-md stack demo-frame">
+          <p class="text-sm">Pagination uses semantic links/buttons; current page is marked with `aria-current`.</p>
+          <nav class="pagination" aria-label="Results pages">
+            <a class="pagination-item" href="#" aria-label="Previous page">Prev</a>
+            <a class="pagination-item" href="#">1</a>
+            <a class="pagination-item" href="#" aria-current="page">2</a>
+            <a class="pagination-item" href="#">3</a>
+            <a class="pagination-item" href="#">4</a>
+            <a class="pagination-item" href="#" aria-label="Next page">Next</a>
+          </nav>
+        </article>
+      </section>
+
+      <section class="section stack">
+        <h2>19) Breadcrumb Surface</h2>
+        <article class="card card-p-md stack demo-frame">
+          <p class="text-sm">Breadcrumb uses semantic nav/list markup with `aria-current` on current node.</p>
+          <nav class="breadcrumb" aria-label="Breadcrumb">
+            <ol class="breadcrumb-list">
+              <li class="breadcrumb-item">
+                <a class="breadcrumb-link" href="#">Home</a>
+                <span>/</span>
+              </li>
+              <li class="breadcrumb-item">
+                <a class="breadcrumb-link" href="#">Settings</a>
+                <span>/</span>
+              </li>
+              <li class="breadcrumb-item">
+                <span class="breadcrumb-current" aria-current="page">Profile</span>
+              </li>
+            </ol>
+          </nav>
+        </article>
+      </section>
+
+      <section class="section stack">
+        <h2>20) Navbar Surface</h2>
+        <article class="card card-p-md stack demo-frame">
+          <p class="text-sm">Navbar surface combines brand area and navigation items.</p>
+          <nav class="navbar" aria-label="Main navigation">
+            <div class="navbar-brand">Fikir CSS</div>
+            <div class="navbar-nav">
+              <a class="navbar-item" href="#">Overview</a>
+              <a class="navbar-item" href="#" aria-current="page">Projects</a>
+              <a class="navbar-item" href="#">Settings</a>
+            </div>
+          </nav>
+        </article>
+      </section>
+
+      <section class="section stack">
+        <h2>20.1) Menu Bar Surface</h2>
+        <article class="card card-p-md stack demo-frame">
+          <p class="text-sm">Menu bar uses `data-open` on each item for disclosure content.</p>
+          <nav class="menu-bar" aria-label="Workspace menu bar">
+            <ul class="menu-bar-list">
+              <li class="menu-bar-item" data-open="true">
+                <button
+                  class="menu-bar-trigger"
+                  type="button"
+                  aria-expanded="true"
+                  aria-haspopup="menu"
+                  aria-controls="menu-bar-file"
+                >
+                  File
+                </button>
+                <div id="menu-bar-file" class="menu-bar-content" role="menu">
+                  <a class="menu-bar-link" href="#" role="menuitem">New project</a>
+                  <a class="menu-bar-link" href="#" role="menuitem">Open recent</a>
+                  <a class="menu-bar-link" href="#" role="menuitem">Export report</a>
+                </div>
+              </li>
+              <li class="menu-bar-item" data-open="false">
+                <button
+                  class="menu-bar-trigger"
+                  type="button"
+                  aria-expanded="false"
+                  aria-haspopup="menu"
+                  aria-controls="menu-bar-edit"
+                >
+                  Edit
+                </button>
+                <div id="menu-bar-edit" class="menu-bar-content" role="menu">
+                  <a class="menu-bar-link" href="#" role="menuitem">Undo</a>
+                  <a class="menu-bar-link" href="#" role="menuitem">Redo</a>
+                </div>
+              </li>
+            </ul>
+          </nav>
+        </article>
+      </section>
+
+      <section class="section stack">
+        <h2>21) Sidebar Navigation Surface</h2>
+        <article class="card card-p-md stack demo-frame">
+          <p class="text-sm">Sidebar navigation uses `sidebar-nav` namespace to avoid layout `.sidebar` conflict.</p>
+          <nav class="sidebar-nav" aria-label="Sidebar navigation">
+            <section class="sidebar-nav-section">
+              <a class="sidebar-nav-item" href="#">Overview</a>
+              <a class="sidebar-nav-item" href="#" aria-current="page">Projects</a>
+              <a class="sidebar-nav-item" href="#">Members</a>
+            </section>
+            <section class="sidebar-nav-section">
+              <a class="sidebar-nav-item" href="#">Billing</a>
+              <a class="sidebar-nav-item" href="#">Security</a>
+            </section>
+          </nav>
+        </article>
+      </section>
+
+      <section class="section stack">
+        <h2>22) Stepper Surface</h2>
+        <article class="card card-p-md stack demo-frame">
+          <p class="text-sm">Stepper uses `data-state` (`complete|active|upcoming`) on each item.</p>
+          <div class="stepper" aria-label="Checkout steps">
+            <div class="stepper-item" data-state="complete">
+              <span class="stepper-marker">1</span>
+              <span class="stepper-label">Account verified</span>
+            </div>
+            <div class="stepper-item" data-state="active">
+              <span class="stepper-marker">2</span>
+              <span class="stepper-label">Payment details</span>
+            </div>
+            <div class="stepper-item" data-state="upcoming">
+              <span class="stepper-marker">3</span>
+              <span class="stepper-label">Review and submit</span>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="section stack">
+        <h2>23) Page Header Surface</h2>
+        <article class="card card-p-md stack demo-frame">
+          <p class="text-sm">Page header groups title/meta and action area.</p>
+          <header class="page-header">
+            <div class="page-header-content">
+              <h3 style="margin: 0">Workspace Settings</h3>
+              <p class="text-sm" style="margin: 0">Manage workspace-level preferences and member access.</p>
+            </div>
+            <div class="page-header-actions">
+              <button class="btn btn-outline btn-sm" type="button">Discard</button>
+              <button class="btn btn-primary btn-sm" type="button">Save</button>
+            </div>
+          </header>
+        </article>
+      </section>
+
+      <section class="section stack">
+        <h2>24) Section Block Surface</h2>
+        <article class="card card-p-md stack demo-frame">
+          <p class="text-sm">Section block creates heading/body structure for product pages.</p>
+          <section class="section-block">
+            <header class="section-header">
+              <h3 style="margin: 0">Security</h3>
+              <button class="btn btn-outline btn-sm" type="button">Edit</button>
+            </header>
+            <div class="section-body">
+              <p class="text-sm" style="margin: 0">Two-factor authentication is enabled for all admins.</p>
+              <p class="text-sm" style="margin: 0">Last review completed on 2026-04-02.</p>
+            </div>
+          </section>
+        </article>
+      </section>
+
+      <section class="section stack">
+        <h2>25) App Shell Surface</h2>
+        <article class="card card-p-md stack demo-frame">
+          <p class="text-sm">App shell combines topbar, sidebar area and main content area.</p>
+          <div class="app-shell">
+            <header class="app-shell-topbar">
+              <strong>Analytics Workspace</strong>
+              <span class="badge">Admin</span>
+            </header>
+            <div class="app-shell-content">
+              <aside class="app-shell-sidebar">
+                <nav class="sidebar-nav" aria-label="App shell sidebar">
+                  <section class="sidebar-nav-section">
+                    <a class="sidebar-nav-item" href="#" aria-current="page">Overview</a>
+                    <a class="sidebar-nav-item" href="#">Reports</a>
+                    <a class="sidebar-nav-item" href="#">Integrations</a>
+                  </section>
+                </nav>
+              </aside>
+              <main class="app-shell-main">
+                <div class="stack" style="--stack-gap: var(--space-2)">
+                  <strong>Overview</strong>
+                  <p class="text-sm" style="margin: 0">Main content area grows while sidebar stays structured.</p>
+                </div>
+              </main>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="section stack">
+        <h2>25.1) Split Pane Surface</h2>
+        <article class="card card-p-md stack demo-frame">
+          <p class="text-sm">Split pane creates responsive dual-region product layouts.</p>
+          <div class="split-pane" data-split-pane-side="end" style="--split-pane-side: 18rem; --split-pane-gap: var(--space-3)">
+            <section class="split-pane-primary">
+              <h3 style="margin-top: 0">Editor</h3>
+              <p class="text-sm" style="margin: 0">Main content/editing region with larger width.</p>
+            </section>
+            <aside class="split-pane-secondary">
+              <h3 style="margin-top: 0">Inspector</h3>
+              <p class="text-sm" style="margin: 0">Metadata and controls remain in side pane.</p>
+            </aside>
+          </div>
+        </article>
+      </section>
+
+      <section class="section stack">
+        <h2>26) Table + Empty State Surface</h2>
+
+        <article class="card card-p-md stack demo-frame">
+          <p class="text-sm">Table surface for dense data rows with selected row state.</p>
+          <div class="demo-table-scroll">
+            <table class="table" aria-label="Project metrics table">
+              <thead class="table-head">
+                <tr class="table-row">
+                  <th class="table-head-cell" scope="col">Project</th>
+                  <th class="table-head-cell" scope="col">Owner</th>
+                  <th class="table-head-cell" scope="col">Status</th>
+                  <th class="table-head-cell" scope="col">MRR</th>
+                </tr>
+              </thead>
+              <tbody class="table-body">
+                <tr class="table-row">
+                  <td class="table-cell">Atlas CRM</td>
+                  <td class="table-cell">Ada</td>
+                  <td class="table-cell">Healthy</td>
+                  <td class="table-cell">$12,400</td>
+                </tr>
+                <tr class="table-row" data-row-selected="true">
+                  <td class="table-cell">Pulse Ops</td>
+                  <td class="table-cell">Grace</td>
+                  <td class="table-cell">At risk</td>
+                  <td class="table-cell">$7,980</td>
+                </tr>
+                <tr class="table-row">
+                  <td class="table-cell">Nova Billing</td>
+                  <td class="table-cell">Linus</td>
+                  <td class="table-cell">Healthy</td>
+                  <td class="table-cell">$4,200</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </article>
+
+        <article class="card card-p-md stack demo-frame">
+          <p class="text-sm">When rows are empty, pair table workflows with empty-state fallback.</p>
+          <section class="empty-state" aria-label="No table records">
+            <span class="empty-state-media" aria-hidden="true">0</span>
+            <h3 class="empty-state-title">No records found</h3>
+            <p class="empty-state-description">
+              There is no matching result for the current filters. Reset filters or create a new record.
+            </p>
+            <div class="empty-state-actions">
+              <button class="btn btn-outline btn-sm" type="button">Reset filters</button>
+              <button class="btn btn-primary btn-sm" type="button">Create record</button>
+            </div>
+          </section>
+        </article>
+      </section>
+
+      <section class="section stack">
+        <h2>26.1) Data Grid Surface</h2>
+        <article class="card card-p-md stack demo-frame">
+          <p class="text-sm">Minimal data-grid surface with role-based semantics and selected row state.</p>
+          <section class="data-grid" role="grid" aria-label="Revenue data grid">
+            <div class="data-grid-head" role="rowgroup">
+              <div class="data-grid-row" role="row" style="--data-grid-columns: 4">
+                <div class="data-grid-cell" role="columnheader">Account</div>
+                <div class="data-grid-cell" role="columnheader">Owner</div>
+                <div class="data-grid-cell" role="columnheader">Plan</div>
+                <div class="data-grid-cell" role="columnheader">MRR</div>
+              </div>
+            </div>
+            <div class="data-grid-body" role="rowgroup">
+              <div class="data-grid-row" role="row" style="--data-grid-columns: 4">
+                <div class="data-grid-cell" role="gridcell">Atlas CRM</div>
+                <div class="data-grid-cell" role="gridcell">Ada</div>
+                <div class="data-grid-cell" role="gridcell">Pro</div>
+                <div class="data-grid-cell" role="gridcell">$12,400</div>
+              </div>
+              <div class="data-grid-row" role="row" data-row-selected="true" style="--data-grid-columns: 4">
+                <div class="data-grid-cell" role="gridcell">Pulse Ops</div>
+                <div class="data-grid-cell" role="gridcell">Grace</div>
+                <div class="data-grid-cell" role="gridcell">Enterprise</div>
+                <div class="data-grid-cell" role="gridcell">$22,900</div>
+              </div>
+            </div>
+          </section>
+        </article>
+      </section>
+
+      <section class="section stack">
+        <h2>27) Avatar + Stat Surface</h2>
+        <div class="sidebar" style="--sidebar-width: 22rem; --sidebar-gap: var(--space-4)">
+          <article class="card card-p-md stack demo-frame">
+            <p class="text-sm">Avatar surface supports image and fallback content with size classes.</p>
+            <div class="cluster">
+              <span class="avatar avatar-sm" aria-label="Ada Lovelace avatar">
+                <img
+                  class="avatar-image"
+                  alt="Ada Lovelace avatar"
+                  src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='96' height='96'%3E%3Crect width='100%25' height='100%25' fill='%236c8cff'/%3E%3Ctext x='50%25' y='55%25' fill='white' font-size='34' font-family='Arial' text-anchor='middle'%3EAL%3C/text%3E%3C/svg%3E"
+                />
+              </span>
+              <span class="avatar avatar-md" aria-label="Linus Torvalds avatar fallback">
+                <span class="avatar-fallback">LT</span>
+              </span>
+              <span class="avatar avatar-lg" aria-label="Grace Hopper avatar fallback">
+                <span class="avatar-fallback">GH</span>
+              </span>
+            </div>
+          </article>
+
+          <article class="card card-p-md stack demo-frame">
+            <p class="text-sm">Stat surface is a compact metric block for dashboards.</p>
+            <div class="switcher" style="--switcher-gap: var(--space-2); --switcher-min: 12rem">
+              <section class="stat">
+                <p class="stat-label">Monthly Revenue</p>
+                <p class="stat-value">$24,580</p>
+                <p class="stat-meta">+8.2% vs last month</p>
+              </section>
+              <section class="stat">
+                <p class="stat-label">Active Teams</p>
+                <p class="stat-value">128</p>
+                <p class="stat-meta">3 new this week</p>
+              </section>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section stack">
+        <h2>27.1) Avatar Group + Tag Chip Surface</h2>
+        <article class="card card-p-md stack demo-frame">
+          <p class="text-sm">Avatar group overlaps members while preserving per-avatar semantics.</p>
+          <div class="avatar-group" aria-label="Project members">
+            <span class="avatar-group-item">
+              <span class="avatar avatar-sm" aria-label="Ada avatar"><span class="avatar-fallback">A</span></span>
+            </span>
+            <span class="avatar-group-item">
+              <span class="avatar avatar-sm" aria-label="Linus avatar"><span class="avatar-fallback">L</span></span>
+            </span>
+            <span class="avatar-group-item">
+              <span class="avatar avatar-sm" aria-label="Grace avatar"><span class="avatar-fallback">G</span></span>
+            </span>
+          </div>
+
+          <div class="cluster">
+            <span class="tag-chip">
+              <span class="tag-chip-label">status: active</span>
+            </span>
+            <span class="tag-chip">
+              <span class="tag-chip-label">owner: platform</span>
+              <button class="tag-chip-remove" type="button" aria-label="Remove owner filter">×</button>
+            </span>
+            <span class="tag-chip">
+              <span class="tag-chip-label">tier: enterprise</span>
+              <button class="tag-chip-remove" type="button" aria-label="Remove tier filter">×</button>
+            </span>
+          </div>
+        </article>
+      </section>
+
+      <section class="section stack">
+        <h2>28) Timeline + KPI Card Surface</h2>
+        <div class="sidebar" style="--sidebar-width: 24rem; --sidebar-gap: var(--space-4)">
+          <article class="card card-p-md stack demo-frame">
+            <p class="text-sm">Timeline surface lists ordered events with marker and meta information.</p>
+            <ol class="timeline" aria-label="Release timeline">
+              <li class="timeline-item">
+                <span class="timeline-marker" aria-hidden="true"></span>
+                <div class="timeline-content">
+                  <p class="timeline-title">v0.2 foundation freeze</p>
+                  <p class="timeline-meta">2026-04-01 · Contract validation stabilized.</p>
+                </div>
+              </li>
+              <li class="timeline-item">
+                <span class="timeline-marker" aria-hidden="true"></span>
+                <div class="timeline-content">
+                  <p class="timeline-title">P4 data package started</p>
+                  <p class="timeline-meta">2026-04-11 · Table and empty-state shipped.</p>
+                </div>
+              </li>
+              <li class="timeline-item">
+                <span class="timeline-marker" aria-hidden="true"></span>
+                <div class="timeline-content">
+                  <p class="timeline-title">P4 data package expansion</p>
+                  <p class="timeline-meta">2026-04-11 · Avatar, stat, timeline and KPI card added.</p>
+                </div>
+              </li>
+            </ol>
+          </article>
+
+          <article class="card card-p-md stack demo-frame">
+            <p class="text-sm">KPI card surface for dashboard metric summaries.</p>
+            <div class="switcher" style="--switcher-gap: var(--space-2); --switcher-min: 12rem">
+              <section class="kpi-card">
+                <p class="kpi-card-header">Conversion rate</p>
+                <p class="kpi-card-value">4.8%</p>
+                <span class="kpi-card-trend">+0.6%</span>
+                <p class="kpi-card-meta">Compared to previous 7 days.</p>
+              </section>
+
+              <section class="kpi-card">
+                <p class="kpi-card-header">Churn risk accounts</p>
+                <p class="kpi-card-value">12</p>
+                <span class="kpi-card-trend">-2</span>
+                <p class="kpi-card-meta">Manual review queue size.</p>
+              </section>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section stack">
+        <h2>29) List + Description List Surface</h2>
+        <div class="sidebar" style="--sidebar-width: 24rem; --sidebar-gap: var(--space-4)">
+          <article class="card card-p-md stack demo-frame">
+            <p class="text-sm">List surface provides a simple structured item stack.</p>
+            <ul class="list" aria-label="Deployment checklist">
+              <li class="list-item">Build completed</li>
+              <li class="list-item">Contract validation passed</li>
+              <li class="list-item">Release notes updated</li>
+            </ul>
+          </article>
+
+          <article class="card card-p-md stack demo-frame">
+            <p class="text-sm">Description list surface presents key/value metadata.</p>
+            <dl class="description-list" aria-label="Release metadata">
+              <div>
+                <dt class="description-term">Version</dt>
+                <dd class="description-details">v0.2.0</dd>
+              </div>
+              <div>
+                <dt class="description-term">Build date</dt>
+                <dd class="description-details">2026-04-11</dd>
+              </div>
+              <div>
+                <dt class="description-term">Status</dt>
+                <dd class="description-details">Foundation preview</dd>
+              </div>
+            </dl>
+          </article>
+        </div>
+      </section>
+
+      <section class="section stack">
+        <h2>30) Combobox + Search Box Surface</h2>
+        <div class="sidebar" style="--sidebar-width: 24rem; --sidebar-gap: var(--space-4)">
+          <article class="card card-p-md stack demo-frame">
+            <p class="text-sm">Combobox surface: semantic input + listbox ilişkisinin görsel katmanı.</p>
+            <div class="combobox">
+              <label class="label" for="demo-combobox-input">Team</label>
+              <input
+                id="demo-combobox-input"
+                class="combobox-input"
+                role="combobox"
+                aria-expanded="true"
+                aria-controls="demo-combobox-list"
+                aria-autocomplete="list"
+                value="Platform"
+              />
+              <ul id="demo-combobox-list" class="combobox-list" role="listbox" aria-label="Team suggestions">
+                <li class="combobox-option" role="option" aria-selected="false">Payments</li>
+                <li class="combobox-option" role="option" data-active="true" aria-selected="true">Platform</li>
+                <li class="combobox-option" role="option" aria-selected="false">Security</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="card card-p-md stack demo-frame">
+            <p class="text-sm">Search box surface: input + action birleşik arama alanı.</p>
+            <form class="search-box" role="search" aria-label="Project search">
+              <input
+                id="demo-search-box-input"
+                class="search-box-input"
+                type="search"
+                aria-label="Search query"
+                placeholder="Search projects"
+                value="foundation"
+              />
+              <button class="search-box-action" type="submit">Search</button>
+            </form>
+          </article>
+        </div>
+      </section>
+
+      <section class="section stack">
+        <h2>31) Autocomplete + Command Palette Surface</h2>
+        <div class="sidebar" style="--sidebar-width: 24rem; --sidebar-gap: var(--space-4)">
+          <article class="card card-p-md stack demo-frame">
+            <p class="text-sm">Autocomplete surface: input + öneri listesi görsel katmanı.</p>
+            <div class="autocomplete">
+              <label class="label" for="demo-autocomplete-input">Repository</label>
+              <input
+                id="demo-autocomplete-input"
+                class="autocomplete-input"
+                type="text"
+                aria-label="Repository autocomplete"
+                value="fikir"
+              />
+              <ul class="autocomplete-list" role="listbox" aria-label="Repository suggestions">
+                <li class="autocomplete-option" role="option">fikir-css</li>
+                <li class="autocomplete-option" role="option" data-active="true">fikir-playground</li>
+                <li class="autocomplete-option" role="option">fikir-recipes</li>
+              </ul>
+            </div>
+          </article>
+
+          <article class="card card-p-md stack demo-frame">
+            <p class="text-sm">Command palette surface: dialog içinde komut arama/listesi.</p>
+            <div class="command-palette" data-open="true">
+              <section class="command-palette-dialog" role="dialog" aria-label="Command palette">
+                <input
+                  class="command-palette-input"
+                  type="text"
+                  aria-label="Command search"
+                  value="theme"
+                />
+                <ul class="command-palette-list" role="listbox" aria-label="Command results">
+                  <li class="command-palette-item" role="option" data-active="true">Toggle theme</li>
+                  <li class="command-palette-item" role="option">Open settings</li>
+                  <li class="command-palette-item" role="option">Run build</li>
+                </ul>
+              </section>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section stack">
+        <h2>32) Command Bar + Filter Bar Composite</h2>
+        <div class="stack" style="--stack-gap: var(--space-3)">
+          <article class="card card-p-md stack demo-frame" data-pattern="command-bar">
+            <p class="text-sm">Command bar: arama + hızlı aksiyon birleşimi.</p>
+            <div class="cluster" style="--cluster-gap: var(--space-2)">
+              <form class="search-box" role="search" aria-label="Command bar search">
+                <input class="search-box-input" type="search" aria-label="Command bar search input" value="release notes" />
+                <button class="search-box-action" type="submit">Search</button>
+              </form>
+              <button class="btn btn-outline btn-sm" type="button">Quick open</button>
+              <button class="btn btn-primary btn-sm" type="button">New issue</button>
+              <span class="badge">workspace: core</span>
+            </div>
+          </article>
+
+          <article class="card card-p-md stack demo-frame" data-pattern="filter-bar">
+            <p class="text-sm">Filter bar implementation: mevcut controls ile filtre kompozisyonu.</p>
+            <div class="cluster" style="--cluster-gap: var(--space-2)">
+              <label class="label" for="demo-filter-status">Status</label>
+              <select id="demo-filter-status" class="select">
+                <option>All</option>
+                <option selected>Active</option>
+                <option>Archived</option>
+              </select>
+
+              <label class="cluster text-sm">
+                <input class="checkbox" type="checkbox" checked />
+                High priority
+              </label>
+
+              <button class="btn btn-outline btn-sm" type="button">Reset</button>
+              <button class="btn btn-primary btn-sm" type="button">Apply</button>
+            </div>
+          </article>
+
+          <article class="card card-p-md stack demo-frame" data-pattern="search-filter-composite">
+            <p class="text-sm">Search + filter composite summary.</p>
+            <div class="cluster" style="--cluster-gap: var(--space-2)">
+              <span class="badge">status: active</span>
+              <span class="badge">priority: high</span>
+              <span class="text-sm">12 results</span>
+            </div>
+            <ul class="list" aria-label="Composite result snapshot">
+              <li class="list-item">Issue #241 — Input validation doc update</li>
+              <li class="list-item">Issue #248 — Naming contract checks</li>
+            </ul>
+          </article>
+        </div>
+      </section>
+
+      <section class="section stack">
+        <h2>33) Data Table Toolbar Pattern</h2>
+        <div class="stack" style="--stack-gap: var(--space-3)">
+          <article class="card card-p-md stack demo-frame" data-pattern="data-table-toolbar">
+            <p class="text-sm">Data table toolbar: search + filter + bulk action kompozisyonu.</p>
+
+            <div class="sidebar" style="--sidebar-width: 32rem; --sidebar-gap: var(--space-2)">
+              <div class="cluster" style="--cluster-gap: var(--space-2)">
+                <form class="search-box" role="search" aria-label="Issue table search">
+                  <input class="search-box-input" type="search" aria-label="Search issues" value="validation" />
+                  <button class="search-box-action" type="submit">Search</button>
+                </form>
+
+                <label class="label" for="demo-table-status-filter">Status</label>
+                <select id="demo-table-status-filter" class="select">
+                  <option>All</option>
+                  <option selected>Open</option>
+                  <option>Closed</option>
+                </select>
+              </div>
+
+              <div class="cluster" style="--cluster-gap: var(--space-2)">
+                <button class="btn btn-outline btn-sm" type="button" aria-controls="demo-issues-table">
+                  Export
+                </button>
+                <button class="btn btn-primary btn-sm" type="button" aria-controls="demo-issues-table">
+                  Bulk close
+                </button>
+              </div>
+            </div>
+
+            <div class="cluster" style="--cluster-gap: var(--space-2)">
+              <span class="badge">status: open</span>
+              <span class="text-sm">3 selected</span>
+            </div>
+
+            <table id="demo-issues-table" class="table" aria-label="Issue table snapshot">
+              <thead class="table-head">
+                <tr class="table-row">
+                  <th class="table-head-cell" scope="col">Issue</th>
+                  <th class="table-head-cell" scope="col">Owner</th>
+                  <th class="table-head-cell" scope="col">State</th>
+                </tr>
+              </thead>
+              <tbody class="table-body">
+                <tr class="table-row" data-row-selected="true">
+                  <td class="table-cell">#248 Naming contract checks</td>
+                  <td class="table-cell">Core Team</td>
+                  <td class="table-cell">Open</td>
+                </tr>
+                <tr class="table-row" data-row-selected="true">
+                  <td class="table-cell">#251 Input validation docs</td>
+                  <td class="table-cell">Design Ops</td>
+                  <td class="table-cell">Open</td>
+                </tr>
+                <tr class="table-row">
+                  <td class="table-cell">#260 Build pipeline polish</td>
+                  <td class="table-cell">Platform</td>
+                  <td class="table-cell">Closed</td>
+                </tr>
+              </tbody>
+            </table>
+          </article>
+        </div>
+      </section>
+
+      <section class="section stack">
+        <h2>34) Date Picker Surface</h2>
+        <div class="sidebar" style="--sidebar-width: 30rem; --sidebar-gap: var(--space-4)">
+          <article class="card card-p-md stack demo-frame">
+            <p class="text-sm">Date picker surface: input + trigger + panel + day grid kompozisyonu.</p>
+            <div class="date-picker" data-open="true">
+              <label class="label" for="demo-date-picker-input">Due date</label>
+
+              <div class="cluster" style="--cluster-gap: var(--space-2)">
+                <input
+                  id="demo-date-picker-input"
+                  class="date-picker-input"
+                  type="text"
+                  value="2026-04-11"
+                  aria-haspopup="dialog"
+                  aria-controls="demo-date-picker-panel"
+                />
+                <button
+                  class="date-picker-trigger"
+                  type="button"
+                  aria-expanded="true"
+                  aria-controls="demo-date-picker-panel"
+                >
+                  Open
+                </button>
+              </div>
+
+              <section id="demo-date-picker-panel" class="date-picker-panel" role="dialog" aria-label="April 2026 calendar">
+                <div class="cluster" style="--cluster-gap: var(--space-2); --cluster-justify: space-between">
+                  <strong>April 2026</strong>
+                  <span class="badge">1 selected</span>
+                </div>
+
+                <div class="date-picker-grid" role="grid" aria-label="April 2026 date grid">
+                  <button class="date-picker-day" type="button" data-outside="true" aria-label="March 30">30</button>
+                  <button class="date-picker-day" type="button" data-outside="true" aria-label="March 31">31</button>
+                  <button class="date-picker-day" type="button" aria-label="April 1">1</button>
+                  <button class="date-picker-day" type="button" aria-label="April 2">2</button>
+                  <button class="date-picker-day" type="button" aria-label="April 3">3</button>
+                  <button class="date-picker-day" type="button" data-today="true" aria-label="April 4, today">4</button>
+                  <button class="date-picker-day" type="button" aria-label="April 5">5</button>
+                  <button class="date-picker-day" type="button" aria-label="April 6">6</button>
+                  <button class="date-picker-day" type="button" aria-label="April 7">7</button>
+                  <button class="date-picker-day" type="button" aria-label="April 8">8</button>
+                  <button class="date-picker-day" type="button" aria-label="April 9">9</button>
+                  <button class="date-picker-day" type="button" aria-label="April 10">10</button>
+                  <button class="date-picker-day" type="button" data-selected="true" aria-label="April 11, selected">11</button>
+                  <button class="date-picker-day" type="button" aria-label="April 12">12</button>
+                  <button class="date-picker-day" type="button" disabled aria-label="April 13, disabled">13</button>
+                  <button class="date-picker-day" type="button" aria-label="April 14">14</button>
+                  <button class="date-picker-day" type="button" aria-label="April 15">15</button>
+                  <button class="date-picker-day" type="button" aria-label="April 16">16</button>
+                  <button class="date-picker-day" type="button" aria-label="April 17">17</button>
+                  <button class="date-picker-day" type="button" aria-label="April 18">18</button>
+                  <button class="date-picker-day" type="button" aria-label="April 19">19</button>
+                </div>
+              </section>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section stack">
+        <h2>35) Date Range Picker Surface</h2>
+        <div class="sidebar" style="--sidebar-width: 34rem; --sidebar-gap: var(--space-4)">
+          <article class="card card-p-md stack demo-frame" data-pattern="date-range-picker">
+            <p class="text-sm">Date range picker surface: start/end input + panel + range day states.</p>
+
+            <div class="date-range-picker" data-open="true">
+              <label class="label" for="demo-range-start">Reporting range</label>
+
+              <div class="cluster" style="--cluster-gap: var(--space-2)">
+                <input
+                  id="demo-range-start"
+                  class="date-range-picker-start"
+                  type="text"
+                  value="2026-04-05"
+                  aria-label="Range start"
+                />
+                <span class="date-range-picker-separator" aria-hidden="true">to</span>
+                <input
+                  id="demo-range-end"
+                  class="date-range-picker-end"
+                  type="text"
+                  value="2026-04-11"
+                  aria-label="Range end"
+                />
+                <button
+                  class="date-range-picker-trigger"
+                  type="button"
+                  aria-expanded="true"
+                  aria-controls="demo-range-picker-panel"
+                >
+                  Open
+                </button>
+              </div>
+
+              <section id="demo-range-picker-panel" class="date-range-picker-panel" role="dialog" aria-label="April 2026 range calendar">
+                <div class="cluster" style="--cluster-gap: var(--space-2); --cluster-justify: space-between">
+                  <strong>April 2026</strong>
+                  <span class="badge">Apr 5 - Apr 11</span>
+                </div>
+
+                <div class="date-range-picker-grid" role="grid" aria-label="April 2026 range grid">
+                  <button class="date-range-picker-day" type="button" data-outside="true" aria-label="March 30">30</button>
+                  <button class="date-range-picker-day" type="button" data-outside="true" aria-label="March 31">31</button>
+                  <button class="date-range-picker-day" type="button" aria-label="April 1">1</button>
+                  <button class="date-range-picker-day" type="button" aria-label="April 2">2</button>
+                  <button class="date-range-picker-day" type="button" aria-label="April 3">3</button>
+                  <button class="date-range-picker-day" type="button" aria-label="April 4">4</button>
+                  <button class="date-range-picker-day" type="button" data-range-start="true" aria-label="April 5, range start">5</button>
+                  <button class="date-range-picker-day" type="button" data-in-range="true" aria-label="April 6">6</button>
+                  <button class="date-range-picker-day" type="button" data-in-range="true" aria-label="April 7">7</button>
+                  <button class="date-range-picker-day" type="button" data-in-range="true" aria-label="April 8">8</button>
+                  <button class="date-range-picker-day" type="button" data-in-range="true" aria-label="April 9">9</button>
+                  <button class="date-range-picker-day" type="button" data-in-range="true" aria-label="April 10">10</button>
+                  <button class="date-range-picker-day" type="button" data-range-end="true" aria-label="April 11, range end">11</button>
+                  <button class="date-range-picker-day" type="button" aria-label="April 12">12</button>
+                  <button class="date-range-picker-day" type="button" disabled aria-label="April 13, disabled">13</button>
+                  <button class="date-range-picker-day" type="button" aria-label="April 14">14</button>
+                  <button class="date-range-picker-day" type="button" aria-label="April 15">15</button>
+                  <button class="date-range-picker-day" type="button" aria-label="April 16">16</button>
+                  <button class="date-range-picker-day" type="button" aria-label="April 17">17</button>
+                  <button class="date-range-picker-day" type="button" aria-label="April 18">18</button>
+                  <button class="date-range-picker-day" type="button" aria-label="April 19">19</button>
+                </div>
+              </section>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section stack">
+        <h2>36) Calendar Surface</h2>
+        <div class="sidebar" style="--sidebar-width: 30rem; --sidebar-gap: var(--space-4)">
+          <article class="card card-p-md stack demo-frame" data-pattern="calendar">
+            <p class="text-sm">Calendar surface: header + nav + weekday/day grid kompozisyonu.</p>
+
+            <section class="calendar" aria-label="April 2026 calendar">
+              <header class="calendar-header">
+                <button class="calendar-nav" type="button" aria-label="Previous month">&lt;</button>
+                <strong class="calendar-title">April 2026</strong>
+                <button class="calendar-nav" type="button" aria-label="Next month">&gt;</button>
+              </header>
+
+              <div class="calendar-grid" role="row">
+                <span class="calendar-weekday">Mo</span>
+                <span class="calendar-weekday">Tu</span>
+                <span class="calendar-weekday">We</span>
+                <span class="calendar-weekday">Th</span>
+                <span class="calendar-weekday">Fr</span>
+                <span class="calendar-weekday">Sa</span>
+                <span class="calendar-weekday">Su</span>
+              </div>
+
+              <div class="calendar-grid" role="grid" aria-label="April 2026 days">
+                <button class="calendar-day" type="button" data-outside="true" aria-label="March 30">30</button>
+                <button class="calendar-day" type="button" data-outside="true" aria-label="March 31">31</button>
+                <button class="calendar-day" type="button" aria-label="April 1">1</button>
+                <button class="calendar-day" type="button" aria-label="April 2">2</button>
+                <button class="calendar-day" type="button" aria-label="April 3">3</button>
+                <button class="calendar-day" type="button" data-today="true" aria-label="April 4, today">4</button>
+                <button class="calendar-day" type="button" data-selected="true" aria-label="April 5, selected">5</button>
+                <button class="calendar-day" type="button" aria-label="April 6">6</button>
+                <button class="calendar-day" type="button" aria-label="April 7">7</button>
+                <button class="calendar-day" type="button" aria-label="April 8">8</button>
+                <button class="calendar-day" type="button" aria-label="April 9">9</button>
+                <button class="calendar-day" type="button" aria-label="April 10">10</button>
+                <button class="calendar-day" type="button" aria-label="April 11">11</button>
+                <button class="calendar-day" type="button" aria-label="April 12">12</button>
+                <button class="calendar-day" type="button" disabled aria-label="April 13, disabled">13</button>
+                <button class="calendar-day" type="button" aria-label="April 14">14</button>
+                <button class="calendar-day" type="button" aria-label="April 15">15</button>
+                <button class="calendar-day" type="button" aria-label="April 16">16</button>
+                <button class="calendar-day" type="button" aria-label="April 17">17</button>
+                <button class="calendar-day" type="button" aria-label="April 18">18</button>
+                <button class="calendar-day" type="button" aria-label="April 19">19</button>
+              </div>
+            </section>
+          </article>
+        </div>
+      </section>
+
+      <section class="section stack">
+        <h2>37) File Upload Surface</h2>
+        <div class="sidebar" style="--sidebar-width: 30rem; --sidebar-gap: var(--space-4)">
+          <article class="card card-p-md stack demo-frame" data-pattern="file-upload">
+            <p class="text-sm">File upload surface: input + meta + actions kompozisyonu.</p>
+
+            <section class="file-upload" data-has-file="true" aria-label="Avatar file upload">
+              <label class="label" for="demo-file-upload-input">Profile image</label>
+              <input
+                id="demo-file-upload-input"
+                class="file-upload-input"
+                type="file"
+                accept=".png,.jpg,.jpeg,.webp"
+              />
+              <p class="file-upload-meta">Selected: avatar.png (184 KB). Accepted: png, jpg, webp.</p>
+              <div class="file-upload-actions">
+                <button class="btn btn-outline btn-sm" type="button">Clear</button>
+                <button class="btn btn-primary btn-sm" type="button">Upload</button>
+              </div>
+            </section>
+          </article>
+        </div>
+      </section>
+
+      <section class="section stack">
+        <h2>38) Dropzone Surface</h2>
+        <div class="sidebar" style="--sidebar-width: 30rem; --sidebar-gap: var(--space-4)">
+          <article class="card card-p-md stack demo-frame" data-pattern="dropzone">
+            <p class="text-sm">Dropzone surface: drop area + hidden input + helper actions.</p>
+
+            <section class="dropzone" data-drag-over="true" aria-label="Asset dropzone">
+              <label class="label" for="demo-dropzone-input">Upload assets</label>
+              <input id="demo-dropzone-input" class="dropzone-input" type="file" multiple />
+              <p class="dropzone-hint">Drag files here or click to choose.</p>
+              <p class="dropzone-meta">Accepted: png, jpg, svg. Max size: 5MB per file.</p>
+              <div class="dropzone-actions">
+                <label for="demo-dropzone-input" class="btn btn-outline btn-sm">Choose files</label>
+                <button class="btn btn-primary btn-sm" type="button">Start upload</button>
+              </div>
+            </section>
+          </article>
+        </div>
+      </section>
+
+      <section class="section stack">
+        <h2>39) Editable Field Surface</h2>
+        <div class="sidebar" style="--sidebar-width: 30rem; --sidebar-gap: var(--space-4)">
+          <article class="card card-p-md stack demo-frame" data-pattern="editable-field">
+            <p class="text-sm">Editable field surface: display/edit mode ve action alanı kompozisyonu.</p>
+
+            <section class="editable-field" data-editing="false" aria-label="Editable profile name">
+              <div class="editable-field-display cluster" style="--cluster-gap: var(--space-2); --cluster-justify: space-between">
+                <span class="text-sm">Ada Lovelace</span>
+                <button class="btn btn-outline btn-sm" type="button">Edit</button>
+              </div>
+
+              <form class="editable-field-editor" aria-label="Edit profile name">
+                <label class="label" for="demo-editable-field-input">Name</label>
+                <input id="demo-editable-field-input" class="input" type="text" value="Ada Lovelace" />
+                <div class="editable-field-actions">
+                  <button class="btn btn-outline btn-sm" type="button">Cancel</button>
+                  <button class="btn btn-primary btn-sm" type="submit">Save</button>
+                </div>
+              </form>
+            </section>
+          </article>
+        </div>
+      </section>
+
+      <section class="section stack">
+        <h2>40) Hover Card Surface</h2>
+        <div class="sidebar" style="--sidebar-width: 30rem; --sidebar-gap: var(--space-4)">
+          <article class="card card-p-md stack demo-frame" data-pattern="hover-card">
+            <p class="text-sm">Hover card surface: trigger + contextual content kompozisyonu.</p>
+
+            <div class="hover-card" data-open="true">
+              <button class="btn btn-outline btn-sm" type="button" aria-describedby="demo-hover-card-content">
+                @ada
+              </button>
+              <section id="demo-hover-card-content" class="hover-card-content" role="note" aria-label="Profile summary">
+                <strong>Ada Lovelace</strong>
+                <p class="text-sm">Writes mathematical notes for the analytics toolkit.</p>
+                <span class="badge">core-team</span>
+              </section>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section stack">
+        <h2>41) Content / Rich UI Surface</h2>
+        <div class="sidebar" style="--sidebar-width: 30rem; --sidebar-gap: var(--space-4)">
+          <article class="card card-p-md stack demo-frame">
+            <h3 class="heading">Typography Surface</h3>
+            <p class="text">Text component keeps body copy readable in product surfaces.</p>
+            <p class="text">Use <code class="code">code</code> for inline snippets.</p>
+            <pre class="code-block"><code>npm run test:ci</code></pre>
+          </article>
+
+          <article class="card card-p-md stack demo-frame">
+            <section class="callout">
+              <h3 class="callout-title">Migration Reminder</h3>
+              <p class="callout-body">Keep selector contract and RFC docs aligned before release.</p>
+            </section>
+
+            <blockquote class="quote">
+              “Stable CSS contracts make UI changes predictable for teams.”
+            </blockquote>
+
+            <p class="text">
+              Quick action:
+              <kbd class="kbd">Ctrl</kbd>
+              +
+              <kbd class="kbd">K</kbd>
+            </p>
+          </article>
+        </div>
+
+        <article class="card card-p-md stack demo-frame">
+          <section class="markdown-surface" aria-label="Markdown preview">
+            <h3>Release Notes</h3>
+            <p>Foundation package refinements completed for navigation, data and content surfaces.</p>
+            <ul>
+              <li>Contract checks passed.</li>
+              <li>Playground examples updated.</li>
+              <li>Build pipeline remains green.</li>
+            </ul>
+            <pre><code>npm run build</code></pre>
+          </section>
+        </article>
+      </section>
     </main>
+
+    <div class="toast-viewport" aria-live="polite" aria-atomic="true">
+      <article id="demo-toast-info" class="toast" data-open="false">
+        <strong>Saved</strong>
+        <p class="text-sm">Profile changes were saved.</p>
+        <div class="toast-actions">
+          <button class="btn btn-outline btn-sm" type="button" data-toast-hide="demo-toast-info">Close</button>
+        </div>
+      </article>
+
+      <article id="demo-toast-danger" class="toast" data-open="false" data-tone="danger">
+        <strong>Failed</strong>
+        <p class="text-sm">Request failed. Try again.</p>
+        <div class="toast-actions">
+          <button class="btn btn-outline btn-sm" type="button" data-toast-hide="demo-toast-danger">Close</button>
+        </div>
+      </article>
+    </div>
+
+    <div id="demo-drawer" class="drawer" data-open="false" aria-hidden="true">
+      <button class="drawer-backdrop" type="button" data-drawer-close="demo-drawer" aria-label="Close drawer"></button>
+      <aside class="drawer-panel" role="dialog" aria-modal="true" aria-labelledby="demo-drawer-title">
+        <header class="drawer-header">
+          <h3 id="demo-drawer-title">Drawer Title</h3>
+        </header>
+        <div class="drawer-body stack" style="--stack-gap: var(--space-2)">
+          <p class="text-sm">Side panel for contextual settings.</p>
+          <label class="cluster text-sm">
+            <input class="checkbox" type="checkbox" checked />
+            Notify on updates
+          </label>
+          <label class="cluster text-sm">
+            <input class="checkbox" type="checkbox" />
+            Compact mode
+          </label>
+        </div>
+        <footer class="drawer-footer">
+          <button class="btn btn-outline btn-sm" type="button" data-drawer-close="demo-drawer">Cancel</button>
+          <button class="btn btn-primary btn-sm" type="button" data-drawer-close="demo-drawer">Apply</button>
+        </footer>
+      </aside>
+    </div>
 
     <script src="./demo.js" defer></script>
   </body>

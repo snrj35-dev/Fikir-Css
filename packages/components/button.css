@@ -1,4 +1,10 @@
 /*
-  Button recipe selectors are generated into @layer recipes from contracts/recipes.contract.mjs.
-  This file remains as a placeholder to preserve package structure in v0.2 migration.
+  Button canonical class surface is generated into @layer recipes from contracts/recipes.contract.mjs.
+  This file is reserved for non-canonical behavioral refinements.
 */
+@layer components {
+  {{component.btn}}:disabled {
+    cursor: not-allowed;
+    opacity: 0.65;
+  }
+}

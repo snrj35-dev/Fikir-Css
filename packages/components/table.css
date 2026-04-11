@@ -1,0 +1,44 @@
+@layer components {
+  {{component.table}} {
+    inline-size: 100%;
+    border-collapse: collapse;
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background: var(--color-bg-surface);
+    color: var(--color-fg-default);
+  }
+
+  {{component.tableHead}} {
+    background: var(--color-bg-default);
+  }
+
+  {{component.tableBody}} {
+    background: var(--color-bg-surface);
+  }
+
+  {{component.tableRow}} + {{component.tableRow}} {
+    border-top: 1px solid var(--color-border-subtle);
+  }
+
+  {{component.tableHeadCell}},
+  {{component.tableCell}} {
+    text-align: left;
+    vertical-align: middle;
+    padding: var(--space-2) var(--space-3);
+    font-size: var(--font-size-sm);
+  }
+
+  {{component.tableHeadCell}} {
+    font-weight: 700;
+    color: var(--color-fg-default);
+  }
+
+  {{component.tableCell}} {
+    color: var(--color-fg-default);
+  }
+
+  {{component.tableRow}}[data-row-selected="true"] {
+    background: color-mix(in oklch, var(--color-accent) 18%, var(--color-bg-surface));
+  }
+}

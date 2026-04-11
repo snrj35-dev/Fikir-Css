@@ -1,6 +1,6 @@
 ---
 name: Bug report
-about: Report a reproducible problem in the v0.2 foundation
+about: Report a reproducible problem in the v0.3 foundation
 labels: bug
 ---
 

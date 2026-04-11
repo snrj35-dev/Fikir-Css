@@ -1,0 +1,33 @@
+@layer components {
+  {{component.accordion}} {
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  {{component.accordionItem}} {
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-md);
+    background: var(--color-bg-surface);
+    color: var(--color-fg-default);
+  }
+
+  {{component.accordionTrigger}} {
+    inline-size: 100%;
+    border: 0;
+    background: transparent;
+    color: inherit;
+    text-align: start;
+    padding: var(--space-3);
+    cursor: pointer;
+    font-weight: 600;
+  }
+
+  {{component.accordionPanel}} {
+    display: none;
+    padding: 0 var(--space-3) var(--space-3);
+  }
+
+  {{component.accordionItem}}[data-open="true"] {{component.accordionPanel}} {
+    display: block;
+  }
+}

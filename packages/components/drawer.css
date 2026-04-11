@@ -1,0 +1,50 @@
+@layer components {
+  {{component.drawer}} {
+    position: fixed;
+    inset: 0;
+    z-index: 42;
+    display: none;
+  }
+
+  {{component.drawer}}[data-open="true"] {
+    display: block;
+  }
+
+  {{component.drawerBackdrop}} {
+    position: absolute;
+    inset: 0;
+    background: color-mix(in oklch, black 38%, transparent);
+  }
+
+  {{component.drawerPanel}} {
+    position: absolute;
+    inset-block: 0;
+    inset-inline-end: 0;
+    inline-size: min(100vw, 24rem);
+    border-inline-start: 1px solid var(--color-border-subtle);
+    background: var(--color-bg-surface);
+    color: var(--color-fg-default);
+    box-shadow: var(--shadow-md);
+    display: flex;
+    flex-direction: column;
+  }
+
+  {{component.drawerHeader}} {
+    padding: var(--space-4);
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+
+  {{component.drawerBody}} {
+    padding: var(--space-4);
+    flex: 1;
+    overflow: auto;
+  }
+
+  {{component.drawerFooter}} {
+    padding: var(--space-4);
+    border-top: 1px solid var(--color-border-subtle);
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--space-2);
+  }
+}

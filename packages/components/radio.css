@@ -1,0 +1,22 @@
+@layer components {
+  {{component.radio}} {
+    inline-size: 1rem;
+    block-size: 1rem;
+    margin: 0;
+    accent-color: var(--color-accent);
+  }
+
+  {{component.radio}}:focus-visible {
+    box-shadow: 0 0 0 3px color-mix(in oklch, var(--color-primary-500) 35%, transparent);
+  }
+
+  {{component.radio}}[aria-invalid="true"] {
+    outline: 2px solid var(--color-danger);
+    outline-offset: 1px;
+  }
+
+  {{component.radio}}[disabled] {
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+}

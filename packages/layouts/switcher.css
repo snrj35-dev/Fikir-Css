@@ -1,12 +1,18 @@
 @layer layouts {
   .switcher {
     --switcher-gap: var(--space-4);
+    --switcher-min: 16rem;
     display: flex;
     flex-wrap: wrap;
     gap: var(--switcher-gap);
   }
 
   .switcher > * {
-    flex: 1 1 16rem;
+    flex: 1 1 var(--switcher-min);
+    min-inline-size: min(100%, var(--switcher-min));
+  }
+
+  .switcher[data-switcher-fixed="true"] > * {
+    flex-grow: 0;
   }
 }

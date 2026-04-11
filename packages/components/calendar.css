@@ -1,0 +1,80 @@
+@layer components {
+  {{component.calendar}} {
+    inline-size: 100%;
+    display: grid;
+    gap: var(--space-2);
+    padding: var(--space-3);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-md);
+    background: var(--color-bg-surface);
+    color: var(--color-fg-default);
+    box-shadow: var(--shadow-sm);
+  }
+
+  {{component.calendarHeader}} {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+  }
+
+  {{component.calendarTitle}} {
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+  }
+
+  {{component.calendarNav}} {
+    min-block-size: 2rem;
+    min-inline-size: 2rem;
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-sm);
+    background: var(--color-bg-surface);
+    color: var(--color-fg-default);
+    cursor: pointer;
+  }
+
+  {{component.calendarGrid}} {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: var(--space-1);
+  }
+
+  {{component.calendarWeekday}} {
+    text-align: center;
+    font-size: var(--font-size-xs);
+    color: var(--color-fg-muted);
+  }
+
+  {{component.calendarDay}} {
+    min-block-size: 2rem;
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-sm);
+    background: var(--color-bg-surface);
+    color: var(--color-fg-default);
+    font-size: var(--font-size-sm);
+    line-height: 1.2;
+    cursor: pointer;
+  }
+
+  {{component.calendarDay}}[data-today="true"] {
+    border-color: var(--color-accent);
+  }
+
+  {{component.calendarDay}}[data-selected="true"] {
+    background: var(--color-primary-500);
+    color: var(--color-gray-50);
+    border-color: var(--color-primary-500);
+  }
+
+  {{component.calendarDay}}[data-outside="true"] {
+    color: var(--color-fg-muted);
+    background: var(--color-bg-default);
+  }
+
+  {{component.calendarDay}}[disabled] {
+    color: var(--color-fg-muted);
+    background: var(--color-bg-default);
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+}

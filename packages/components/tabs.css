@@ -1,0 +1,43 @@
+@layer components {
+  {{component.tabs}} {
+    display: grid;
+    gap: var(--space-3);
+  }
+
+  {{component.tabsList}} {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2);
+  }
+
+  {{component.tabsTrigger}} {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid var(--color-border-subtle);
+    background: var(--color-bg-surface);
+    color: var(--color-fg-default);
+    border-radius: var(--radius-md);
+    padding: var(--space-2) var(--space-3);
+    cursor: pointer;
+  }
+
+  {{component.tabsTrigger}}[data-active="true"] {
+    background: var(--color-primary-500);
+    color: var(--color-gray-50);
+    border-color: var(--color-primary-500);
+  }
+
+  {{component.tabsPanel}} {
+    display: none;
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-md);
+    background: var(--color-bg-surface);
+    color: var(--color-fg-default);
+    padding: var(--space-3);
+  }
+
+  {{component.tabsPanel}}[data-active="true"] {
+    display: block;
+  }
+}

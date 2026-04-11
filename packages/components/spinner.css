@@ -1,0 +1,41 @@
+@layer components {
+  {{component.spinner}} {
+    inline-size: 1rem;
+    block-size: 1rem;
+    display: inline-block;
+    border: 2px solid var(--color-border-subtle);
+    border-top-color: var(--color-accent);
+    border-radius: 999px;
+    animation: spinner-rotate 900ms linear infinite;
+  }
+
+  {{component.spinnerSm}} {
+    inline-size: 0.875rem;
+    block-size: 0.875rem;
+  }
+
+  {{component.spinnerMd}} {
+    inline-size: 1rem;
+    block-size: 1rem;
+  }
+
+  {{component.spinnerLg}} {
+    inline-size: 1.25rem;
+    block-size: 1.25rem;
+    border-width: 3px;
+  }
+
+  @keyframes spinner-rotate {
+    to {
+      transform: rotate(1turn);
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @layer components {
+    {{component.spinner}} {
+      animation: none;
+    }
+  }
+}

@@ -1,0 +1,95 @@
+@layer components {
+  {{component.dateRangePicker}} {
+    inline-size: 100%;
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  {{component.dateRangePickerStart}},
+  {{component.dateRangePickerEnd}} {
+    inline-size: 100%;
+    min-block-size: 2.5rem;
+    padding-inline: var(--space-3);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border-subtle);
+    background: var(--color-bg-surface);
+    color: var(--color-fg-default);
+  }
+
+  {{component.dateRangePickerStart}}:focus-visible,
+  {{component.dateRangePickerEnd}}:focus-visible {
+    border-color: var(--color-accent);
+  }
+
+  {{component.dateRangePickerSeparator}} {
+    color: var(--color-fg-muted);
+    font-size: var(--font-size-sm);
+    align-self: center;
+  }
+
+  {{component.dateRangePickerTrigger}} {
+    min-block-size: 2.5rem;
+    padding-inline: var(--space-3);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border-subtle);
+    background: var(--color-bg-surface);
+    color: var(--color-fg-default);
+    cursor: pointer;
+  }
+
+  {{component.dateRangePickerPanel}} {
+    display: none;
+    padding: var(--space-3);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-md);
+    background: var(--color-bg-surface);
+    color: var(--color-fg-default);
+    box-shadow: var(--shadow-sm);
+  }
+
+  {{component.dateRangePicker}}[data-open="true"] {{component.dateRangePickerPanel}} {
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  {{component.dateRangePickerGrid}} {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: var(--space-1);
+  }
+
+  {{component.dateRangePickerDay}} {
+    min-block-size: 2rem;
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-sm);
+    background: var(--color-bg-surface);
+    color: var(--color-fg-default);
+    font-size: var(--font-size-sm);
+    line-height: 1.2;
+    cursor: pointer;
+  }
+
+  {{component.dateRangePickerDay}}[data-in-range="true"] {
+    background: color-mix(in oklab, var(--color-primary-500) 16%, var(--color-bg-surface));
+    border-color: color-mix(in oklab, var(--color-primary-500) 40%, var(--color-border-subtle));
+  }
+
+  {{component.dateRangePickerDay}}[data-range-start="true"],
+  {{component.dateRangePickerDay}}[data-range-end="true"] {
+    background: var(--color-primary-500);
+    color: var(--color-gray-50);
+    border-color: var(--color-primary-500);
+  }
+
+  {{component.dateRangePickerDay}}[data-outside="true"] {
+    color: var(--color-fg-muted);
+    background: var(--color-bg-default);
+  }
+
+  {{component.dateRangePickerDay}}[disabled] {
+    color: var(--color-fg-muted);
+    background: var(--color-bg-default);
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+}

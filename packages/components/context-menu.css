@@ -1,0 +1,43 @@
+@layer components {
+  {{component.contextMenu}} {
+    position: relative;
+    display: inline-flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  {{component.contextMenuContent}} {
+    min-inline-size: 11rem;
+    display: none;
+    position: absolute;
+    inset-block-start: calc(100% + var(--space-1));
+    inset-inline-start: 0;
+    z-index: 20;
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-md);
+    background: var(--color-bg-surface);
+    box-shadow: var(--shadow-sm);
+    padding: var(--space-1);
+  }
+
+  {{component.contextMenu}}[data-open="true"] {{component.contextMenuContent}} {
+    display: grid;
+    gap: var(--space-1);
+  }
+
+  {{component.contextMenuItem}} {
+    border: 0;
+    border-radius: var(--radius-sm);
+    background: transparent;
+    color: var(--color-fg-default);
+    font-size: var(--font-size-sm);
+    text-align: start;
+    padding: var(--space-2) var(--space-3);
+    cursor: pointer;
+  }
+
+  {{component.contextMenuItem}}:hover,
+  {{component.contextMenuItem}}:focus-visible {
+    background: var(--color-bg-default);
+  }
+}

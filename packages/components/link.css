@@ -1,0 +1,35 @@
+@layer components {
+  {{component.link}} {
+    color: var(--color-accent);
+    text-decoration-line: underline;
+    text-decoration-thickness: 0.08em;
+    text-underline-offset: 0.15em;
+    font-weight: 500;
+    transition: color 120ms ease;
+  }
+
+  {{component.link}}:hover {
+    color: var(--color-primary-600);
+  }
+
+  {{component.link}}:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+  }
+
+  {{component.link}}[aria-disabled="true"] {
+    color: var(--color-fg-muted);
+    text-decoration: none;
+    pointer-events: none;
+    cursor: default;
+  }
+
+  {{component.linkMuted}} {
+    color: var(--color-fg-muted);
+  }
+
+  {{component.linkDanger}} {
+    color: var(--color-danger);
+  }
+}

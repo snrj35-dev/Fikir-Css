@@ -2,11 +2,33 @@
   {{component.badge}} {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
+    gap: var(--space-1);
     border-radius: 999px;
-    padding: 0.125rem var(--space-2);
+    border: 1px solid var(--color-border-subtle);
+    padding: var(--space-1) var(--space-2);
     font-size: var(--font-size-xs);
     font-weight: 700;
-    background: var(--color-gray-100);
+    line-height: 1.2;
+    background: color-mix(in oklch, var(--color-border-subtle) 28%, var(--color-bg-surface));
     color: var(--color-fg-default);
+  }
+
+  {{component.badgeNeutral}} {
+    background: color-mix(in oklch, var(--color-border-subtle) 28%, var(--color-bg-surface));
+    color: var(--color-fg-default);
+    border-color: var(--color-border-subtle);
+  }
+
+  {{component.badgePrimary}} {
+    background: var(--color-primary-500);
+    color: var(--color-gray-50);
+    border-color: transparent;
+  }
+
+  {{component.badgeDanger}} {
+    background: color-mix(in oklch, var(--color-danger) 22%, var(--color-bg-surface));
+    color: var(--color-fg-default);
+    border-color: color-mix(in oklch, var(--color-danger) 52%, var(--color-bg-surface));
   }
 }

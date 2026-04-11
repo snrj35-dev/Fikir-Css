@@ -1,0 +1,48 @@
+@layer components {
+  {{component.skeleton}} {
+    display: block;
+    background: linear-gradient(
+      90deg,
+      color-mix(in oklch, var(--color-border-subtle) 35%, var(--color-bg-surface)) 25%,
+      color-mix(in oklch, var(--color-border-subtle) 60%, var(--color-bg-surface)) 50%,
+      color-mix(in oklch, var(--color-border-subtle) 35%, var(--color-bg-surface)) 75%
+    );
+    background-size: 200% 100%;
+    border-radius: var(--radius-sm);
+    animation: skeleton-shimmer 1.2s linear infinite;
+  }
+
+  {{component.skeletonText}} {
+    inline-size: 100%;
+    block-size: 0.9em;
+  }
+
+  {{component.skeletonBlock}} {
+    inline-size: 100%;
+    min-block-size: 4rem;
+  }
+
+  {{component.skeletonCircle}} {
+    inline-size: 2rem;
+    block-size: 2rem;
+    border-radius: 999px;
+  }
+
+  @keyframes skeleton-shimmer {
+    from {
+      background-position: 100% 0;
+    }
+
+    to {
+      background-position: -100% 0;
+    }
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  @layer components {
+    {{component.skeleton}} {
+      animation: none;
+    }
+  }
+}

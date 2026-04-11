@@ -1,0 +1,43 @@
+@layer components {
+  {{component.dataGrid}} {
+    display: grid;
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    background: var(--color-bg-surface);
+    color: var(--color-fg-default);
+  }
+
+  {{component.dataGridHead}},
+  {{component.dataGridBody}} {
+    display: grid;
+  }
+
+  {{component.dataGridRow}} {
+    display: grid;
+    grid-template-columns: repeat(var(--data-grid-columns, 4), minmax(0, 1fr));
+    align-items: center;
+  }
+
+  {{component.dataGridHead}} {{component.dataGridRow}} {
+    background: var(--color-bg-default);
+    font-weight: 700;
+  }
+
+  {{component.dataGridBody}} {{component.dataGridRow}} + {{component.dataGridRow}} {
+    border-top: 1px solid var(--color-border-subtle);
+  }
+
+  {{component.dataGridCell}} {
+    min-inline-size: 0;
+    padding: var(--space-2) var(--space-3);
+    font-size: var(--font-size-sm);
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+  {{component.dataGridRow}}[data-row-selected="true"] {
+    background: color-mix(in oklch, var(--color-accent) 18%, var(--color-bg-surface));
+  }
+}

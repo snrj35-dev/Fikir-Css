@@ -1,5 +1,10 @@
 # Recipe Contract (v0.2)
 
+İlgili dokümanlar:
+- `docs/contracts/naming-contract.md`
+- `docs/contracts/naming-convention-spec.md`
+- `docs/contracts/token-dictionary-spec.md`
+
 ## Purpose
 Recipe CSS ve TS resolver çıktısını tek sözleşmeden üretmek.
 

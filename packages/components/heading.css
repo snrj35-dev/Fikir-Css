@@ -1,0 +1,9 @@
+@layer components {
+  {{component.heading}} {
+    margin: 0;
+    color: var(--color-fg-default);
+    font-size: var(--font-size-lg);
+    line-height: 1.3;
+    font-weight: 700;
+  }
+}

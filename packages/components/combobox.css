@@ -1,0 +1,52 @@
+@layer components {
+  {{component.combobox}} {
+    position: relative;
+    inline-size: 100%;
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  {{component.comboboxInput}} {
+    inline-size: 100%;
+    min-block-size: 2.5rem;
+    padding-inline: var(--space-3);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border-subtle);
+    background: var(--color-bg-surface);
+    color: var(--color-fg-default);
+  }
+
+  {{component.comboboxInput}}:focus-visible {
+    border-color: var(--color-accent);
+  }
+
+  {{component.comboboxList}} {
+    margin: 0;
+    padding: var(--space-1);
+    list-style: none;
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-md);
+    background: var(--color-bg-surface);
+    color: var(--color-fg-default);
+    max-block-size: 12rem;
+    overflow: auto;
+    box-shadow: var(--shadow-sm);
+  }
+
+  {{component.comboboxOption}} {
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-sm);
+    font-size: var(--font-size-sm);
+    line-height: 1.35;
+    cursor: default;
+  }
+
+  {{component.comboboxOption}}[data-active="true"] {
+    background: var(--color-bg-default);
+  }
+
+  {{component.comboboxOption}}[aria-selected="true"] {
+    background: var(--color-primary-500);
+    color: var(--color-gray-50);
+  }
+}

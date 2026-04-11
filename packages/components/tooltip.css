@@ -1,0 +1,32 @@
+@layer components {
+  {{component.tooltip}} {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  {{component.tooltipContent}} {
+    position: absolute;
+    inset-block-end: calc(100% + var(--space-2));
+    inset-inline-start: 50%;
+    transform: translateX(-50%);
+    inline-size: max-content;
+    max-inline-size: 16rem;
+    padding: 0.35rem var(--space-2);
+    border-radius: var(--radius-sm);
+    background: var(--color-fg-default);
+    color: var(--color-bg-surface);
+    font-size: var(--font-size-xs);
+    line-height: 1.4;
+    box-shadow: var(--shadow-sm);
+    z-index: 50;
+    opacity: 0;
+    pointer-events: none;
+    visibility: hidden;
+  }
+
+  {{component.tooltip}}[data-open="true"] {{component.tooltipContent}} {
+    opacity: 1;
+    visibility: visible;
+  }
+}

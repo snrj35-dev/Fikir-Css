@@ -1,0 +1,712 @@
+# Fikir CSS — Task List
+
+> Product plan'e bağlı uygulanabilir görev listesi
+
+## 1. Kullanım Notu
+
+Bu görev listesi, `plan.md` içindeki fazlar ve workstream'leri uygulanabilir iş kalemlerine dönüştürür.
+
+Görevler üç seviyede düşünülmelidir:
+
+- Spec / RFC
+- Implementation
+- Docs / Demo / Test / CI
+
+Her iş kalemi mümkün olduğunda bu üç seviyeden en az ikisini kapsamalıdır.
+
+---
+
+## 2. Şu Anki Durum Özeti
+
+Tamamlanan temel alanlar:
+
+- Foundation mimarisi
+- Contract-driven yapı
+- Naming spec
+- Token dictionary spec
+- Button / Input / Card RFC'leri
+- Demo / playground
+- GitHub hazırlığı
+- Minimal test suite
+- CI
+
+Bu nedenle task list'in ana odağı artık yeni fikir üretmek değil, planlı büyümedir.
+
+---
+
+## 3. Priority Backlog
+
+### P0 — Hemen sıradaki işler
+
+#### Core Component Refinement
+- [x] Button state refinement implementation
+- [x] Input validation surface implementation
+- [x] Card basic slot / composition surface implementation
+- [x] Bu üç yüzey için test ekleme
+- [x] Playground güncellemesi
+- [x] Release note / docs güncellemesi
+
+#### RFC-to-Implementation Alignment
+- [x] Button RFC ile implementation yüzeyini tekrar doğrulama
+- [x] Input RFC ile implementation yüzeyini tekrar doğrulama
+- [x] Card RFC ile implementation yüzeyini tekrar doğrulama
+
+---
+
+### P1 — Form ve temel ürün yüzeyi
+
+#### Field Composition
+- [x] Label implementation
+- [x] Helper Text implementation
+- [x] Error Text implementation
+- [x] Field / Form Field RFC yazımı
+- [x] Field / Form Field implementation
+- [x] Form field docs örnekleri
+- [x] Form field accessibility örnekleri
+
+#### Form Controls
+- [x] Textarea RFC
+- [x] Textarea implementation
+- [x] Select RFC
+- [x] Select implementation
+- [x] Checkbox RFC
+- [x] Checkbox implementation
+- [x] Radio RFC
+- [x] Radio implementation
+- [x] Switch RFC
+- [x] Switch implementation
+- [x] Input Group RFC
+- [x] Input Group implementation
+
+#### Test / Docs
+- [x] Form control state testleri
+- [x] Invalid/disabled/readonly örnekleri
+- [x] Playground form demo section'ı
+- [x] README docs map güncellemesi
+
+---
+
+### P2 — Overlay & Interaction
+
+#### Overlay Core
+- [x] Modal RFC
+- [x] Modal implementation
+- [x] Toast RFC
+- [x] Toast implementation
+- [x] Tooltip RFC
+- [x] Tooltip implementation
+- [x] Popover RFC
+- [x] Popover implementation
+- [x] Dropdown Menu RFC
+- [x] Dropdown Menu implementation
+- [x] Drawer RFC
+- [x] Drawer implementation
+
+#### Overlay Quality
+- [x] Focus management test planı
+- [x] Layering/z-index docs notları
+- [x] Accessibility expectations dokümantasyonu
+- [x] Playground overlay showcase
+
+---
+
+### P3 — Navigation & Shell
+
+#### Navigation
+- [x] Tabs implementation refinement
+- [x] Accordion implementation refinement
+- [x] Pagination implementation refinement
+- [x] Breadcrumb RFC
+- [x] Breadcrumb implementation
+- [x] Navbar RFC
+- [x] Navbar implementation
+- [x] Sidebar RFC
+- [x] Sidebar implementation
+- [x] Stepper RFC
+- [x] Stepper implementation
+
+#### Shell / Product Patterns
+- [x] Page Header RFC
+- [x] Page Header implementation
+- [x] Section RFC
+- [x] Section implementation
+- [x] App Shell RFC
+- [x] App Shell implementation
+- [x] Settings Panel pattern spec
+- [x] Filter Bar pattern spec
+
+#### Docs / Demo
+- [x] Navigation showcase
+- [x] App shell example page
+- [x] Product pattern docs
+
+#### Quality Gate (P3)
+- [x] Navigation & shell RFC-implementation-test uyumluluğu denetlendi
+- [x] P3 sonrası `npm run test:ci` yeşil geçti
+- [x] P4 başlangıcı için P3 bloklayıcıları kapatıldı
+
+---
+
+### P4 — Data & Display
+
+#### Basic Data Surface
+- [x] Table implementation refinement
+- [x] Avatar RFC
+- [x] Avatar implementation
+- [x] Empty State implementation refinement
+- [x] Stat RFC
+- [x] Stat implementation
+- [x] Timeline RFC
+- [x] Timeline implementation
+- [x] KPI Card RFC
+- [x] KPI Card implementation
+
+#### Structured Data
+- [x] List RFC
+- [x] List implementation
+- [x] Description List RFC
+- [x] Description List implementation
+- [x] Data Grid research note
+- [x] Data Grid RFC (phase-gated)
+
+#### Docs / Demo / Tests
+- [x] Dense data display examples
+- [x] Table + empty state combined demo
+- [x] Data display token audit
+
+#### Quality Gate (P4 Paket-1)
+- [x] Table + empty-state RFC/implementation/test hizası doğrulandı
+- [x] P4 paket-1 sonrası `npm run test:ci` yeşil geçti
+
+#### Quality Gate (P4 Paket-2)
+- [x] Avatar + stat RFC/implementation/test hizası doğrulandı
+- [x] P4 paket-2 sonrası `npm run test:ci` yeşil geçti
+
+#### Quality Gate (P4 Paket-3)
+- [x] Timeline + KPI card RFC/implementation/test hizası doğrulandı
+- [x] P4 paket-3 sonrası `npm run test:ci` yeşil geçti
+
+#### Quality Gate (P4 Paket-4)
+- [x] List + description-list RFC/implementation/test hizası doğrulandı
+- [x] P4 paket-4 sonrası `npm run test:ci` yeşil geçti
+
+#### Quality Gate (P4 Paket-5)
+- [x] Data-grid research note + phase-gated RFC tamamlandı
+- [x] P4 paket-5 sonrası `npm run test:ci` yeşil geçti
+
+#### Quality Gate (P5 Paket-1)
+- [x] Combobox + search-box RFC/implementation/test hizası doğrulandı
+- [x] P5 paket-1 sonrası `npm run test:ci` yeşil geçti
+
+#### Quality Gate (P5 Paket-2)
+- [x] Autocomplete + command-palette RFC/implementation/test hizası doğrulandı
+- [x] P5 paket-2 sonrası `npm run test:ci` yeşil geçti
+
+#### Quality Gate (P5 Paket-3)
+- [x] Command bar pattern spec + implementation tamamlandı
+- [x] Filter bar implementation + search/filter composite examples tamamlandı
+- [x] P5 paket-3 sonrası `npm run test:ci` yeşil geçti
+
+#### Quality Gate (P5 Paket-4)
+- [x] Data table toolbar spec + implementation tamamlandı
+- [x] P5 paket-4 sonrası `npm run test:ci` yeşil geçti
+
+#### Quality Gate (P5 Paket-5)
+- [x] Date picker RFC + implementation tamamlandı
+- [x] P5 paket-5 sonrası `npm run test:ci` yeşil geçti
+
+#### Quality Gate (P5 Paket-6)
+- [x] Date range picker RFC + implementation tamamlandı
+- [x] P5 paket-6 sonrası `npm run test:ci` yeşil geçti
+
+#### Quality Gate (P5 Paket-7)
+- [x] Calendar RFC + implementation tamamlandı
+- [x] P5 paket-7 sonrası `npm run test:ci` yeşil geçti
+
+#### Quality Gate (P5 Paket-8)
+- [x] File upload RFC + implementation tamamlandı
+- [x] P5 paket-8 sonrası `npm run test:ci` yeşil geçti
+
+#### Quality Gate (P5 Paket-9)
+- [x] Dropzone RFC + implementation tamamlandı
+- [x] P5 paket-9 sonrası `npm run test:ci` yeşil geçti
+
+#### Quality Gate (P5 Paket-10)
+- [x] Editable field RFC + implementation tamamlandı
+- [x] P5 paket-10 sonrası `npm run test:ci` yeşil geçti
+
+#### Quality Gate (P5 Paket-11)
+- [x] Hover card RFC + implementation tamamlandı
+- [x] P5 paket-11 sonrası `npm run test:ci` yeşil geçti
+
+---
+
+### P5 — Advanced Surface
+
+#### Search / Productivity
+- [x] Combobox RFC
+- [x] Combobox implementation
+- [x] Autocomplete RFC
+- [x] Autocomplete implementation
+- [x] Command Palette RFC
+- [x] Command Palette implementation
+- [x] Search Box RFC
+- [x] Search Box implementation
+- [x] Command Bar pattern spec
+- [x] Command Bar implementation
+
+#### Date / File / Editing
+- [x] Date Picker RFC
+- [x] Date Picker implementation
+- [x] Date Range Picker RFC
+- [x] Date Range Picker implementation
+- [x] Calendar RFC
+- [x] Calendar implementation
+- [x] File Upload RFC
+- [x] File Upload implementation
+- [x] Dropzone RFC
+- [x] Dropzone implementation
+- [x] Editable Field RFC
+- [x] Editable Field implementation
+
+#### Product Patterns
+- [x] Data Table Toolbar spec
+- [x] Data Table Toolbar implementation
+- [x] Filter Bar implementation
+- [x] Search + filter composite examples
+
+---
+
+### P6 — Plan İçi Açık Maddeler (Paketli İlerleme)
+
+#### Paket-1 — Core Foundation Completion
+- [x] Icon Button RFC
+- [x] Icon Button implementation
+- [x] Link RFC
+- [x] Link implementation
+- [x] Divider RFC
+- [x] Divider implementation
+- [x] Surface RFC
+- [x] Surface implementation
+- [x] Visually Hidden RFC
+- [x] Visually Hidden implementation
+- [x] Badge implementation refinement
+- [x] Alert implementation refinement
+- [x] Skeleton implementation refinement
+- [x] Spinner implementation refinement
+
+#### Quality Gate (P6 Paket-1)
+- [x] Core foundation yüzeyi için RFC/implementation/test hizası doğrulandı
+- [x] P6 paket-1 sonrası `npm run test:ci` yeşil geçti
+- [x] Core docs + playground örnekleri güncellendi
+
+#### Paket-2 — Form Extensions
+- [x] Range Slider RFC
+- [x] Range Slider implementation
+- [x] OTP / Pin Input RFC
+- [x] OTP / Pin Input implementation
+
+#### Quality Gate (P6 Paket-2)
+- [x] Form extensions için field-state + accessibility testleri güncellendi
+- [x] P6 paket-2 sonrası `npm run test:ci` yeşil geçti
+- [x] Form docs + demo örnekleri güncellendi
+
+#### Paket-3 — Overlay Extensions
+- [x] Context Menu RFC
+- [x] Context Menu implementation
+- [x] Progress RFC
+- [x] Progress implementation
+- [x] Loading Overlay RFC
+- [x] Loading Overlay implementation
+
+#### Quality Gate (P6 Paket-3)
+- [x] Overlay extensions için focus/layering/a11y beklentileri doğrulandı
+- [x] P6 paket-3 sonrası `npm run test:ci` yeşil geçti
+- [x] Overlay docs + playground showcase güncellendi
+
+#### Paket-4 — Navigation & Layout Extensions
+- [x] Menu Bar RFC
+- [x] Menu Bar implementation
+- [x] Container implementation refinement
+- [x] Stack implementation refinement
+- [x] Cluster implementation refinement
+- [x] Sidebar Layout implementation refinement
+- [x] Switcher implementation refinement
+- [x] Center implementation refinement
+- [x] Grid implementation refinement
+- [x] Split Pane RFC
+- [x] Split Pane implementation
+
+#### Quality Gate (P6 Paket-4)
+- [x] Navigation/layout extensions için RFC/implementation/test hizası doğrulandı
+- [x] P6 paket-4 sonrası `npm run test:ci` yeşil geçti
+- [x] App shell + layout docs örnekleri güncellendi
+
+#### Paket-5 — Data & Display Completion
+- [x] Data Grid implementation
+- [x] Avatar Group RFC
+- [x] Avatar Group implementation
+- [x] Tag / Chip RFC
+- [x] Tag / Chip implementation
+
+#### Quality Gate (P6 Paket-5)
+- [x] Data display extensions için dense-surface test senaryoları güncellendi
+- [x] P6 paket-5 sonrası `npm run test:ci` yeşil geçti
+- [x] Data display docs + combined demo örnekleri güncellendi
+
+#### Paket-6 — Content / Rich UI Foundation
+- [x] Text RFC
+- [x] Text implementation
+- [x] Heading RFC
+- [x] Heading implementation
+- [x] Code RFC
+- [x] Code implementation
+- [x] Code Block RFC
+- [x] Code Block implementation
+- [x] Callout RFC
+- [x] Callout implementation
+- [x] Quote RFC
+- [x] Quote implementation
+- [x] Kbd RFC
+- [x] Kbd implementation
+- [x] Markdown Surface RFC
+- [x] Markdown Surface implementation
+
+#### Quality Gate (P6 Paket-6)
+- [x] Content surface için typography/token contract hizası doğrulandı
+- [x] P6 paket-6 sonrası `npm run test:ci` yeşil geçti
+- [x] Content docs + playground içerik showcase güncellendi
+
+---
+
+## 4. Component Master Checklist
+
+### 4.1 Core / Foundation
+- [x] Button RFC
+- [x] Button implementation refinement
+- [x] Icon Button RFC
+- [x] Icon Button implementation
+- [x] Link RFC
+- [x] Link implementation
+- [x] Card RFC
+- [x] Card implementation refinement
+- [x] Badge implementation refinement
+- [x] Alert implementation refinement
+- [x] Divider RFC
+- [x] Divider implementation
+- [x] Skeleton implementation refinement
+- [x] Spinner implementation refinement
+- [x] Surface RFC
+- [x] Surface implementation
+- [x] Visually Hidden RFC
+- [x] Visually Hidden implementation
+
+### 4.2 Form / Input
+- [x] Input RFC
+- [x] Input validation implementation
+- [x] Textarea RFC
+- [x] Textarea implementation
+- [x] Select RFC
+- [x] Select implementation
+- [x] Checkbox RFC
+- [x] Checkbox implementation
+- [x] Radio RFC
+- [x] Radio implementation
+- [x] Switch RFC
+- [x] Switch implementation
+- [x] Range Slider RFC
+- [x] Range Slider implementation
+- [x] OTP / Pin Input RFC
+- [x] OTP / Pin Input implementation
+- [x] Field / Form Field RFC
+- [x] Field / Form Field implementation
+- [x] Label implementation
+- [x] Helper Text implementation
+- [x] Error Text implementation
+- [x] Input Group RFC
+- [x] Input Group implementation
+- [x] Combobox RFC
+- [x] Combobox implementation
+- [x] Autocomplete RFC
+- [x] Autocomplete implementation
+
+### 4.3 Overlay / Feedback
+- [x] Modal / Dialog RFC
+- [x] Modal / Dialog implementation
+- [x] Drawer RFC
+- [x] Drawer implementation
+- [x] Popover RFC
+- [x] Popover implementation
+- [x] Tooltip RFC
+- [x] Tooltip implementation
+- [x] Dropdown Menu RFC
+- [x] Dropdown Menu implementation
+- [x] Context Menu RFC
+- [x] Context Menu implementation
+- [x] Hover Card RFC
+- [x] Hover Card implementation
+- [x] Toast RFC
+- [x] Toast implementation refinement
+- [x] Progress RFC
+- [x] Progress implementation
+- [x] Loading Overlay RFC
+- [x] Loading Overlay implementation
+
+### 4.4 Navigation
+- [x] Tabs RFC
+- [x] Tabs implementation refinement
+- [x] Accordion RFC
+- [x] Accordion implementation refinement
+- [x] Breadcrumb RFC
+- [x] Breadcrumb implementation
+- [x] Pagination RFC
+- [x] Pagination implementation refinement
+- [x] Navbar RFC
+- [x] Navbar implementation
+- [x] Sidebar RFC
+- [x] Sidebar implementation
+- [x] Command Palette RFC
+- [x] Command Palette implementation
+- [x] Menu Bar RFC
+- [x] Menu Bar implementation
+- [x] Steps / Stepper RFC
+- [x] Steps / Stepper implementation
+
+### 4.5 Data Display
+- [x] Table RFC
+- [x] Table implementation refinement
+- [x] Data Grid RFC
+- [x] Data Grid implementation
+- [x] List RFC
+- [x] List implementation
+- [x] Description List RFC
+- [x] Description List implementation
+- [x] Avatar RFC
+- [x] Avatar implementation
+- [x] Avatar Group RFC
+- [x] Avatar Group implementation
+- [x] Tag / Chip RFC
+- [x] Tag / Chip implementation
+- [x] Stat RFC
+- [x] Stat implementation
+- [x] Empty State RFC
+- [x] Empty State implementation refinement
+- [x] Timeline RFC
+- [x] Timeline implementation
+- [x] KPI Card RFC
+- [x] KPI Card implementation
+
+### 4.6 Layout / App Shell
+- [x] Container implementation refinement
+- [x] Stack implementation refinement
+- [x] Cluster implementation refinement
+- [x] Sidebar Layout implementation refinement
+- [x] Switcher implementation refinement
+- [x] Center implementation refinement
+- [x] Grid implementation refinement
+- [x] Page Header RFC
+- [x] Page Header implementation
+- [x] Section RFC
+- [x] Section implementation
+- [x] App Shell RFC
+- [x] App Shell implementation
+- [x] Split Pane RFC
+- [x] Split Pane implementation
+
+### 4.7 Content / Rich UI
+- [x] Text RFC
+- [x] Text implementation
+- [x] Heading RFC
+- [x] Heading implementation
+- [x] Code RFC
+- [x] Code implementation
+- [x] Code Block RFC
+- [x] Code Block implementation
+- [x] Callout RFC
+- [x] Callout implementation
+- [x] Quote RFC
+- [x] Quote implementation
+- [x] Kbd RFC
+- [x] Kbd implementation
+- [x] Markdown Surface RFC
+- [x] Markdown Surface implementation
+
+### 4.8 Advanced / Product Surface
+- [x] Date Picker RFC
+- [x] Date Picker implementation
+- [x] Date Range Picker RFC
+- [x] Date Range Picker implementation
+- [x] Calendar RFC
+- [x] Calendar implementation
+- [x] File Upload RFC
+- [x] File Upload implementation
+- [x] Dropzone RFC
+- [x] Dropzone implementation
+- [x] Search Box RFC
+- [x] Search Box implementation
+- [x] Filter Bar spec
+- [x] Filter Bar implementation
+- [x] Data Table Toolbar spec
+- [x] Data Table Toolbar implementation
+- [x] Command Bar spec
+- [x] Command Bar implementation
+- [x] Editable Field RFC
+- [x] Editable Field implementation
+
+---
+
+## 5. Workstream Checklists
+
+### A — Core Component Refinement
+- [x] Button
+- [x] Input
+- [x] Card
+- [x] Badge
+- [x] Alert
+- [x] Label / Helper / Error Text
+- [x] RFC alignment
+- [x] Tests
+- [x] Playground update
+
+### B — Overlay & Interaction
+- [x] Modal
+- [x] Toast
+- [x] Popover
+- [x] Tooltip
+- [x] Dropdown Menu
+- [x] Drawer
+- [x] Overlay docs
+- [x] Overlay demo
+
+### C — Forms & Field Composition
+- [x] Textarea
+- [x] Select
+- [x] Checkbox
+- [x] Radio
+- [x] Switch
+- [x] Field / Form Field
+- [x] Input Group
+- [x] Form demo
+- [x] Form tests
+
+### D — Navigation & Shell
+- [x] Tabs
+- [x] Accordion
+- [x] Pagination
+- [x] Breadcrumb
+- [x] Navbar
+- [x] Sidebar
+- [x] Stepper
+- [x] App Shell
+- [x] Navigation demo
+
+### E — Data & Display
+- [x] Table
+- [x] List
+- [x] Description List
+- [x] Avatar
+- [x] Empty State
+- [x] Stat
+- [x] Timeline
+- [x] KPI Card
+- [x] Data display examples
+
+### F — Advanced Surface
+- [x] Combobox
+- [x] Search Box
+- [x] Autocomplete
+- [x] Command Palette
+- [x] Date Picker
+- [x] Date Range Picker
+- [x] Calendar
+- [x] File Upload
+- [x] Dropzone
+- [x] Data Grid
+- [x] Hover Card
+- [x] Editable Field
+
+---
+
+## 6. Definition of Done
+
+Bir component veya pattern tamamlanmış sayılmadan önce:
+
+- [x] Spec/RFC mevcut
+- [x] Naming spec ile uyumlu
+- [x] Token dictionary ile uyumlu
+- [x] Contract/recipe ilişkisi açık
+- [x] Test veya validation eklendi
+- [x] Demo/playground örneği var
+- [x] Docs güncellendi
+- [x] Accessibility beklentisi yazıldı
+- [x] Release note etkisi değerlendirildi
+
+---
+
+## 7. Önerilen Yakın Sprint Sırası
+
+### Sprint 1
+- [x] Button state refinement
+- [x] Input validation surface
+- [x] Card slot/composition surface
+- [x] Core playground update
+- [x] Core docs update
+
+### Sprint 2
+- [x] Label / Helper Text / Error Text
+- [x] Field / Form Field RFC
+- [x] Textarea
+- [x] Select
+- [x] Checkbox / Radio / Switch
+
+### Sprint 3
+- [x] Modal
+- [x] Toast
+- [x] Tooltip
+- [x] Popover
+- [x] Dropdown Menu
+- [x] Drawer
+
+### Sprint 4
+- [x] Breadcrumb
+- [x] Navbar
+- [x] Sidebar
+- [x] Page Header
+- [x] Section
+- [x] App Shell
+
+### Sprint 5 (P6 Paket-1)
+- [x] Icon Button + Link
+- [x] Divider + Surface + Visually Hidden
+- [x] Badge/Alert/Skeleton/Spinner refinement
+
+### Sprint 6 (P6 Paket-2)
+- [x] Range Slider
+- [x] OTP / Pin Input
+
+### Sprint 7 (P6 Paket-3)
+- [x] Context Menu
+- [x] Progress
+- [x] Loading Overlay
+
+### Sprint 8 (P6 Paket-4)
+- [x] Menu Bar
+- [x] Layout primitive refinements
+- [x] Split Pane
+
+### Sprint 9 (P6 Paket-5)
+- [x] Data Grid implementation
+- [x] Avatar Group
+- [x] Tag / Chip
+
+### Sprint 10 (P6 Paket-6)
+- [x] Text + Heading
+- [x] Code + Code Block
+- [x] Callout + Quote + Kbd
+- [x] Markdown Surface
+
+---
+
+## 8. Not
+
+Bu task list, her şeyi aynı anda yapmak için değil; neyin hangi sırayla ve hangi kalite eşiğiyle yapılacağını görünür kılmak için hazırlanmıştır.

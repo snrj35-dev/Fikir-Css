@@ -1,0 +1,50 @@
+@layer components {
+  {{component.timeline}} {
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  {{component.timelineItem}} {
+    display: grid;
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: start;
+    gap: var(--space-3);
+  }
+
+  {{component.timelineMarker}} {
+    inline-size: 0.75rem;
+    block-size: 0.75rem;
+    margin-block-start: 0.35rem;
+    border-radius: 999px;
+    background: var(--color-primary-500);
+    border: 1px solid var(--color-primary-500);
+    box-shadow: 0 0 0 2px var(--color-bg-surface);
+    flex: none;
+  }
+
+  {{component.timelineContent}} {
+    border-left: 1px solid var(--color-border-subtle);
+    padding-inline-start: var(--space-3);
+    padding-block-end: var(--space-3);
+    color: var(--color-fg-default);
+  }
+
+  {{component.timelineItem}}:last-child {{component.timelineContent}} {
+    padding-block-end: 0;
+    border-left-color: transparent;
+  }
+
+  {{component.timelineTitle}} {
+    margin: 0;
+    font-size: var(--font-size-md);
+    font-weight: 700;
+    line-height: 1.35;
+  }
+
+  {{component.timelineMeta}} {
+    margin: 0;
+    font-size: var(--font-size-sm);
+    color: var(--color-fg-muted);
+    line-height: 1.35;
+  }
+}

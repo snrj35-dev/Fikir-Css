@@ -4,6 +4,16 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
+    justify-content: flex-start;
     gap: var(--cluster-gap);
+  }
+
+  .cluster[data-cluster-justify="between"] {
+    justify-content: space-between;
+  }
+
+  .cluster[data-cluster-nowrap="true"] {
+    flex-wrap: nowrap;
+    overflow-x: auto;
   }
 }

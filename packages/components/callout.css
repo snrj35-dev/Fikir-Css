@@ -1,0 +1,26 @@
+@layer components {
+  {{component.callout}} {
+    display: grid;
+    gap: var(--space-2);
+    border: 1px solid var(--color-border-subtle);
+    border-inline-start: 4px solid var(--color-accent);
+    border-radius: var(--radius-md);
+    background: var(--color-bg-surface);
+    color: var(--color-fg-default);
+    padding: var(--space-3);
+  }
+
+  {{component.calloutTitle}} {
+    margin: 0;
+    font-size: var(--font-size-md);
+    font-weight: 700;
+    line-height: 1.35;
+  }
+
+  {{component.calloutBody}} {
+    margin: 0;
+    color: var(--color-fg-muted);
+    font-size: var(--font-size-sm);
+    line-height: 1.5;
+  }
+}

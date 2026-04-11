@@ -1,0 +1,8 @@
+@layer layouts {
+  .container {
+    --container-max: var(--container-md);
+    --container-gutter: var(--space-4);
+    inline-size: min(100% - (2 * var(--container-gutter)), var(--container-max));
+    margin-inline: auto;
+  }
+}

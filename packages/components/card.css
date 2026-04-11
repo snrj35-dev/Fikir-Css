@@ -1,4 +1,14 @@
 /*
-  Card recipe selectors are generated into @layer recipes from contracts/recipes.contract.mjs.
-  This file remains as a placeholder to preserve package structure in v0.2 migration.
+  Card canonical class surface is generated into @layer recipes from contracts/recipes.contract.mjs.
+  This file is reserved for composition behavior that does not introduce new canonical selectors.
 */
+@layer components {
+  {{component.card}}[data-card-layout="stack"] > * + * {
+    margin-block-start: var(--space-3);
+  }
+
+  {{component.card}} > [data-card-slot="footer"] {
+    border-top: 1px solid var(--color-border-subtle);
+    padding-block-start: var(--space-3);
+  }
+}

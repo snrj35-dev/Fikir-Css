@@ -1,0 +1,49 @@
+@layer components {
+  {{component.inputGroup}} {
+    display: flex;
+    inline-size: 100%;
+    align-items: stretch;
+  }
+
+  {{component.inputGroup}} > {{component.input}},
+  {{component.inputGroup}} > {{component.textarea}},
+  {{component.inputGroup}} > {{component.select}} {
+    flex: 1 1 auto;
+    min-inline-size: 0;
+  }
+
+  {{component.inputGroupAddon}} {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-block-size: 2.5rem;
+    padding-inline: var(--space-3);
+    border: 1px solid var(--color-border-subtle);
+    background: var(--color-bg-default);
+    color: var(--color-fg-muted);
+    font-size: var(--font-size-sm);
+    white-space: nowrap;
+  }
+
+  {{component.inputGroup}} > * + * {
+    margin-inline-start: -1px;
+  }
+
+  {{component.inputGroup}} > :first-child:not(:last-child) {
+    border-start-end-radius: 0;
+    border-end-end-radius: 0;
+  }
+
+  {{component.inputGroup}} > :last-child:not(:first-child) {
+    border-start-start-radius: 0;
+    border-end-start-radius: 0;
+  }
+
+  {{component.inputGroup}} > :not(:first-child):not(:last-child) {
+    border-radius: 0;
+  }
+
+  {{component.inputGroup}}[data-input-group-invalid="true"] {{component.inputGroupAddon}} {
+    border-color: var(--color-danger);
+  }
+}

@@ -2,7 +2,7 @@
 
 Thanks for contributing.
 
-This repository is a contract-driven CSS foundation prototype. Please keep changes small, explicit, and compatible with current v0.2 scope.
+This repository is a contract-driven CSS foundation prototype. Please keep changes small, explicit, and compatible with current v0.3 scope.
 
 ## Before You Start
 1. Read `README.md` and architecture docs under `docs/architecture/`.
@@ -24,7 +24,7 @@ This repository is a contract-driven CSS foundation prototype. Please keep chang
 - [ ] Build passes locally (`npm run build`)
 - [ ] Contract outputs are consistent (`dist/contracts/*`)
 - [ ] README/docs updated when needed
-- [ ] Change is within v0.2 foundation scope
+- [ ] Change is within v0.3 foundation scope
 
 ## Commit Style (Recommended)
 Use clear prefixes:

@@ -1,0 +1,17 @@
+@layer components {
+  {{component.label}} {
+    display: inline-block;
+    color: var(--color-fg-default);
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    line-height: 1.4;
+  }
+
+  {{component.label}}[for] {
+    cursor: pointer;
+  }
+
+  {{component.field}}[data-field-invalid="true"] {{component.label}} {
+    color: var(--color-danger);
+  }
+}

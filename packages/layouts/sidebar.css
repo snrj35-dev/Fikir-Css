@@ -2,6 +2,7 @@
   .sidebar {
     --sidebar-width: 18rem;
     --sidebar-gap: var(--space-6);
+    --sidebar-min: 14rem;
     display: grid;
     grid-template-columns: minmax(0, 1fr);
     gap: var(--sidebar-gap);
@@ -9,8 +10,12 @@
 
   @media (min-width: 56rem) {
     .sidebar {
-      grid-template-columns: var(--sidebar-width) minmax(0, 1fr);
+      grid-template-columns: minmax(var(--sidebar-min), var(--sidebar-width)) minmax(0, 1fr);
       align-items: start;
+    }
+
+    .sidebar[data-sidebar-side="end"] {
+      grid-template-columns: minmax(0, 1fr) minmax(var(--sidebar-min), var(--sidebar-width));
     }
   }
 }

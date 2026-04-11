@@ -1,0 +1,19 @@
+@layer components {
+  {{component.avatarGroup}} {
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: nowrap;
+    padding-inline-start: var(--space-2);
+  }
+
+  {{component.avatarGroupItem}} {
+    margin-inline-start: calc(var(--space-2) * -1);
+    border-radius: 999px;
+  }
+
+  {{component.avatarGroupItem}} > {{component.avatar}} {
+    border-width: 2px;
+    border-color: var(--color-bg-surface);
+    box-shadow: 0 0 0 1px var(--color-border-subtle);
+  }
+}

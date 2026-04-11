@@ -1,6 +1,14 @@
 @layer layouts {
   .center {
-    inline-size: min(100% - (2 * var(--space-4)), var(--container-md));
+    --center-max: var(--container-md);
+    --center-gutter: var(--space-4);
+    inline-size: min(100% - (2 * var(--center-gutter)), var(--center-max));
     margin-inline: auto;
+  }
+
+  .center[data-center-intrinsic="true"] {
+    display: grid;
+    place-items: center;
+    min-block-size: 100%;
   }
 }

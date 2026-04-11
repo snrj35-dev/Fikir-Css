@@ -1,0 +1,52 @@
+@layer components {
+  {{component.switch}} {
+    inline-size: 2.25rem;
+    block-size: 1.25rem;
+    margin: 0;
+    border-radius: 999px;
+    border: 1px solid var(--color-border-subtle);
+    background: var(--color-bg-default);
+    cursor: pointer;
+    appearance: none;
+    position: relative;
+    transition: background-color 120ms ease, border-color 120ms ease;
+  }
+
+  {{component.switch}}::before {
+    content: "";
+    inline-size: 0.95rem;
+    block-size: 0.95rem;
+    border-radius: 999px;
+    background: var(--color-bg-surface);
+    border: 1px solid var(--color-border-subtle);
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-start: 0.12rem;
+    transform: translate(0, -50%);
+    transition: transform 120ms ease;
+  }
+
+  {{component.switch}}:checked {
+    background: var(--color-accent);
+    border-color: var(--color-accent);
+  }
+
+  {{component.switch}}:checked::before {
+    transform: translate(0.95rem, -50%);
+    border-color: transparent;
+  }
+
+  {{component.switch}}:focus-visible {
+    box-shadow: 0 0 0 3px color-mix(in oklch, var(--color-primary-500) 35%, transparent);
+  }
+
+  {{component.switch}}[aria-invalid="true"] {
+    border-color: var(--color-danger);
+    box-shadow: 0 0 0 3px color-mix(in oklch, var(--color-danger) 25%, transparent);
+  }
+
+  {{component.switch}}[disabled] {
+    cursor: not-allowed;
+    opacity: 0.7;
+  }
+}

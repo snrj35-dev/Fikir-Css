@@ -1,0 +1,8 @@
+@layer components {
+  {{component.text}} {
+    margin: 0;
+    color: var(--color-fg-default);
+    font-size: var(--font-size-sm);
+    line-height: 1.55;
+  }
+}
