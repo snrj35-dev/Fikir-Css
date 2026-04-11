@@ -21,12 +21,14 @@ This document captures the current repository state for GitHub release preparati
   - `.github/ISSUE_TEMPLATE/request_for_feedback.md`
   - `docs/community/external-feedback-log.md`
 
+## Release Status
+- v0.3.0 release is published:
+  - `https://github.com/snrj35-dev/Fikir-Css/releases/tag/v0.3.0`
+  - Published at: `2026-04-11T14:30:06Z`
+
 ## Remaining External Actions
 1. Open M1 milestone and sync labels/issues on GitHub.
 - Requires `GH_TOKEN` or `GITHUB_TOKEN`.
 
-2. Publish release tag + GitHub release record.
-- Suggested tag: `v0.3.0`.
-
-3. Collect first external user feedback.
+2. Collect first external user feedback.
 - Track entries in `docs/community/external-feedback-log.md`.

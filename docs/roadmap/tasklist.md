@@ -288,7 +288,7 @@ Legend:
 - [x] Editable Field `(M4)`
 
 ### Gate before starting M4
-- [~] M1 release shipped `(requires tag + GitHub release publish)`
+- [x] M1 release shipped
 - [x] M2 support matrix updated
 - [x] playground sections labeled
 - [x] release process stable
