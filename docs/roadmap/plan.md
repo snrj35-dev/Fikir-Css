@@ -1,122 +1,160 @@
-# Fikir CSS — Professionalization Plan (v0.4 Track)
+# Fikir CSS — Product Supremacy Plan (v1.0 Track)
 
 > Last reviewed: 2026-04-11
-> Replaces: `docs/archive/plan-2026-04-11-v0.3-completed.md`
+> Replaces: `docs/archive/plan-2026-04-11-v0.4-released.md`
 
 ## 1. Purpose
-This plan defines the next phase after v0.3 release: move from strong prototype/product baseline to a more professional, workflow-complete UI foundation.
+Bu planın amacı v0.4 release-candidate seviyesinden, rakipleri geçen tam ürün seviyesine çıkmaktır.
 
-## 2. Current Baseline
-- v0.3 release is published (`v0.3.0`).
-- Core and many advanced surfaces are implemented.
-- CI/release gates are in place.
-- Main remaining growth area is component/workflow completeness versus market expectations.
-- Build architecture is contract-manifest driven CSS generation (not SCSS loop-based generation).
-- Naming system already supports `plain` and `prefixed` modes for integration risk management.
-- Local measured bundle baseline is ~76 KB raw / ~8.9 KB gzip (2026-04-11).
+Ana hedef:
+- Ürün kalitesi puanı: `9.9/10`
+- Çıkış noktası: contract-driven foundation
+- Varış noktası: production-grade design system platform
 
-## 3. Strategic Objectives
-1. Increase supported surface depth (not only breadth).
-2. Close highest-value competitive gaps.
-3. Strengthen quality automation (a11y + visual + stability).
-4. Improve adoption readiness for real product teams.
+## 2. North Star and Scoring Model
+`9.9/10` hedefi aşağıdaki ağırlıklı modelle ölçülür:
 
-## 4. Competitive Positioning Summary
-Based on benchmark docs from MUI, Radix, shadcn/ui, and Ant Design, Fikir CSS should prioritize:
-- `number-input`
-- `rating`
-- `tree-view`
-- `tags-input`
-- `result/status` surface
+1. Surface depth and completeness (`20%`)
+- Geniş component seti + workflow-level composability
 
-Detailed analysis: `docs/roadmap/competitive-gap-analysis-2026-04-11.md`
-Promotion candidate list: `docs/roadmap/v0.4-promotion-candidates.md`
+2. Accessibility and quality trust (`20%`)
+- Keyboard, semantic, contrast, screen-reader beklentileri
 
-## 5. Workstreams
+3. Runtime and bundle performance (`15%`)
+- Raw/gzip bütçe, stable parsing footprint, low runtime overhead
 
-### Workstream A — Support-Level Maturity
-Objective:
-Promote stable experimental surfaces into `supported` with full criteria evidence.
+4. DX and tooling excellence (`20%`)
+- Type-safe recipes, conflict resolution, migration safety, deterministic build
 
-Deliverables:
-- promotion candidates list
-- support-matrix updates
-- release impact records
+5. Documentation and adoption readiness (`15%`)
+- Onboarding clarity, examples, support-level transparency
 
-### Workstream B — Gap Closure Components
-Objective:
-Implement high-value missing components that complete common app workflows.
+6. Governance and release discipline (`10%`)
+- Milestone hygiene, evidence-based promotions, predictable release flow
 
-Deliverables:
-- RFC + implementation + tests + docs + playground examples for each selected gap component
+Exit condition:
+- Ağırlıklı ortalama `>= 9.9`
+- En az iki ardışık release candidate turunda korunmuş skor
 
-### Workstream C — Data/Product Workflow Depth
-Objective:
-Make data-heavy and settings-heavy app flows production-credible.
+## 3. Competitor-Surpass Definition
+Rakipleri “geçmek” sadece özellik sayısı değil, bütünsel deneyim üstünlüğü olarak tanımlanır.
 
-Deliverables:
-- workflow-level examples (dashboard/settings/table workflows)
-- data grid/table conventions with stronger guidance
+1. Tailwind class-speed + utility ergonomics
+- Hedef: utility hızını korurken semantic/headless/product-pattern katmanlarını aynı sistemde sunmak
 
-### Workstream D — Quality Automation
-Objective:
-Raise trust with deterministic and repeatable quality checks.
+2. Bootstrap ready-component convenience
+- Hedef: temel bileşenleri hızlı kullanılabilir şekilde sunarken a11y ve theme kontrolünden ödün vermemek
 
-Deliverables:
-- a11y CI scope expansion
-- visual regression automation progression
-- bundle/size guardrails stabilization
+3. MUI/Chakra/Mantine design-system maturity
+- Hedef: token yönetişimi, support-level modeli, migration ve release disipliniyle enterprise güveni
 
-### Workstream E — Adoption and Governance
-Objective:
-Reduce onboarding friction for external teams and contributors.
+4. Panda build-time + type-safe yaklaşımı
+- Hedef: runtime maliyetini düşük tutarak type-aware recipe sözleşmelerini standartlaştırmak
 
-Deliverables:
-- issue/milestone hygiene
-- feedback loop with external evaluators
-- clearer support promotion lifecycle
+5. Headless/Radix state-aware kalite
+- Hedef: interaction/accessibility davranışlarını styled + headless birlikte sürdürülebilir hale getirmek
 
-### Workstream F — Runtime Efficiency and Interop Hardening
-Objective:
-Convert external technical feedback into measurable, repo-specific improvements.
+## 4. Strategic Product Pillars
 
-Deliverables:
-- external review disposition with evidence-backed accept/reject decisions
-- gzip-aware bundle guardrail extension
-- prefixed-mode CI smoke validation for collision-safe adoption
-- logical-property consistency audit (physical -> logical where applicable)
-- fluid token pilot (`clamp`) RFC and migration note
+### Pillar A — Foundation Engine 2.0
+Hedef:
+- Token sistemi, naming contract, manifest pipeline ve selector governance’i uzun vadeli ürün çekirdeği haline getirmek.
 
-## 6. Milestone Proposal
+Çıktılar:
+- token lifecycle policy
+- contract compatibility matrix
+- strict alias deprecation protocol
 
-### Milestone P1 — v0.4 Professional Core
+### Pillar B — Complete Component System
+Hedef:
+- Desteklenen yüzeyi, gerçek ürün ekiplerinin günlük ihtiyaçlarını tek repo içinde karşılayacak seviyeye çıkarmak.
+
+Çıktılar:
+- parity-level component coverage
+- supported vs experimental net ayrımı
+- workflow-complete examples
+
+### Pillar C — Dual API (Utility + Semantic + Headless)
+Hedef:
+- Utility-first, semantic-first ve headless-first kullanım biçimlerini aynı doğruluk modeline bağlamak.
+
+Çıktılar:
+- variant/state contracts
+- composable headless guidance
+- class conflict resolution strategy
+
+### Pillar D — Theme and Brand Scalability
+Hedef:
+- Light/dark ötesinde enterprise tema varyasyonlarını güvenle taşıyabilmek.
+
+Çıktılar:
+- theme packs
+- density/motion/contrast modes
+- brand override governance
+
+### Pillar E — Quality Automation at Scale
+Hedef:
+- Release öncesi kritik regresyonları mümkün olan en erken adımda yakalamak.
+
+Çıktılar:
+- expanded a11y CI
+- deterministic visual baselines + diff strategy
+- release quality scorecard
+
+### Pillar F — Adoption and Ecosystem Readiness
+Hedef:
+- Harici ekiplerin onboarding süresini azaltmak ve entegrasyon güvenini yükseltmek.
+
+Çıktılar:
+- docs IA refinement
+- starter kits + adapter guidance
+- feedback-to-roadmap closed loop
+
+## 5. Milestone Framework
+
+### Milestone M1 — Product Core Lift
+Hedef skor: `>= 9.0`
+
 Must include:
-- first gap components (`number-input`, `rating`, `result`)
-- at least 3 experimental -> supported promotions
-- improved a11y CI scope and release impact process
+- v0.4 sonrası support matrix genişletme turu
+- component promotion evidence standardization
+- release and governance workflow stabilization
 
-### Milestone P2 — Workflow Completeness
+### Milestone M2 — Competitive Parity+
+Hedef skor: `>= 9.4`
+
 Must include:
-- `tree-view` and `tags-input`
-- stronger data workflow conventions
-- external feedback-driven refinements
+- high-value missing surfaces completion
+- headless/styled parity guidance
+- stronger visual + a11y automation
 
-### Milestone P3 — Advanced Product Readiness
+### Milestone M3 — Surpass Layer
+Hedef skor: `>= 9.7`
+
 Must include:
-- chart integration pattern guidance
-- scaled visual/a11y automation
-- stable promotion cadence and issue hygiene
+- enterprise workflow bundles
+- advanced theming and integration model
+- benchmark-backed comparative wins
 
-## 7. Guardrails
-- No feature merges without support-level intent (`supported`/`experimental` target).
-- No promotion without criteria evidence.
-- No release without passing `test:ci` and release checklist.
-- No optimization claim without local measurable evidence (raw + gzip bundle metrics).
+### Milestone M4 — v1.0 Product Confidence
+Hedef skor: `>= 9.9`
 
-## 8. Success Criteria
-The v0.4 track is successful when:
-- missing high-value workflow components are implemented,
-- supported surface is meaningfully expanded,
-- quality gates catch regressions earlier,
-- at least first external feedback loop is closed with tracked actions,
-- performance/interop hardening items are tracked with measurable baselines.
+Must include:
+- final support-level freeze
+- migration certainty and compatibility guarantees
+- publishable product-grade docs + governance package
+
+## 6. Guardrails
+- No promotion without explicit evidence bundle.
+- No release without `npm run test:ci` and release checklist pass.
+- No performance claim without measured raw + gzip data.
+- No API expansion without contract-key and migration impact review.
+- No docs claim without runnable playground/reference evidence.
+
+## 7. Success Criteria
+Bu plan başarılı sayılırsa:
+- Fikir CSS, utility + semantic + headless katmanlarını tek sistemde güvenle sunar.
+- Supported surface, rakip karşılaştırmalarında kritik kullanım senaryolarını kapsar.
+- CI/release süreçleri regressions yakalayan güvenilir kalite ağına dönüşür.
+- Harici feedback düzenli toplanır ve roadmap issue’larına geri beslenir.
+- Ürün puanı en az iki ardışık turda `9.9/10` seviyesine ulaşır.
