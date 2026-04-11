@@ -14,6 +14,7 @@ Use this path for release operations, support-level governance, and docs/impleme
 - Changelog policy: `docs/release/changelog-policy.md`.
 - Milestone release notes process: `docs/release/milestone-release-notes-process.md`.
 - Bundle size thresholds: `docs/release/bundle-size-thresholds.md`.
+- Utility surface budget policy: `docs/release/utility-surface-budget-policy.md`.
 - Release impact review: `docs/release/release-impact-review.md`.
 - GitHub release readiness (v0.3): `docs/release/github-release-readiness-v0.3.md`.
 

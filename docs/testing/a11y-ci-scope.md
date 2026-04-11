@@ -10,11 +10,15 @@ This document defines what accessibility checks are currently enforced in CI and
   - semantic markup expectations in `tests/build/*-surface.test.mjs`
   - overlay keyboard/escape/focus wiring checks in interactive surface tests
   - docs/criteria consistency checks in `tests/source/*.test.mjs`
+  - workflow example semantics checks in `tests/source/a11y-expanded-ci-scope.test.mjs`
 
 ## Explicitly Covered Categories
 - Form semantics and relationships (`field`, `label`, `helper-text`, `error-text`).
 - Overlay interaction expectations (modal/popover/dropdown/drawer wiring).
 - Icon-only naming expectations in docs + playground examples.
+- Workflow-level validation semantics (`aria-invalid`, status/error copy linkage).
+- Tree/table semantics for data explorer workflows (`role="tree"`, `aria-expanded`, labeled tables).
+- Result/toast status messaging semantics (`role="status"`, `aria-live`).
 - Dark mode readability checks as manual QA requirement with documented checklist.
 
 ## Not Fully Automated Yet

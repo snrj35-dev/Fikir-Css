@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fikir CSS Toast Example</title>
+    <link rel="stylesheet" href="../dist/fikir.css" />
+    <style>
+      body { margin: 0; min-height: 100vh; }
+      .page-shell { max-width: 64rem; margin: 0 auto; padding: 1.5rem 1rem 3rem; }
+      .toast-demo-stage { min-height: 14rem; position: relative; border: 1px dashed var(--color-border-subtle); border-radius: var(--radius-md); padding: var(--space-4); }
+      .toast-demo-stage .toast-viewport { position: absolute; inset-inline-end: var(--space-4); inset-block-end: var(--space-4); }
+    </style>
+  </head>
+  <body>
+    <main class="page-shell stack" style="--stack-gap: var(--space-4)">
+      <header class="page-header">
+        <div class="page-header-content">
+          <h1 style="margin: 0">Toast Example</h1>
+          <p class="text-sm" style="margin: 0">Supported overlay baseline with a deterministic visible toast state.</p>
+        </div>
+      </header>
+
+      <section class="toast-demo-stage" aria-label="Toast viewport">
+        <p class="text-sm" style="margin: 0">A visible toast is kept open in this page for visual baseline captures.</p>
+        <div class="toast-viewport" aria-live="polite" aria-atomic="true">
+          <article class="toast" data-open="true" role="status" data-tone="danger" aria-label="Billing action failed">
+            <p class="toast-title">Action failed</p>
+            <p class="toast-description">Billing profile update could not be completed.</p>
+            <div class="toast-actions">
+              <button class="btn btn-outline btn-sm" type="button">Details</button>
+              <button class="btn btn-primary btn-sm" type="button">Retry</button>
+            </div>
+          </article>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

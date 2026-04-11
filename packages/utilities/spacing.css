@@ -28,11 +28,11 @@
   }
 
   {{utility.mt0}} {
-    margin-top: 0;
+    margin-block-start: 0;
   }
 
   /* Escape hatch: sınırlı ve bilinçli kullanım */
   {{utility.forceMt0}} {
-    margin-top: 0 !important;
+    margin-block-start: 0 !important;
   }
 }

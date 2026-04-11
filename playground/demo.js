@@ -64,7 +64,7 @@
     });
   }
 
-  const supportedSectionNumbers = new Set(["6", "7", "10", "16", "26"]);
+  const supportedSectionNumbers = new Set(["6", "7", "10", "11", "16", "18", "26"]);
   const showcaseSectionNumbers = new Set([
     "0",
     "1",
@@ -83,7 +83,8 @@
     "31",
     "32",
     "33",
-    "41"
+    "41",
+    "42"
   ]);
 
   for (const heading of sectionHeadings) {

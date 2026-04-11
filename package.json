@@ -1,6 +1,6 @@
 {
   "name": "fikir-css-mvp",
-  "version": "0.3.0",
+  "version": "0.4.0",
   "private": true,
   "description": "Contract-driven CSS foundation output for Fikir CSS",
   "type": "module",
@@ -25,7 +25,9 @@
     "build": "node scripts/build-css.mjs",
     "build:css": "node scripts/build-css.mjs",
     "docs:validate": "node --test tests/source/docs-link-audit.test.mjs",
+    "capture:playground": "node scripts/capture-playground-screenshots.mjs",
     "validate:size": "node scripts/validate-size-thresholds.mjs",
+    "validate:prefixed": "node scripts/validate-prefixed-smoke.mjs",
     "report:size": "node scripts/report-size-diff.mjs",
     "validate:playground-baseline": "node scripts/validate-playground-baseline.mjs",
     "validate:publish": "node scripts/validate-publishable-outputs.mjs",
@@ -34,7 +36,7 @@
     "github:bootstrap": "node scripts/bootstrap-github-roadmap.mjs",
     "test:source": "node --test tests/source/*.test.mjs",
     "test:build": "node --test tests/build/*.test.mjs",
-    "test:ci": "npm run test:source && npm run docs:validate && npm run build && npm run validate:size && npm run validate:playground-baseline && npm run validate:publish && npm run validate:version && npm run package:smoke && npm run test:build",
+    "test:ci": "npm run test:source && npm run docs:validate && npm run build && npm run validate:size && npm run validate:prefixed && npm run validate:playground-baseline && npm run validate:publish && npm run validate:version && npm run package:smoke && npm run test:build",
     "test": "npm run test:ci"
   }
 }

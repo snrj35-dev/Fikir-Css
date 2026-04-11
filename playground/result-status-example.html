@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fikir CSS Result Status Example</title>
+    <link rel="stylesheet" href="../dist/fikir.css" />
+    <style>
+      body { margin: 0; }
+      .page-shell { max-width: 72rem; margin: 0 auto; padding: 1.5rem 1rem 3rem; }
+      .result-grid { display: grid; gap: var(--space-3); }
+      @media (min-width: 56rem) {
+        .result-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="page-shell stack" style="--stack-gap: var(--space-4)">
+      <header class="page-header">
+        <div class="page-header-content">
+          <h1 style="margin: 0">Result / Status Example</h1>
+          <p class="text-sm" style="margin: 0">Common result pages for success, info, warning, and error flows.</p>
+        </div>
+      </header>
+
+      <section class="result-grid" aria-label="Result status states">
+        <article class="result" data-result-tone="success" aria-label="Payment success result">
+          <span class="result-media" aria-hidden="true">OK</span>
+          <h2 class="result-title">Payment completed</h2>
+          <p class="result-description">Invoice #4821 was paid successfully and a receipt was sent.</p>
+          <div class="result-actions">
+            <button class="btn btn-primary btn-sm" type="button">Download receipt</button>
+            <button class="btn btn-outline btn-sm" type="button">Back to billing</button>
+          </div>
+        </article>
+
+        <article class="result" data-result-tone="info" aria-label="Sync in progress result">
+          <span class="result-media" aria-hidden="true">i</span>
+          <h2 class="result-title">Sync in progress</h2>
+          <p class="result-description">We are importing 320 records. This usually takes under two minutes.</p>
+          <div class="result-actions">
+            <button class="btn btn-outline btn-sm" type="button">View logs</button>
+          </div>
+        </article>
+
+        <article class="result" data-result-tone="warning" aria-label="Limit warning result">
+          <span class="result-media" aria-hidden="true">!</span>
+          <h2 class="result-title">Storage limit almost reached</h2>
+          <p class="result-description">Usage is at 91%. Remove old exports or upgrade your plan.</p>
+          <div class="result-actions">
+            <button class="btn btn-outline btn-sm" type="button">Review exports</button>
+            <button class="btn btn-primary btn-sm" type="button">Upgrade plan</button>
+          </div>
+        </article>
+
+        <article class="result" data-result-tone="danger" aria-label="Upload failure result">
+          <span class="result-media" aria-hidden="true">x</span>
+          <h2 class="result-title">Upload failed</h2>
+          <p class="result-description">The selected file exceeds policy limits. Try a smaller file and retry.</p>
+          <div class="result-actions">
+            <button class="btn btn-primary btn-sm" type="button">Retry upload</button>
+            <button class="btn btn-outline btn-sm" type="button">View requirements</button>
+          </div>
+        </article>
+      </section>
+    </main>
+  </body>
+</html>

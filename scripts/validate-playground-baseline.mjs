@@ -4,7 +4,17 @@ import { resolve } from "node:path";
 const rootDir = resolve(process.cwd());
 const baselineFiles = [
   "playground/screenshots/playground-light.png",
-  "playground/screenshots/playground-dark.png"
+  "playground/screenshots/playground-dark.png",
+  "playground/screenshots/sections/supported-foundation-light.png",
+  "playground/screenshots/sections/supported-foundation-dark.png",
+  "playground/screenshots/sections/supported-forms-light.png",
+  "playground/screenshots/sections/supported-forms-dark.png",
+  "playground/screenshots/sections/supported-toast-light.png",
+  "playground/screenshots/sections/supported-toast-dark.png",
+  "playground/screenshots/sections/supported-pagination-table-light.png",
+  "playground/screenshots/sections/supported-pagination-table-dark.png",
+  "playground/screenshots/sections/supported-data-display-light.png",
+  "playground/screenshots/sections/supported-data-display-dark.png"
 ];
 
 const pngSignature = Buffer.from([0x89, 0x50, 0x4e, 0x47]);

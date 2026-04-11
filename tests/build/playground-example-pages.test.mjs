@@ -63,3 +63,40 @@ test("playground examples: data table workflow page includes toolbar-to-table re
   assert.ok(html.includes('aria-controls="issues-table"'));
   assert.ok(html.includes('id="issues-table"'));
 });
+
+test("playground examples: multi-step settings workflow page includes stepper and validation states", async () => {
+  const html = await readPlaygroundFile("settings-workflow-example.html");
+
+  assert.ok(html.includes("Settings Workflow Example"));
+  assert.ok(html.includes('class="stepper"'));
+  assert.ok(html.includes('data-state="active"'));
+  assert.ok(html.includes('aria-invalid="true"'));
+  assert.ok(html.includes('class="error-text"'));
+});
+
+test("playground examples: tree-table workflow page includes tree, table, and pagination", async () => {
+  const html = await readPlaygroundFile("tree-table-workflow-example.html");
+
+  assert.ok(html.includes("Tree + Table Workflow Example"));
+  assert.ok(html.includes('class="tree-view"'));
+  assert.ok(html.includes('class="table"'));
+  assert.ok(html.includes('class="pagination"'));
+});
+
+test("playground examples: result-status page includes common outcome tones", async () => {
+  const html = await readPlaygroundFile("result-status-example.html");
+
+  assert.ok(html.includes("Result / Status Example"));
+  assert.ok(html.includes('data-result-tone="success"'));
+  assert.ok(html.includes('data-result-tone="warning"'));
+  assert.ok(html.includes('data-result-tone="danger"'));
+});
+
+test("playground examples: index page links new workflow/result baseline pages", async () => {
+  const indexHtml = await readPlaygroundFile("index.html");
+
+  assert.ok(indexHtml.includes('href="./settings-workflow-example.html"'));
+  assert.ok(indexHtml.includes('href="./tree-table-workflow-example.html"'));
+  assert.ok(indexHtml.includes('href="./result-status-example.html"'));
+  assert.ok(indexHtml.includes('href="./toast-example.html"'));
+});

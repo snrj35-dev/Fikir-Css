@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Fikir CSS v0.3 Foundation Playground</title>
+    <title>Fikir CSS v0.4 Foundation Playground</title>
     <link id="fikir-css-bundle" rel="stylesheet" href="../dist/fikir.css" />
     <link rel="stylesheet" href="./demo.css" />
   </head>
@@ -15,7 +15,7 @@
 
       <header class="cluster justify-between demo-page-header">
         <div class="stack">
-          <h1>Fikir CSS v0.3 Foundation Playground</h1>
+          <h1>Fikir CSS v0.4 Foundation Playground</h1>
           <p class="text-sm">Showcase only: current class surface and layout primitives.</p>
         </div>
         <div class="cluster">
@@ -43,6 +43,10 @@
             <a class="link" href="./data-table-workflow-example.html">Data table workflow</a>
             <a class="link" href="./dashboard-example.html">Dashboard</a>
             <a class="link" href="./settings-example.html">Settings</a>
+            <a class="link" href="./settings-workflow-example.html">Settings workflow</a>
+            <a class="link" href="./tree-table-workflow-example.html">Tree + table workflow</a>
+            <a class="link" href="./result-status-example.html">Result status</a>
+            <a class="link" href="./toast-example.html">Toast baseline</a>
             <a class="link" href="./accessibility-notes.html">Accessibility notes</a>
           </div>
         </article>
@@ -417,6 +421,44 @@
               <span class="input-group-addon">USD</span>
             </div>
             <p id="demo-price-error" class="error-text">Price değeri zorunludur.</p>
+          </div>
+        </article>
+      </section>
+
+      <section class="section stack">
+        <h2>9.1) Number Input Surface</h2>
+        <article class="card card-p-md stack demo-frame">
+          <div class="field">
+            <label class="label" for="demo-number-input">Quantity</label>
+            <div class="number-input">
+              <input id="demo-number-input" class="input" type="number" min="1" max="20" value="3" />
+              <div class="number-input-controls">
+                <button class="number-input-step" type="button" aria-label="Increase quantity">+</button>
+                <button class="number-input-step" type="button" aria-label="Decrease quantity">-</button>
+              </div>
+            </div>
+            <p class="helper-text">Canonical number input composition with optional step controls.</p>
+          </div>
+
+          <div class="field" data-field-invalid="true">
+            <label class="label" for="demo-number-input-invalid">Quota</label>
+            <div class="number-input">
+              <input
+                id="demo-number-input-invalid"
+                class="input aria-invalid:ring-danger"
+                type="number"
+                min="0"
+                max="100"
+                value="140"
+                aria-invalid="true"
+                aria-describedby="demo-number-input-error"
+              />
+              <div class="number-input-controls">
+                <button class="number-input-step" type="button" aria-label="Increase quota">+</button>
+                <button class="number-input-step" type="button" aria-label="Decrease quota" disabled>-</button>
+              </div>
+            </div>
+            <p id="demo-number-input-error" class="error-text">Value must be between 0 and 100.</p>
           </div>
         </article>
       </section>
@@ -880,11 +922,11 @@
           <p class="text-sm">Split pane creates responsive dual-region product layouts.</p>
           <div class="split-pane" data-split-pane-side="end" style="--split-pane-side: 18rem; --split-pane-gap: var(--space-3)">
             <section class="split-pane-primary">
-              <h3 style="margin-top: 0">Editor</h3>
+              <h3 style="margin-block-start: 0">Editor</h3>
               <p class="text-sm" style="margin: 0">Main content/editing region with larger width.</p>
             </section>
             <aside class="split-pane-secondary">
-              <h3 style="margin-top: 0">Inspector</h3>
+              <h3 style="margin-block-start: 0">Inspector</h3>
               <p class="text-sm" style="margin: 0">Metadata and controls remain in side pane.</p>
             </aside>
           </div>
@@ -1645,6 +1687,166 @@
             </ul>
             <pre><code>npm run build</code></pre>
           </section>
+        </article>
+      </section>
+
+      <section class="section stack">
+        <h2>42) Fluid Token Pilot (`clamp`) Comparison</h2>
+        <article class="card card-p-md stack demo-frame">
+          <p class="text-sm">Pilot only: compare fixed values vs fluid `clamp()` values for type and spacing rhythm.</p>
+
+          <div class="demo-fluid-pilot">
+            <section class="demo-fluid-sample">
+              <h3 class="demo-fluid-fixed-title">Fixed Title Scale</h3>
+              <p class="text-sm">Uses a fixed title size and fixed top spacing baseline.</p>
+              <p class="demo-fluid-fixed-space text-sm">Spacing remains static across viewport widths.</p>
+            </section>
+
+            <section class="demo-fluid-sample">
+              <h3 class="demo-fluid-clamp-title">Fluid Clamp Title Scale</h3>
+              <p class="text-sm">Uses `clamp()` for responsive title sizing and spacing progression.</p>
+              <p class="demo-fluid-clamp-space text-sm">Spacing scales within controlled min/max boundaries.</p>
+            </section>
+          </div>
+        </article>
+      </section>
+
+      <section class="section stack">
+        <h2>43) Rating Surface</h2>
+        <article class="card card-p-md stack demo-frame">
+          <p class="text-sm">Rating surface with active state, readonly and disabled examples.</p>
+
+          <div class="field">
+            <span class="label">Interactive rating</span>
+            <div class="rating" role="radiogroup" aria-label="Product rating">
+              <button class="rating-item rating-item-active" type="button" data-active="true" role="radio" aria-checked="true">
+                *
+              </button>
+              <button class="rating-item rating-item-active" type="button" data-active="true" role="radio" aria-checked="true">
+                *
+              </button>
+              <button class="rating-item" type="button" data-active="false" role="radio" aria-checked="false">*</button>
+              <button class="rating-item" type="button" data-active="false" role="radio" aria-checked="false">*</button>
+              <button class="rating-item" type="button" data-active="false" role="radio" aria-checked="false">*</button>
+            </div>
+            <p class="helper-text">Use active marker on selected items and semantic group labeling.</p>
+          </div>
+
+          <div class="field">
+            <span class="label">Disabled rating</span>
+            <div class="rating" aria-label="Disabled rating" aria-disabled="true">
+              <button class="rating-item rating-item-active" type="button" data-active="true" disabled>*</button>
+              <button class="rating-item rating-item-active" type="button" data-active="true" disabled>*</button>
+              <button class="rating-item rating-item-active" type="button" data-active="true" disabled>*</button>
+              <button class="rating-item" type="button" data-active="false" disabled>*</button>
+              <button class="rating-item" type="button" data-active="false" disabled>*</button>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="section stack">
+        <h2>44) Result / Status Surface</h2>
+        <div class="sidebar" style="--sidebar-width: 26rem; --sidebar-gap: var(--space-3)">
+          <article class="result" data-result-tone="success" aria-label="Success status">
+            <span class="result-media" aria-hidden="true">OK</span>
+            <h3 class="result-title">Payment completed</h3>
+            <p class="result-description">Invoice #4821 was paid successfully and receipt was emailed.</p>
+            <div class="result-actions">
+              <button class="btn btn-primary btn-sm" type="button">View receipt</button>
+              <button class="btn btn-outline btn-sm" type="button">Back to billing</button>
+            </div>
+          </article>
+
+          <article class="result" data-result-tone="danger" aria-label="Error status">
+            <span class="result-media" aria-hidden="true">!</span>
+            <h3 class="result-title">Upload failed</h3>
+            <p class="result-description">The file exceeds the account size limit. Try a smaller file.</p>
+            <div class="result-actions">
+              <button class="btn btn-primary btn-sm" type="button">Retry</button>
+              <button class="btn btn-outline btn-sm" type="button">Contact support</button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section stack">
+        <h2>45) Tree View Surface</h2>
+        <article class="card card-p-md stack demo-frame">
+          <p class="text-sm">Tree-view surface for nested navigation/data hierarchies.</p>
+          <nav class="tree-view" aria-label="Project tree" role="tree">
+            <ul class="tree-view-group">
+              <li class="tree-view-item" data-tree-expanded="true" role="treeitem" aria-expanded="true">
+                <button class="tree-view-toggle" type="button" aria-label="Collapse Core">- Core</button>
+                <span class="tree-view-label">Core</span>
+                <ul class="tree-view-group">
+                  <li class="tree-view-item" data-tree-expanded="false" role="treeitem" aria-expanded="false">
+                    <button class="tree-view-toggle" type="button" aria-label="Expand Tokens">+ Tokens</button>
+                    <span class="tree-view-label">Tokens</span>
+                    <ul class="tree-view-group">
+                      <li class="tree-view-item" role="treeitem">
+                        <span class="tree-view-label">Semantic</span>
+                      </li>
+                    </ul>
+                  </li>
+                  <li class="tree-view-item" role="treeitem">
+                    <span class="tree-view-label">Components</span>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </nav>
+        </article>
+      </section>
+
+      <section class="section stack">
+        <h2>46) Tags Input Surface</h2>
+        <article class="card card-p-md stack demo-frame">
+          <p class="text-sm">Tags input surface with removable items and inline entry field.</p>
+          <div class="field">
+            <label class="label" for="demo-tags-input-field">Labels</label>
+            <div class="tags-input" aria-label="Project tags">
+              <div class="tags-input-list">
+                <span class="tags-input-item">
+                  urgent
+                  <button class="tags-input-remove" type="button" aria-label="Remove urgent">x</button>
+                </span>
+                <span class="tags-input-item">
+                  backend
+                  <button class="tags-input-remove" type="button" aria-label="Remove backend">x</button>
+                </span>
+              </div>
+              <input
+                id="demo-tags-input-field"
+                class="tags-input-field"
+                type="text"
+                value=""
+                placeholder="Add a tag"
+                aria-label="Add tag"
+              />
+            </div>
+          </div>
+
+          <div class="field" data-field-invalid="true">
+            <label class="label" for="demo-tags-input-invalid">Restricted tags</label>
+            <div class="tags-input" data-tags-invalid="true">
+              <div class="tags-input-list">
+                <span class="tags-input-item">
+                  archived
+                  <button class="tags-input-remove" type="button" aria-label="Remove archived" disabled>x</button>
+                </span>
+              </div>
+              <input
+                id="demo-tags-input-invalid"
+                class="tags-input-field"
+                type="text"
+                value="readonly-tag"
+                aria-invalid="true"
+                aria-describedby="demo-tags-input-error"
+              />
+            </div>
+            <p id="demo-tags-input-error" class="error-text">This project cannot accept more tags.</p>
+          </div>
         </article>
       </section>
     </main>

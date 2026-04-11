@@ -15,8 +15,11 @@ test("playground visual regression plan: doc includes strategy and baseline refe
     "Screenshot Baseline Strategy",
     "playground/screenshots/playground-light.png",
     "playground/screenshots/playground-dark.png",
+    "playground/screenshots/sections",
+    "npm run capture:playground",
     "validate:playground-baseline",
-    "Full pixel diff automation is deferred"
+    "Full pixel diff automation is deferred",
+    "supported-forms"
   ];
 
   for (const marker of requiredMarkers) {

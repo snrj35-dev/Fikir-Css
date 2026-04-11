@@ -101,6 +101,7 @@ Kural seti:
   - Utility: `{utilityPrefix}-{base}` (örn. `u-p-4`)
   - Component: `{componentPrefix}-{base}` (örn. `comp-btn`)
 - Kullanım: Birden fazla CSS kaynağının birleştiği veya naming collision riskinin yüksek olduğu ortamlarda önerilir.
+- Artifact behavior: build çıktısı tek mode üretir; plain ve prefixed selector seti aynı dist dosyasında birlikte yayınlanmaz.
 
 ### 5.3 Hangi durumda hangisi önerilir
 - Plain mode should be the default for v0.2 local development and small scope usage.

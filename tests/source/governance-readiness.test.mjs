@@ -9,6 +9,7 @@ const labelsManifestPath = resolve(rootDir, ".github/project-management/labels.j
 const milestonesManifestPath = resolve(rootDir, ".github/project-management/milestones.json");
 const feedbackTemplatePath = resolve(rootDir, ".github/ISSUE_TEMPLATE/request_for_feedback.md");
 const feedbackLogPath = resolve(rootDir, "docs/community/external-feedback-log.md");
+const feedbackThemeMappingPath = resolve(rootDir, "docs/roadmap/external-feedback-theme-mapping-2026-04-11.md");
 
 test("governance readiness: roadmap conversion manifests include labels/milestone/issues", async () => {
   const labels = JSON.parse(await readFile(labelsManifestPath, "utf8"));
@@ -23,9 +24,14 @@ test("governance readiness: roadmap conversion manifests include labels/mileston
 test("governance readiness: feedback intake template and log are present", async () => {
   const template = await readFile(feedbackTemplatePath, "utf8");
   const log = await readFile(feedbackLogPath, "utf8");
+  const mapping = await readFile(feedbackThemeMappingPath, "utf8");
 
   assert.ok(template.includes("Request for feedback"));
   assert.ok(template.includes("Evaluated Scope"));
   assert.ok(log.includes("External Feedback Log"));
-  assert.ok(log.includes("No external user feedback received yet"));
+  assert.ok(log.includes("Date: 2026-04-11"));
+  assert.ok(log.includes("dark mode readability"));
+  assert.ok(log.includes("token scope confusion"));
+  assert.ok(mapping.includes("Top 3 Recurring Themes -> Issue Mapping"));
+  assert.ok(mapping.includes("M1: Harden dark-mode readability checks for supported surfaces"));
 });

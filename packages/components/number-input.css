@@ -1,0 +1,53 @@
+@layer components {
+  {{component.numberInput}} {
+    display: flex;
+    align-items: stretch;
+    inline-size: 100%;
+    gap: var(--space-2);
+  }
+
+  {{component.numberInput}} > {{component.input}}[type="number"] {
+    flex: 1 1 auto;
+    min-inline-size: 0;
+  }
+
+  {{component.numberInput}} > {{component.input}}[type="number"]::-webkit-outer-spin-button,
+  {{component.numberInput}} > {{component.input}}[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  {{component.numberInput}} > {{component.input}}[type="number"] {
+    -moz-appearance: textfield;
+  }
+
+  {{component.numberInputControls}} {
+    display: grid;
+    grid-template-rows: repeat(2, minmax(0, 1fr));
+    gap: var(--space-1);
+  }
+
+  {{component.numberInputStep}} {
+    min-inline-size: 2rem;
+    min-block-size: 1.1875rem;
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-sm);
+    background: var(--color-bg-surface);
+    color: var(--color-fg-default);
+    font-size: var(--font-size-sm);
+    line-height: 1;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  {{component.numberInputStep}}:focus-visible {
+    border-color: var(--color-accent);
+  }
+
+  {{component.numberInputStep}}[disabled] {
+    cursor: not-allowed;
+    opacity: 0.65;
+    color: var(--color-fg-muted);
+    background: var(--color-bg-default);
+  }
+}

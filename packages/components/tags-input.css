@@ -1,0 +1,68 @@
+@layer components {
+  {{component.tagsInput}} {
+    display: grid;
+    gap: var(--space-2);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-md);
+    background: var(--color-bg-surface);
+    color: var(--color-fg-default);
+    padding: var(--space-2);
+  }
+
+  {{component.tagsInputList}} {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-1);
+  }
+
+  {{component.tagsInputItem}} {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: 999px;
+    background: color-mix(in oklch, var(--color-border-subtle) 22%, var(--color-bg-surface));
+    color: var(--color-fg-default);
+    padding: var(--space-1) var(--space-2);
+    font-size: var(--font-size-sm);
+  }
+
+  {{component.tagsInputRemove}} {
+    inline-size: 1.25rem;
+    min-block-size: 1.25rem;
+    border: 1px solid var(--color-border-subtle);
+    border-radius: 999px;
+    background: var(--color-bg-surface);
+    color: var(--color-fg-default);
+    line-height: 1;
+    padding: 0;
+    cursor: pointer;
+  }
+
+  {{component.tagsInputField}} {
+    border: none;
+    background: transparent;
+    color: var(--color-fg-default);
+    min-inline-size: 8rem;
+    min-block-size: 1.875rem;
+    padding: 0;
+  }
+
+  {{component.tagsInputField}}:focus-visible {
+    outline: 2px solid color-mix(in oklch, var(--color-accent) 60%, var(--color-bg-surface));
+    outline-offset: 2px;
+  }
+
+  {{component.tagsInput}}[data-tags-invalid="true"] {
+    border-color: var(--color-danger);
+  }
+
+  {{component.tagsInput}}[data-tags-disabled="true"] {
+    opacity: 0.7;
+  }
+
+  {{component.tagsInput}}[data-tags-disabled="true"] {{component.tagsInputField}},
+  {{component.tagsInput}}[data-tags-disabled="true"] {{component.tagsInputRemove}} {
+    cursor: not-allowed;
+  }
+}

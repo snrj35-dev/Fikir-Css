@@ -10,6 +10,7 @@ This plan defines how playground UI changes are tracked with screenshot baseline
 - Baseline files:
   - `playground/screenshots/playground-light.png`
   - `playground/screenshots/playground-dark.png`
+  - `playground/screenshots/sections/*.png` (supported-slice baselines)
 
 ## Screenshot Baseline Strategy
 1. Baseline source of truth
@@ -38,13 +39,16 @@ This plan defines how playground UI changes are tracked with screenshot baseline
 1. Build and verify artifacts
 - `npm run build`
 
-2. Validate baseline assets exist
+2. Capture deterministic screenshots
+- `npm run capture:playground`
+
+3. Validate baseline assets exist
 - `npm run validate:playground-baseline`
 
-3. Run source checks
+4. Run source checks
 - `npm run test:source`
 
-4. Manual visual review
+5. Manual visual review
 - Compare updated screenshots against previous commit in PR diff.
 - Confirm major supported sections remain visually stable.
 
@@ -54,7 +58,12 @@ This plan defines how playground UI changes are tracked with screenshot baseline
   - `tests/source/playground-visual-regression-plan.test.mjs`
 - Full pixel diff automation is deferred; this plan establishes stable baseline governance first.
 
+## Supported-Slice Baseline Set
+- `supported-foundation`: `playground/getting-started.html`
+- `supported-forms`: `playground/settings-workflow-example.html`
+- `supported-toast`: `playground/toast-example.html`
+- `supported-pagination-table`: `playground/tree-table-workflow-example.html`
+- `supported-data-display`: `playground/data-display-example.html`
+
 ## Exit Criteria for Automation Upgrade
-- Add deterministic screenshot capture command.
-- Add per-section snapshot set for supported surfaces.
 - Add threshold-based pixel diff report in CI.

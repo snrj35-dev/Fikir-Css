@@ -13,13 +13,16 @@ Use this path if you want to propose RFCs, implement changes, and keep contribut
 - Naming contract/spec: `docs/contracts/naming-contract.md`, `docs/contracts/naming-convention-spec.md`.
 - Token dictionary spec: `docs/contracts/token-dictionary-spec.md`.
 - Recipe contract: `docs/contracts/recipe-contract.md`.
+- Utility budget policy: `docs/release/utility-surface-budget-policy.md`.
 
 ## Step 3: RFC Workflow
 - RFC directory: `docs/rfcs/components/`.
+- Foundation RFCs: `docs/rfcs/foundations/`.
 - How to add a new component RFC: `docs/contributor/how-to-add-component-rfc.md`.
 
 ## Step 4: Promotion Workflow
 - Promotion criteria: `docs/release/experimental-to-supported-criteria.md`.
+- Promotion candidate baseline: `docs/roadmap/v0.4-promotion-candidates.md`.
 - How to move RFC to supported implementation: `docs/maintainer/how-to-move-rfc-to-supported.md`.
 
 ## Step 5: Validation and Evidence

@@ -1,16 +1,16 @@
 # Fikir CSS
 
-Contract-driven CSS foundation prototype (v0.3).
+Contract-driven CSS foundation (v0.4).
 
-Fikir CSS is an experimental foundation repository focused on predictable cascade behavior, contract-based selector generation, and low-runtime CSS delivery. It is not a complete framework yet.
+Fikir CSS is a contract-driven CSS foundation repository focused on predictable cascade behavior, selector generation, and low-runtime delivery.
 
 ## Current Status
-- Stage: `v0.3 prototype -> productization transition`
+- Stage: `v0.4 release-candidate track`
 - Support baseline: `docs/roadmap/support-matrix.md`
-- Supported slice: core + layout primitives + selected M1 slices (modal/tabs/table-empty-state)
+- Supported slice: expanded core forms + layout primitives + selected M1 slices (modal/toast/tabs/pagination/table-empty-state)
 - Experimental slice: broad implemented component/pattern surface outside current support commitment
 - Installation model: repo-first build (`npm install && npm run build`) with local package tarball consumption preview (`npm pack`)
-- Stability: prototype; APIs and file layout may still change between minor tags
+- Stability: release-candidate track; APIs and file layout may still evolve between minor tags
 - Intended use: architecture exploration and tooling validation
 
 ## Non-goals (Current)
@@ -26,9 +26,9 @@ Fikir CSS is an experimental foundation repository focused on predictable cascad
 
 ## Supported Surface (Current Baseline)
 - See full matrix: `docs/roadmap/support-matrix.md`
-- Core: `button`, `input`, `card`, `badge`, `alert`, `label`, `helper-text`, `error-text`, `field`
+- Core: `button`, `input`, `textarea`, `select`, `checkbox`, `radio`, `switch`, `card`, `badge`, `alert`, `label`, `helper-text`, `error-text`, `field`
 - Layout primitives: `container`, `stack`, `cluster`, `sidebar`, `switcher`, `center`, `grid`
-- M1 slices: `modal`, `tabs`, `table`, `empty-state`
+- M1 slices: `modal`, `toast`, `tabs`, `pagination`, `table`, `empty-state`
 
 ## Experimental Surface
 - Implemented and publicly demoed surfaces outside the supported baseline are marked `experimental` in:
@@ -74,7 +74,7 @@ Starter consumer example:
 - Path: `playground/`
 - Purpose: showcase current foundation only (not production app patterns)
 - Covers:
-  - button, icon-button, link, divider, card, surface, input, textarea, select, checkbox, radio, switch, range-slider, otp-input, input-group, modal, toast, tooltip, popover, dropdown-menu, context-menu, progress, loading-overlay, drawer, tabs, accordion, pagination, breadcrumb, navbar, menu-bar, sidebar-nav, stepper, page-header, section-block, app-shell, split-pane, table, data-grid, empty-state, avatar, avatar-group, tag-chip, stat, timeline, kpi-card, list, description-list, combobox, search-box, autocomplete, command-palette, badge, alert, text, heading, code, code-block, callout, quote, kbd, markdown-surface
+  - button, icon-button, link, divider, card, surface, input, textarea, select, checkbox, radio, switch, range-slider, number-input, rating, tags-input, otp-input, input-group, modal, toast, tooltip, popover, dropdown-menu, context-menu, progress, loading-overlay, drawer, tabs, accordion, pagination, breadcrumb, navbar, menu-bar, sidebar-nav, tree-view, stepper, page-header, section-block, app-shell, split-pane, table, data-grid, empty-state, result, avatar, avatar-group, tag-chip, stat, timeline, kpi-card, list, description-list, combobox, search-box, autocomplete, command-palette, badge, alert, text, heading, code, code-block, callout, quote, kbd, markdown-surface
   - date-picker, date-range-picker, calendar, file-upload, dropzone, editable-field, hover-card
   - field composition (`field`, `label`, `helper-text`, `error-text`), accessibility helper (`visually-hidden`)
   - loading primitives (`skeleton`, `spinner`)
@@ -158,6 +158,12 @@ Generated outputs:
 - Date Picker RFC: `docs/rfcs/components/date-picker-rfc.md`
 - Date Range Picker RFC: `docs/rfcs/components/date-range-picker-rfc.md`
 - Calendar RFC: `docs/rfcs/components/calendar-rfc.md`
+- Number Input RFC: `docs/rfcs/components/number-input-rfc.md`
+- Rating RFC: `docs/rfcs/components/rating-rfc.md`
+- Result RFC: `docs/rfcs/components/result-rfc.md`
+- Tree View RFC: `docs/rfcs/components/tree-view-rfc.md`
+- Tags Input RFC: `docs/rfcs/components/tags-input-rfc.md`
+- Fluid Tokens Pilot RFC: `docs/rfcs/foundations/fluid-tokens-rfc.md`
 - File Upload RFC: `docs/rfcs/components/file-upload-rfc.md`
 - Dropzone RFC: `docs/rfcs/components/dropzone-rfc.md`
 - Editable Field RFC: `docs/rfcs/components/editable-field-rfc.md`
@@ -219,13 +225,18 @@ Generated outputs:
 - Experimental-to-supported criteria: `docs/release/experimental-to-supported-criteria.md`
 - Milestone release notes process: `docs/release/milestone-release-notes-process.md`
 - Bundle size thresholds: `docs/release/bundle-size-thresholds.md`
+- Utility surface budget policy: `docs/release/utility-surface-budget-policy.md`
 - Release impact review: `docs/release/release-impact-review.md`
+- v0.4 release impact review record: `docs/release/v0.4.0-release-impact-review.md`
 - GitHub release readiness (v0.3): `docs/release/github-release-readiness-v0.3.md`
+- GitHub release readiness (v0.4): `docs/release/github-release-readiness-v0.4.md`
 - GitHub roadmap bootstrap guide: `docs/release/github-roadmap-bootstrap.md`
 - Release note template: `docs/release/release-note-template.md`
+- v0.4 release body (copy/paste): `docs/release/v0.4.0-release-body.md`
 - Known limitations: `docs/community/known-limitations.md`
 - Community feedback issue draft: `docs/community/request-for-feedback-issue.md`
 - External feedback log: `docs/community/external-feedback-log.md`
+- External feedback theme mapping: `docs/roadmap/external-feedback-theme-mapping-2026-04-11.md`
 - Playground evaluation contributor note: `docs/community/how-to-evaluate-playground.md`
 - RFC authoring guide: `docs/contributor/how-to-add-component-rfc.md`
 - RFC-to-supported promotion guide: `docs/maintainer/how-to-move-rfc-to-supported.md`

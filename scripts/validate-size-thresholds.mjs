@@ -6,6 +6,8 @@ const sizeReportPath = resolve(rootDir, "dist/contracts/size-report.json");
 
 const MAX_BUNDLE_BYTES = Number(process.env.MAX_BUNDLE_BYTES ?? 100000);
 const MAX_DIFF_BYTES = Number(process.env.MAX_DIFF_BYTES ?? 8000);
+const MAX_GZIP_BUNDLE_BYTES = Number(process.env.MAX_GZIP_BUNDLE_BYTES ?? 12000);
+const MAX_GZIP_DIFF_BYTES = Number(process.env.MAX_GZIP_DIFF_BYTES ?? 1500);
 
 function formatSigned(value) {
   return value >= 0 ? `+${value}` : `${value}`;
@@ -29,12 +31,31 @@ async function main() {
     );
   }
 
+  if (typeof report.gzipBytes !== "number") {
+    failures.push("size report missing gzipBytes");
+  } else if (report.gzipBytes > MAX_GZIP_BUNDLE_BYTES) {
+    failures.push(
+      `gzip size ${report.gzipBytes} exceeds MAX_GZIP_BUNDLE_BYTES=${MAX_GZIP_BUNDLE_BYTES}`
+    );
+  }
+
+  if (typeof report.diffGzipBytes !== "number") {
+    failures.push("size report missing diffGzipBytes");
+  } else if (report.diffGzipBytes > MAX_GZIP_DIFF_BYTES) {
+    failures.push(
+      `gzip diff ${formatSigned(report.diffGzipBytes)} exceeds MAX_GZIP_DIFF_BYTES=${MAX_GZIP_DIFF_BYTES}`
+    );
+  }
+
   console.log(
     [
       `bundle bytes: ${report.bytes}`,
       `previous bytes: ${report.previousBytes}`,
       `diff bytes: ${formatSigned(report.diffBytes)}`,
-      `thresholds => max bytes: ${MAX_BUNDLE_BYTES}, max positive diff: ${MAX_DIFF_BYTES}`
+      `gzip bytes: ${report.gzipBytes}`,
+      `previous gzip bytes: ${report.previousGzipBytes}`,
+      `diff gzip bytes: ${formatSigned(report.diffGzipBytes)}`,
+      `thresholds => max bytes: ${MAX_BUNDLE_BYTES}, max positive diff: ${MAX_DIFF_BYTES}, max gzip bytes: ${MAX_GZIP_BUNDLE_BYTES}, max positive gzip diff: ${MAX_GZIP_DIFF_BYTES}`
     ].join("\n")
   );
 

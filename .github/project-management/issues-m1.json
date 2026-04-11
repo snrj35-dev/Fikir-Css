@@ -28,5 +28,17 @@
     "body": "Create and maintain known limitations for current supported and experimental slices.",
     "labels": ["workstream:docs", "type:docs"],
     "milestone": "M1 Supported Foundation Release"
+  },
+  {
+    "title": "M1: Harden dark-mode readability checks for supported surfaces",
+    "body": "Track and fix dark-mode readability/contrast friction discovered during external evaluation.\n\nAcceptance:\n- Supported-surface examples are reviewed for readable badge/alert/table states in dark mode\n- Manual a11y checklist reflects review outcome\n- Visual baseline screenshots updated when changes are intentional",
+    "labels": ["workstream:a11y", "workstream:playground", "type:docs"],
+    "milestone": "M1 Supported Foundation Release"
+  },
+  {
+    "title": "M1: Improve docs onboarding flow and README scannability",
+    "body": "Reduce first-pass friction in docs and README while preserving full technical depth.\n\nAcceptance:\n- README top section is concise and confidence-building\n- Long visual/docs segments use progressive disclosure where appropriate\n- Docs index paths remain aligned and discoverable",
+    "labels": ["workstream:docs", "workstream:governance", "type:docs"],
+    "milestone": "M1 Supported Foundation Release"
   }
 ]

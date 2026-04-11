@@ -13,6 +13,8 @@ test("size guardrails: thresholds document defines numeric limits", async () => 
 
   assert.ok(content.includes("Maximum bundle size: `100000` bytes"));
   assert.ok(content.includes("Maximum positive size diff per change: `8000` bytes"));
+  assert.ok(content.includes("Maximum gzip bundle size: `12000` bytes"));
+  assert.ok(content.includes("Maximum positive gzip size diff per change: `1500` bytes"));
   assert.ok(content.includes("npm run validate:size"));
   assert.ok(content.includes("npm run report:size"));
 });
@@ -25,10 +27,15 @@ test("size guardrails: package scripts include threshold validation and reportin
     "node scripts/validate-size-thresholds.mjs"
   );
   assert.equal(
+    packageJson.scripts["validate:prefixed"],
+    "node scripts/validate-prefixed-smoke.mjs"
+  );
+  assert.equal(
     packageJson.scripts["report:size"],
     "node scripts/report-size-diff.mjs"
   );
   assert.ok(packageJson.scripts["test:ci"].includes("npm run validate:size"));
+  assert.ok(packageJson.scripts["test:ci"].includes("npm run validate:prefixed"));
 });
 
 test("size guardrails: CI workflow reports size diff", async () => {

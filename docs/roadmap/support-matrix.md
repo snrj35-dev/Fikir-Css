@@ -16,6 +16,11 @@ Support levels:
 ### Core and foundation
 - `button`
 - `input`
+- `textarea`
+- `select`
+- `checkbox`
+- `radio`
+- `switch`
 - `card`
 - `badge`
 - `alert`
@@ -34,8 +39,8 @@ Support levels:
 - `grid`
 
 ### M1 chosen slices
-- Overlay: `modal`
-- Navigation: `tabs`
+- Overlay: `modal`, `toast`
+- Navigation: `tabs`, `pagination`
 - Data/display: `table`, `empty-state`
 
 ## Experimental Surface (Implemented)
@@ -50,17 +55,14 @@ Support levels:
 - `spinner`
 
 ### Forms and input extensions
-- `textarea`
-- `select`
-- `checkbox`
-- `radio`
-- `switch`
 - `range-slider`
+- `number-input`
+- `rating`
+- `tags-input`
 - `otp-input`
 - `input-group`
 
 ### Overlay and interaction
-- `toast`
 - `tooltip`
 - `popover`
 - `dropdown-menu`
@@ -72,11 +74,11 @@ Support levels:
 
 ### Navigation and shell
 - `accordion`
-- `pagination`
 - `breadcrumb`
 - `navbar`
 - `menu-bar`
 - `sidebar-nav`
+- `tree-view`
 - `stepper`
 - `page-header`
 - `section-block`
@@ -85,6 +87,7 @@ Support levels:
 
 ### Data and display
 - `data-grid`
+- `result`
 - `avatar`
 - `avatar-group`
 - `tag-chip`

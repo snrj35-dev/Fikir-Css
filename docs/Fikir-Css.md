@@ -416,7 +416,7 @@ Birincil çözüm iyi tasarlanmış `@layer` sırası olmalıdır. `!important`,
 ```css
 @layer utilities {
   /* Escape hatch: sınırlı kullanım */
-  .u-force-mt-0 { margin-top: 0 !important; }
+  .u-force-mt-0 { margin-block-start: 0 !important; }
 }
 ```
 

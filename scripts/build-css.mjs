@@ -1,6 +1,7 @@
 import { access, mkdir, readFile, writeFile } from "node:fs/promises";
 import { constants } from "node:fs";
 import { dirname, resolve } from "node:path";
+import { gzipSync } from "node:zlib";
 
 import config from "../fikir.config.mjs";
 import { namingContract } from "../contracts/naming.contract.mjs";
@@ -20,6 +21,19 @@ const PLACEHOLDER_PATTERN = /\{\{\s*([a-zA-Z0-9_.]+)\s*\}\}/g;
 function ensureTrailingDash(value) {
   if (!value) return "";
   return value.endsWith("-") ? value : `${value}-`;
+}
+
+function resolveNamingConfig(baseNamingConfig) {
+  const mode = process.env.FIKIR_NAMING_MODE?.trim();
+  const utilityPrefix = process.env.FIKIR_UTILITY_PREFIX?.trim();
+  const componentPrefix = process.env.FIKIR_COMPONENT_PREFIX?.trim();
+
+  return {
+    ...baseNamingConfig,
+    ...(mode ? { mode } : {}),
+    ...(utilityPrefix ? { utilityPrefix } : {}),
+    ...(componentPrefix ? { componentPrefix } : {})
+  };
 }
 
 function escapeClassName(className) {
@@ -300,14 +314,18 @@ async function writeFileEnsured(path, content) {
 }
 
 async function buildCss() {
+  const effectiveNaming = resolveNamingConfig(config.naming);
   const previousSize = (await pathExists(outFile))
-    ? (await readFile(outFile, "utf8")).length
+    ? Buffer.byteLength(await readFile(outFile, "utf8"), "utf8")
+    : 0;
+  const previousGzipSize = (await pathExists(outFile))
+    ? gzipSync(await readFile(outFile, "utf8")).length
     : 0;
 
   validateContractReferences(namingContract, recipesContract);
   validateSingleClassSurface(recipesContract);
 
-  const selectorMap = buildSelectorMap(namingContract, config.naming);
+  const selectorMap = buildSelectorMap(namingContract, effectiveNaming);
 
   const generatedRecipeCss = generateRecipeCss(recipesContract, selectorMap);
   await writeFileEnsured(recipeCssOutFile, generatedRecipeCss);
@@ -338,22 +356,26 @@ async function buildCss() {
 
   await writeFileEnsured(
     selectorsManifestOutFile,
-    `${JSON.stringify({ naming: config.naming, selectors: selectorMap }, null, 2)}\n`
+    `${JSON.stringify({ naming: effectiveNaming, selectors: selectorMap }, null, 2)}\n`
   );
 
-  const aliasMigration = buildAliasMigrationMap(namingContract, config.naming);
+  const aliasMigration = buildAliasMigrationMap(namingContract, effectiveNaming);
   await writeFileEnsured(
     aliasMigrationOutFile,
-    `${JSON.stringify({ mode: config.naming.mode, migration: aliasMigration }, null, 2)}\n`
+    `${JSON.stringify({ mode: effectiveNaming.mode, migration: aliasMigration }, null, 2)}\n`
   );
 
-  const currentSize = distCss.length;
+  const currentSize = Buffer.byteLength(distCss, "utf8");
+  const currentGzipSize = gzipSync(distCss).length;
   const report = {
     file: config.build.cssOutFile,
     bytes: currentSize,
     previousBytes: previousSize,
     diffBytes: currentSize - previousSize,
-    namingMode: config.naming.mode
+    gzipBytes: currentGzipSize,
+    previousGzipBytes: previousGzipSize,
+    diffGzipBytes: currentGzipSize - previousGzipSize,
+    namingMode: effectiveNaming.mode
   };
 
   await writeFileEnsured(sizeReportOutFile, `${JSON.stringify(report, null, 2)}\n`);
@@ -363,6 +385,7 @@ async function buildCss() {
   console.log(`Alias migration: ${aliasMigrationOutFile}`);
   console.log(`Size report: ${sizeReportOutFile}`);
   console.log(`Size diff: ${report.diffBytes} bytes`);
+  console.log(`Gzip size diff: ${report.diffGzipBytes} bytes`);
 }
 
 buildCss().catch((error) => {

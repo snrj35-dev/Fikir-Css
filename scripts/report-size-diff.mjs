@@ -31,6 +31,9 @@ async function writeGithubSummary(report) {
     `| Current bytes | ${report.bytes} |`,
     `| Previous bytes | ${report.previousBytes} |`,
     `| Diff bytes | ${formatSigned(report.diffBytes)} |`,
+    `| Current gzip bytes | ${report.gzipBytes} |`,
+    `| Previous gzip bytes | ${report.previousGzipBytes} |`,
+    `| Diff gzip bytes | ${formatSigned(report.diffGzipBytes)} |`,
     ""
   ].join("\n");
 
@@ -52,6 +55,9 @@ async function main() {
   console.log(`- current bytes: ${report.bytes}`);
   console.log(`- previous bytes: ${report.previousBytes}`);
   console.log(`- diff bytes: ${signedDiff}`);
+  console.log(`- current gzip bytes: ${report.gzipBytes}`);
+  console.log(`- previous gzip bytes: ${report.previousGzipBytes}`);
+  console.log(`- diff gzip bytes: ${formatSigned(report.diffGzipBytes)}`);
 
   await writeGithubSummary(report);
 }

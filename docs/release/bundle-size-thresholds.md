@@ -11,10 +11,13 @@ This document defines acceptable CSS bundle size limits for the current producti
 ## Thresholds
 - Maximum bundle size: `100000` bytes
 - Maximum positive size diff per change: `8000` bytes
+- Maximum gzip bundle size: `12000` bytes
+- Maximum positive gzip size diff per change: `1500` bytes
 
 ## Rationale
 - Current baseline bundle is ~75 KB, so 100 KB keeps room for controlled growth.
 - Positive diff cap protects against accidental large CSS inflation in a single change.
+- Gzip limits keep network-transfer costs visible during CI checks.
 - Intentional larger growth should be milestone-reviewed and documented in release notes.
 
 ## Validation Commands

@@ -17,9 +17,12 @@
 ## For Users
 - Support matrix and current scope: `docs/roadmap/support-matrix.md`
 - Release notes: `docs/release/`
+- v0.4 draft release note: `docs/release/v0.4.0-release-notes.md`
 - Migration notes: `docs/migration/`
+- v0.4 draft migration note: `docs/migration/v0.4.0-migration-note-draft.md`
 - Known limitations: `docs/community/known-limitations.md`
 - External feedback log: `docs/community/external-feedback-log.md`
+- External feedback theme mapping: `docs/roadmap/external-feedback-theme-mapping-2026-04-11.md`
 - Playground usage: `playground/README.md`
 - Minimal getting-started page: `playground/getting-started.html`
 
@@ -29,6 +32,7 @@
 - Token dictionary spec: `docs/contracts/token-dictionary-spec.md`
 - Recipe contract: `docs/contracts/recipe-contract.md`
 - RFC directory: `docs/rfcs/components/`
+- v0.4 promotion candidates: `docs/roadmap/v0.4-promotion-candidates.md`
 - Playground evaluation guide: `docs/community/how-to-evaluate-playground.md`
 
 ## For Maintainers
@@ -38,9 +42,13 @@
 - Product patterns: `docs/architecture/product-patterns.md`
 - Release promotion criteria: `docs/release/experimental-to-supported-criteria.md`
 - Milestone release notes process: `docs/release/milestone-release-notes-process.md`
+- v0.4 release criteria freeze draft: `docs/release/v0.4.0-release-criteria-freeze.md`
 - Bundle size thresholds: `docs/release/bundle-size-thresholds.md`
+- Utility surface budget policy: `docs/release/utility-surface-budget-policy.md`
 - Release impact review: `docs/release/release-impact-review.md`
+- v0.4 release impact review record: `docs/release/v0.4.0-release-impact-review.md`
 - GitHub release readiness (v0.3): `docs/release/github-release-readiness-v0.3.md`
+- GitHub release readiness (v0.4): `docs/release/github-release-readiness-v0.4.md`
 - GitHub roadmap bootstrap: `docs/release/github-roadmap-bootstrap.md`
 - Core a11y expectations: `docs/architecture/core-accessibility-expectations.md`
 - Icon-only surface guidance: `docs/architecture/icon-only-surface-guidance.md`
@@ -48,6 +56,7 @@
 - Manual a11y QA checklist: `docs/testing/manual-accessibility-qa-checklist.md`
 - A11y CI scope: `docs/testing/a11y-ci-scope.md`
 - Playground visual regression plan: `docs/testing/playground-visual-regression-plan.md`
+- Fluid token pilot RFC: `docs/rfcs/foundations/fluid-tokens-rfc.md`
 
 ## Support-level Notes
 - `supported`: committed in current support baseline (`docs/roadmap/support-matrix.md`)
