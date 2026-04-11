@@ -43,11 +43,15 @@ See [playground/README.md](./playground/README.md) for section details.
 Standalone shell sample: `playground/app-shell-example.html`.
 
 ### Playground Screenshots
+<details>
+<summary>Light / Dark Preview</summary>
+
 Light mode:
 ![Fikir CSS v0.3 playground light preview](./playground/screenshots/playground-light.png)
 
 Dark mode:
 ![Fikir CSS v0.3 playground dark preview](./playground/screenshots/playground-dark.png)
+</details>
 
 ## Architecture (v0.3)
 Single sources of truth:
