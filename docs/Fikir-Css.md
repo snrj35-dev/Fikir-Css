@@ -1,6 +1,8 @@
 # Fikir CSS
 > Utility-first + semantic component + token-driven + accessible + type-safe + low-runtime overhead
 
+> Status: `stale` ideation document. Use `README.md`, `docs/roadmap/plan.md`, and `docs/roadmap/tasklist.md` for current product scope.
+
 Bu belge, modern CSS framework’lerin güçlü yanlarını tek bir sistemde birleştiren hayali bir framework tasarımı için temel mimari dokümandır. İlk fikirler önceki notlardan derlenmiş ve ürünleştirilebilir bir çerçeveye dönüştürülmüştür. Kaynak notlar: fileciteturn0file0
 
 ---

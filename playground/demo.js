@@ -18,6 +18,16 @@
   const drawerCloseButtons = document.querySelectorAll("[data-drawer-close]");
   const tabsRoots = document.querySelectorAll("[data-tabs-root]");
   const accordionTriggers = document.querySelectorAll("[data-accordion-trigger]");
+  const sectionHeadings = document.querySelectorAll("section.section.stack > h2");
+  const modalReturnFocusMap = new Map();
+  const modalFocusableSelector = [
+    "button:not([disabled])",
+    "[href]",
+    "input:not([disabled]):not([type=\"hidden\"])",
+    "select:not([disabled])",
+    "textarea:not([disabled])",
+    "[tabindex]:not([tabindex=\"-1\"])"
+  ].join(", ");
 
   const resolverExample = {
     importLine: 'import { buttonRecipe } from "../packages/recipes/button.ts";',
@@ -54,19 +64,101 @@
     });
   }
 
-  function setModalOpen(modalId, isOpen) {
+  const supportedSectionNumbers = new Set(["6", "7", "10", "16", "26"]);
+  const showcaseSectionNumbers = new Set([
+    "0",
+    "1",
+    "2",
+    "3",
+    "4",
+    "5",
+    "14.1",
+    "20.1",
+    "25.1",
+    "27",
+    "27.1",
+    "28",
+    "29",
+    "30",
+    "31",
+    "32",
+    "33",
+    "41"
+  ]);
+
+  for (const heading of sectionHeadings) {
+    const headingText = heading.textContent || "";
+    const match = headingText.match(/^(\d+(?:\.\d+)?)\)/);
+    if (!match) continue;
+
+    const sectionNumber = match[1];
+    let supportLevel = "experimental";
+
+    if (supportedSectionNumbers.has(sectionNumber)) {
+      supportLevel = "supported";
+    } else if (showcaseSectionNumbers.has(sectionNumber)) {
+      supportLevel = "showcase";
+    }
+
+    const pill = document.createElement("span");
+    pill.className = "support-pill";
+    pill.setAttribute("data-support-level", supportLevel);
+    pill.textContent = supportLevel;
+    heading.append(pill);
+  }
+
+  function getFocusableElements(scope) {
+    if (!scope) return [];
+    return Array.from(scope.querySelectorAll(modalFocusableSelector));
+  }
+
+  function focusModalSurface(modal) {
+    const dialog = modal.querySelector(".modal-dialog");
+    if (!dialog) return;
+
+    const focusables = getFocusableElements(dialog);
+    const focusTarget = focusables[0] || dialog;
+
+    if (focusTarget === dialog && !dialog.hasAttribute("tabindex")) {
+      dialog.setAttribute("tabindex", "-1");
+    }
+
+    window.requestAnimationFrame(function () {
+      if (typeof focusTarget.focus === "function") {
+        focusTarget.focus();
+      }
+    });
+  }
+
+  function setModalOpen(modalId, isOpen, options) {
     const modal = document.getElementById(modalId);
     if (!modal) return;
 
     modal.setAttribute("data-open", isOpen ? "true" : "false");
     modal.setAttribute("aria-hidden", isOpen ? "false" : "true");
+
+    if (isOpen) {
+      if (options?.trigger) {
+        modalReturnFocusMap.set(modalId, options.trigger);
+      }
+
+      focusModalSurface(modal);
+      return;
+    }
+
+    const returnTarget = modalReturnFocusMap.get(modalId);
+    if (returnTarget && returnTarget.isConnected && typeof returnTarget.focus === "function") {
+      window.requestAnimationFrame(function () {
+        returnTarget.focus();
+      });
+    }
   }
 
   for (const button of modalOpenButtons) {
     button.addEventListener("click", function () {
       const modalId = button.getAttribute("data-modal-open");
       if (!modalId) return;
-      setModalOpen(modalId, true);
+      setModalOpen(modalId, true, { trigger: button });
     });
   }
 

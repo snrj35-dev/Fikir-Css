@@ -2,13 +2,39 @@
   "name": "fikir-css-mvp",
   "version": "0.3.0",
   "private": true,
+  "description": "Contract-driven CSS foundation output for Fikir CSS",
   "type": "module",
+  "style": "./dist/fikir.css",
+  "exports": {
+    ".": {
+      "default": "./dist/fikir.css"
+    },
+    "./css": "./dist/fikir.css",
+    "./contracts/selectors": "./dist/contracts/selectors.json",
+    "./contracts/alias-migration": "./dist/contracts/alias-migration.json",
+    "./contracts/size-report": "./dist/contracts/size-report.json"
+  },
+  "files": [
+    "dist/**",
+    "README.md",
+    "LICENSE",
+    "docs/release/release-note-template.md",
+    "docs/migration/migration-note-template.md"
+  ],
   "scripts": {
     "build": "node scripts/build-css.mjs",
     "build:css": "node scripts/build-css.mjs",
+    "docs:validate": "node --test tests/source/docs-link-audit.test.mjs",
+    "validate:size": "node scripts/validate-size-thresholds.mjs",
+    "report:size": "node scripts/report-size-diff.mjs",
+    "validate:playground-baseline": "node scripts/validate-playground-baseline.mjs",
+    "validate:publish": "node scripts/validate-publishable-outputs.mjs",
+    "validate:version": "node scripts/validate-version-tag-consistency.mjs",
+    "package:smoke": "node scripts/package-smoke.mjs",
+    "github:bootstrap": "node scripts/bootstrap-github-roadmap.mjs",
     "test:source": "node --test tests/source/*.test.mjs",
     "test:build": "node --test tests/build/*.test.mjs",
-    "test:ci": "npm run test:source && npm run build && npm run test:build",
+    "test:ci": "npm run test:source && npm run docs:validate && npm run build && npm run validate:size && npm run validate:playground-baseline && npm run validate:publish && npm run validate:version && npm run package:smoke && npm run test:build",
     "test": "npm run test:ci"
   }
 }

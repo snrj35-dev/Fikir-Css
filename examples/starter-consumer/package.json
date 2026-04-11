@@ -1,0 +1,9 @@
+{
+  "name": "fikir-css-starter-consumer",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Local tarball consumer smoke example for Fikir CSS",
+  "scripts": {
+    "start": "echo Open index.html in your browser"
+  }
+}

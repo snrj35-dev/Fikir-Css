@@ -1,0 +1,128 @@
+{
+  "alert": {
+    "reason": "Dedicated RFC is not split out yet; surface is implemented and publicly exposed.",
+    "evidence": [
+      "packages/components/alert.css",
+      "playground/index.html"
+    ]
+  },
+  "badge": {
+    "reason": "Dedicated RFC is not split out yet; surface is implemented and publicly exposed.",
+    "evidence": [
+      "packages/components/badge.css",
+      "playground/index.html"
+    ]
+  },
+  "label": {
+    "reason": "Field composition sub-surface tracked under field RFC.",
+    "evidence": [
+      "packages/components/label.css",
+      "docs/rfcs/components/field-rfc.md"
+    ]
+  },
+  "helper-text": {
+    "reason": "Field composition sub-surface tracked under field RFC.",
+    "evidence": [
+      "packages/components/helper-text.css",
+      "docs/rfcs/components/field-rfc.md"
+    ]
+  },
+  "error-text": {
+    "reason": "Field composition sub-surface tracked under field RFC.",
+    "evidence": [
+      "packages/components/error-text.css",
+      "docs/rfcs/components/field-rfc.md"
+    ]
+  },
+  "container": {
+    "reason": "Layout primitive tracked by implementation + support matrix baseline.",
+    "evidence": [
+      "packages/layouts/container.css",
+      "docs/roadmap/support-matrix.md"
+    ]
+  },
+  "stack": {
+    "reason": "Layout primitive tracked by implementation + support matrix baseline.",
+    "evidence": [
+      "packages/layouts/stack.css",
+      "docs/roadmap/support-matrix.md"
+    ]
+  },
+  "cluster": {
+    "reason": "Layout primitive tracked by implementation + support matrix baseline.",
+    "evidence": [
+      "packages/layouts/cluster.css",
+      "docs/roadmap/support-matrix.md"
+    ]
+  },
+  "sidebar": {
+    "reason": "Layout primitive tracked by implementation + support matrix baseline.",
+    "evidence": [
+      "packages/layouts/sidebar.css",
+      "docs/roadmap/support-matrix.md"
+    ]
+  },
+  "switcher": {
+    "reason": "Layout primitive tracked by implementation + support matrix baseline.",
+    "evidence": [
+      "packages/layouts/switcher.css",
+      "docs/roadmap/support-matrix.md"
+    ]
+  },
+  "center": {
+    "reason": "Layout primitive tracked by implementation + support matrix baseline.",
+    "evidence": [
+      "packages/layouts/center.css",
+      "docs/roadmap/support-matrix.md"
+    ]
+  },
+  "grid": {
+    "reason": "Layout primitive tracked by implementation + support matrix baseline.",
+    "evidence": [
+      "packages/layouts/grid.css",
+      "docs/roadmap/support-matrix.md"
+    ]
+  },
+  "command-bar": {
+    "reason": "Pattern composition documented as spec, not canonical component RFC.",
+    "evidence": [
+      "docs/architecture/command-bar-pattern-spec.md",
+      "playground/index.html"
+    ]
+  },
+  "filter-bar": {
+    "reason": "Pattern composition documented as spec, not canonical component RFC.",
+    "evidence": [
+      "docs/architecture/filter-bar-pattern-spec.md",
+      "playground/index.html"
+    ]
+  },
+  "data-table-toolbar": {
+    "reason": "Pattern composition documented as spec, not canonical component RFC.",
+    "evidence": [
+      "docs/architecture/data-table-toolbar-pattern-spec.md",
+      "playground/index.html"
+    ]
+  },
+  "settings-panel": {
+    "reason": "RFC-only pattern tracked as architecture spec instead of component RFC.",
+    "evidence": [
+      "docs/architecture/settings-panel-pattern-spec.md",
+      "docs/roadmap/support-matrix.md"
+    ]
+  },
+  "skeleton": {
+    "reason": "Foundation extension component without split RFC yet; tracked by implementation/demo evidence.",
+    "evidence": [
+      "packages/components/skeleton.css",
+      "playground/index.html"
+    ]
+  },
+  "spinner": {
+    "reason": "Foundation extension component without split RFC yet; tracked by implementation/demo evidence.",
+    "evidence": [
+      "packages/components/spinner.css",
+      "playground/index.html"
+    ]
+  }
+}

@@ -26,3 +26,7 @@ Foundation seviyesinde contract, build ve override davranışının kırılmadan
 - `.u-*` ve `.comp-*` selector'ları dist'te olmamalı (plain mode)
 - `:root` ve `[data-theme="light"]` semantic tokenları tek blokta olmalı
 - `data-theme="dark"` override'ları korunmalı
+
+## Manual Accessibility Baseline (M1)
+- Core expectation table: `docs/architecture/core-accessibility-expectations.md`
+- Manual QA checklist: `docs/testing/manual-accessibility-qa-checklist.md`

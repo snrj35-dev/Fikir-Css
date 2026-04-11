@@ -24,3 +24,7 @@ jobs:
 
       - name: Run minimal foundation test suite
         run: npm run test:ci
+
+      - name: Report CSS size diff
+        if: always()
+        run: npm run report:size

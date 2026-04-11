@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fikir CSS Getting Started (M1)</title>
+    <link rel="stylesheet" href="../dist/fikir.css" />
+    <style>
+      body {
+        margin: 0;
+        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, sans-serif;
+      }
+
+      .gs-shell {
+        max-width: 56rem;
+        margin: 0 auto;
+        padding: 2rem 1rem 3rem;
+      }
+
+      .gs-section {
+        margin-top: 1.25rem;
+      }
+    </style>
+  </head>
+  <body class="surface" data-theme="light">
+    <main class="gs-shell stack" style="--stack-gap: var(--space-4)">
+      <header class="stack" style="--stack-gap: var(--space-2)">
+        <h1 class="heading-2">Fikir CSS Minimal Getting Started</h1>
+        <p class="text-muted">
+          Bu sayfa, M1 destekli core surface ile hızlı başlangıç için en küçük örneği verir.
+        </p>
+      </header>
+
+      <section class="card card-p-md gs-section stack" style="--stack-gap: var(--space-3)">
+        <h2 class="heading-4">1) Button + Badge + Alert</h2>
+        <div class="cluster" style="--cluster-gap: var(--space-2)">
+          <button class="button" type="button">Kaydet</button>
+          <button class="button button-ghost" type="button">Vazgeç</button>
+          <span class="badge">M1 supported</span>
+        </div>
+        <p class="alert alert-info" role="status">Bilgi: Bu örnek canonical class surface kullanır.</p>
+      </section>
+
+      <section class="card card-p-md gs-section stack" style="--stack-gap: var(--space-3)">
+        <h2 class="heading-4">2) Field Composition</h2>
+        <div class="field" style="max-width: 28rem">
+          <label class="label" for="gs-email">Email</label>
+          <input id="gs-email" class="input" type="email" placeholder="name@example.com" />
+          <p class="helper-text">Readonly ve disabled semantik olarak ayrıdır.</p>
+        </div>
+
+        <div class="field" data-field-invalid="true" style="max-width: 28rem">
+          <label class="label" for="gs-email-invalid">Email (invalid)</label>
+          <input id="gs-email-invalid" class="input aria-invalid:ring-danger" type="email" aria-invalid="true" value="invalid-mail" />
+          <p class="error-text">Geçerli bir email giriniz.</p>
+        </div>
+      </section>
+
+      <section class="card card-p-md gs-section stack" style="--stack-gap: var(--space-2)">
+        <h2 class="heading-4">3) Theme Check</h2>
+        <p class="text-sm">Dark mode kontrolü için <code>data-theme="dark"</code> uygulayabilirsiniz.</p>
+      </section>
+    </main>
+  </body>
+</html>

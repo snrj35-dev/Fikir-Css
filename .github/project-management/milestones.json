@@ -1,0 +1,8 @@
+[
+  {
+    "title": "M1 Supported Foundation Release",
+    "description": "First supportable release baseline: support matrix discipline, package/release guardrails, and governance bootstrap.",
+    "due_on": "2026-05-15T00:00:00Z",
+    "state": "open"
+  }
+]

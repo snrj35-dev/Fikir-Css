@@ -1,376 +1,371 @@
-# Fikir CSS — Product Plan
+# Fikir CSS — Prototype to Product Plan
 
-> Contract-driven CSS foundation prototype için bileşen, pattern ve ürünleşme yol haritası
+> Detailed plan to evolve Fikir CSS from a contract-driven prototype into a publishable, supportable product.
+> Last reviewed: 2026-04-11
 
-## 1. Amaç
+## 1. Purpose
 
-Bu belge, Fikir CSS'in mevcut v0.2 foundation aşamasından daha geniş bir component ve product surface'e nasıl evrileceğini planlar.
+This document defines the productization plan for Fikir CSS based on the current public repository state.
 
-Amaçlar:
+Fikir CSS already has a strong architectural foundation:
+- contract-driven selector generation
+- build-time CSS output
+- validation pipeline
+- naming and token specifications
+- broad RFC coverage
+- playground/demo and CI scaffolding
 
-- Bileşen yüzeyini rastgele değil, fazlı biçimde büyütmek
-- Primitive, composite ve product pattern katmanlarını birlikte ele almak
-- Spec-first yaklaşımı korumak
-- Foundation, contract, naming ve token disiplinini bozmadan ilerlemek
-- Küçük ekip ve ürün ekipleri için farklı değer katmanlarını sıralamak
+However, it is still explicitly positioned as a prototype, not a complete framework. The next stage is not “add more things”, but “turn what exists into something releasable, stable, and trustworthy”.
 
-Bu plan, tek tek dağınık feature eklemek yerine kontrollü workstream'ler ve fazlar üzerinden ilerlemeyi önerir.
-
----
-
-## 2. Planlama İlkeleri
-
-### 2.1 Spec-first
-Yeni component veya pattern implementation'ı, mümkün olduğunda önce RFC/spec ile tanımlanmalıdır.
-
-### 2.2 Contract-first
-Naming, selector surface, token kullanımı ve recipe ilişkisi mevcut contract-driven mimariyle uyumlu kalmalıdır.
-
-### 2.3 Batch-oriented delivery
-Tek tek izole feature eklemek yerine ilişkili yüzeyler batch/workstream halinde ilerletilmelidir.
-
-### 2.4 Product realism
-Sadece tekil UI elemanları değil, gerçek ürün yapıları da roadmap içinde düşünülmelidir.
-
-### 2.5 Enforcement before expansion
-Yeni yüzey eklenmeden önce mevcut yüzey için test, docs ve override davranışı yeterince güvence altına alınmalıdır.
+This plan focuses on that transition.
 
 ---
 
-## 3. Bileşen Envanteri
+## 2. Current Reality Snapshot
 
-### 3.1 Core / Foundation
+### Strengths already present
 
+Fikir CSS already has:
+- a clear prototype framing
+- a contract-first architecture
+- a build/validation pipeline
+- a documentation map with architecture notes, specs, and many RFCs
+- a playground that demonstrates current surface area
+- test/CI infrastructure
+- release and migration note structure
+
+### Product gaps still visible
+
+To become a real product, Fikir CSS still needs:
+- a clear supported surface vs planned surface distinction
+- packaging/distribution ergonomics
+- a stable consumer installation story
+- stronger release automation and compatibility guarantees
+- implementation maturity tracking per component
+- browser/runtime support policy
+- accessibility verification beyond documentation
+- visual regression and real consumer examples
+- governance and versioning discipline
+- external adoption hooks (examples, starter usage, migration guidance)
+
+---
+
+## 3. Productization Goals
+
+The product phase should produce the following outcomes:
+
+1. **Stable consumer story**  
+   A user can install, build, and use Fikir CSS without reading the entire repo.
+
+2. **Explicit support model**  
+   Supported, experimental, RFC-only, and planned surfaces are clearly separated.
+
+3. **Release confidence**  
+   A release should be backed by compatibility checks, migration artifacts, docs, and validation.
+
+4. **Implementation credibility**  
+   The implemented surface should match public claims in README and playground.
+
+5. **Operational maintainability**  
+   The project should be governable through issues, milestones, release notes, CI, and roadmap discipline.
+
+---
+
+## 4. Productization Principles
+
+### 4.1 Stabilize before expanding
+Do not continue broad surface expansion until the existing public surface is classified and support levels are explicit.
+
+### 4.2 Public claims must be auditable
+Anything listed in README/playground must be traceable to one of:
+- implemented and tested
+- implemented but experimental
+- RFC-only
+- planned only
+
+### 4.3 Prefer smaller supported surface over broad ambiguous surface
+A smaller but clearly supported v1.0 is better than a very broad but undefined “component surface”.
+
+### 4.4 Docs must reflect delivery state
+Specs and RFCs are assets, but they must stay synchronized with implementation and release state.
+
+### 4.5 Product quality requires adoption workflows
+A “real product” needs:
+- install instructions
+- examples
+- versioning policy
+- support expectations
+- migration policy
+- release discipline
+
+---
+
+## 5. Productization Workstreams
+
+### Workstream A — Surface Classification and Product Scope
+
+#### Objective
+Define what Fikir CSS actually supports today and what it only documents.
+
+#### Deliverables
+- support matrix for every surface
+- explicit labels: `supported`, `experimental`, `rfc-only`, `planned`
+- README cleanup to reflect support status
+- playground labeling aligned with support status
+
+#### Why this matters
+The current repository exposes a very broad component/pattern surface. That is powerful for exploration, but risky for product perception.
+
+### Workstream B — Packaging and Distribution
+
+#### Objective
+Make Fikir CSS installable and consumable as a package, not only as a repo build.
+
+#### Deliverables
+- package export strategy
+- distribution layout
+- install/use documentation
+- generated artifact publishing policy
+- starter consumption example
+- versioned release packaging
+
+#### Questions to resolve
+- What is the primary package entrypoint?
+- Which files are shipped vs source-only?
+- Are generated artifacts committed, published, or both?
+- What is the support contract for `contracts/*.mjs` and generated files?
+
+### Workstream C — Release Engineering and Compatibility
+
+#### Objective
+Turn build/test success into release trust.
+
+#### Deliverables
+- semver policy
+- release gates
+- alias migration validation in release flow
+- changelog discipline
+- release checklist
+- compatibility matrix
+
+#### Required release gates
+- build success
+- source/build tests
+- contract parity validation
+- migration artifact generation
+- size report generation
+- docs/release note update
+
+### Workstream D — Component Product Readiness
+
+#### Objective
+Convert RFC-backed surfaces into product-ready surfaces.
+
+#### Product readiness criteria
+A component is product-ready only if it has:
+- RFC/spec
+- canonical class surface
+- token usage aligned with token dictionary
+- implementation status clearly declared
+- tests
+- demo examples
+- accessibility expectations documented
+- migration impact understood
+
+#### Initial priority set
 - Button
-- Icon Button
-- Link
-- Card
-- Badge
-- Alert
-- Divider
-- Skeleton
-- Spinner
-- Surface
-- Visually Hidden
-
-### 3.2 Form / Input
-
 - Input
-- Textarea
-- Select
-- Checkbox
-- Radio
-- Switch
-- Range Slider
-- OTP / Pin Input
-- Field / Form Field
-- Label
-- Helper Text
-- Error Text
-- Input Group
-- Combobox
-- Autocomplete
-
-### 3.3 Overlay / Feedback
-
-- Modal / Dialog
-- Drawer
-- Popover
-- Tooltip
-- Dropdown Menu
-- Context Menu
-- Hover Card
-- Toast
-- Progress
-- Loading Overlay
-
-### 3.4 Navigation
-
-- Tabs
-- Accordion
-- Breadcrumb
-- Pagination
-- Navbar
-- Sidebar
-- Command Palette
-- Menu Bar
-- Steps / Stepper
-
-### 3.5 Data Display
-
+- Card
+- Label / Helper Text / Error Text / Field
+- Modal
 - Table
-- Data Grid
-- List
-- Description List
-- Avatar
-- Avatar Group
-- Tag / Chip
-- Stat
-- Empty State
-- Timeline
-- KPI Card
+- Tabs / Accordion / Pagination
+- Avatar / Empty State / Badge / Alert
 
-### 3.6 Layout / App Shell
+### Workstream E — Accessibility Quality
 
-- Container
-- Stack
-- Cluster
-- Sidebar Layout
-- Switcher
-- Center
-- Grid
+#### Objective
+Move from a11y documentation to verifiable accessibility quality.
+
+#### Deliverables
+- accessibility checklist by component category
+- keyboard behavior expectations
+- overlay focus management tests
+- semantic usage examples
+- invalid/error/help text examples
+- icon-only and interactive surface guidance
+
+#### Scope priorities
+- Button / Link semantics
+- Input / Form Field relationships
+- Modal / Drawer / Popover focus handling
+- Menu-like surfaces
+- Clickable vs non-clickable card/surface rules
+
+### Workstream F — Documentation and Information Architecture
+
+#### Objective
+Restructure docs from “many good files” into a product documentation system.
+
+#### Deliverables
+- docs IA by audience:
+  - getting started
+  - architecture
+  - contracts/specs
+  - components
+  - patterns
+  - testing/quality
+  - migration/releases
+- implemented vs experimental markers
+- docs landing pages by domain
+- contributor path for adding a component/pattern
+
+#### Key principle
+Documentation should support:
+- users
+- contributors
+- maintainers
+- release managers
+
+Not just architecture readers.
+
+### Workstream G — Playground and Example Strategy
+
+#### Objective
+Turn the playground from a broad showcase into a product-quality example surface.
+
+#### Deliverables
+- labeled sections by support level
+- minimal getting-started example
+- realistic product example pages
+- app-shell example
+- form validation example
+- data display example
+- accessibility example notes
+
+#### Product role of playground
+The playground should answer:
+- what is implemented
+- what is stable
+- how to use it
+- how override behavior works
+
+### Workstream H — Governance and Community Setup
+
+#### Objective
+Prepare the project for external users and contributors.
+
+#### Deliverables
+- issue taxonomy
+- milestones by release
+- labels for support level and workstream
+- roadmap issue mapping
+- contribution path for RFC → implementation
+- maintainer checklist
+
+#### Suggested issue labels
+- `rfc`
+- `implementation`
+- `docs`
+- `quality`
+- `a11y`
+- `release`
+- `migration`
+- `experimental`
+- `good first issue`
+
+---
+
+## 6. Product Milestones
+
+### Milestone 1 — Supported Foundation Release
+
+#### Goal
+Ship the first release that is small but genuinely supportable.
+
+#### Must include
+- stable install/build path
+- explicit support matrix
+- productized README
+- release checklist
+- supported core surface:
+  - Button
+  - Input
+  - Card
+  - Badge
+  - Alert
+  - Label / Helper / Error Text / Field
+  - one overlay (`Modal` or `Toast`)
+  - one navigation slice (`Tabs` or `Accordion`)
+- compatibility/migration notes
+- CI-backed release gates
+
+#### Non-goal
+Do not ship the whole roadmap in this milestone.
+
+### Milestone 2 — Core Product UI Kit
+
+#### Goal
+Extend beyond foundation into a credible core UI kit.
+
+#### Candidate scope
+- form controls:
+  - Textarea
+  - Select
+  - Checkbox
+  - Radio
+  - Switch
+  - Input Group
+- overlays:
+  - Modal
+  - Toast
+  - Tooltip
+  - Popover
+  - Dropdown Menu
+- navigation:
+  - Tabs
+  - Accordion
+  - Pagination
+  - Breadcrumb
+- display:
+  - Table
+  - Avatar
+  - Empty State
+  - Stat
+
+#### Required for milestone exit
+- support status visible in docs/playground
+- stronger a11y verification
+- example pages
+- release tags and changelog discipline
+
+### Milestone 3 — Product Patterns and Real App Surface
+
+#### Goal
+Show that Fikir CSS is useful for real product interfaces, not only isolated widgets.
+
+#### Candidate scope
+- App Shell
 - Page Header
 - Section
-- App Shell
-- Split Pane
-
-### 3.7 Content / Rich UI
-
-- Text
-- Heading
-- Code
-- Code Block
-- Callout
-- Quote
-- Kbd
-- Markdown Surface
-
-### 3.8 Advanced / Product Surface
-
-- Date Picker
-- Date Range Picker
-- Calendar
-- File Upload
-- Dropzone
-- Search Box
-- Filter Bar
-- Data Table Toolbar
-- Command Bar
-- Editable Field
-
----
-
-## 4. Öncelik Fazları
-
-### 4.1 Phase 1 — Mutlaka lazım olanlar
-
-Bu faz, framework'ün en hızlı değer üreten ve gerçek ürünlerde en sık kullanılan yüzeylerini kapsar.
-
-- Button
-- Input
-- Card
-- Badge
-- Alert
-- Label
-- Helper Text
-- Error Text
-- Modal
-- Tabs
-- Accordion
-- Toast
-- Table
-- Pagination
-- Avatar
-- Empty State
-- Skeleton
-- Spinner
-
-#### Phase 1 hedefleri
-- Temel component surface'in ürün kullanılabilirliğini göstermek
-- Primitive + ilk composite katmanı kurmak
-- Demo ve docs'ta gerçek kullanım örnekleri sunmak
-- Override davranışını somutlaştırmak
-- A11y ve token tüketimi konusunda güvenilir örnekler üretmek
-
----
-
-### 4.2 Phase 2 — Ürün ekipleri için yüksek değer
-
-Bu faz, dashboard, admin panel ve daha zengin uygulama yüzeyleri için gerekli yapı taşlarını kapsar.
-
-- Select
-- Checkbox
-- Radio
-- Switch
-- Textarea
-- Dropdown Menu
-- Popover
-- Tooltip
-- Drawer
-- Breadcrumb
-- Navbar
 - Sidebar
-- Stepper
-- Stat
-- Timeline
-- Input Group
-
-#### Phase 2 hedefleri
-- Form ve navigation yüzeyini olgunlaştırmak
-- Overlay / interaction surface'i genişletmek
-- App shell ve settings/dashboard akışlarını desteklemek
-- Küçük demo yerine gerçek ürün senaryolarına daha yakın örnekler sunmak
-
----
-
-### 4.3 Phase 3 — Framework’ü güçlü gösterenler
-
-Bu faz, Fikir CSS'in ileri seviye yeteneklerini ve daha yüksek geliştirici deneyimini görünür kılar.
-
-- Combobox
-- Autocomplete
-- Command Palette
-- Date Picker
-- Date Range Picker
-- File Upload
-- Dropzone
-- Data Grid
-- Hover Card
-- Editable Field
-
-#### Phase 3 hedefleri
-- Gelişmiş ürün yüzeylerini desteklemek
-- Composite component yeteneğini göstermek
-- Interaction complexity içeren bileşenlerde contract disiplini korumak
-- Framework'ün farklılaşma alanlarını güçlendirmek
-
----
-
-## 5. Üç Katmanlı Ürün Yüzeyi
-
-Fikir CSS'te component listesi sadece tekil UI elemanları olarak ele alınmamalıdır. Yol haritası üç ayrı yüzeyi birlikte kapsamalıdır.
-
-### 5.1 Primitive components
-
-Düşük seviyeli ama yaygın kullanılan yüzeyler:
-
-- Button
-- Input
-- Card
-
-Bu katman:
-- canonical class surface
-- recipe yüzeyi
-- token kullanımı
-- basic accessibility beklentisi
-açısından en net tanımlanan katman olmalıdır.
-
-### 5.2 Composite components
-
-Birden fazla primitive ve state yüzeyini birleştiren bileşenler:
-
-- Modal
-- Dropdown Menu
-- Table
-- Form Field
-
-Bu katman:
-- slot/composition modeli
-- layout ve utility ilişkisi
-- interaction states
-- wrapper/child surface
-konularını taşır.
-
-### 5.3 Product patterns
-
-Gerçek uygulama iskeletleri ve workflow yüzeyleri:
-
-- App Shell
+- Navbar
 - Filter Bar
 - Data Table Toolbar
 - Settings Panel
+- KPI Card / Timeline / Data display examples
 
-Bu katman, Fikir CSS'in sadece component kütüphanesi değil, ürün geliştirme yüzeyi olduğunu gösterir.
+#### Required for milestone exit
+- at least 2 realistic example pages
+- clear primitive/composite/pattern separation
+- stronger navigation/layout guidance
 
----
+### Milestone 4 — Advanced Surface (Phase-gated)
 
-## 6. Workstream Bazlı Yol Haritası
+#### Goal
+Adopt advanced components only after core product maturity exists.
 
-Tek tek feature yerine, ilişkili alanları workstream olarak ele almak önerilir.
-
-### 6.1 Workstream A — Core Component Refinement
-
-Kapsam:
-- Button
-- Input
-- Card
-- Badge
-- Alert
-- Label / Helper Text / Error Text
-
-Amaç:
-- Mevcut RFC yüzeylerini implementation ile hizalamak
-- Primitive layer'ı stabilize etmek
-- Validation ve demo örnekleri eklemek
-
-### 6.2 Workstream B — Overlay & Interaction
-
-Kapsam:
-- Modal
-- Toast
-- Popover
-- Tooltip
-- Dropdown Menu
-- Drawer
-
-Amaç:
-- Overlay ve feedback yüzeyini standartlaştırmak
-- State, focus ve layering davranışını ürün seviyesinde test etmek
-
-### 6.3 Workstream C — Forms & Field Composition
-
-Kapsam:
-- Select
-- Checkbox
-- Radio
-- Switch
-- Textarea
-- Field / Form Field
-- Input Group
-
-Amaç:
-- Form semantics ve validation ilişkisini genişletmek
-- Label/help/error modelini alan bazında birleştirmek
-
-### 6.4 Workstream D — Navigation & Shell
-
-Kapsam:
-- Tabs
-- Accordion
-- Breadcrumb
-- Pagination
-- Navbar
-- Sidebar
-- Stepper
-- App Shell
-- Page Header
-- Section
-
-Amaç:
-- Application shell ve navigation yüzeyini oturtmak
-- Layout primitives ile higher-level patterns arasındaki sınırı netleştirmek
-
-### 6.5 Workstream E — Data & Display
-
-Kapsam:
-- Table
-- Avatar
-- Empty State
-- Stat
-- Timeline
-- KPI Card
-- Data Grid
-- List
-- Description List
-
-Amaç:
-- Data-heavy ürünler için display yüzeyi hazırlamak
-- Table/Data Grid farkını netleştirmek
-- Dense information surfaces için token ve layout kararlarını test etmek
-
-### 6.6 Workstream F — Advanced Product Surface
-
-Kapsam:
+#### Candidate scope
 - Combobox
 - Autocomplete
 - Command Palette
@@ -378,105 +373,118 @@ Kapsam:
 - Date Range Picker
 - File Upload
 - Dropzone
-- Search Box
-- Filter Bar
-- Data Table Toolbar
-- Command Bar
+- Data Grid
 - Editable Field
 
-Amaç:
-- Framework'ün ileri seviye kullanım alanlarını açmak
-- Complex interaction ve composite state yönetimini olgunlaştırmak
+#### Rule
+No advanced surface should be marked supported before:
+- support matrix exists
+- release engineering is stable
+- component readiness criteria are enforced
+- playground/examples show real usage
 
 ---
 
-## 7. Aşama Aşama Uygulama Stratejisi
+## 7. Release Readiness Checklist
 
-### Stage 1 — Foundation Alignment
-- RFC'li primitive'leri implementation ile hizala
-- Core docs, tests ve playground yüzeyini güncelle
-- Default/override davranışlarını netleştir
+A release should not be cut unless all of the following are true:
 
-### Stage 2 — Composite Layer
-- Overlay ve form composition surface ekle
-- Accessibility ve slot/composition davranışlarını tanımla
-- Daha güçlü demo akışları kur
-
-### Stage 3 — Product Pattern Layer
-- App shell, filter bar, toolbar gibi pattern'leri ekle
-- Component library'den product surface'e geçişi görünür kıl
-
-### Stage 4 — Advanced Surface
-- Daha zor interaction bileşenlerine geç
-- Build/test/docs disiplinini koruyarak ileri yüzeyleri ekle
+- [ ] support matrix updated
+- [ ] README current status updated
+- [ ] docs links valid
+- [ ] build passes
+- [ ] source tests pass
+- [ ] build tests pass
+- [ ] migration artifacts generated
+- [ ] size report generated
+- [ ] release notes written
+- [ ] migration notes reviewed
+- [ ] supported/experimental labels updated
+- [ ] playground reflects current release state
 
 ---
 
-## 8. Non-Goals
+## 8. Product Readiness Checklist by Surface
 
-Bu planın amacı:
-- Her component'i aynı anda implement etmek değildir
-- Sadece “çok component olsun” diye yüzey büyütmek değildir
-- Headless behavior engine veya ağır runtime mimarisi kurmak değildir
-- Contract ve naming disiplini pahasına hızlı demo toplamak değildir
+A component/pattern should be considered product-ready only if:
 
----
-
-## 9. Başarı Ölçütleri
-
-Bir faz veya workstream tamamlanmış sayılmadan önce aşağıdaki sorulara olumlu cevap verilmelidir:
-
-- Surface için RFC/spec var mı?
-- Naming spec ve token dictionary ile uyumlu mu?
-- Contract surface test veya validation ile korunuyor mu?
-- Demo/playground içinde gerçek örnek var mı?
-- README/docs içinde referans mevcut mu?
-- Override davranışı belgelendi mi?
-- Accessibility beklentisi yazıldı mı?
+- [ ] RFC/spec exists
+- [ ] implementation exists
+- [ ] support level is declared
+- [ ] canonical class surface is stable
+- [ ] token usage aligns with token dictionary
+- [ ] naming aligns with naming spec
+- [ ] tests exist
+- [ ] a11y expectations are documented
+- [ ] example exists in playground/docs
+- [ ] release impact is understood
 
 ---
 
-## 10. Önerilen Yakın Yol Haritası
+## 9. Near-Term Recommended Sequence
 
-En mantıklı kısa vadeli sıra:
+### Phase A — Re-scope and stabilize
+- classify all current public surfaces
+- create support matrix
+- update README/playground labels
+- define first “supported foundation” release scope
 
-1. Core Component Refinement batch
-   - Button state refinement
-   - Input validation surface
-   - Card composition / slot surface
-   - ilgili testler
-   - playground güncellemesi
+### Phase B — Package and release foundation
+- formalize packaging/distribution
+- add release engineering guardrails
+- publish first supportable package/release
 
-2. Forms & Field Composition batch
-   - Label
-   - Helper Text
-   - Error Text
-   - Field / Form Field
-   - Textarea
-   - Select
-   - Checkbox / Radio / Switch
+### Phase C — Harden core components
+- finish product-readiness pass for core surfaces
+- strengthen a11y and example coverage
+- close high-value docs gaps
 
-3. Overlay & Interaction batch
-   - Modal
-   - Toast
-   - Tooltip
-   - Popover
-   - Dropdown Menu
-   - Drawer
-
-4. Navigation & Shell batch
-   - Tabs
-   - Accordion
-   - Pagination
-   - Breadcrumb
-   - Navbar
-   - Sidebar
-   - Page Header / Section / App Shell
+### Phase D — Expand into core UI kit
+- add/support form and overlay slices
+- improve example pages
+- build trust before broad expansion
 
 ---
 
-## 11. Sonuç
+## 10. Risks
 
-Fikir CSS için doğru büyüme stratejisi, uzun bileşen listesine rağmen bunları tek tek dağınık eklemek değil; primitive, composite ve product pattern katmanlarını birlikte düşünerek fazlı ve workstream bazlı ilerlemektir.
+### Risk 1 — Public surface inflation
+The repository presents a wider surface area than can likely be supported today.
 
-Bu planın amacı, framework'ü sadece “çok component barındıran” bir yapı değil, dokümante edilmiş, test edilen ve ürün senaryolarını karşılayan bir sistem olarak büyütmektir.
+**Mitigation:** support matrix, labels, README/playground cleanup.
+
+### Risk 2 — Docs/implementation drift
+The docs and RFC inventory is already large.
+
+**Mitigation:** release gates must include docs alignment checks and ownership.
+
+### Risk 3 — Prototype architecture without consumer ergonomics
+A technically strong repo can still fail as a product if installation and usage remain repo-centric.
+
+**Mitigation:** packaging/distribution and starter consumption examples.
+
+### Risk 4 — Advanced surface too early
+Complex components can consume attention before core supportability exists.
+
+**Mitigation:** milestone-gate advanced surface behind core maturity.
+
+---
+
+## 11. Definition of Success
+
+Fikir CSS is no longer “just a prototype” when:
+
+- a newcomer can install and use it from published artifacts
+- supported vs experimental surface is obvious
+- releases are gated and repeatable
+- docs match implementation
+- core surfaces are stable and tested
+- the playground demonstrates supported usage, not just possibility
+- contribution and migration paths are explicit
+
+---
+
+## 12. Recommended File Placement
+
+Suggested repo location:
+- `docs/roadmap/plan.md`

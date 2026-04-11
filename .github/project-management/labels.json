@@ -1,0 +1,19 @@
+[
+  { "name": "workstream:scope", "color": "0E8A16", "description": "Scope classification and support matrix work" },
+  { "name": "workstream:packaging", "color": "1D76DB", "description": "Packaging and distribution work" },
+  { "name": "workstream:release", "color": "5319E7", "description": "Release engineering and compatibility work" },
+  { "name": "workstream:readiness", "color": "FBCA04", "description": "Component product-readiness work" },
+  { "name": "workstream:a11y", "color": "C2E0C6", "description": "Accessibility and behavior verification work" },
+  { "name": "workstream:docs", "color": "006B75", "description": "Documentation information architecture and consistency" },
+  { "name": "workstream:playground", "color": "BFD4F2", "description": "Playground and example strategy" },
+  { "name": "workstream:governance", "color": "D93F0B", "description": "Governance and external adoption work" },
+
+  { "name": "support:supported", "color": "0B5FFF", "description": "Surface committed in support baseline" },
+  { "name": "support:experimental", "color": "FBCA04", "description": "Implemented but outside supported commitment" },
+  { "name": "support:rfc-only", "color": "EDEDED", "description": "Specified but not canonical implemented surface" },
+  { "name": "support:planned", "color": "BFDADC", "description": "Planned/deferred roadmap scope" },
+
+  { "name": "type:governance", "color": "5319E7", "description": "Project process and governance tasks" },
+  { "name": "type:community", "color": "C5DEF5", "description": "Community and feedback tasks" },
+  { "name": "type:docs", "color": "0075CA", "description": "Documentation tasks" }
+]

@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fikir CSS Dashboard Example</title>
+    <link rel="stylesheet" href="../dist/fikir.css" />
+    <style>
+      body { margin: 0; }
+      .page-shell { max-width: 84rem; margin: 0 auto; padding: 1rem; }
+    </style>
+  </head>
+  <body>
+    <main class="page-shell stack" style="--stack-gap: var(--space-3)">
+      <div class="page-header">
+        <div class="page-header-content">
+          <h1 style="margin: 0">Dashboard Example</h1>
+          <p class="text-sm" style="margin: 0">Realistic app-shell + data display composition.</p>
+        </div>
+        <div class="page-header-actions">
+          <button class="btn btn-outline btn-sm" type="button">Export</button>
+          <button class="btn btn-primary btn-sm" type="button">Create report</button>
+        </div>
+      </div>
+
+      <div class="app-shell">
+        <header class="app-shell-topbar">
+          <strong>Revenue Workspace</strong>
+          <span class="badge badge-primary">Live</span>
+        </header>
+
+        <div class="app-shell-content">
+          <aside class="app-shell-sidebar">
+            <nav class="sidebar-nav" aria-label="Dashboard sidebar">
+              <section class="sidebar-nav-section">
+                <a class="sidebar-nav-item" href="#" aria-current="page">Overview</a>
+                <a class="sidebar-nav-item" href="#">Pipeline</a>
+                <a class="sidebar-nav-item" href="#">Forecast</a>
+                <a class="sidebar-nav-item" href="#">Settings</a>
+              </section>
+            </nav>
+          </aside>
+
+          <section class="app-shell-main stack" style="--stack-gap: var(--space-3)">
+            <div class="grid" style="--grid-min: 13rem; --grid-gap: var(--space-3)">
+              <article class="stat">
+                <p class="stat-label">ARR</p>
+                <p class="stat-value">$1.21M</p>
+                <p class="stat-meta">+6.4%</p>
+              </article>
+              <article class="stat">
+                <p class="stat-label">Churn</p>
+                <p class="stat-value">1.8%</p>
+                <p class="stat-meta">-0.3%</p>
+              </article>
+              <article class="stat">
+                <p class="stat-label">Expansion</p>
+                <p class="stat-value">$84K</p>
+                <p class="stat-meta">QTD</p>
+              </article>
+            </div>
+
+            <section class="section-block">
+              <header class="section-header">
+                <h2 style="margin: 0">Top Accounts</h2>
+              </header>
+              <div class="section-body" style="overflow-x: auto">
+                <table class="table" aria-label="Top accounts table">
+                  <thead class="table-head">
+                    <tr class="table-row">
+                      <th class="table-head-cell" scope="col">Account</th>
+                      <th class="table-head-cell" scope="col">Owner</th>
+                      <th class="table-head-cell" scope="col">MRR</th>
+                    </tr>
+                  </thead>
+                  <tbody class="table-body">
+                    <tr class="table-row">
+                      <td class="table-cell">Atlas CRM</td>
+                      <td class="table-cell">Ada</td>
+                      <td class="table-cell">$12,400</td>
+                    </tr>
+                    <tr class="table-row" data-row-selected="true">
+                      <td class="table-cell">Pulse Ops</td>
+                      <td class="table-cell">Grace</td>
+                      <td class="table-cell">$22,900</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </section>
+          </section>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

@@ -5,8 +5,11 @@ Contract-driven CSS foundation prototype (v0.3).
 Fikir CSS is an experimental foundation repository focused on predictable cascade behavior, contract-based selector generation, and low-runtime CSS delivery. It is not a complete framework yet.
 
 ## Current Status
-- Stage: `v0.3 foundation + component surface`
-- Scope: tokens, reset/base, layout primitives, utilities, contract-driven recipes, broad component/pattern surface
+- Stage: `v0.3 prototype -> productization transition`
+- Support baseline: `docs/roadmap/support-matrix.md`
+- Supported slice: core + layout primitives + selected M1 slices (modal/tabs/table-empty-state)
+- Experimental slice: broad implemented component/pattern surface outside current support commitment
+- Installation model: repo-first build (`npm install && npm run build`) with local package tarball consumption preview (`npm pack`)
 - Stability: prototype; APIs and file layout may still change between minor tags
 - Intended use: architecture exploration and tooling validation
 
@@ -15,6 +18,28 @@ Fikir CSS is an experimental foundation repository focused on predictable cascad
 - Full static extraction/compiler engine
 - Production-ready plugin ecosystem
 - Marketing/demo site as a product surface
+
+## Who This Is For
+- Teams validating contract-driven CSS architecture before full framework adoption
+- Maintainers who need predictable selector/token contracts and reproducible build artifacts
+- Contributors iterating on RFC-first component surfaces with test-backed changes
+
+## Supported Surface (Current Baseline)
+- See full matrix: `docs/roadmap/support-matrix.md`
+- Core: `button`, `input`, `card`, `badge`, `alert`, `label`, `helper-text`, `error-text`, `field`
+- Layout primitives: `container`, `stack`, `cluster`, `sidebar`, `switcher`, `center`, `grid`
+- M1 slices: `modal`, `tabs`, `table`, `empty-state`
+
+## Experimental Surface
+- Implemented and publicly demoed surfaces outside the supported baseline are marked `experimental` in:
+  - `docs/roadmap/support-matrix.md`
+- Includes advanced/productivity, broad overlay/navigation/data surfaces, and pattern compositions.
+
+## RFC-only / Planned Surface
+- RFC-only baseline example: `settings-panel` pattern (spec exists, no canonical implemented component surface yet)
+- Planned scope is tracked in:
+  - `docs/roadmap/plan.md`
+  - `docs/roadmap/tasklist.md`
 
 ## Quick Start
 1. Install dependencies
@@ -25,6 +50,25 @@ Fikir CSS is an experimental foundation repository focused on predictable cascad
    - `playground/index.html`
 
 If `dist/fikir.css` is missing, run `npm run build` first.
+
+## Package Consumption (Preview)
+Entrypoints and package files are defined in:
+- `package.json` (`style`, `exports`, `files`)
+- `docs/roadmap/package-distribution-strategy.md`
+
+Minimal local package flow:
+1. Build artifacts:
+   - `npm run build`
+2. Create tarball:
+   - `npm pack`
+3. Install in a consumer project:
+   - `npm install ../fikir-css-mvp-<version>.tgz`
+4. Consume CSS:
+   - plain HTML: `<link rel="stylesheet" href="./node_modules/fikir-css-mvp/dist/fikir.css" />`
+   - bundler import: `import "fikir-css-mvp/css";`
+
+Starter consumer example:
+- `examples/starter-consumer/`
 
 ## Playground / Demo
 - Path: `playground/`
@@ -40,6 +84,7 @@ If `dist/fikir.css` is missing, run `npm run build` first.
   - recipe resolver output snapshot
 
 See [playground/README.md](./playground/README.md) for section details.
+Minimal getting-started sample: `playground/getting-started.html`.
 Standalone shell sample: `playground/app-shell-example.html`.
 
 ### Playground Screenshots
@@ -70,10 +115,15 @@ Generated outputs:
 - `dist/contracts/size-report.json`
 
 ## Documentation Map
+- Docs index (audience + support labels): `docs/INDEX.md`
+- Role-based docs paths: `docs/paths/user-path.md`, `docs/paths/contributor-path.md`, `docs/paths/maintainer-path.md`
 - Technical summary: `docs/architecture/technical-summary.md`
 - Validation pipeline: `docs/architecture/validation-pipeline.md`
 - Overlay layering notes: `docs/architecture/overlay-layering-z-index-notes.md`
 - Overlay accessibility expectations: `docs/architecture/overlay-accessibility-expectations.md`
+- Core accessibility expectations: `docs/architecture/core-accessibility-expectations.md`
+- Icon-only surface guidance: `docs/architecture/icon-only-surface-guidance.md`
+- Navigation accessibility notes: `docs/architecture/navigation-accessibility-notes.md`
 - Layout primitives refinement notes: `docs/architecture/layout-primitives-refinement-notes.md`
 - Product patterns: `docs/architecture/product-patterns.md`
 - Settings panel pattern spec: `docs/architecture/settings-panel-pattern-spec.md`
@@ -157,7 +207,32 @@ Generated outputs:
 - Minimal test plan: `docs/testing/minimal-test-plan.md`
 - Critical automation areas: `docs/testing/critical-automation-areas.md`
 - Overlay focus management test plan: `docs/testing/overlay-focus-management-test-plan.md`
+- Manual accessibility QA checklist: `docs/testing/manual-accessibility-qa-checklist.md`
+- A11y CI scope: `docs/testing/a11y-ci-scope.md`
+- Playground visual regression plan: `docs/testing/playground-visual-regression-plan.md`
+- Package distribution strategy: `docs/roadmap/package-distribution-strategy.md`
+- Package distribution checklist: `docs/release/package-distribution-checklist.md`
+- Versioning/Semver policy: `docs/release/versioning-semver-policy.md`
+- Changelog policy: `docs/release/changelog-policy.md`
+- Release checklist: `docs/release/release-checklist.md`
+- Release promotion flow: `docs/release/release-promotion-flow.md`
+- Experimental-to-supported criteria: `docs/release/experimental-to-supported-criteria.md`
+- Milestone release notes process: `docs/release/milestone-release-notes-process.md`
+- Bundle size thresholds: `docs/release/bundle-size-thresholds.md`
+- Release impact review: `docs/release/release-impact-review.md`
+- GitHub release readiness (v0.3): `docs/release/github-release-readiness-v0.3.md`
+- GitHub roadmap bootstrap guide: `docs/release/github-roadmap-bootstrap.md`
+- Release note template: `docs/release/release-note-template.md`
+- Known limitations: `docs/community/known-limitations.md`
+- Community feedback issue draft: `docs/community/request-for-feedback-issue.md`
+- External feedback log: `docs/community/external-feedback-log.md`
+- Playground evaluation contributor note: `docs/community/how-to-evaluate-playground.md`
+- RFC authoring guide: `docs/contributor/how-to-add-component-rfc.md`
+- RFC-to-supported promotion guide: `docs/maintainer/how-to-move-rfc-to-supported.md`
+- Last reviewed convention: `docs/maintainer/last-reviewed-convention.md`
+- GitHub roadmap bootstrap assets: `.github/project-management/`, `scripts/bootstrap-github-roadmap.mjs`
 - Migration notes: `docs/migration/`
+- Migration note template: `docs/migration/migration-note-template.md`
 - Release notes: `docs/release/`
 
 ## Roadmap (Near-term)

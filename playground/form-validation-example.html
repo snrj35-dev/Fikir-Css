@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fikir CSS Form Validation Example</title>
+    <link rel="stylesheet" href="../dist/fikir.css" />
+    <style>
+      body { margin: 0; }
+      .page-shell { max-width: 56rem; margin: 0 auto; padding: 1.5rem 1rem 3rem; }
+    </style>
+  </head>
+  <body>
+    <main class="page-shell stack" style="--stack-gap: var(--space-4)">
+      <header class="page-header">
+        <div class="page-header-content">
+          <h1 style="margin: 0">Form Validation Example</h1>
+          <p class="text-sm" style="margin: 0">Field composition with valid, invalid, readonly, and disabled semantics.</p>
+        </div>
+        <div class="page-header-actions">
+          <button class="btn btn-outline btn-sm" type="button">Reset</button>
+          <button class="btn btn-primary btn-sm" type="submit" form="profile-form">Save</button>
+        </div>
+      </header>
+
+      <form id="profile-form" class="section-block stack" style="--stack-gap: var(--space-3)" novalidate>
+        <header class="section-header">
+          <h2 style="margin: 0">Profile</h2>
+        </header>
+
+        <div class="section-body stack" style="--stack-gap: var(--space-3)">
+          <div class="field">
+            <label class="label" for="full-name">Full name</label>
+            <input id="full-name" class="input" type="text" value="Ada Lovelace" />
+            <p class="helper-text">Public profile name.</p>
+          </div>
+
+          <div class="field" data-field-invalid="true">
+            <label class="label" for="email-invalid">Email (invalid)</label>
+            <input
+              id="email-invalid"
+              class="input aria-invalid:ring-danger"
+              type="email"
+              value="ada.example.com"
+              aria-invalid="true"
+              aria-describedby="email-invalid-error"
+            />
+            <p id="email-invalid-error" class="error-text">Enter a valid email address.</p>
+          </div>
+
+          <div class="switcher" data-switcher-fixed="true" style="--switcher-min: 18rem; --switcher-gap: var(--space-3)">
+            <div class="field">
+              <label class="label" for="timezone">Timezone</label>
+              <select id="timezone" class="select">
+                <option>Europe/Istanbul</option>
+                <option>UTC</option>
+                <option>America/New_York</option>
+              </select>
+              <p class="helper-text">Used for reports and notifications.</p>
+            </div>
+
+            <div class="field" data-field-disabled="true">
+              <label class="label" for="workspace-id">Workspace ID (disabled)</label>
+              <input id="workspace-id" class="input" type="text" value="ws_1f5d" disabled />
+              <p class="helper-text">System-managed identifier.</p>
+            </div>
+          </div>
+
+          <div class="field">
+            <label class="label" for="email-readonly">Recovery email (readonly)</label>
+            <input id="email-readonly" class="input" type="email" value="readonly@example.com" readonly />
+            <p class="helper-text">Readonly fields remain focusable but not editable.</p>
+          </div>
+        </div>
+      </form>
+    </main>
+  </body>
+</html>

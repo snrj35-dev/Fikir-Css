@@ -1,0 +1,32 @@
+[
+  {
+    "title": "M1: Convert roadmap into GitHub issues/milestones",
+    "body": "Track roadmap-to-issue conversion for active M1 items.\n\nAcceptance:\n- Active M1 tasks are represented as issues\n- Milestone assignment is consistent\n- Issue status is reflected back to docs/roadmap/tasklist.md",
+    "labels": ["workstream:governance", "type:governance"],
+    "milestone": "M1 Supported Foundation Release"
+  },
+  {
+    "title": "M1: Create labels by workstream and support level",
+    "body": "Create and maintain label taxonomy for workstream and support-level tracking.\n\nAcceptance:\n- workstream:* labels exist\n- support:* labels exist\n- labels are documented and used by roadmap issues",
+    "labels": ["workstream:governance", "type:governance"],
+    "milestone": "M1 Supported Foundation Release"
+  },
+  {
+    "title": "M1: Open first milestone for supported foundation release",
+    "body": "Create and maintain the first release milestone that aligns with supported foundation scope.",
+    "labels": ["workstream:release", "type:governance"],
+    "milestone": "M1 Supported Foundation Release"
+  },
+  {
+    "title": "M1: Request for feedback from external users",
+    "body": "Publish a feedback request issue for first external evaluators.\n\nAcceptance:\n- Issue is public and pinned/linked from docs\n- Evaluation prompts include support matrix + playground guidance\n- Findings are triaged into roadmap workstreams",
+    "labels": ["workstream:governance", "type:community"],
+    "milestone": "M1 Supported Foundation Release"
+  },
+  {
+    "title": "M1: Add known limitations page",
+    "body": "Create and maintain known limitations for current supported and experimental slices.",
+    "labels": ["workstream:docs", "type:docs"],
+    "milestone": "M1 Supported Foundation Release"
+  }
+]

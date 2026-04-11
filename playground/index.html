@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Fikir CSS v0.2 Foundation Playground</title>
+    <title>Fikir CSS v0.3 Foundation Playground</title>
     <link id="fikir-css-bundle" rel="stylesheet" href="../dist/fikir.css" />
     <link rel="stylesheet" href="./demo.css" />
   </head>
@@ -13,9 +13,9 @@
         Build output missing: <code>dist/fikir.css</code> is not loaded. Run <code>npm run build</code>.
       </p>
 
-      <header class="cluster justify-between page-header">
+      <header class="cluster justify-between demo-page-header">
         <div class="stack">
-          <h1>Fikir CSS v0.2 Foundation Playground</h1>
+          <h1>Fikir CSS v0.3 Foundation Playground</h1>
           <p class="text-sm">Showcase only: current class surface and layout primitives.</p>
         </div>
         <div class="cluster">
@@ -23,6 +23,30 @@
           <button id="theme-toggle" class="btn btn-outline btn-sm" type="button">Switch to dark</button>
         </div>
       </header>
+
+      <p class="text-sm demo-support-legend">
+        Section labels:
+        <span class="badge badge-primary">supported</span>
+        <span class="badge badge-neutral">experimental</span>
+        <span class="badge">showcase</span>
+      </p>
+
+      <section class="section stack">
+        <h2>0) Standalone Example Pages</h2>
+        <article class="card card-p-md stack demo-frame">
+          <p class="text-sm">Use these pages for end-to-end usage flows beyond single-section showcase blocks.</p>
+          <div class="cluster">
+            <a class="link" href="./getting-started.html">Getting started</a>
+            <a class="link" href="./form-validation-example.html">Form validation</a>
+            <a class="link" href="./app-shell-example.html">App shell</a>
+            <a class="link" href="./data-display-example.html">Data display</a>
+            <a class="link" href="./data-table-workflow-example.html">Data table workflow</a>
+            <a class="link" href="./dashboard-example.html">Dashboard</a>
+            <a class="link" href="./settings-example.html">Settings</a>
+            <a class="link" href="./accessibility-notes.html">Accessibility notes</a>
+          </div>
+        </article>
+      </section>
 
       <section class="section stack">
         <h2>1) Component Surface</h2>
@@ -170,7 +194,7 @@
         <div class="sidebar" style="--sidebar-width: 22rem; --sidebar-gap: var(--space-4)">
           <article class="card card-p-md stack demo-frame">
             <h3>Example A: Button background</h3>
-            <p class="text-sm code-line">`btn btn-primary` vs `bg-red-500`</p>
+            <p class="text-sm demo-code-line">`btn btn-primary` vs `bg-red-500`</p>
             <div class="cluster">
               <button class="btn btn-primary btn-sm">Semantic only</button>
               <button class="btn btn-primary btn-sm bg-red-500">Utility override</button>
@@ -179,7 +203,7 @@
 
           <article class="card card-p-md stack demo-frame" data-pattern="date-picker">
             <h3>Example B: Card padding</h3>
-            <p class="text-sm code-line">`card-p-sm` vs `p-4`</p>
+            <p class="text-sm demo-code-line">`card-p-sm` vs `p-4`</p>
             <div class="stack" style="--stack-gap: var(--space-2)">
               <div class="card card-elevated card-p-sm">Semantic padding</div>
               <div class="card card-elevated card-p-sm p-4">Utility padding override</div>
@@ -189,7 +213,7 @@
 
         <article class="card card-p-md stack demo-frame">
           <h3>Example C: Input radius</h3>
-          <p class="text-sm code-line">`input` vs `rounded-lg`</p>
+          <p class="text-sm demo-code-line">`input` vs `rounded-lg`</p>
           <div class="cluster demo-inline-form">
             <input class="input" type="text" value="Semantic radius" />
             <input class="input rounded-lg" type="text" value="Utility radius override" />
@@ -224,7 +248,7 @@
         <h2>5) Recipe Resolver Usage Snapshot</h2>
         <article class="card card-p-md stack demo-frame">
           <p class="text-sm">Source: `packages/recipes/button.ts` -> generated resolver output.</p>
-          <pre class="code-block"><code id="recipe-code"></code></pre>
+          <pre class="demo-code-block"><code id="recipe-code"></code></pre>
           <div class="cluster">
             <span class="badge">Rendered with resolver output</span>
             <button id="recipe-button" class="btn btn-outline btn-sm">Resolver button</button>

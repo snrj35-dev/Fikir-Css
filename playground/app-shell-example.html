@@ -22,13 +22,21 @@
       <div class="page-header">
         <div class="page-header-content">
           <h1 style="margin: 0">App Shell Example</h1>
-          <p class="text-sm" style="margin: 0">Small product shell sample built with current v0.2 surface.</p>
+          <p class="text-sm" style="margin: 0">Small product shell sample built with current v0.3 surface.</p>
         </div>
         <div class="page-header-actions">
           <button class="btn btn-outline btn-sm" type="button">Export</button>
           <button class="btn btn-primary btn-sm" type="button">New item</button>
         </div>
       </div>
+
+      <nav class="breadcrumb" aria-label="Breadcrumb">
+        <a class="breadcrumb-item" href="#">Home</a>
+        <span class="breadcrumb-separator" aria-hidden="true">/</span>
+        <a class="breadcrumb-item" href="#">Workspace</a>
+        <span class="breadcrumb-separator" aria-hidden="true">/</span>
+        <span class="breadcrumb-item" aria-current="page">Overview</span>
+      </nav>
 
       <div class="app-shell">
         <header class="app-shell-topbar">
@@ -48,6 +56,15 @@
           </aside>
 
           <main class="app-shell-main">
+            <section class="cluster" style="--cluster-gap: var(--space-2)" data-pattern="data-table-toolbar">
+              <form class="search-box" role="search" aria-label="Task search">
+                <input class="search-box-input" type="search" aria-label="Search tasks" />
+                <button class="search-box-action" type="submit">Search</button>
+              </form>
+              <button class="btn btn-outline btn-sm" type="button">Filter</button>
+              <button class="btn btn-primary btn-sm" type="button">Create task</button>
+            </section>
+
             <article class="section-block">
               <header class="section-header">
                 <h2 style="margin: 0">Active Sprint</h2>

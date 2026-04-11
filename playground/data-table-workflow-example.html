@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fikir CSS Data Table Workflow Example</title>
+    <link rel="stylesheet" href="../dist/fikir.css" />
+    <style>
+      body { margin: 0; }
+      .page-shell { max-width: 70rem; margin: 0 auto; padding: 1.5rem 1rem 3rem; }
+    </style>
+  </head>
+  <body>
+    <main class="page-shell stack" style="--stack-gap: var(--space-4)">
+      <header class="page-header">
+        <div class="page-header-content">
+          <h1 style="margin: 0">Data Table Workflow Example</h1>
+          <p class="text-sm" style="margin: 0">Search, filter, bulk actions, and selected-row summary.</p>
+        </div>
+      </header>
+
+      <section class="stack" style="--stack-gap: var(--space-3)" data-pattern="data-table-toolbar">
+        <div class="cluster" style="--cluster-gap: var(--space-2)">
+          <form class="search-box" role="search" aria-label="Issue table search">
+            <input class="search-box-input" type="search" aria-label="Search issues" value="billing" />
+            <button class="search-box-action" type="submit">Search</button>
+          </form>
+
+          <label class="label" for="status-filter">Status</label>
+          <select id="status-filter" class="select" aria-controls="issues-table">
+            <option>All</option>
+            <option selected>Open</option>
+            <option>Closed</option>
+          </select>
+
+          <button class="btn btn-outline btn-sm" type="button">Export CSV</button>
+          <button class="btn btn-primary btn-sm" type="button" aria-controls="issues-table">Assign owner</button>
+        </div>
+
+        <div class="cluster" style="--cluster-gap: var(--space-2)">
+          <span class="badge">status: open</span>
+          <span class="text-sm">2 selected</span>
+        </div>
+      </section>
+
+      <section class="section-block">
+        <header class="section-header">
+          <h2 style="margin: 0">Issue Queue</h2>
+        </header>
+        <div class="section-body" style="overflow-x: auto">
+          <table id="issues-table" class="table" aria-label="Issues table">
+            <thead class="table-head">
+              <tr class="table-row">
+                <th class="table-head-cell" scope="col">Issue</th>
+                <th class="table-head-cell" scope="col">Owner</th>
+                <th class="table-head-cell" scope="col">Priority</th>
+                <th class="table-head-cell" scope="col">Status</th>
+              </tr>
+            </thead>
+            <tbody class="table-body">
+              <tr class="table-row" data-row-selected="true">
+                <td class="table-cell">Billing import timeout</td>
+                <td class="table-cell">Ada</td>
+                <td class="table-cell">P1</td>
+                <td class="table-cell">Open</td>
+              </tr>
+              <tr class="table-row" data-row-selected="true">
+                <td class="table-cell">Invoice PDF regression</td>
+                <td class="table-cell">Grace</td>
+                <td class="table-cell">P2</td>
+                <td class="table-cell">Open</td>
+              </tr>
+              <tr class="table-row">
+                <td class="table-cell">Webhook retries</td>
+                <td class="table-cell">Linus</td>
+                <td class="table-cell">P3</td>
+                <td class="table-cell">Closed</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fikir CSS Data Display Example</title>
+    <link rel="stylesheet" href="../dist/fikir.css" />
+    <style>
+      body { margin: 0; }
+      .page-shell { max-width: 64rem; margin: 0 auto; padding: 1.5rem 1rem 3rem; }
+    </style>
+  </head>
+  <body>
+    <main class="page-shell stack" style="--stack-gap: var(--space-4)">
+      <header class="page-header">
+        <div class="page-header-content">
+          <h1 style="margin: 0">Data Display Example</h1>
+          <p class="text-sm" style="margin: 0">Stat, table, empty-state, and data-grid usage in one page.</p>
+        </div>
+      </header>
+
+      <section class="grid" style="--grid-min: 14rem; --grid-gap: var(--space-3)">
+        <article class="stat">
+          <p class="stat-label">Active Accounts</p>
+          <p class="stat-value">182</p>
+          <p class="stat-meta">+8 this week</p>
+        </article>
+        <article class="stat">
+          <p class="stat-label">MRR</p>
+          <p class="stat-value">$74,920</p>
+          <p class="stat-meta">+4.1% MoM</p>
+        </article>
+        <article class="stat">
+          <p class="stat-label">At-risk Accounts</p>
+          <p class="stat-value">6</p>
+          <p class="stat-meta">Needs follow-up</p>
+        </article>
+      </section>
+
+      <section class="section-block stack" style="--stack-gap: var(--space-3)">
+        <header class="section-header">
+          <h2 style="margin: 0">Revenue Table</h2>
+          <span class="badge badge-primary">supported</span>
+        </header>
+        <div class="section-body stack" style="--stack-gap: var(--space-3)">
+          <div style="overflow-x: auto">
+            <table class="table" aria-label="Revenue table">
+              <thead class="table-head">
+                <tr class="table-row">
+                  <th class="table-head-cell" scope="col">Account</th>
+                  <th class="table-head-cell" scope="col">Owner</th>
+                  <th class="table-head-cell" scope="col">Plan</th>
+                  <th class="table-head-cell" scope="col">MRR</th>
+                </tr>
+              </thead>
+              <tbody class="table-body">
+                <tr class="table-row">
+                  <td class="table-cell">Atlas CRM</td>
+                  <td class="table-cell">Ada</td>
+                  <td class="table-cell">Pro</td>
+                  <td class="table-cell">$12,400</td>
+                </tr>
+                <tr class="table-row" data-row-selected="true">
+                  <td class="table-cell">Pulse Ops</td>
+                  <td class="table-cell">Grace</td>
+                  <td class="table-cell">Enterprise</td>
+                  <td class="table-cell">$22,900</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <section class="empty-state" aria-label="No archived records">
+            <span class="empty-state-media" aria-hidden="true">0</span>
+            <h3 class="empty-state-title">No archived records</h3>
+            <p class="empty-state-description">Your filters returned no archived items.</p>
+            <div class="empty-state-actions">
+              <button class="btn btn-outline btn-sm" type="button">Clear filters</button>
+            </div>
+          </section>
+        </div>
+      </section>
+
+      <section class="section-block">
+        <header class="section-header">
+          <h2 style="margin: 0">Data Grid Snapshot</h2>
+        </header>
+        <div class="section-body">
+          <section class="data-grid" role="grid" aria-label="Data grid snapshot">
+            <div class="data-grid-head" role="rowgroup">
+              <div class="data-grid-row" role="row" style="--data-grid-columns: 3">
+                <div class="data-grid-cell" role="columnheader">Region</div>
+                <div class="data-grid-cell" role="columnheader">Leads</div>
+                <div class="data-grid-cell" role="columnheader">Conversion</div>
+              </div>
+            </div>
+            <div class="data-grid-body" role="rowgroup">
+              <div class="data-grid-row" role="row" style="--data-grid-columns: 3">
+                <div class="data-grid-cell" role="gridcell">EMEA</div>
+                <div class="data-grid-cell" role="gridcell">312</div>
+                <div class="data-grid-cell" role="gridcell">22%</div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

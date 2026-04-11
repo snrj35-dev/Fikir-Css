@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fikir CSS Settings Example</title>
+    <link rel="stylesheet" href="../dist/fikir.css" />
+    <style>
+      body { margin: 0; }
+      .page-shell { max-width: 76rem; margin: 0 auto; padding: 1.5rem 1rem 3rem; }
+    </style>
+  </head>
+  <body>
+    <main class="page-shell stack" style="--stack-gap: var(--space-4)">
+      <form class="stack" style="--stack-gap: var(--space-4)" data-pattern="settings-panel">
+        <header class="page-header">
+          <div class="page-header-content">
+            <h1 style="margin: 0">Settings Page Example</h1>
+            <p class="text-sm" style="margin: 0">Settings panel composition with current canonical surfaces.</p>
+          </div>
+          <div class="page-header-actions">
+            <button class="btn btn-outline btn-sm" type="button">Cancel</button>
+            <button class="btn btn-primary btn-sm" type="submit">Save changes</button>
+          </div>
+        </header>
+
+        <div class="sidebar" style="--sidebar-width: 16rem; --sidebar-gap: var(--space-4)">
+          <aside>
+            <nav class="sidebar-nav" aria-label="Settings navigation">
+              <section class="sidebar-nav-section">
+                <a class="sidebar-nav-item" href="#general" aria-current="page">General</a>
+                <a class="sidebar-nav-item" href="#security">Security</a>
+                <a class="sidebar-nav-item" href="#notifications">Notifications</a>
+              </section>
+            </nav>
+          </aside>
+
+          <section class="stack" style="--stack-gap: var(--space-3)">
+            <section id="general" class="section-block">
+              <header class="section-header">
+                <h2 style="margin: 0">General</h2>
+              </header>
+              <div class="section-body stack" style="--stack-gap: var(--space-3)">
+                <div class="field">
+                  <label class="label" for="workspace-name">Workspace name</label>
+                  <input id="workspace-name" class="input" type="text" value="Fikir Workspace" />
+                  <p class="helper-text">Visible to all members.</p>
+                </div>
+
+                <div class="field">
+                  <label class="label" for="workspace-url">Workspace URL</label>
+                  <input id="workspace-url" class="input" type="url" value="https://fikir.app/team" readonly />
+                  <p class="helper-text">Managed by system policy.</p>
+                </div>
+              </div>
+            </section>
+
+            <section id="security" class="section-block">
+              <header class="section-header">
+                <h2 style="margin: 0">Security</h2>
+              </header>
+              <div class="section-body stack" style="--stack-gap: var(--space-2)">
+                <label class="cluster text-sm">
+                  <input class="switch" type="checkbox" checked />
+                  Require 2FA for admins
+                </label>
+                <label class="cluster text-sm">
+                  <input class="checkbox" type="checkbox" checked />
+                  Allow SSO login
+                </label>
+              </div>
+            </section>
+          </section>
+        </div>
+      </form>
+    </main>
+  </body>
+</html>

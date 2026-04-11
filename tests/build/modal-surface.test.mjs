@@ -57,3 +57,15 @@ test("modal surface: playground js includes open/close wiring and escape handlin
   assert.ok(js.includes("data-modal-close"));
   assert.ok(js.includes('event.key !== "Escape"'));
 });
+
+test("modal surface: playground js includes focus open/close safety wiring", async () => {
+  const js = await readFile(playgroundJsPath, "utf8");
+
+  assert.ok(js.includes("const modalReturnFocusMap = new Map()"));
+  assert.ok(js.includes("function getFocusableElements"));
+  assert.ok(js.includes("function focusModalSurface"));
+  assert.ok(js.includes("modal.querySelector(\".modal-dialog\")"));
+  assert.ok(js.includes("modalReturnFocusMap.set(modalId, options.trigger)"));
+  assert.ok(js.includes("modalReturnFocusMap.get(modalId)"));
+  assert.ok(js.includes("requestAnimationFrame"));
+});

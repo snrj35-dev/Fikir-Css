@@ -1,5 +1,11 @@
 blank_issues_enabled: false
 contact_links:
   - name: Scope question
-    url: https://github.com/<org-or-user>/<repo>/issues/new?template=documentation_or_scope.md
-    about: Use this for v0.2 scope clarification requests.
+    url: https://github.com/snrj35-dev/Fikir-Css/issues/new?template=documentation_or_scope.md
+    about: Use this for scope/support-level clarification requests.
+  - name: Request for feedback
+    url: https://github.com/snrj35-dev/Fikir-Css/issues/new?template=request_for_feedback.md
+    about: Use this to submit productization feedback for supported baseline.
+  - name: Support level promotion
+    url: https://github.com/snrj35-dev/Fikir-Css/issues/new?template=support_level_promotion.md
+    about: Use this to propose promotion from experimental/rfc-only to supported.

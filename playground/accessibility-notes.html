@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fikir CSS Accessibility Notes Example</title>
+    <link rel="stylesheet" href="../dist/fikir.css" />
+    <style>
+      body { margin: 0; }
+      .page-shell { max-width: 56rem; margin: 0 auto; padding: 1.5rem 1rem 3rem; }
+    </style>
+  </head>
+  <body>
+    <main class="page-shell stack" style="--stack-gap: var(--space-4)">
+      <header class="page-header">
+        <div class="page-header-content">
+          <h1 style="margin: 0">Accessibility-focused Example Notes</h1>
+          <p class="text-sm" style="margin: 0">Quick examples for icon-only naming, field relationships, and dialog semantics.</p>
+        </div>
+      </header>
+
+      <section class="section-block">
+        <header class="section-header">
+          <h2 style="margin: 0">Icon-only controls</h2>
+        </header>
+        <div class="section-body stack" style="--stack-gap: var(--space-2)">
+          <p class="text-sm" style="margin: 0">Every icon-only control must expose an accessible name.</p>
+          <div class="cluster">
+            <button class="icon-button icon-button-sm" type="button" aria-label="Open quick menu">
+              <span aria-hidden="true">☰</span>
+            </button>
+            <button class="icon-button icon-button-sm" type="button" aria-label="Refresh data">
+              <span aria-hidden="true">↻</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-block">
+        <header class="section-header">
+          <h2 style="margin: 0">Field relationships</h2>
+        </header>
+        <div class="section-body stack" style="--stack-gap: var(--space-2)">
+          <div class="field" data-field-invalid="true">
+            <label class="label" for="a11y-email">Email</label>
+            <input
+              id="a11y-email"
+              class="input aria-invalid:ring-danger"
+              type="email"
+              value="invalid"
+              aria-invalid="true"
+              aria-describedby="a11y-email-error"
+            />
+            <p id="a11y-email-error" class="error-text">Provide a valid email.</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section-block">
+        <header class="section-header">
+          <h2 style="margin: 0">Dialog trigger semantics</h2>
+        </header>
+        <div class="section-body stack" style="--stack-gap: var(--space-2)">
+          <p class="text-sm" style="margin: 0">Use button semantics for in-page actions like opening modal dialogs.</p>
+          <button class="btn btn-primary btn-sm" type="button" aria-haspopup="dialog">Open preferences modal</button>
+        </div>
+      </section>
+    </main>
+  </body>
+</html>

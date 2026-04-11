@@ -1,712 +1,334 @@
-# Fikir CSS — Task List
+# Fikir CSS — Productization Task List
 
-> Product plan'e bağlı uygulanabilir görev listesi
+> Actionable backlog for turning Fikir CSS into a real product.
+> Last reviewed: 2026-04-11
 
-## 1. Kullanım Notu
+## 1. Usage Notes
 
-Bu görev listesi, `plan.md` içindeki fazlar ve workstream'leri uygulanabilir iş kalemlerine dönüştürür.
+This task list follows the productization plan and is organized around workstreams and milestones.
 
-Görevler üç seviyede düşünülmelidir:
+Task types:
+- scope / governance
+- packaging / release
+- implementation maturity
+- docs / examples
+- accessibility / quality
 
-- Spec / RFC
-- Implementation
-- Docs / Demo / Test / CI
-
-Her iş kalemi mümkün olduğunda bu üç seviyeden en az ikisini kapsamalıdır.
-
----
-
-## 2. Şu Anki Durum Özeti
-
-Tamamlanan temel alanlar:
-
-- Foundation mimarisi
-- Contract-driven yapı
-- Naming spec
-- Token dictionary spec
-- Button / Input / Card RFC'leri
-- Demo / playground
-- GitHub hazırlığı
-- Minimal test suite
-- CI
-
-Bu nedenle task list'in ana odağı artık yeni fikir üretmek değil, planlı büyümedir.
+Legend:
+- `[ ]` not started
+- `[~]` in progress
+- `[x]` done
+- `(M1)` Milestone 1
+- `(M2)` Milestone 2
+- `(M3)` Milestone 3
+- `(M4)` Milestone 4
 
 ---
 
-## 3. Priority Backlog
+## 2. P0 — Must do before calling it a product
 
-### P0 — Hemen sıradaki işler
+### Scope and support classification
+- [x] Create a component/pattern support matrix `(M1)`
+- [x] Label every public surface as `supported`, `experimental`, `rfc-only`, or `planned` `(M1)`
+- [x] Audit README surface list against actual implementation state `(M1)`
+- [x] Add support-level labeling to playground sections `(M1)`
+- [x] Add support-level labeling to docs navigation `(M1)`
 
-#### Core Component Refinement
-- [x] Button state refinement implementation
-- [x] Input validation surface implementation
-- [x] Card basic slot / composition surface implementation
-- [x] Bu üç yüzey için test ekleme
-- [x] Playground güncellemesi
-- [x] Release note / docs güncellemesi
-
-#### RFC-to-Implementation Alignment
-- [x] Button RFC ile implementation yüzeyini tekrar doğrulama
-- [x] Input RFC ile implementation yüzeyini tekrar doğrulama
-- [x] Card RFC ile implementation yüzeyini tekrar doğrulama
-
----
-
-### P1 — Form ve temel ürün yüzeyi
-
-#### Field Composition
-- [x] Label implementation
-- [x] Helper Text implementation
-- [x] Error Text implementation
-- [x] Field / Form Field RFC yazımı
-- [x] Field / Form Field implementation
-- [x] Form field docs örnekleri
-- [x] Form field accessibility örnekleri
-
-#### Form Controls
-- [x] Textarea RFC
-- [x] Textarea implementation
-- [x] Select RFC
-- [x] Select implementation
-- [x] Checkbox RFC
-- [x] Checkbox implementation
-- [x] Radio RFC
-- [x] Radio implementation
-- [x] Switch RFC
-- [x] Switch implementation
-- [x] Input Group RFC
-- [x] Input Group implementation
-
-#### Test / Docs
-- [x] Form control state testleri
-- [x] Invalid/disabled/readonly örnekleri
-- [x] Playground form demo section'ı
-- [x] README docs map güncellemesi
+### Product positioning cleanup
+- [x] Rewrite README “Current Status” around support levels `(M1)`
+- [x] Add “Supported Surface” section to README `(M1)`
+- [x] Add “Experimental Surface” section to README `(M1)`
+- [x] Add “RFC-only / Planned Surface” section to README `(M1)`
+- [x] Clarify package/repo usage expectations `(M1)`
 
 ---
 
-### P2 — Overlay & Interaction
+## 3. P1 — Packaging and distribution
 
-#### Overlay Core
-- [x] Modal RFC
-- [x] Modal implementation
-- [x] Toast RFC
-- [x] Toast implementation
-- [x] Tooltip RFC
-- [x] Tooltip implementation
-- [x] Popover RFC
-- [x] Popover implementation
-- [x] Dropdown Menu RFC
-- [x] Dropdown Menu implementation
-- [x] Drawer RFC
-- [x] Drawer implementation
+### Package strategy
+- [x] Define package entrypoints `(M1)`
+- [x] Decide shipped artifacts vs source-only files `(M1)`
+- [x] Define published file list `(M1)`
+- [x] Document installation and consumption flow `(M1)`
+- [x] Add starter consumer example `(M1)`
 
-#### Overlay Quality
-- [x] Focus management test planı
-- [x] Layering/z-index docs notları
-- [x] Accessibility expectations dokümantasyonu
-- [x] Playground overlay showcase
+### Build/distribution
+- [x] Create package distribution checklist `(M1)`
+- [x] Ensure generated artifacts are reproducible `(M1)`
+- [x] Define dist contract for selectors/migration/size artifacts `(M1)`
+- [x] Add package smoke test `(M1)`
+- [x] Add post-build validation for publishable outputs `(M1)`
 
----
-
-### P3 — Navigation & Shell
-
-#### Navigation
-- [x] Tabs implementation refinement
-- [x] Accordion implementation refinement
-- [x] Pagination implementation refinement
-- [x] Breadcrumb RFC
-- [x] Breadcrumb implementation
-- [x] Navbar RFC
-- [x] Navbar implementation
-- [x] Sidebar RFC
-- [x] Sidebar implementation
-- [x] Stepper RFC
-- [x] Stepper implementation
-
-#### Shell / Product Patterns
-- [x] Page Header RFC
-- [x] Page Header implementation
-- [x] Section RFC
-- [x] Section implementation
-- [x] App Shell RFC
-- [x] App Shell implementation
-- [x] Settings Panel pattern spec
-- [x] Filter Bar pattern spec
-
-#### Docs / Demo
-- [x] Navigation showcase
-- [x] App shell example page
-- [x] Product pattern docs
-
-#### Quality Gate (P3)
-- [x] Navigation & shell RFC-implementation-test uyumluluğu denetlendi
-- [x] P3 sonrası `npm run test:ci` yeşil geçti
-- [x] P4 başlangıcı için P3 bloklayıcıları kapatıldı
+### Release ergonomics
+- [x] Define versioning/semver policy `(M1)`
+- [x] Create release checklist document `(M1)`
+- [x] Add changelog policy `(M1)`
+- [x] Add release note template `(M1)`
+- [x] Add migration note template `(M1)`
 
 ---
 
-### P4 — Data & Display
+## 4. P2 — Core component product-readiness
 
-#### Basic Data Surface
-- [x] Table implementation refinement
-- [x] Avatar RFC
-- [x] Avatar implementation
-- [x] Empty State implementation refinement
-- [x] Stat RFC
-- [x] Stat implementation
-- [x] Timeline RFC
-- [x] Timeline implementation
-- [x] KPI Card RFC
-- [x] KPI Card implementation
+### Core surface (must support)
+- [x] Button support-level declaration `(M1)`
+- [x] Input support-level declaration `(M1)`
+- [x] Card support-level declaration `(M1)`
+- [x] Badge support-level declaration `(M1)`
+- [x] Alert support-level declaration `(M1)`
+- [x] Label support-level declaration `(M1)`
+- [x] Helper Text support-level declaration `(M1)`
+- [x] Error Text support-level declaration `(M1)`
+- [x] Field / Form Field support-level declaration `(M1)`
 
-#### Structured Data
-- [x] List RFC
-- [x] List implementation
-- [x] Description List RFC
-- [x] Description List implementation
-- [x] Data Grid research note
-- [x] Data Grid RFC (phase-gated)
+### Core implementation hardening
+- [x] Button state refinement implementation `(M1)`
+- [x] Input validation surface implementation `(M1)`
+- [x] Card slot/composition implementation `(M1)`
+- [x] Label implementation `(M1)`
+- [x] Helper Text implementation `(M1)`
+- [x] Error Text implementation `(M1)`
+- [x] Field / Form Field implementation `(M1)`
 
-#### Docs / Demo / Tests
-- [x] Dense data display examples
-- [x] Table + empty state combined demo
-- [x] Data display token audit
-
-#### Quality Gate (P4 Paket-1)
-- [x] Table + empty-state RFC/implementation/test hizası doğrulandı
-- [x] P4 paket-1 sonrası `npm run test:ci` yeşil geçti
-
-#### Quality Gate (P4 Paket-2)
-- [x] Avatar + stat RFC/implementation/test hizası doğrulandı
-- [x] P4 paket-2 sonrası `npm run test:ci` yeşil geçti
-
-#### Quality Gate (P4 Paket-3)
-- [x] Timeline + KPI card RFC/implementation/test hizası doğrulandı
-- [x] P4 paket-3 sonrası `npm run test:ci` yeşil geçti
-
-#### Quality Gate (P4 Paket-4)
-- [x] List + description-list RFC/implementation/test hizası doğrulandı
-- [x] P4 paket-4 sonrası `npm run test:ci` yeşil geçti
-
-#### Quality Gate (P4 Paket-5)
-- [x] Data-grid research note + phase-gated RFC tamamlandı
-- [x] P4 paket-5 sonrası `npm run test:ci` yeşil geçti
-
-#### Quality Gate (P5 Paket-1)
-- [x] Combobox + search-box RFC/implementation/test hizası doğrulandı
-- [x] P5 paket-1 sonrası `npm run test:ci` yeşil geçti
-
-#### Quality Gate (P5 Paket-2)
-- [x] Autocomplete + command-palette RFC/implementation/test hizası doğrulandı
-- [x] P5 paket-2 sonrası `npm run test:ci` yeşil geçti
-
-#### Quality Gate (P5 Paket-3)
-- [x] Command bar pattern spec + implementation tamamlandı
-- [x] Filter bar implementation + search/filter composite examples tamamlandı
-- [x] P5 paket-3 sonrası `npm run test:ci` yeşil geçti
-
-#### Quality Gate (P5 Paket-4)
-- [x] Data table toolbar spec + implementation tamamlandı
-- [x] P5 paket-4 sonrası `npm run test:ci` yeşil geçti
-
-#### Quality Gate (P5 Paket-5)
-- [x] Date picker RFC + implementation tamamlandı
-- [x] P5 paket-5 sonrası `npm run test:ci` yeşil geçti
-
-#### Quality Gate (P5 Paket-6)
-- [x] Date range picker RFC + implementation tamamlandı
-- [x] P5 paket-6 sonrası `npm run test:ci` yeşil geçti
-
-#### Quality Gate (P5 Paket-7)
-- [x] Calendar RFC + implementation tamamlandı
-- [x] P5 paket-7 sonrası `npm run test:ci` yeşil geçti
-
-#### Quality Gate (P5 Paket-8)
-- [x] File upload RFC + implementation tamamlandı
-- [x] P5 paket-8 sonrası `npm run test:ci` yeşil geçti
-
-#### Quality Gate (P5 Paket-9)
-- [x] Dropzone RFC + implementation tamamlandı
-- [x] P5 paket-9 sonrası `npm run test:ci` yeşil geçti
-
-#### Quality Gate (P5 Paket-10)
-- [x] Editable field RFC + implementation tamamlandı
-- [x] P5 paket-10 sonrası `npm run test:ci` yeşil geçti
-
-#### Quality Gate (P5 Paket-11)
-- [x] Hover card RFC + implementation tamamlandı
-- [x] P5 paket-11 sonrası `npm run test:ci` yeşil geçti
+### Core quality
+- [x] Add core component regression tests `(M1)`
+- [x] Add default behavior invariants `(M1)`
+- [x] Add supported usage examples `(M1)`
+- [x] Add a11y expectation table for core surfaces `(M1)`
 
 ---
 
-### P5 — Advanced Surface
+## 5. P3 — Minimal overlay/navigation for first supportable release
 
-#### Search / Productivity
-- [x] Combobox RFC
-- [x] Combobox implementation
-- [x] Autocomplete RFC
-- [x] Autocomplete implementation
-- [x] Command Palette RFC
-- [x] Command Palette implementation
-- [x] Search Box RFC
-- [x] Search Box implementation
-- [x] Command Bar pattern spec
-- [x] Command Bar implementation
+### Overlay slice
+- [x] Choose one supported overlay surface for M1 `(M1)`
+- [x] Modal implementation hardening **or** Toast implementation hardening `(M1)`
+- [x] Add focus and accessibility tests for chosen overlay `(M1)`
+- [x] Add playground example for chosen overlay `(M1)`
 
-#### Date / File / Editing
-- [x] Date Picker RFC
-- [x] Date Picker implementation
-- [x] Date Range Picker RFC
-- [x] Date Range Picker implementation
-- [x] Calendar RFC
-- [x] Calendar implementation
-- [x] File Upload RFC
-- [x] File Upload implementation
-- [x] Dropzone RFC
-- [x] Dropzone implementation
-- [x] Editable Field RFC
-- [x] Editable Field implementation
+### Navigation slice
+- [x] Choose one supported navigation slice for M1 `(M1)`
+- [x] Tabs hardening **or** Accordion hardening `(M1)`
+- [x] Add keyboard/a11y notes `(M1)`
+- [x] Add usage example `(M1)`
 
-#### Product Patterns
-- [x] Data Table Toolbar spec
-- [x] Data Table Toolbar implementation
-- [x] Filter Bar implementation
-- [x] Search + filter composite examples
+### Data/display slice
+- [x] Choose one supported data/display slice for M1 `(M1)`
+- [x] Table hardening **or** Empty State hardening `(M1)`
+- [x] Add example `(M1)`
+- [x] Add docs note on density/layout expectations `(M1)`
 
 ---
 
-### P6 — Plan İçi Açık Maddeler (Paketli İlerleme)
+## 6. P4 — Accessibility and behavior verification
 
-#### Paket-1 — Core Foundation Completion
-- [x] Icon Button RFC
-- [x] Icon Button implementation
-- [x] Link RFC
-- [x] Link implementation
-- [x] Divider RFC
-- [x] Divider implementation
-- [x] Surface RFC
-- [x] Surface implementation
-- [x] Visually Hidden RFC
-- [x] Visually Hidden implementation
-- [x] Badge implementation refinement
-- [x] Alert implementation refinement
-- [x] Skeleton implementation refinement
-- [x] Spinner implementation refinement
+### Core a11y
+- [x] Create component accessibility checklist `(M1)`
+- [x] Document button vs link semantics `(M1)`
+- [x] Document input/field/error relationships `(M1)`
+- [x] Document readonly vs disabled behavior `(M1)`
+- [x] Document icon-only surface guidance `(M2)`
 
-#### Quality Gate (P6 Paket-1)
-- [x] Core foundation yüzeyi için RFC/implementation/test hizası doğrulandı
-- [x] P6 paket-1 sonrası `npm run test:ci` yeşil geçti
-- [x] Core docs + playground örnekleri güncellendi
+### Overlay a11y
+- [x] Create overlay focus management checklist `(M2)`
+- [x] Add modal/drawer/popover keyboard behavior expectations `(M2)`
+- [x] Add dismiss/escape behavior guidance `(M2)`
 
-#### Paket-2 — Form Extensions
-- [x] Range Slider RFC
-- [x] Range Slider implementation
-- [x] OTP / Pin Input RFC
-- [x] OTP / Pin Input implementation
-
-#### Quality Gate (P6 Paket-2)
-- [x] Form extensions için field-state + accessibility testleri güncellendi
-- [x] P6 paket-2 sonrası `npm run test:ci` yeşil geçti
-- [x] Form docs + demo örnekleri güncellendi
-
-#### Paket-3 — Overlay Extensions
-- [x] Context Menu RFC
-- [x] Context Menu implementation
-- [x] Progress RFC
-- [x] Progress implementation
-- [x] Loading Overlay RFC
-- [x] Loading Overlay implementation
-
-#### Quality Gate (P6 Paket-3)
-- [x] Overlay extensions için focus/layering/a11y beklentileri doğrulandı
-- [x] P6 paket-3 sonrası `npm run test:ci` yeşil geçti
-- [x] Overlay docs + playground showcase güncellendi
-
-#### Paket-4 — Navigation & Layout Extensions
-- [x] Menu Bar RFC
-- [x] Menu Bar implementation
-- [x] Container implementation refinement
-- [x] Stack implementation refinement
-- [x] Cluster implementation refinement
-- [x] Sidebar Layout implementation refinement
-- [x] Switcher implementation refinement
-- [x] Center implementation refinement
-- [x] Grid implementation refinement
-- [x] Split Pane RFC
-- [x] Split Pane implementation
-
-#### Quality Gate (P6 Paket-4)
-- [x] Navigation/layout extensions için RFC/implementation/test hizası doğrulandı
-- [x] P6 paket-4 sonrası `npm run test:ci` yeşil geçti
-- [x] App shell + layout docs örnekleri güncellendi
-
-#### Paket-5 — Data & Display Completion
-- [x] Data Grid implementation
-- [x] Avatar Group RFC
-- [x] Avatar Group implementation
-- [x] Tag / Chip RFC
-- [x] Tag / Chip implementation
-
-#### Quality Gate (P6 Paket-5)
-- [x] Data display extensions için dense-surface test senaryoları güncellendi
-- [x] P6 paket-5 sonrası `npm run test:ci` yeşil geçti
-- [x] Data display docs + combined demo örnekleri güncellendi
-
-#### Paket-6 — Content / Rich UI Foundation
-- [x] Text RFC
-- [x] Text implementation
-- [x] Heading RFC
-- [x] Heading implementation
-- [x] Code RFC
-- [x] Code implementation
-- [x] Code Block RFC
-- [x] Code Block implementation
-- [x] Callout RFC
-- [x] Callout implementation
-- [x] Quote RFC
-- [x] Quote implementation
-- [x] Kbd RFC
-- [x] Kbd implementation
-- [x] Markdown Surface RFC
-- [x] Markdown Surface implementation
-
-#### Quality Gate (P6 Paket-6)
-- [x] Content surface için typography/token contract hizası doğrulandı
-- [x] P6 paket-6 sonrası `npm run test:ci` yeşil geçti
-- [x] Content docs + playground içerik showcase güncellendi
+### Verification
+- [x] Decide a11y testing scope in CI `(M2)`
+- [x] Add manual accessibility QA checklist `(M1)`
+- [x] Add example-based a11y notes in playground/docs `(M1)`
 
 ---
 
-## 4. Component Master Checklist
+## 7. P5 — Documentation system cleanup
 
-### 4.1 Core / Foundation
-- [x] Button RFC
-- [x] Button implementation refinement
-- [x] Icon Button RFC
-- [x] Icon Button implementation
-- [x] Link RFC
-- [x] Link implementation
-- [x] Card RFC
-- [x] Card implementation refinement
-- [x] Badge implementation refinement
-- [x] Alert implementation refinement
-- [x] Divider RFC
-- [x] Divider implementation
-- [x] Skeleton implementation refinement
-- [x] Spinner implementation refinement
-- [x] Surface RFC
-- [x] Surface implementation
-- [x] Visually Hidden RFC
-- [x] Visually Hidden implementation
+### Docs IA
+- [x] Add docs landing page by audience `(M1)`
+- [x] Split docs into user / maintainer / contributor paths `(M2)`
+- [x] Add “where to start” guide `(M1)`
+- [x] Add “how to add a component RFC” guide `(M2)`
+- [x] Add “how to move RFC to supported implementation” guide `(M2)`
 
-### 4.2 Form / Input
-- [x] Input RFC
-- [x] Input validation implementation
-- [x] Textarea RFC
-- [x] Textarea implementation
-- [x] Select RFC
-- [x] Select implementation
-- [x] Checkbox RFC
-- [x] Checkbox implementation
-- [x] Radio RFC
-- [x] Radio implementation
-- [x] Switch RFC
-- [x] Switch implementation
-- [x] Range Slider RFC
-- [x] Range Slider implementation
-- [x] OTP / Pin Input RFC
-- [x] OTP / Pin Input implementation
-- [x] Field / Form Field RFC
-- [x] Field / Form Field implementation
-- [x] Label implementation
-- [x] Helper Text implementation
-- [x] Error Text implementation
-- [x] Input Group RFC
-- [x] Input Group implementation
-- [x] Combobox RFC
-- [x] Combobox implementation
-- [x] Autocomplete RFC
-- [x] Autocomplete implementation
+### Current docs consistency
+- [x] Audit docs links for dead/incorrect paths `(M1)`
+- [x] Cross-check RFC list against implementation/support matrix `(M1)`
+- [x] Mark stale docs with status banners `(M1)`
+- [x] Add `Last reviewed` convention for core docs `(M2)`
 
-### 4.3 Overlay / Feedback
-- [x] Modal / Dialog RFC
-- [x] Modal / Dialog implementation
-- [x] Drawer RFC
-- [x] Drawer implementation
-- [x] Popover RFC
-- [x] Popover implementation
-- [x] Tooltip RFC
-- [x] Tooltip implementation
-- [x] Dropdown Menu RFC
-- [x] Dropdown Menu implementation
-- [x] Context Menu RFC
-- [x] Context Menu implementation
-- [x] Hover Card RFC
-- [x] Hover Card implementation
-- [x] Toast RFC
-- [x] Toast implementation refinement
-- [x] Progress RFC
-- [x] Progress implementation
-- [x] Loading Overlay RFC
-- [x] Loading Overlay implementation
-
-### 4.4 Navigation
-- [x] Tabs RFC
-- [x] Tabs implementation refinement
-- [x] Accordion RFC
-- [x] Accordion implementation refinement
-- [x] Breadcrumb RFC
-- [x] Breadcrumb implementation
-- [x] Pagination RFC
-- [x] Pagination implementation refinement
-- [x] Navbar RFC
-- [x] Navbar implementation
-- [x] Sidebar RFC
-- [x] Sidebar implementation
-- [x] Command Palette RFC
-- [x] Command Palette implementation
-- [x] Menu Bar RFC
-- [x] Menu Bar implementation
-- [x] Steps / Stepper RFC
-- [x] Steps / Stepper implementation
-
-### 4.5 Data Display
-- [x] Table RFC
-- [x] Table implementation refinement
-- [x] Data Grid RFC
-- [x] Data Grid implementation
-- [x] List RFC
-- [x] List implementation
-- [x] Description List RFC
-- [x] Description List implementation
-- [x] Avatar RFC
-- [x] Avatar implementation
-- [x] Avatar Group RFC
-- [x] Avatar Group implementation
-- [x] Tag / Chip RFC
-- [x] Tag / Chip implementation
-- [x] Stat RFC
-- [x] Stat implementation
-- [x] Empty State RFC
-- [x] Empty State implementation refinement
-- [x] Timeline RFC
-- [x] Timeline implementation
-- [x] KPI Card RFC
-- [x] KPI Card implementation
-
-### 4.6 Layout / App Shell
-- [x] Container implementation refinement
-- [x] Stack implementation refinement
-- [x] Cluster implementation refinement
-- [x] Sidebar Layout implementation refinement
-- [x] Switcher implementation refinement
-- [x] Center implementation refinement
-- [x] Grid implementation refinement
-- [x] Page Header RFC
-- [x] Page Header implementation
-- [x] Section RFC
-- [x] Section implementation
-- [x] App Shell RFC
-- [x] App Shell implementation
-- [x] Split Pane RFC
-- [x] Split Pane implementation
-
-### 4.7 Content / Rich UI
-- [x] Text RFC
-- [x] Text implementation
-- [x] Heading RFC
-- [x] Heading implementation
-- [x] Code RFC
-- [x] Code implementation
-- [x] Code Block RFC
-- [x] Code Block implementation
-- [x] Callout RFC
-- [x] Callout implementation
-- [x] Quote RFC
-- [x] Quote implementation
-- [x] Kbd RFC
-- [x] Kbd implementation
-- [x] Markdown Surface RFC
-- [x] Markdown Surface implementation
-
-### 4.8 Advanced / Product Surface
-- [x] Date Picker RFC
-- [x] Date Picker implementation
-- [x] Date Range Picker RFC
-- [x] Date Range Picker implementation
-- [x] Calendar RFC
-- [x] Calendar implementation
-- [x] File Upload RFC
-- [x] File Upload implementation
-- [x] Dropzone RFC
-- [x] Dropzone implementation
-- [x] Search Box RFC
-- [x] Search Box implementation
-- [x] Filter Bar spec
-- [x] Filter Bar implementation
-- [x] Data Table Toolbar spec
-- [x] Data Table Toolbar implementation
-- [x] Command Bar spec
-- [x] Command Bar implementation
-- [x] Editable Field RFC
-- [x] Editable Field implementation
+### README polish
+- [x] Add install/usage snippet for package consumption `(M1)`
+- [x] Add support-level matrix summary `(M1)`
+- [x] Add release/migration links `(M1)`
+- [x] Add “who this is for” section `(M1)`
 
 ---
 
-## 5. Workstream Checklists
+## 8. P6 — Playground productization
 
-### A — Core Component Refinement
-- [x] Button
-- [x] Input
-- [x] Card
-- [x] Badge
-- [x] Alert
-- [x] Label / Helper / Error Text
-- [x] RFC alignment
-- [x] Tests
-- [x] Playground update
+### Playground labeling
+- [x] Label sections as supported/experimental/showcase `(M1)`
+- [x] Add “build output missing” notice if CSS is absent `(M1)`
+- [x] Remove any demo-specific overrides that touch framework classes `(M1)`
+- [x] Add section legend/explainer `(M1)`
 
-### B — Overlay & Interaction
-- [x] Modal
-- [x] Toast
-- [x] Popover
-- [x] Tooltip
-- [x] Dropdown Menu
-- [x] Drawer
-- [x] Overlay docs
-- [x] Overlay demo
+### Example pages
+- [x] Create minimal getting-started page `(M1)`
+- [x] Create form validation example `(M2)`
+- [x] Create app-shell example refinement `(M2)`
+- [x] Create data display example page `(M2)`
+- [x] Create accessibility-focused example notes `(M2)`
 
-### C — Forms & Field Composition
-- [x] Textarea
-- [x] Select
-- [x] Checkbox
-- [x] Radio
-- [x] Switch
-- [x] Field / Form Field
-- [x] Input Group
-- [x] Form demo
-- [x] Form tests
-
-### D — Navigation & Shell
-- [x] Tabs
-- [x] Accordion
-- [x] Pagination
-- [x] Breadcrumb
-- [x] Navbar
-- [x] Sidebar
-- [x] Stepper
-- [x] App Shell
-- [x] Navigation demo
-
-### E — Data & Display
-- [x] Table
-- [x] List
-- [x] Description List
-- [x] Avatar
-- [x] Empty State
-- [x] Stat
-- [x] Timeline
-- [x] KPI Card
-- [x] Data display examples
-
-### F — Advanced Surface
-- [x] Combobox
-- [x] Search Box
-- [x] Autocomplete
-- [x] Command Palette
-- [x] Date Picker
-- [x] Date Range Picker
-- [x] Calendar
-- [x] File Upload
-- [x] Dropzone
-- [x] Data Grid
-- [x] Hover Card
-- [x] Editable Field
+### Confidence tooling
+- [x] Add visual regression plan for playground `(M2)`
+- [x] Identify screenshot baseline strategy `(M2)`
 
 ---
 
-## 6. Definition of Done
+## 9. P7 — Release engineering and CI hardening
 
-Bir component veya pattern tamamlanmış sayılmadan önce:
+### CI gates
+- [x] Ensure source/build tests are mandatory for main `(M1)`
+- [x] Add docs link validation `(M2)`
+- [x] Add release artifact verification `(M1)`
+- [x] Add version/tag consistency checks `(M2)`
+- [x] Add package smoke install test `(M1)`
 
-- [x] Spec/RFC mevcut
-- [x] Naming spec ile uyumlu
-- [x] Token dictionary ile uyumlu
-- [x] Contract/recipe ilişkisi açık
-- [x] Test veya validation eklendi
-- [x] Demo/playground örneği var
-- [x] Docs güncellendi
-- [x] Accessibility beklentisi yazıldı
-- [x] Release note etkisi değerlendirildi
+### Release process
+- [x] Define release promotion flow `(M1)`
+- [x] Define experimental-to-supported criteria `(M1)`
+- [x] Create release checklist file `(M1)`
+- [x] Create milestone-based release notes process `(M2)`
 
----
-
-## 7. Önerilen Yakın Sprint Sırası
-
-### Sprint 1
-- [x] Button state refinement
-- [x] Input validation surface
-- [x] Card slot/composition surface
-- [x] Core playground update
-- [x] Core docs update
-
-### Sprint 2
-- [x] Label / Helper Text / Error Text
-- [x] Field / Form Field RFC
-- [x] Textarea
-- [x] Select
-- [x] Checkbox / Radio / Switch
-
-### Sprint 3
-- [x] Modal
-- [x] Toast
-- [x] Tooltip
-- [x] Popover
-- [x] Dropdown Menu
-- [x] Drawer
-
-### Sprint 4
-- [x] Breadcrumb
-- [x] Navbar
-- [x] Sidebar
-- [x] Page Header
-- [x] Section
-- [x] App Shell
-
-### Sprint 5 (P6 Paket-1)
-- [x] Icon Button + Link
-- [x] Divider + Surface + Visually Hidden
-- [x] Badge/Alert/Skeleton/Spinner refinement
-
-### Sprint 6 (P6 Paket-2)
-- [x] Range Slider
-- [x] OTP / Pin Input
-
-### Sprint 7 (P6 Paket-3)
-- [x] Context Menu
-- [x] Progress
-- [x] Loading Overlay
-
-### Sprint 8 (P6 Paket-4)
-- [x] Menu Bar
-- [x] Layout primitive refinements
-- [x] Split Pane
-
-### Sprint 9 (P6 Paket-5)
-- [x] Data Grid implementation
-- [x] Avatar Group
-- [x] Tag / Chip
-
-### Sprint 10 (P6 Paket-6)
-- [x] Text + Heading
-- [x] Code + Code Block
-- [x] Callout + Quote + Kbd
-- [x] Markdown Surface
+### Metrics/guardrails
+- [x] Define acceptable bundle size thresholds `(M2)`
+- [x] Add size diff reporting in CI `(M2)`
+- [x] Add alias migration regression guard in release flow `(M1)`
 
 ---
 
-## 8. Not
+## 10. P8 — Governance and external adoption
 
-Bu task list, her şeyi aynı anda yapmak için değil; neyin hangi sırayla ve hangi kalite eşiğiyle yapılacağını görünür kılmak için hazırlanmıştır.
+### Project management
+- [x] Convert roadmap into GitHub issues/milestones `(M1)`
+- [x] Create labels by workstream and support level `(M1)`
+- [~] Open first milestone for supported foundation release `(M1, external GitHub action)`
+- [x] Open issue templates for support level promotion `(M2)`
+
+### Community readiness
+- [x] Add “request for feedback” issue `(M1)`
+- [x] Add “how to evaluate the playground” contributor note `(M2)`
+- [~] Collect first external user feedback `(M1, requires real external responses)`
+- [x] Add known limitations page `(M1)`
+
+---
+
+## 11. M2 — Core UI kit expansion
+
+### Forms
+- [x] Textarea RFC → implementation `(M2)`
+- [x] Select RFC → implementation `(M2)`
+- [x] Checkbox RFC → implementation `(M2)`
+- [x] Radio RFC → implementation `(M2)`
+- [x] Switch RFC → implementation `(M2)`
+- [x] Input Group RFC → implementation `(M2)`
+
+### Overlay
+- [x] Modal `(M2)`
+- [x] Toast `(M2)`
+- [x] Tooltip `(M2)`
+- [x] Popover `(M2)`
+- [x] Dropdown Menu `(M2)`
+- [x] Drawer `(M2)`
+
+### Navigation
+- [x] Tabs `(M2)`
+- [x] Accordion `(M2)`
+- [x] Pagination `(M2)`
+- [x] Breadcrumb `(M2)`
+
+### Display
+- [x] Table `(M2)`
+- [x] Avatar `(M2)`
+- [x] Empty State `(M2)`
+- [x] Stat `(M2)`
+
+---
+
+## 12. M3 — Product patterns and app surface
+
+### Layout and patterns
+- [x] Navbar `(M3)`
+- [x] Sidebar `(M3)`
+- [x] Page Header `(M3)`
+- [x] Section `(M3)`
+- [x] App Shell `(M3)`
+- [x] Filter Bar `(M3)`
+- [x] Data Table Toolbar `(M3)`
+- [x] Settings Panel `(M3)`
+
+### Product examples
+- [x] Dashboard example page `(M3)`
+- [x] Settings page example `(M3)`
+- [x] Data table workflow example `(M3)`
+
+---
+
+## 13. M4 — Advanced surface (phase-gated)
+
+### Advanced components
+- [x] Combobox `(M4)`
+- [x] Autocomplete `(M4)`
+- [x] Command Palette `(M4)`
+- [x] Date Picker `(M4)`
+- [x] Date Range Picker `(M4)`
+- [x] File Upload `(M4)`
+- [x] Dropzone `(M4)`
+- [x] Data Grid `(M4)`
+- [x] Editable Field `(M4)`
+
+### Gate before starting M4
+- [~] M1 release shipped `(requires tag + GitHub release publish)`
+- [x] M2 support matrix updated
+- [x] playground sections labeled
+- [x] release process stable
+- [x] docs/implementation drift under control
+
+---
+
+## 14. Definition of Done for Product-Ready Surface
+
+A surface is product-ready only if:
+
+- [x] support level declared
+- [x] RFC/spec exists
+- [x] implementation exists
+- [x] canonical surface validated
+- [x] naming/token rules respected
+- [x] tests exist
+- [x] docs exist
+- [x] example exists
+- [x] accessibility expectations documented
+- [x] release impact reviewed
+
+---
+
+## 15. Immediate Next 10 Tasks
+
+- [x] Create support matrix
+- [x] Reclassify README surface list by support level
+- [x] Label playground sections by support level
+- [x] Define package/distribution strategy
+- [x] Add release checklist document
+- [x] Finish Button/Input/Card/Field product-readiness pass
+- [x] Choose one overlay for M1 support
+- [x] Choose one navigation slice for M1 support
+- [x] Create minimal consumer install example
+- [x] Convert roadmap to GitHub milestones/issues
+
+---
+
+## 16. Recommended File Placement
+
+Suggested repo location:
+- `docs/roadmap/tasklist.md`

@@ -66,6 +66,11 @@ Mevcut build testleri aşağıdaki sinyalleri doğrular:
 
 Bu testler selector yüzeyi ve demo wiring varlığını doğrular; gerçek klavye sekansı E2E kapsamındadır.
 
+Ek olarak modal build testi, demo wiring içinde:
+- açılışta modal içi fokus hedefi seçimi
+- kapanışta tetikleyiciye fokus dönüşü
+izlerinin bulunduğunu doğrular.
+
 ## Future Improvement
 - Playwright tabanlı klavye akışı testleri:
   - `Tab` sırası
