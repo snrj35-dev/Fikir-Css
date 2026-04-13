@@ -66,6 +66,9 @@
 > **Odak:** Gallery coverage %95+, migrasyon rehberleri, component API docs.
 
 - [ ] Gallery'ye ekle (doğrulanmış öncelik): `stepper` → `tree-view` → `timeline` → `stat` polish/API → `kpi-card` `(M12)` ← uzman #2 düzeltmesi (`stat` zaten gallery'de, `stepper` hiç görünmüyor)
+  - `stepper`: `[data-step-state]` veya `:has()` ile CSS-only active/completed state ← uzman #4
+  - `tree-view`: CSS `grid` indent + `[aria-expanded]` state, recursive yapı ← uzman #4
+  - `timeline`: `@container` sorgusu — mobil/desktop layout shift riski ← uzman #4
 - [ ] Gallery'ye ekle: `progress`, `rating`, `range-slider`, `calendar` `(M12)`
 - [ ] `playground/index.html`'e metin arama / bileşen filtreleme ekle `(M12)`
 - [ ] `docs/guides/migration-from-bootstrap.md` tam içerik — class eşleme tablosu `(M12)`

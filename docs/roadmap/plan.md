@@ -166,6 +166,37 @@ Per-component CSS import (`import 'fikir-css/button.css'`) şu an **desteklenmiy
 
 ---
 
+## Uzman Görüşü #4 Özeti (2026-04-13) + Doğrulama
+
+> Dördüncü uzman — Teknik Borç + Mimari Uyum açısı
+
+| Uzman İddiası | Doğrulama | Aksiyon |
+|--------------|------------|--------|
+| URL / kimlik kopukluğu | ✅ **DOĞRU** — `osman-developer` URL'si `package.json`'da | M9 zaten var |
+| CI blokajı | ✅ **ÇöZÜLDÜ** — 245/245 yeşil | M9'da giderildi |
+| `npm publish --dry-run` kritik test | ✅ Zaten M9'da | — |
+| `stat` var, `stepper` eksik | ✅ **DOĞRU** — zaten M12 öncelik sırasına işlendi | — |
+| `reduced-motion` sadece class toggle, OS entegrasyonu yok | ❌ **YANLIŞ** — `@media (prefers-reduced-motion: reduce)` **zaten var** + `[data-motion="reduced"]` manual override da var | — |
+| Token Explorer iki tema karşılaştırma şart | ✅ Zaten M10'da | — |
+| M10 önce gelmeli | ✅ Üç uzman konsensüsü | — |
+| Migration guide'lar benimsemeyi katlayacak | ✅ Zaten M12'de | — |
+
+**Teknik uygulama notları (M12 için):**
+- `stepper` — CSS-only state yönetimi (active/completed) için `[data-step-state]` veya `:has()` selektörü değerlendirilmeli
+- `tree-view` — Recursive itinç yapılar için CSS `grid` indent + `[aria-expanded]` state kullanılacak
+- `timeline` — Mobil/desktop geçişinde `layout shift` riskini azaltmak için `@container` sorgusu tercih edilmeli
+
+**Özet — 4 uzman konsensüsü:**
+| Karar | Skor |
+|-------|------|
+| M9 önce (CI + URL + publish dry-run) | 4/4 |
+| M10 ikinci (tema sistemi görünürlüğü) | 4/4 |
+| GA npm publish yapma, beta yeterli | 4/4 |
+| Migration guide'lar = benimseme kalkası | 3/4 |
+| stepper ilk öncelikli bileşen | 4/4 |
+
+---
+
 ## Guardrails
 - CI yeşil olmadan M10+ başlamaz (M9 blocker).
 - README ve site üzerindeki npm/CDN vaatleri — paket yayınlanmadan kaldırılmalı veya uyarı eklenmeli.
