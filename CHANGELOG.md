@@ -7,19 +7,38 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [0.6.0-beta] — Unreleased
 
-### Focus: Stability & Distribution (M9), Theme System (M10)
+### Focus: Stability & Distribution (M9), Theme System (M10), Framework Examples (M11), Component Showcase (M12)
+
+### Added
+- **Site landing page restructure** — Install + Theme Switcher + Real App Examples sections precede component gallery
+- **Live theme switcher** in site gallery — light / dark / high-contrast + compact / comfortable toggles
+- **Token Explorer compare mode** — `↔ Compare` button shows two themes side-by-side
+- **`docs/guides/theme-system.md`** — full guide: all themes, activation, mixing, token overrides, custom theme, reduced-motion
+- **Component gallery additions**: `stepper`, `timeline`, `tree-view` in `site/index.html` (sidebar + live markup)
+- **Migration guides**: `docs/migration/from-bootstrap.md`, `docs/migration/from-tailwind.md`
+- **Component API docs** (11 components): button, modal, alert, input, badge, accordion, tabs, card, stepper, tree-view, timeline + `_template.md`
+- **`docs/benchmark.md`** — bundle size + runtime + feature comparison vs Bootstrap 5, Tailwind CSS, Bulma, Pico CSS
+- **README**: "Why not Tailwind?" comparison table, theme switching snippet, npm beta badge
+- **`docs/guides/vue-adapter.md`** — full content: modal component, segmented control, dynamic classes, SSR note
+- **`docs/guides/svelte-adapter.md`** — updated: dark mode writable store, SvelteKit layout, `@beta` install
+- **RFC note**: per-component CSS tree-shaking deferred to M13+ (`docs/rfcs/per-component-tree-shaking-rfc-note.md`)
+- **Fizibilite kararı**: `site/` + `playground/` birleştirme — ayrı tutulacak, bakım maliyeti gerekçesiyle
 
 ### Changed
 - `package.json` repository/homepage/bugs URLs updated to `snrj35-dev`
-- README: npm/CDN install options marked as pending; CDN example replaced with GitHub Pages URL
-- `site/index.html`: removed broken CDN fallback (npm package not yet published)
+- README: version badge `v0.5.0` → `v0.6.0-beta`; CDN example → GitHub Pages URL
+- `site/index.html`: hero badges updated, CDN fallback removed, hero CTA buttons added
 - `playground/index.html`: version badge corrected `v1.0-M2` → `v0.5.0`
-- `publish.yml`: added `--dry-run` verification step before actual publish
+- `publish.yml`: added `--dry-run` verification step; added `--tag beta` for prerelease dist-tag
+- `test:ci`: `build` step moved to start of chain (dist/ was missing in CI cold start)
+- `build` script: added 3 missing contract report scripts (`contract-drift`, `bundle-layers`, `component-css-map`)
+- `validate-size-thresholds`: diff checks skipped on cold start (`previousBytes=0`)
 
-### Upcoming (in progress)
-- Gallery theme switcher (compact / high-contrast / reduced-motion)
-- `docs/guides/theme-system.md` full content
-- `site/` landing page restructure: Install + Theme Switcher + Real App Examples
+### Fixed
+- CI failures: `dist/fikir.css` missing when tests ran before build in fresh CI clone
+- CI failures: missing contract report JSON files (`contract-drift-report.json` etc.)
+- Version/tag mismatch validation in `validate-version-tag-consistency.mjs`
+- `fikir-css@0.6.0-beta.6` successfully published to npm under `@beta` dist-tag
 
 ---
 
