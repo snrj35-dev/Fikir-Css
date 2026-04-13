@@ -111,8 +111,9 @@ export const recipesContract = {
       selector: "component.alertDanger",
       declarations: [
         ["background", "var(--color-danger-subtle)"],
-        ["border-color", "var(--color-danger)"],
-        ["color", "var(--color-danger)"]
+        ["border-color", "color-mix(in oklch, var(--color-danger) 45%, var(--color-bg-surface))"],
+        ["border-left-width", "3px"],
+        ["color", "var(--color-fg-default)"]
       ]
     },
     alertWarning: {
@@ -202,9 +203,9 @@ export const recipesContract = {
     badgeInfo: {
       selector: "component.badgeInfo",
       declarations: [
-        ["background", "color-mix(in oklch, var(--color-info) 16%, var(--color-bg-surface))"],
-        ["color", "color-mix(in oklch, var(--color-primary-600) 90%, var(--color-fg-default))"],
-        ["border-color", "color-mix(in oklch, var(--color-info) 50%, var(--color-bg-surface))"]
+        ["background", "var(--color-info-subtle)"],
+        ["color", "color-mix(in oklch, var(--color-info) 70%, var(--color-fg-default))"],
+        ["border-color", "color-mix(in oklch, var(--color-info) 40%, var(--color-bg-surface))"]
       ]
     },
     modalBase: {

@@ -23,12 +23,9 @@
   }
 
   {{component.alertDanger}} {
+    background: var(--color-danger-subtle);
     border-color: color-mix(in oklch, var(--color-danger) 45%, var(--color-bg-surface));
-    background: color-mix(in oklch, var(--color-danger) 18%, var(--color-bg-surface));
+    border-left-width: 3px;
     color: var(--color-fg-default);
-  }
-
-  {{component.alertDanger}} {{component.alertDescription}} {
-    color: color-mix(in oklch, var(--color-fg-default) 88%, var(--color-bg-surface));
   }
 }

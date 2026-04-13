@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Fikir CSS — Component Gallery</title>
+  <title>Fikir CSS — Design System</title>
   <meta name="description" content="Contract-driven CSS design system. 82 UI surfaces, zero runtime, token-first." />
   <!-- CSS loaded from ./dist/fikir.css (copied by the deploy workflow). Run `npm run build` locally. -->
   <link rel="stylesheet" href="./dist/fikir.css" />
@@ -101,7 +101,7 @@
     .site-body.sidebar-collapsed .site-sidebar { width: 0; overflow: hidden; padding: 0; border: none; }
 
     /* ── Content ─────────────────────────────────────────────────────── */
-    .site-content { padding: var(--space-6) var(--space-8); max-width: 72rem; }
+    .site-content { padding: var(--space-6) var(--space-8); max-width: 72rem; min-width: 0; width: 100%; }
 
     /* ── Hero ────────────────────────────────────────────────────────── */
     .hero {
@@ -154,7 +154,7 @@
       flex: 1; min-width: 8rem;
       padding: var(--space-4) var(--space-3); text-align: center;
       border-right: 1px solid var(--color-border-subtle);
-      background: var(--color-bg-default);
+      background: color-mix(in oklch, var(--color-accent) 4%, var(--color-bg-surface));
     }
     .hero-stat:last-child { border-right: none; }
     .hero-stat-value { font-size: var(--font-size-xl); font-weight: 800; color: var(--color-fg-default); line-height: 1; }
