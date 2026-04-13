@@ -5,6 +5,24 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [0.6.0-beta] — Unreleased
+
+### Focus: Stability & Distribution (M9), Theme System (M10)
+
+### Changed
+- `package.json` repository/homepage/bugs URLs updated to `snrj35-dev`
+- README: npm/CDN install options marked as pending; CDN example replaced with GitHub Pages URL
+- `site/index.html`: removed broken CDN fallback (npm package not yet published)
+- `playground/index.html`: version badge corrected `v1.0-M2` → `v0.5.0`
+- `publish.yml`: added `--dry-run` verification step before actual publish
+
+### Upcoming (in progress)
+- Gallery theme switcher (compact / high-contrast / reduced-motion)
+- `docs/guides/theme-system.md` full content
+- `site/` landing page restructure: Install + Theme Switcher + Real App Examples
+
+---
+
 ## [0.5.0] — 2026-04-12
 
 ### Added

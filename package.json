@@ -6,11 +6,11 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/osman-developer/Fikir-Css.git"
+    "url": "https://github.com/snrj35-dev/Fikir-Css.git"
   },
-  "homepage": "https://github.com/osman-developer/Fikir-Css#readme",
+  "homepage": "https://snrj35-dev.github.io/Fikir-Css/",
   "bugs": {
-    "url": "https://github.com/osman-developer/Fikir-Css/issues"
+    "url": "https://github.com/snrj35-dev/Fikir-Css/issues"
   },
   "type": "module",
   "style": "./dist/fikir.css",

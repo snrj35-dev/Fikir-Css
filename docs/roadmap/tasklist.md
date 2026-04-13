@@ -22,15 +22,15 @@
 
 - [x] GitHub Actions CI logunu incele — `docs-link-audit` ve `tasklist-hardening` fail `(M9)`
 - [x] CI fail olan adımı düzelt — stub dosyalar + carry-over items eklendi, 245/245 yeşil `(M9)`
-- [ ] `package.json` → `repository.url` ve `homepage` `snrj35-dev` ile güncelle `(M9)`
-- [ ] README üzerindeki `npm install fikir-css` ve jsDelivr CDN bağlantılarını kaldır veya "coming soon" ile işaretle — paket yayınlanmadan 404 veriyor `(M9)` ← uzman bulgusu
-- [ ] `site/index.html` CDN fallback'ini temizle veya uyarı ekle `(M9)` ← uzman bulgusu
+- [x] `package.json` → `repository.url`, `homepage`, `bugs.url` `snrj35-dev` ile güncellendi `(M9)`
+- [x] README üzerindeki npm/CDN bağlantıları: ⚠️ "npm publish pending" uyarısı eklendi; CDN örneği GitHub Pages URL'sine çevrildi `(M9)` ← uzman bulgusu
+- [x] `site/index.html` CDN fallback kaldırıldı — npm paketi yayınlanmadığından `onerror` fallback işe yaramaz `(M9)` ← uzman bulgusu
 - [ ] npm account / `NPM_TOKEN` secret GitHub'a ekle — GA publish yerine `0.6.0-beta.1` prerelease yap `(M9)` ← uzman önerisi
-- [ ] `publish.yml` workflow'una `npm publish --dry-run` CI adımı ekle `(M9)`
+- [x] `publish.yml` workflow'una `npm publish --dry-run` doğrulama adımı eklendi `(M9)`
 - [x] `playground/index.html` versiyon badge'ini `v1.0-M2` → `v0.5.0` olarak düzelt `(M9)` ← uzman #2 bulgusu
 - [ ] `site/` + `playground/` birleştirme fizibilite değerlendirmesi — dış kullanıcı iki farklı ürün görüyor `(M9)` ← uzman bulgusu
 - [ ] Site ana sayfasını yeniden düzenle: **Install + Theme Switcher + Real App Examples** üçlüsü önce, component galeri sonra `(M9)` ← uzman #2 bulgusu
-- [ ] `CHANGELOG.md`'ye v0.6.0-beta başlığı ekle `(M9)`
+- [x] `CHANGELOG.md`'ye v0.6.0-beta Unreleased başlığı eklendi `(M9)`
 
 ---
 

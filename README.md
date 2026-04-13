@@ -22,7 +22,7 @@ Copy this into any `.html` file and open it:
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fikir-css@0.5.0/dist/fikir.css" />
+  <link rel="stylesheet" href="https://snrj35-dev.github.io/Fikir-Css/dist/fikir.css" />
 </head>
 <body class="surface" style="padding: 2rem">
 
@@ -71,6 +71,8 @@ Copy this into any `.html` file and open it:
 
 ### Option 2 — npm
 
+> ⚠️ **npm publish pending** — package not yet available on the npm registry. Use Option 1 (CDN/GitHub Pages) or Option 3 (build from source) in the meantime.
+
 ```bash
 npm install fikir-css
 ```
@@ -91,7 +93,7 @@ import "fikir-css/css";
 |-----------|--------|
 | Bundler (Vite / webpack / Parcel / Rollup) | `import "fikir-css/css"` |
 | Plain HTML | `<link rel="stylesheet" href="node_modules/fikir-css/dist/fikir.css" />` |
-| CDN | `<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fikir-css/dist/fikir.css" />` |
+| CDN _(pending)_ | `<link rel="stylesheet" href="https://snrj35-dev.github.io/Fikir-Css/dist/fikir.css" />` |
 | Recipe resolvers (JS/TS) | `import { resolveBtn, resolveCard } from "fikir-css/tooling"` |
 | Overlay JS helpers | `import { createFocusTrap, bindOverlayKeyboard } from "fikir-css/helpers"` |
 | Design tokens (JSON) | `import tokens from "fikir-css/tokens" assert { type: "json" }` |
