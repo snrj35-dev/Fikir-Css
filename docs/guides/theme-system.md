@@ -111,6 +111,69 @@ Themes are designed to compose cleanly:
 <html data-theme="dark" data-density="compact" data-motion="reduced">
 ```
 
+## Brand Color (Accent Override)
+
+**`--color-accent` is the single brand color hook.** Override it globally — all buttons, focus rings, active states, and interactive elements automatically pick up your brand color.
+
+```css
+/* brand.css — load AFTER fikir.css */
+:root {
+  --color-accent: #7c3aed;   /* your brand color — replaces Fikir's default blue */
+}
+
+/* Per-theme variant (optional) */
+[data-theme="dark"] {
+  --color-accent: #a78bfa;   /* lighter tint for dark backgrounds */
+}
+```
+
+> ⚠️ **Do NOT create `--my-brand-accent` or `--app-accent`.** A parallel token system breaks dark mode and high-contrast themes — they only know how to override `--color-accent`.
+
+## Writing Custom CSS with Fikir Tokens
+
+When building app-specific components (charts, dashboards, brand sections), always consume Fikir tokens — never hard-code values:
+
+```css
+/* ✅ Correct — tokens adapt to every theme automatically */
+.my-panel {
+  background: var(--color-bg-surface);
+  color: var(--color-fg-default);
+  border: 1px solid var(--color-border-subtle);
+  padding: var(--space-4) var(--space-6);
+  border-radius: var(--radius-lg);
+  gap: var(--space-3);
+  font-size: var(--font-size-sm);
+}
+
+/* ❌ Wrong — hard-coded values break dark mode */
+.my-panel {
+  background: #ffffff;
+  color: #111827;
+  border: 1px solid #e5e7eb;
+  padding: 16px 24px;
+  border-radius: 8px;
+}
+```
+
+### Spacing scale
+
+| Token | Value | Use for |
+|-------|-------|---------|
+| `--space-1` | 0.25rem | Tiny gaps, icon padding |
+| `--space-2` | 0.5rem | Compact item spacing |
+| `--space-3` | 0.75rem | Default internal padding |
+| `--space-4` | 1rem | Card padding, section gaps |
+| `--space-6` | 1.5rem | Large section spacing |
+| `--space-8` | 2rem | Page-level spacing |
+
+### Radius scale
+
+| Token | Use for |
+|-------|---------|
+| `--radius-sm` | Tags, badges, small inputs |
+| `--radius-md` | Buttons, inputs, cards |
+| `--radius-lg` | Panels, modals, large cards |
+
 ## Token Overrides
 
 All theme values are CSS custom properties. Override locally without touching the theme files:

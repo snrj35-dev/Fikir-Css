@@ -173,10 +173,76 @@ import selectors from "fikir-css/contracts/selectors";
 ```
 
 **Key conventions for AI context:**
-- Theme: `data-theme="light|dark"` on `<html>`
+- Theme: `data-theme="light|dark|high-contrast"` on `<html>`
+- Density: `data-density="compact|comfortable"` on `<html>`
 - State: `data-open="true|false"`, `data-active="true"`, `data-disabled="true"`
 - Variants: `btn-primary`, `btn-outline`, `btn-danger` (modifier suffix, not `btn--primary`)
 - ARIA-first: components are styled off semantic HTML + ARIA attributes, not extra class toggles
+
+### Token rules for custom CSS — MUST follow
+
+When writing application-specific CSS alongside Fikir CSS, **always consume Fikir tokens**. Never invent a parallel custom property system.
+
+**✅ DO — extend Fikir tokens:**
+
+```css
+/* Brand color: override --color-accent, don't create --my-accent */
+:root {
+  --color-accent: #7c3aed;  /* your brand purple */
+}
+
+/* Spacing: use --space-* scale */
+.my-card { padding: var(--space-4) var(--space-6); }
+
+/* Radius: use --radius-* scale */
+.my-panel { border-radius: var(--radius-lg); }
+
+/* Colors: use semantic tokens — they auto-adapt to dark/high-contrast */
+.my-component {
+  background: var(--color-bg-surface);
+  color: var(--color-fg-default);
+  border: 1px solid var(--color-border-subtle);
+}
+```
+
+**❌ DON'T — parallel token system:**
+
+```css
+/* BAD: creates a system that breaks dark mode */
+:root {
+  --my-brand-accent: #7c3aed;   /* use --color-accent instead */
+  --my-bg: #ffffff;              /* use --color-bg-default instead */
+  --my-text: #111827;            /* use --color-fg-default instead */
+}
+
+/* BAD: hard-coded values ignore the theme system */
+.my-card {
+  background: #ffffff;           /* breaks in dark mode */
+  color: #111827;                /* breaks in dark mode */
+  padding: 16px 24px;            /* use var(--space-4) var(--space-6) */
+  border-radius: 8px;            /* use var(--radius-md) */
+}
+```
+
+### Token cheat sheet
+
+| Need | Token |
+|------|-------|
+| Brand / accent color | `--color-accent` |
+| Page background | `--color-bg-default` |
+| Card / panel background | `--color-bg-surface` |
+| Primary text | `--color-fg-default` |
+| Secondary / muted text | `--color-fg-muted` |
+| Borders | `--color-border-subtle` |
+| Success state | `--color-success` |
+| Warning state | `--color-warning` |
+| Error / danger state | `--color-danger` |
+| Spacing (xs→xl) | `--space-1` `--space-2` `--space-3` `--space-4` `--space-6` `--space-8` |
+| Border radius | `--radius-sm` `--radius-md` `--radius-lg` |
+| Font sizes | `--font-size-xs` `--font-size-sm` `--font-size-md` `--font-size-lg` |
+| Transitions | `--transition-duration-fast` `--transition-duration-base` |
+
+→ Full token list: [`packages/tokens/`](./packages/tokens/) | Full guide: [`docs/guides/theme-system.md`](./docs/guides/theme-system.md)
 
 ---
 
