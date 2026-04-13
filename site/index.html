@@ -220,12 +220,13 @@
       </div>
     </div>
 
-    <!-- ── BUTTONS ───────────────────────────────── -->
+    <!-- ── BUTTONS ─────────────────────────── -->
     <section class="section" id="buttons">
       <h2 class="section-title">Button</h2>
-      <p class="section-desc">Use <code class="code-chip">btn</code> as base, add variant + tone modifier classes.</p>
+      <p class="section-desc"><code class="code-chip">btn</code> is the base class — it provides sizing, focus ring, and cursor. A <strong>tone modifier</strong> (<code class="code-chip">btn-primary</code>, <code class="code-chip">btn-neutral</code>, etc.) is required for color. <code class="code-chip">btn</code> alone is intentionally invisible so it composes cleanly.</p>
 
       <div class="preview-row">
+        <div class="item"><button class="btn">btn only</button><span class="preview-label">btn (no tone — transparent)</span></div>
         <div class="item"><button class="btn btn-primary">Primary</button><span class="preview-label">btn btn-primary</span></div>
         <div class="item"><button class="btn btn-neutral">Neutral</button><span class="preview-label">btn btn-neutral</span></div>
         <div class="item"><button class="btn btn-danger">Danger</button><span class="preview-label">btn btn-danger</span></div>
@@ -239,6 +240,7 @@
       </div>
       <div class="preview-row">
         <div class="item"><button class="btn btn-primary" disabled>Disabled</button><span class="preview-label">disabled attr</span></div>
+        <div class="item"><button class="btn btn-neutral" disabled>Disabled</button><span class="preview-label">btn-neutral disabled</span></div>
       </div>
     </section>
 
@@ -370,17 +372,24 @@
     <!-- ── FORMS ─────────────────────────────────── -->
     <section class="section" id="input">
       <h2 class="section-title">Input / Field</h2>
+      <p class="section-desc">Visual states: default, focus (click the input), invalid (<code class="code-chip">aria-invalid="true"</code>), disabled.</p>
       <div class="preview-row" style="flex-direction: column; max-width: 28rem; gap: var(--space-4)">
         <div class="field">
-          <label class="label" for="g-name">Name</label>
+          <label class="label" for="g-name">Default</label>
           <input id="g-name" class="input" type="text" placeholder="Jane Doe" />
-          <p class="helper-text">Your display name.</p>
+          <p class="helper-text">Click to see focus ring.</p>
         </div>
         <div class="field">
-          <label class="label" for="g-email">Email</label>
-          <input id="g-email" class="input" type="email" placeholder="jane@example.com" />
+          <label class="label" for="g-invalid">Invalid</label>
+          <input id="g-invalid" class="input" type="email" value="not-an-email" aria-invalid="true" />
+          <p class="helper-text" style="color: var(--color-danger, #dc2626)">Please enter a valid email address.</p>
         </div>
-        <span class="preview-label">field · label · input · helper-text</span>
+        <div class="field">
+          <label class="label" for="g-disabled">Disabled</label>
+          <input id="g-disabled" class="input" type="text" value="Cannot edit" disabled />
+          <p class="helper-text">This field is read-only.</p>
+        </div>
+        <span class="preview-label">field · label · input · aria-invalid · disabled</span>
       </div>
     </section>
 

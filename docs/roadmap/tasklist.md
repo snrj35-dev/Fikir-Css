@@ -34,10 +34,10 @@
 - [x] `alert` tüm tones ekle: `alert-warning`, `alert-success`, `alert-info`, `alert-neutral` `(M6)`
 - [x] `badge` tüm tones ekle: `badge-warning`, `badge-success`, `badge-info` `(M6)`
 - [x] `naming.contract.mjs` + `recipes.contract.mjs` alert/badge yeni tonlar ile güncelle `(M6)`
-- [ ] `btn` tek class kullanımını belgele — varsayılan görünüm neden `btn-primary` gerektiriyor? `(M6)`
-- [ ] CSS reset dokümantasyonu: ne reset'leniyor, nasıl opt-out edilir, mevcut projeyle çakışır mı? `(M6)`
-- [ ] `input` focus/invalid/disabled görsel durumlarını playground'da göster `(M6)`
-- [ ] Playground component gallery sayfasına tüm yeni variant'ları ekle `(M6)`
+- [x] `btn` tek class kullanımını belgele — gallery'de bare `btn` demo + açıklama eklendi `(M6)`
+- [x] CSS reset dokümantasyonu — `docs/guides/css-reset.md` `(M6)`
+- [x] `input` focus/invalid/disabled görsel durumlarını gallery'de göster `(M6)`
+- [x] Playground component gallery sayfasına tüm yeni variant'ları ekle `(M6)`
 
 ---
 
