@@ -126,6 +126,48 @@
     .hero p { color: var(--color-fg-muted); margin: 0 0 var(--space-4); }
     .hero-badges { display: flex; gap: var(--space-2); justify-content: center; flex-wrap: wrap; }
 
+    /* ── Onboarding sections ─────────────────────── */
+    .onboarding-section { background: var(--color-bg-surface); border: 1px solid var(--color-border-subtle); border-radius: var(--radius-lg); padding: var(--space-6); margin-bottom: var(--space-6); }
+    .onboarding-section .section-title { font-size: 1.1rem; margin-bottom: var(--space-3); }
+
+    .install-options { display: flex; flex-direction: column; gap: var(--space-3); }
+    .install-option-label { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--color-fg-muted); margin-bottom: var(--space-1); }
+    .install-code {
+      display: flex; align-items: center; justify-content: space-between; gap: var(--space-2);
+      background: var(--color-bg-default); border: 1px solid var(--color-border-subtle);
+      border-radius: var(--radius-md); padding: var(--space-2) var(--space-3);
+      font-family: monospace; font-size: .85rem; color: var(--color-fg-default);
+    }
+    .copy-btn { font-size: .7rem; padding: 2px 8px; cursor: pointer; white-space: nowrap; }
+    .copy-btn.copied { color: var(--color-success, green); }
+
+    .theme-switcher { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-bottom: var(--space-4); }
+    .theme-btn { font-size: var(--font-size-sm); }
+    .theme-btn.active { outline: 2px solid var(--color-accent); outline-offset: 2px; }
+
+    .theme-preview {
+      display: grid; grid-template-columns: repeat(auto-fill, minmax(10rem, 1fr)); gap: var(--space-3);
+      padding: var(--space-4); background: var(--color-bg-default);
+      border: 1px solid var(--color-border-subtle); border-radius: var(--radius-lg);
+    }
+    .theme-preview-label { font-size: .65rem; color: var(--color-fg-muted); margin-top: var(--space-1); }
+
+    .examples-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(13rem, 1fr)); gap: var(--space-3); }
+    .example-card {
+      display: flex; flex-direction: column; gap: var(--space-2);
+      padding: var(--space-4); background: var(--color-bg-default);
+      border: 1px solid var(--color-border-subtle); border-radius: var(--radius-lg);
+      text-decoration: none; color: inherit; transition: border-color 120ms;
+    }
+    .example-card:hover { border-color: var(--color-accent); }
+    .example-card-title { font-weight: 700; font-size: var(--font-size-sm); color: var(--color-fg-default); }
+    .example-card-desc { font-size: .75rem; color: var(--color-fg-muted); }
+    .example-card-badge { align-self: flex-start; }
+
+    .gallery-heading { font-size: 1.5rem; font-weight: 800; color: var(--color-fg-default); margin: 0 0 var(--space-6); padding-top: var(--space-2); border-top: 2px solid var(--color-accent); }
+
+    .hero-actions { display: flex; gap: var(--space-2); justify-content: center; flex-wrap: wrap; margin-top: var(--space-4); }
+
     @media (max-width: 640px) {
       .site-body { grid-template-columns: 1fr; }
       .site-sidebar { display: none; }
@@ -212,14 +254,125 @@
       <h1>Fikir CSS</h1>
       <p>Contract-driven design system · Zero runtime · Token-first · 82 surfaces</p>
       <div class="hero-badges">
-        <span class="badge badge-neutral">v0.5.0</span>
-        <span class="badge badge-neutral">~12 KB gzip</span>
+        <span class="badge badge-neutral">v0.6.0-beta</span>
+        <span class="badge badge-neutral">~10.5 KB gzip</span>
         <span class="badge badge-primary">Zero runtime</span>
         <span class="badge badge-neutral">TypeScript types</span>
+        <span class="badge badge-success">npm beta</span>
+      </div>
+      <div class="hero-actions">
+        <a href="#install" class="btn btn-primary btn-sm">Get started</a>
+        <a href="#themes" class="btn btn-outline btn-neutral btn-sm"> Theme demo</a>
+        <a href="#gallery" class="btn btn-outline btn-neutral btn-sm"> Components</a>
       </div>
     </div>
 
-    <!-- ── BUTTONS ─────────────────────────── -->
+    <!-- ── 1. INSTALL ──────────────────────────────────── -->
+    <section class="section onboarding-section" id="install">
+      <h2 class="section-title">1 — Install</h2>
+      <p class="section-desc">Pick one of three options. No build step required for consumers.</p>
+      <div class="install-options">
+        <div>
+          <div class="install-option-label"> Option A — GitHub Pages CDN (zero install)</div>
+          <div class="install-code">
+            <code id="cdn-snippet">&lt;link rel="stylesheet" href="https://snrj35-dev.github.io/Fikir-Css/dist/fikir.css" /&gt;</code>
+            <button class="btn btn-outline btn-neutral btn-sm copy-btn" onclick="copySnippet('cdn-snippet', this)">Copy</button>
+          </div>
+        </div>
+        <div>
+          <div class="install-option-label">Option B — npm (beta)</div>
+          <div class="install-code">
+            <code id="npm-snippet">npm install fikir-css@beta</code>
+            <button class="btn btn-outline btn-neutral btn-sm copy-btn" onclick="copySnippet('npm-snippet', this)">Copy</button>
+          </div>
+        </div>
+        <div>
+          <div class="install-option-label">Option C — Build from source</div>
+          <div class="install-code">
+            <code id="build-snippet">git clone https://github.com/snrj35-dev/Fikir-Css.git &amp;&amp; npm install &amp;&amp; npm run build</code>
+            <button class="btn btn-outline btn-neutral btn-sm copy-btn" onclick="copySnippet('build-snippet', this)">Copy</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── 2. THEMES ──────────────────────────────────── -->
+    <section class="section onboarding-section" id="themes">
+      <h2 class="section-title">2 — Theme &amp; Density</h2>
+      <p class="section-desc">All themes are activated via <code class="code-chip">data-*</code> attributes — no rebuild required. Toggle and see the effect live:</p>
+      <div class="theme-switcher">
+        <button class="btn btn-sm btn-outline btn-neutral theme-btn active" data-apply-theme="light" onclick="applyTheme(this)">Light</button>
+        <button class="btn btn-sm btn-outline btn-neutral theme-btn" data-apply-theme="dark" onclick="applyTheme(this)">Dark</button>
+        <button class="btn btn-sm btn-outline btn-neutral theme-btn" data-apply-theme="high-contrast" onclick="applyTheme(this)">High Contrast</button>
+        <button class="btn btn-sm btn-outline btn-neutral theme-btn" data-apply-density="compact" onclick="applyDensity(this)">Compact</button>
+        <button class="btn btn-sm btn-outline btn-neutral theme-btn" data-apply-density="comfortable" onclick="applyDensity(this)">Comfortable</button>
+        <button class="btn btn-sm btn-outline btn-neutral theme-btn" data-apply-density="" onclick="applyDensity(this)">Default density</button>
+      </div>
+      <div class="theme-preview">
+        <div>
+          <button class="btn btn-primary btn-sm">Primary</button>
+          <div class="theme-preview-label">btn-primary</div>
+        </div>
+        <div>
+          <button class="btn btn-danger btn-sm">Danger</button>
+          <div class="theme-preview-label">btn-danger</div>
+        </div>
+        <div>
+          <span class="badge badge-success">Success</span>
+          <div class="theme-preview-label">badge-success</div>
+        </div>
+        <div>
+          <span class="badge badge-warning">Warning</span>
+          <div class="theme-preview-label">badge-warning</div>
+        </div>
+        <div>
+          <div class="alert alert-info" role="alert" style="padding:.5rem .75rem">
+            <p class="alert-title" style="margin:0;font-size:.8rem">Info alert</p>
+          </div>
+          <div class="theme-preview-label">alert-info</div>
+        </div>
+        <div>
+          <input class="input" type="text" placeholder="Input" style="width:100%" />
+          <div class="theme-preview-label">input</div>
+        </div>
+      </div>
+      <p class="section-desc" style="margin-top:var(--space-3);margin-bottom:0">
+        Activate in HTML: <code class="code-chip">data-theme="dark"</code> or <code class="code-chip">data-density="compact"</code> on <code class="code-chip">&lt;html&gt;</code>.
+      </p>
+    </section>
+
+    <!-- ── 3. REAL APP EXAMPLES ────────────────────────── -->
+    <section class="section onboarding-section" id="examples">
+      <h2 class="section-title">3 — Real App Examples</h2>
+      <p class="section-desc">Full starter templates — open and copy-paste. No build step.</p>
+      <div class="examples-grid">
+        <a class="example-card" href="../playground/templates/app-shell-starter.html" target="_blank">
+          <span class="badge badge-primary example-card-badge">Starter</span>
+          <div class="example-card-title">App Shell</div>
+          <div class="example-card-desc">Sidebar nav + topbar + content area. Full layout scaffold.</div>
+        </a>
+        <a class="example-card" href="../playground/templates/settings-starter.html" target="_blank">
+          <span class="badge badge-neutral example-card-badge">Starter</span>
+          <div class="example-card-title">Settings Panel</div>
+          <div class="example-card-desc">Form, switch, select, card layout. Ready to customise.</div>
+        </a>
+        <a class="example-card" href="../playground/templates/data-workflow-starter.html" target="_blank">
+          <span class="badge badge-neutral example-card-badge">Starter</span>
+          <div class="example-card-title">Data Workflow</div>
+          <div class="example-card-desc">Table, stat, badge, pagination. Data-heavy UI template.</div>
+        </a>
+        <a class="example-card" href="../examples/react-vite/" target="_blank">
+          <span class="badge badge-info example-card-badge">React</span>
+          <div class="example-card-title">React + Vite</div>
+          <div class="example-card-desc">Typed resolvers, overlay helpers, dark mode toggle.</div>
+        </a>
+      </div>
+    </section>
+
+    <!-- ── COMPONENT GALLERY ────────────────────────────── -->
+    <h2 class="gallery-heading" id="gallery"> Component Gallery</h2>
+
+    <!-- ── BUTTONS ───────────────────────────────────────── -->
     <section class="section" id="buttons">
       <h2 class="section-title">Button</h2>
       <p class="section-desc"><code class="code-chip">btn</code> is the base class — it provides sizing, focus ring, and cursor. A <strong>tone modifier</strong> (<code class="code-chip">btn-primary</code>, <code class="code-chip">btn-neutral</code>, etc.) is required for color. <code class="code-chip">btn</code> alone is intentionally invisible so it composes cleanly.</p>
@@ -654,14 +807,47 @@
 </div>
 
 <script>
-  // Dark mode toggle (non-module, runs immediately)
+  // Dark mode toggle (header button)
   const btn = document.getElementById('theme-toggle');
   btn.addEventListener('click', () => {
     const current = document.documentElement.getAttribute('data-theme');
     const next = current === 'dark' ? 'light' : 'dark';
     document.documentElement.setAttribute('data-theme', next);
     btn.textContent = next === 'dark' ? '☀️ Light' : '🌙 Dark';
+    document.querySelectorAll('.theme-btn[data-apply-theme]').forEach(b => {
+      b.classList.toggle('active', b.dataset.applyTheme === next);
+    });
   });
+
+  // Onboarding theme switcher
+  function applyTheme(btn) {
+    const theme = btn.dataset.applyTheme;
+    document.documentElement.setAttribute('data-theme', theme);
+    document.querySelectorAll('.theme-btn[data-apply-theme]').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    const headerBtn = document.getElementById('theme-toggle');
+    if (headerBtn) headerBtn.textContent = theme === 'dark' ? '☀️ Light' : '🌙 Dark';
+  }
+
+  function applyDensity(btn) {
+    const density = btn.dataset.applyDensity;
+    if (density) {
+      document.documentElement.setAttribute('data-density', density);
+    } else {
+      document.documentElement.removeAttribute('data-density');
+    }
+    document.querySelectorAll('.theme-btn[data-apply-density]').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+
+  function copySnippet(id, btn) {
+    const text = document.getElementById(id).textContent;
+    navigator.clipboard.writeText(text).then(() => {
+      btn.textContent = '✓ Copied';
+      btn.classList.add('copied');
+      setTimeout(() => { btn.textContent = 'Copy'; btn.classList.remove('copied'); }, 2000);
+    });
+  }
 
   // Smooth sidebar scroll highlight
   const sections = document.querySelectorAll('.section[id]');
