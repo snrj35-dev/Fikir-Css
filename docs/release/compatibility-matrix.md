@@ -38,9 +38,8 @@ This matrix documents which framework adapters, bundlers, and integration patter
 
 | Runtime | Min version | Notes |
 |---------|-------------|-------|
-| Node.js | 18 LTS | Build scripts and contract tooling |
-| Node.js | 20 LTS | Recommended; CI target |
-| Node.js | 22 LTS | GitHub Actions publish workflow |
+| Node.js | 20 LTS | Minimum supported; CI matrix target |
+| Node.js | 22 LTS | Recommended; CI matrix + publish workflow |
 | Bun | 1.x | CSS import confirmed; build scripts not tested |
 | Deno | 1.40+ | CDN import confirmed; npm package untested |
 

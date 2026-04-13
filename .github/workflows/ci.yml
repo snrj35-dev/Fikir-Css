@@ -6,13 +6,16 @@ on:
   pull_request:
     branches: ["main"]
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
+
 jobs:
   test:
     runs-on: ubuntu-latest
 
     strategy:
       matrix:
-        node-version: ["18", "20", "22"]
+        node-version: ["20", "22"]
 
     steps:
       - name: Checkout
@@ -50,12 +53,17 @@ jobs:
           SCREENSHOT_VIEWPORT: "1440,2200"
         continue-on-error: true
 
-      - name: Init baseline if missing, then diff (strict)
+      - name: Visual regression gate
         if: always() && matrix.node-version == '22'
         run: |
           if [ ! -d "playground/screenshots/baseline" ]; then
-            echo "No baseline found — initialising from current capture."
+            echo "No baseline — creating initial baseline."
             node scripts/diff-playground-screenshots.mjs --update-baseline
+          elif [ "${{ github.event_name }}" = "push" ] && [ "${{ github.ref }}" = "refs/heads/main" ]; then
+            echo "Main branch push — updating baseline to reflect intentional changes."
+            node scripts/diff-playground-screenshots.mjs --update-baseline
+            node scripts/diff-playground-screenshots.mjs
           else
+            echo "Pull request — strict regression check."
             node scripts/diff-playground-screenshots.mjs --strict
           fi
