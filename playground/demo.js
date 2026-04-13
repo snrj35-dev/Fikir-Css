@@ -405,4 +405,46 @@
       }
     }
   });
+
+  // ── Component search / filter ──────────────────────────────────────────────
+  const searchInput = document.getElementById('component-search');
+  const noResult = document.getElementById('search-no-result');
+
+  if (searchInput) {
+    searchInput.addEventListener('input', function () {
+      const q = this.value.trim().toLowerCase();
+      const links = document.querySelectorAll('.demo-sidebar-link');
+      const sections = document.querySelectorAll('.demo-sidebar-section');
+      let anyVisible = false;
+
+      if (!q) {
+        links.forEach(l => { l.style.display = ''; });
+        sections.forEach(s => { s.style.display = ''; });
+        if (noResult) noResult.style.display = 'none';
+        return;
+      }
+
+      // Hide all sections first, then show matching links and their parent sections
+      sections.forEach(s => { s.style.display = 'none'; });
+
+      links.forEach(link => {
+        const text = link.textContent.toLowerCase();
+        const href = (link.getAttribute('href') || '').toLowerCase();
+        if (text.includes(q) || href.includes(q)) {
+          link.style.display = '';
+          const parentSection = link.closest('.demo-sidebar-section');
+          if (parentSection) parentSection.style.display = '';
+          anyVisible = true;
+        } else {
+          link.style.display = 'none';
+        }
+      });
+
+      // Always show search box section
+      const searchSection = searchInput.closest('.demo-sidebar-section');
+      if (searchSection) searchSection.style.display = '';
+
+      if (noResult) noResult.style.display = anyVisible ? 'none' : '';
+    });
+  }
 })();

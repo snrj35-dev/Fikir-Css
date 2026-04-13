@@ -245,6 +245,10 @@
       <a class="side-link" href="#stepper">Stepper</a>
       <a class="side-link" href="#timeline">Timeline</a>
       <a class="side-link" href="#tree-view">Tree View</a>
+      <a class="side-link" href="#progress">Progress</a>
+      <a class="side-link" href="#rating">Rating</a>
+      <a class="side-link" href="#range-slider">Range Slider</a>
+      <a class="side-link" href="#calendar">Calendar</a>
     </div>
     <div class="side-group">
       <div class="side-group-title">Typography</div>
@@ -884,6 +888,135 @@
             </ul>
           </div>
           <span class="preview-label">tree-view · tree-view-group · tree-view-item[data-tree-expanded] · tree-view-toggle · tree-view-label</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── PROGRESS ─────────────────────────── -->
+    <section class="section" id="progress">
+      <h2 class="section-title">Progress</h2>
+      <p class="section-desc">Linear progress bar. Set <code class="code-chip">value</code> and <code class="code-chip">max</code> on the native <code class="code-chip">&lt;progress&gt;</code> or use the CSS surface manually.</p>
+      <div class="preview-row" style="flex-direction:column;gap:var(--space-3)">
+        <div class="item" style="flex-direction:column;align-items:stretch;gap:var(--space-2)">
+          <div class="progress">
+            <div class="progress-track">
+              <div class="progress-indicator" style="width:65%" role="progressbar" aria-valuenow="65" aria-valuemin="0" aria-valuemax="100" aria-label="Upload progress"></div>
+            </div>
+            <span class="progress-label">65%</span>
+          </div>
+          <div class="progress">
+            <div class="progress-track">
+              <div class="progress-indicator" style="width:30%" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" aria-label="Storage used"></div>
+            </div>
+            <span class="progress-label">30%</span>
+          </div>
+          <div class="progress">
+            <div class="progress-track">
+              <div class="progress-indicator" style="width:100%" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" aria-label="Complete"></div>
+            </div>
+            <span class="progress-label">100%</span>
+          </div>
+          <span class="preview-label">progress · progress-track · progress-indicator · progress-label</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── RATING ──────────────────────────── -->
+    <section class="section" id="rating">
+      <h2 class="section-title">Rating</h2>
+      <p class="section-desc">Star rating. Add <code class="code-chip">rating-item-active</code> to filled stars. Use <code class="code-chip">aria-label</code> for screen readers.</p>
+      <div class="preview-row">
+        <div class="item">
+          <div class="rating" role="img" aria-label="Rating: 4 out of 5 stars">
+            <span class="rating-item rating-item-active" aria-hidden="true">★</span>
+            <span class="rating-item rating-item-active" aria-hidden="true">★</span>
+            <span class="rating-item rating-item-active" aria-hidden="true">★</span>
+            <span class="rating-item rating-item-active" aria-hidden="true">★</span>
+            <span class="rating-item" aria-hidden="true">★</span>
+          </div>
+          <span class="preview-label">rating · rating-item · rating-item-active</span>
+        </div>
+        <div class="item">
+          <div class="rating" role="img" aria-label="Rating: 2 out of 5 stars">
+            <span class="rating-item rating-item-active" aria-hidden="true">★</span>
+            <span class="rating-item rating-item-active" aria-hidden="true">★</span>
+            <span class="rating-item" aria-hidden="true">★</span>
+            <span class="rating-item" aria-hidden="true">★</span>
+            <span class="rating-item" aria-hidden="true">★</span>
+          </div>
+          <span class="preview-label">2/5</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── RANGE SLIDER ──────────────────────── -->
+    <section class="section" id="range-slider">
+      <h2 class="section-title">Range Slider</h2>
+      <p class="section-desc">Native <code class="code-chip">&lt;input type="range"&gt;</code> styled with the <code class="code-chip">range-slider</code> class.</p>
+      <div class="preview-row" style="flex-direction:column;gap:var(--space-3)">
+        <div class="item" style="flex-direction:column;align-items:stretch;gap:var(--space-2)">
+          <label class="label" for="rs-1">Volume</label>
+          <input class="range-slider" type="range" id="rs-1" min="0" max="100" value="60" />
+          <label class="label" for="rs-2">Brightness</label>
+          <input class="range-slider" type="range" id="rs-2" min="0" max="100" value="30" />
+          <span class="preview-label">range-slider</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── CALENDAR ─────────────────────────── -->
+    <section class="section" id="calendar">
+      <h2 class="section-title">Calendar</h2>
+      <p class="section-desc">Monthly grid. Mark selected day with <code class="code-chip">aria-current="date"</code>, today with <code class="code-chip">aria-pressed="true"</code>.</p>
+      <div class="preview-row">
+        <div class="item">
+          <div class="calendar" role="application" aria-label="April 2025">
+            <header class="calendar-header">
+              <button class="calendar-nav btn btn-outline btn-neutral btn-sm" aria-label="Previous month">‹</button>
+              <h3 class="calendar-title">April 2025</h3>
+              <button class="calendar-nav btn btn-outline btn-neutral btn-sm" aria-label="Next month">›</button>
+            </header>
+            <div class="calendar-grid" role="grid">
+              <div class="calendar-weekday" aria-label="Monday">Mo</div>
+              <div class="calendar-weekday" aria-label="Tuesday">Tu</div>
+              <div class="calendar-weekday" aria-label="Wednesday">We</div>
+              <div class="calendar-weekday" aria-label="Thursday">Th</div>
+              <div class="calendar-weekday" aria-label="Friday">Fr</div>
+              <div class="calendar-weekday" aria-label="Saturday">Sa</div>
+              <div class="calendar-weekday" aria-label="Sunday">Su</div>
+              <div class="calendar-day" style="grid-column:2">1</div>
+              <div class="calendar-day">2</div>
+              <div class="calendar-day">3</div>
+              <div class="calendar-day">4</div>
+              <div class="calendar-day">5</div>
+              <div class="calendar-day">6</div>
+              <div class="calendar-day">7</div>
+              <div class="calendar-day">8</div>
+              <div class="calendar-day">9</div>
+              <div class="calendar-day">10</div>
+              <div class="calendar-day">11</div>
+              <div class="calendar-day" aria-pressed="true">12</div>
+              <div class="calendar-day" aria-current="date">13</div>
+              <div class="calendar-day">14</div>
+              <div class="calendar-day">15</div>
+              <div class="calendar-day">16</div>
+              <div class="calendar-day">17</div>
+              <div class="calendar-day">18</div>
+              <div class="calendar-day">19</div>
+              <div class="calendar-day">20</div>
+              <div class="calendar-day">21</div>
+              <div class="calendar-day">22</div>
+              <div class="calendar-day">23</div>
+              <div class="calendar-day">24</div>
+              <div class="calendar-day">25</div>
+              <div class="calendar-day">26</div>
+              <div class="calendar-day">27</div>
+              <div class="calendar-day">28</div>
+              <div class="calendar-day">29</div>
+              <div class="calendar-day">30</div>
+            </div>
+          </div>
+          <span class="preview-label">calendar · calendar-header · calendar-title · calendar-nav · calendar-grid · calendar-weekday · calendar-day</span>
         </div>
       </div>
     </section>

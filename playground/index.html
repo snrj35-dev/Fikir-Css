@@ -45,6 +45,14 @@
 
       <!-- Sidebar navigation -->
       <nav class="demo-sidebar" aria-label="Component sections">
+        <div class="demo-sidebar-section" style="padding-bottom:0">
+          <div class="search-box" style="width:100%">
+            <input class="search-box-input" type="search" id="component-search"
+              placeholder="Filter components…" aria-label="Filter components"
+              autocomplete="off" />
+          </div>
+          <p id="search-no-result" style="display:none;font-size:var(--font-size-xs);color:var(--color-fg-muted);padding:var(--space-2) var(--space-1)">No match</p>
+        </div>
         <div class="demo-sidebar-section">
           <p class="demo-sidebar-label">M2 New</p>
           <a class="demo-sidebar-link" href="#sec-m2">✦ M2 Showcase</a>

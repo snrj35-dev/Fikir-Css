@@ -64,8 +64,8 @@
 > **Odak:** Gallery coverage %95+, migrasyon rehberleri, component API docs.
 
 - [x] `site/index.html` gallery'ye eklendi: `stepper`, `timeline`, `tree-view` (sidebar + sections) `(M12)`
-- [ ] Gallery'ye ekle: `progress`, `rating`, `range-slider`, `calendar` `(M12)`
-- [ ] `playground/index.html`'e metin arama / bileşen filtreleme ekle `(M12)`
+- [x] Gallery'ye eklendi: `progress`, `rating`, `range-slider`, `calendar` — site/index.html `(M12)`
+- [x] `playground/index.html` sidebar'a bileşen arama/filtreleme eklendi — `demo.js` filter logic `(M12)`
 - [x] `docs/migration/from-bootstrap.md` — tam class eşleme tablosu + modal/dropdown/dark mode migration `(M12)`
 - [x] `docs/migration/from-tailwind.md` — utility→component mapping + token karşılıkları `(M12)`
 - [x] `docs/components/_template.md` — standart doc şablonu (API table, a11y, tokens) `(M12)`
