@@ -27,7 +27,9 @@
 - [ ] `site/index.html` CDN fallback'ini temizle veya uyarı ekle `(M9)` ← uzman bulgusu
 - [ ] npm account / `NPM_TOKEN` secret GitHub'a ekle — GA publish yerine `0.6.0-beta.1` prerelease yap `(M9)` ← uzman önerisi
 - [ ] `publish.yml` workflow'una `npm publish --dry-run` CI adımı ekle `(M9)`
+- [x] `playground/index.html` versiyon badge'ini `v1.0-M2` → `v0.5.0` olarak düzelt `(M9)` ← uzman #2 bulgusu
 - [ ] `site/` + `playground/` birleştirme fizibilite değerlendirmesi — dış kullanıcı iki farklı ürün görüyor `(M9)` ← uzman bulgusu
+- [ ] Site ana sayfasını yeniden düzenle: **Install + Theme Switcher + Real App Examples** üçlüsü önce, component galeri sonra `(M9)` ← uzman #2 bulgusu
 - [ ] `CHANGELOG.md`'ye v0.6.0-beta başlığı ekle `(M9)`
 
 ---
@@ -63,12 +65,13 @@
 ## M12 — Component Showcase & Docs
 > **Odak:** Gallery coverage %95+, migrasyon rehberleri, component API docs.
 
-- [ ] Gallery'ye ekle (uzman öncelik sırası): `stepper` → `stat` → `tree-view` → `timeline` → `kpi-card` `(M12)` ← uzman bulgusu
+- [ ] Gallery'ye ekle (doğrulanmış öncelik): `stepper` → `tree-view` → `timeline` → `stat` polish/API → `kpi-card` `(M12)` ← uzman #2 düzeltmesi (`stat` zaten gallery'de, `stepper` hiç görünmüyor)
 - [ ] Gallery'ye ekle: `progress`, `rating`, `range-slider`, `calendar` `(M12)`
 - [ ] `playground/index.html`'e metin arama / bileşen filtreleme ekle `(M12)`
 - [ ] `docs/guides/migration-from-bootstrap.md` tam içerik — class eşleme tablosu `(M12)`
 - [ ] `docs/guides/migration-from-tailwind.md` tam içerik — utility → component mapping `(M12)`
-- [ ] Her bileşen için "API table" (class, modifier, state) formatı — en az 10 bileşen `(M12)`
+- [ ] Her bileşen için standart doc şablonu oluştur: "ne zaman kullanılır / required classes / modifier'lar / state'ler / a11y / örnek markup / anti-pattern" — en az 10 bileşen `(M12)` ← uzman #2 bulgusu
+- [ ] "API table" formatını doc şablonuna dahil et `(M12)`
 
 ---
 

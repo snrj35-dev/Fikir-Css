@@ -105,7 +105,7 @@ Metrikler:
 
 ---
 
-## Uzman Görüşü Özeti (2026-04-13)
+## Uzman Görüşü #1 Özeti (2026-04-13)
 
 > Uzman değerlendirmesine göre eklenen kararlar:
 
@@ -117,6 +117,28 @@ Metrikler:
 | Framework önceliği | Önce daha fazla component docs, sonra Vue, sonra Svelte |
 | site/ vs playground/ | Mümkünse birleştir — dış kullanıcı iki farklı ürün görüyor |
 | İlk bakış UX | Install + Themes + Examples üçlüsü; tema switcher ilk ekranda görünmeli |
+
+---
+
+## Uzman Görüşü #2 Özeti (2026-04-13) + Doğrulama
+
+> İkinci uzman değerlendirmesi — her iddia doğrulandı:
+
+| Uzman İddiası | Doğrulama | Aksiyon |
+|--------------|------------|--------|
+| `package.json` `private: true` | ❌ **YANLIŞ** — `private` field yok | — |
+| `package.json` adı `fikir-css-mvp` | ❌ **YANLIŞ** — ad `fikir-css` | — |
+| `repository`/`homepage` alanları eksik | ⚠️ **KİSMEN DOĞRU** — var ama eski org URL'si | M9'da düzeltiliyor |
+| CI workflow'u olmayan script'leri çağırıyor | ❌ **YANLIŞ** — tüm 4 script `package.json`'da mevcut | — |
+| `playground` `v1.0-M2` gösteriyor | ✅ **DOĞRU** | Anında düzeltíldi: `v0.5.0` |
+| `stat` zaten gallery'de var | ✅ **DOĞRU** — line 620 site/index.html | M12 öncelik sırası güncellendi |
+| `stepper` gallery'de yok | ✅ **DOĞRU** — hiç görünmüyor | M12 öncelik #1 |
+| README `v0.3` gösteriyor | ❌ **YANLIŞ** — README `v0.5.0` söylüyor | — |
+
+**Net yeni kararlar (uzman #2'den):**
+- Ürün bünlüğü (tek canonical demo + tek sürüm hikayesi) M9'a eklendi.
+- Component doc şablonu (when to use / required classes / states / a11y / anti-pattern) M12'ye eklendi.
+- Bileşen öncelik sırası düzeltildi: `stepper → tree-view → timeline → stat polish → kpi-card`
 
 ---
 
