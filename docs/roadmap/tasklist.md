@@ -25,12 +25,16 @@
 - [x] `package.json` → `repository.url`, `homepage`, `bugs.url` `snrj35-dev` ile güncellendi `(M9)`
 - [x] README üzerindeki npm/CDN bağlantıları: ⚠️ "npm publish pending" uyarısı eklendi; CDN örneği GitHub Pages URL'sine çevrildi `(M9)` ← uzman bulgusu
 - [x] `site/index.html` CDN fallback kaldırıldı — npm paketi yayınlanmadığından `onerror` fallback işe yaramaz `(M9)` ← uzman bulgusu
-- [ ] npm account / `NPM_TOKEN` secret GitHub'a ekle — GA publish yerine `0.6.0-beta.1` prerelease yap `(M9)` ← uzman önerisi
+- [x] npm account / `NPM_TOKEN` secret eklendi — `fikir-css@0.6.0-beta.6` npm'de `@beta` dist-tag ile yayınlandı `(M9)` ← uzman önerisi
 - [x] `publish.yml` workflow'una `npm publish --dry-run` doğrulama adımı eklendi `(M9)`
 - [x] `playground/index.html` versiyon badge'ini `v1.0-M2` → `v0.5.0` olarak düzelt `(M9)` ← uzman #2 bulgusu
 - [ ] `site/` + `playground/` birleştirme fizibilite değerlendirmesi — dış kullanıcı iki farklı ürün görüyor `(M9)` ← uzman bulgusu
 - [ ] Site ana sayfasını yeniden düzenle: **Install + Theme Switcher + Real App Examples** üçlüsü önce, component galeri sonra `(M9)` ← uzman #2 bulgusu
 - [x] `CHANGELOG.md`'ye v0.6.0-beta Unreleased başlığı eklendi `(M9)`
+- [x] `test:ci` zincirinde `build` başa taşındı — CI'da `dist/` yokken `test:source` patlıyordu `(M9)`
+- [x] `build` script'ine 3 eksik contract raporu eklendi: `contract-drift`, `bundle-layers`, `component-css-map` `(M9)`
+- [x] `validate-size-thresholds`: cold-start (`previousBytes=0`) durumunda diff kontrolü atlanıyor `(M9)`
+- [x] `publish.yml`'ye `--tag beta` eklendi — `latest` dist-tag'i etkilenmiyor `(M9)`
 
 ---
 
