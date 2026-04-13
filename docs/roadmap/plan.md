@@ -10,7 +10,7 @@
 | Alan | Mevcut Durum | Boşluk |
 |------|-------------|--------|
 | Bundle | 92 KB raw / 10.5 KB gzip | ✅ Sağlam |
-| CI (GitHub Actions) | Lokal 245/245 ✅, GitHub CI ❌ | Kritik — root cause belirsiz |
+| CI (GitHub Actions) | Lokal 245/245 ✅, GitHub CI ❌ → ✅ düzeltildi | `docs-link-audit` + `tasklist-hardening` stub eksikliği — M9'da giderildi |
 | package.json repo URL | Eski `osman-developer` URL | Düzeltilmeli |
 | npm publish | Yapılmadı | `NPM_TOKEN` secret eksik |
 | Playground coverage | %87.3 (43 selector gösterilmiyor) | Yeni tonlar + utility'ler eklenmeli |
