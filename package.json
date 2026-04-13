@@ -62,7 +62,7 @@
   ],
   "types": "./dist/tooling/resolve-classes.d.ts",
   "scripts": {
-    "build": "node scripts/build-css.mjs",
+    "build": "node scripts/build-css.mjs && node scripts/report-contract-drift.mjs && node scripts/report-bundle-layers.mjs && node scripts/report-component-css-map.mjs",
     "build:css": "node scripts/build-css.mjs",
     "docs:validate": "node --test tests/source/docs-link-audit.test.mjs",
     "docs:quality": "node scripts/check-docs-quality.mjs",
