@@ -37,6 +37,7 @@ jobs:
         run: |
           cp playground/token-explorer.html site/token-explorer.html 2>/dev/null || true
           cp playground/quickstart.html site/quickstart.html 2>/dev/null || true
+          cp -r playground site/playground
 
       - uses: actions/configure-pages@v4
         with:

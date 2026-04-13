@@ -119,7 +119,8 @@ export const recipesContract = {
       selector: "component.alertWarning",
       declarations: [
         ["background", "var(--color-warning-subtle)"],
-        ["border-color", "color-mix(in oklch, var(--color-warning) 50%, var(--color-bg-surface))"],
+        ["border-color", "var(--color-warning)"],
+        ["border-left-width", "3px"],
         ["color", "var(--color-fg-default)"]
       ]
     },
@@ -127,7 +128,8 @@ export const recipesContract = {
       selector: "component.alertSuccess",
       declarations: [
         ["background", "var(--color-success-subtle)"],
-        ["border-color", "color-mix(in oklch, var(--color-success) 50%, var(--color-bg-surface))"],
+        ["border-color", "var(--color-success)"],
+        ["border-left-width", "3px"],
         ["color", "var(--color-fg-default)"]
       ]
     },
@@ -135,7 +137,8 @@ export const recipesContract = {
       selector: "component.alertInfo",
       declarations: [
         ["background", "var(--color-info-subtle)"],
-        ["border-color", "color-mix(in oklch, var(--color-info) 50%, var(--color-bg-surface))"],
+        ["border-color", "var(--color-info)"],
+        ["border-left-width", "3px"],
         ["color", "var(--color-fg-default)"]
       ]
     },
@@ -183,22 +186,25 @@ export const recipesContract = {
     badgeWarning: {
       selector: "component.badgeWarning",
       declarations: [
-        ["background", "var(--color-warning)"],
-        ["color", "var(--color-gray-900)"]
+        ["background", "color-mix(in oklch, var(--color-warning) 22%, var(--color-bg-surface))"],
+        ["color", "color-mix(in oklch, var(--color-warning-600) 90%, var(--color-fg-default))"],
+        ["border-color", "color-mix(in oklch, var(--color-warning) 60%, var(--color-bg-surface))"]
       ]
     },
     badgeSuccess: {
       selector: "component.badgeSuccess",
       declarations: [
-        ["background", "var(--color-success)"],
-        ["color", "var(--color-gray-50)"]
+        ["background", "color-mix(in oklch, var(--color-success) 20%, var(--color-bg-surface))"],
+        ["color", "color-mix(in oklch, var(--color-success-600) 90%, var(--color-fg-default))"],
+        ["border-color", "color-mix(in oklch, var(--color-success) 55%, var(--color-bg-surface))"]
       ]
     },
     badgeInfo: {
       selector: "component.badgeInfo",
       declarations: [
-        ["background", "var(--color-primary-500)"],
-        ["color", "var(--color-gray-50)"]
+        ["background", "color-mix(in oklch, var(--color-info) 16%, var(--color-bg-surface))"],
+        ["color", "color-mix(in oklch, var(--color-primary-600) 90%, var(--color-fg-default))"],
+        ["border-color", "color-mix(in oklch, var(--color-info) 50%, var(--color-bg-surface))"]
       ]
     },
     modalBase: {
