@@ -9,8 +9,8 @@
  */
 
 import { spawn } from "node:child_process";
-import { writeFile, mkdir } from "node:fs/promises";
-import { resolve, dirname } from "node:path";
+import { readdir, writeFile, mkdir } from "node:fs/promises";
+import { resolve, dirname, join } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
@@ -27,10 +27,18 @@ function parseArgs() {
   return { runs, suite };
 }
 
-function runTestSuite(suite) {
-  return new Promise((resolve) => {
-    const cmd = suite === "build" ? "tests/build/*.test.mjs" : "tests/source/*.test.mjs";
-    const proc = spawn("node", ["--test", cmd], { cwd: rootDir, shell: true });
+async function getTestFiles(suite) {
+  const dir = resolve(rootDir, suite === "build" ? "tests/build" : "tests/source");
+  const entries = await readdir(dir);
+  return entries
+    .filter((f) => f.endsWith(".test.mjs"))
+    .map((f) => join(dir, f));
+}
+
+async function runTestSuite(suite) {
+  const files = await getTestFiles(suite);
+  return new Promise((res) => {
+    const proc = spawn("node", ["--test", ...files], { cwd: rootDir });
     let output = "";
     const failures = [];
 
@@ -43,7 +51,7 @@ function runTestSuite(suite) {
       while ((m = failRe.exec(output)) !== null) {
         failures.push(m[1].trim());
       }
-      resolve({ exitCode: code, failures });
+      res({ exitCode: code, failures });
     });
   });
 }

@@ -10,17 +10,21 @@ jobs:
   test:
     runs-on: ubuntu-latest
 
+    strategy:
+      matrix:
+        node-version: ["18", "20", "22"]
+
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Setup Node.js ${{ matrix.node-version }}
         uses: actions/setup-node@v4
         with:
-          node-version: "22"
+          node-version: ${{ matrix.node-version }}
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Run minimal foundation test suite
         run: npm run test:ci
@@ -33,20 +37,25 @@ jobs:
         run: npm run report:size
 
       - name: Install Firefox (for screenshots)
-        if: always()
+        if: always() && matrix.node-version == '22'
         run: |
           which firefox || (sudo apt-get update -qq && sudo apt-get install -y -qq firefox)
         continue-on-error: true
 
       - name: Capture playground screenshots
-        if: always()
+        if: always() && matrix.node-version == '22'
         run: npm run capture:playground
         env:
           FIREFOX_BIN: firefox
           SCREENSHOT_VIEWPORT: "1440,2200"
         continue-on-error: true
 
-      - name: Diff playground screenshots
-        if: always()
-        run: npm run screenshot:diff
-        continue-on-error: true
+      - name: Init baseline if missing, then diff (strict)
+        if: always() && matrix.node-version == '22'
+        run: |
+          if [ ! -d "playground/screenshots/baseline" ]; then
+            echo "No baseline found — initialising from current capture."
+            node scripts/diff-playground-screenshots.mjs --update-baseline
+          else
+            node scripts/diff-playground-screenshots.mjs --strict
+          fi

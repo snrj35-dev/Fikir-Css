@@ -11,7 +11,10 @@
  * visibility on potential visual regressions without gating CI.
  *
  * Usage:
- *   node scripts/diff-playground-screenshots.mjs
+ *   node scripts/diff-playground-screenshots.mjs [--strict] [--update-baseline]
+ *
+ *   --strict           Exit non-zero if any screenshot changed vs baseline.
+ *   --update-baseline  Copy current screenshots to baseline directory and exit 0.
  *
  * Environment variables:
  *   SCREENSHOTS_DIR      — current screenshots directory (default: playground/screenshots)
@@ -19,9 +22,13 @@
  *   THRESHOLD_PERCENT    — size diff % to flag as changed (default: 5)
  */
 
-import { access, appendFile, readdir, stat } from "node:fs/promises";
+import { access, appendFile, copyFile, mkdir, readdir, stat } from "node:fs/promises";
 import { constants } from "node:fs";
-import { resolve, join, relative } from "node:path";
+import { dirname, resolve, join, relative } from "node:path";
+
+const argv = process.argv.slice(2);
+const STRICT = argv.includes("--strict");
+const UPDATE_BASELINE = argv.includes("--update-baseline");
 
 const rootDir = resolve(process.cwd());
 const screenshotsDir = resolve(rootDir, process.env.SCREENSHOTS_DIR ?? "playground/screenshots");
@@ -54,12 +61,25 @@ async function writeGithubSummary(markdown) {
 }
 
 async function main() {
-  const currentFiles = await getPngFiles(screenshotsDir);
+  if (UPDATE_BASELINE) {
+    const sources = (await getPngFiles(screenshotsDir)).filter(p => !p.startsWith(baselineDir));
+    for (const src of sources) {
+      const rel = relative(screenshotsDir, src);
+      const dest = join(baselineDir, rel);
+      await mkdir(dirname(dest), { recursive: true });
+      await copyFile(src, dest);
+    }
+    console.log(`Baseline updated: ${sources.length} file(s) → ${baselineDir}`);
+    return;
+  }
+
+  const currentFiles = (await getPngFiles(screenshotsDir)).filter(p => !p.startsWith(baselineDir + "/") && p !== baselineDir);
 
   if (currentFiles.length === 0) {
     console.log("No screenshots found in", screenshotsDir);
     console.log("Run `npm run capture:playground` first.");
     await writeGithubSummary("## Screenshot Diff\n\n⚠️ No screenshots found — capture step may have been skipped.");
+    if (STRICT) process.exitCode = 1;
     return;
   }
 
@@ -122,14 +142,16 @@ async function main() {
 
   if (changedCount > 0) {
     console.log(`\n⚠️  ${changedCount} screenshot(s) changed by >${THRESHOLD}%. Review the Step Summary for details.`);
+    if (STRICT) {
+      console.log("CI gate: exiting non-zero (--strict mode).");
+      process.exitCode = 1;
+    }
   } else {
     console.log("\n✓ All screenshots within threshold.");
   }
-
-  // Always exit 0 — non-blocking
 }
 
 main().catch(err => {
   console.error("Screenshot diff error:", err.message);
-  // Non-blocking: do not set exitCode
+  if (STRICT) process.exitCode = 1;
 });

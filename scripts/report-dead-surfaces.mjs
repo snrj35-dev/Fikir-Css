@@ -2,16 +2,23 @@
  * report-dead-surfaces.mjs — Dead-surface detection for playground examples (M3)
  *
  * Compares selectors present in the built CSS against selectors actually used
- * in playground/index.html. Reports selectors that exist in the bundle but are
- * not referenced in any playground example.
+ * across ALL playground HTML files. Reports selectors that exist in the bundle
+ * but are not referenced in any playground example.
+ *
+ * Flags: --min-coverage=<percent>  (default: 0, set to e.g. 95 for CI gate)
  *
  * Output: dist/contracts/dead-surfaces-report.json
  */
 
-import { readFile, writeFile, mkdir } from "node:fs/promises";
+import { readdir, readFile, writeFile, mkdir } from "node:fs/promises";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import config from "../fikir.config.mjs";
+
+const MIN_COVERAGE = (() => {
+  const arg = process.argv.find((a) => a.startsWith("--min-coverage="));
+  return arg ? parseFloat(arg.split("=")[1]) : 0;
+})();
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const rootDir = resolve(__dirname, "..");
@@ -38,32 +45,52 @@ function extractClassesFromHtml(html) {
   return classes;
 }
 
+async function collectHtmlFiles() {
+  const candidates = [
+    "playground/index.html",
+    "playground/quickstart.html",
+    "playground/token-explorer.html",
+  ];
+  const templatesDir = resolve(rootDir, "playground/templates");
+  try {
+    const entries = await readdir(templatesDir);
+    for (const f of entries) {
+      if (f.endsWith(".html")) candidates.push(`playground/templates/${f}`);
+    }
+  } catch { /* templates dir may not exist */ }
+  return candidates;
+}
+
 async function main() {
   const cssPath = resolve(rootDir, config.build.cssOutFile);
-  const htmlPath = resolve(rootDir, "playground/index.html");
 
-  let css, html;
+  let css;
   try {
     css = await readFile(cssPath, "utf8");
   } catch {
     console.error("dist/fikir.css not found — run build first");
     process.exit(1);
   }
-  try {
-    html = await readFile(htmlPath, "utf8");
-  } catch {
-    console.error("playground/index.html not found");
-    process.exit(1);
+
+  const htmlFiles = await collectHtmlFiles();
+  const allClasses = new Set();
+  const scannedFiles = [];
+
+  for (const rel of htmlFiles) {
+    try {
+      const html = await readFile(resolve(rootDir, rel), "utf8");
+      const classes = extractClassesFromHtml(html);
+      for (const c of classes) allClasses.add(c);
+      scannedFiles.push(rel);
+    } catch { /* skip missing files */ }
   }
 
   const bundleSelectors = extractSelectorsFromCss(css);
-  const playgroundClasses = extractClassesFromHtml(html);
-
   const used = [];
   const unused = [];
 
   for (const sel of bundleSelectors) {
-    if (playgroundClasses.has(sel)) {
+    if (allClasses.has(sel)) {
       used.push(sel);
     } else {
       unused.push(sel);
@@ -73,13 +100,17 @@ async function main() {
   unused.sort();
   used.sort();
 
+  const coveragePercent = parseFloat(((used.length / bundleSelectors.size) * 100).toFixed(1));
+
   const report = {
     generatedAt: new Date().toISOString(),
+    scannedFiles,
     bundleSelectorCount: bundleSelectors.size,
-    playgroundClassCount: playgroundClasses.size,
+    playgroundClassCount: allClasses.size,
     usedCount: used.length,
     unusedCount: unused.length,
-    coveragePercent: parseFloat(((used.length / bundleSelectors.size) * 100).toFixed(1)),
+    coveragePercent,
+    minCoverageThreshold: MIN_COVERAGE,
     unused,
     used,
   };
@@ -89,9 +120,9 @@ async function main() {
   await writeFile(outPath, JSON.stringify(report, null, 2), "utf8");
 
   console.log("Dead surface detection report");
+  console.log(`- scanned files: ${scannedFiles.length} (${scannedFiles.join(", ")})`);
   console.log(`- bundle selectors: ${report.bundleSelectorCount}`);
-  console.log(`- playground classes: ${report.playgroundClassCount}`);
-  console.log(`- coverage: ${report.coveragePercent}% (${report.usedCount} used, ${report.unusedCount} unused)`);
+  console.log(`- coverage: ${coveragePercent}% (${report.usedCount} used, ${report.unusedCount} unused)`);
   if (unused.length > 0) {
     console.log(`\nTop unused selectors (first 15):`);
     for (const s of unused.slice(0, 15)) {
@@ -99,6 +130,11 @@ async function main() {
     }
   }
   console.log(`\nReport written: ${outPath}`);
+
+  if (MIN_COVERAGE > 0 && coveragePercent < MIN_COVERAGE) {
+    console.error(`\nCoverage gate failed: ${coveragePercent}% < ${MIN_COVERAGE}% minimum`);
+    process.exit(1);
+  }
 }
 
 main();
