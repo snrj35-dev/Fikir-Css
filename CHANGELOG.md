@@ -5,9 +5,9 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
-## [0.6.0-beta] — Unreleased
+## [0.6.0] — 2026-04-13
 
-### Focus: Stability & Distribution (M9), Theme System (M10), Framework Examples (M11), Component Showcase (M12)
+### Focus: Stability & Distribution (M9), Theme System (M10), Framework Examples (M11), Component Showcase (M12), Site Redesign & CI Hardening (M13)
 
 ### Added
 - **Site landing page restructure** — Install + Theme Switcher + Real App Examples sections precede component gallery
@@ -38,7 +38,23 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 - CI failures: `dist/fikir.css` missing when tests ran before build in fresh CI clone
 - CI failures: missing contract report JSON files (`contract-drift-report.json` etc.)
 - Version/tag mismatch validation in `validate-version-tag-consistency.mjs`
-- `fikir-css@0.6.0-beta.6` successfully published to npm under `@beta` dist-tag
+- **`btn--sm` → `btn-sm`** across all playground HTML files (class rename from v0.5.0 not applied)
+- `alert-danger` double CSS definition: `@layer components` and `@layer recipes` both defined `.alert-danger` with conflicting values; unified to single token-based declaration
+- `badge-info` visually identical to `badge-primary`; `--color-info-500` moved to sky blue (`oklch(65% 0.15 220)`) for distinct cyan tone
+- Hero stat boxes in dark mode inverted contrast (`bg-default` darker than `bg-surface`); corrected to `color-mix(accent 4%, bg-surface)`
+- `site-content` missing `min-width: 0` (CSS grid overflow blowout)
+- README `"npm publish pending"` outdated after npm publication; warning removed
+- `detect-flaky-tests.mjs` `shell: true` causing DEP0190 deprecation warning; replaced with `readdir`-based explicit file expansion
+- `package-lock.json` stale name/version (`fikir-css-mvp@0.3.0`); regenerated to match `fikir-css@0.6.0`
+- CI `npm install` → `npm ci` (ci.yml + publish.yml) for deterministic installs
+
+### Added (M13 — Site Redesign & CI Hardening)
+- **Site redesign** (`site/index.html`): app-shell architecture, premium header with backdrop blur, dramatic hero with eyebrow + stats row, sidebar with live search/filter, `gallery-heading` with surface count badge
+- **Visual regression gate**: `--strict` flag in `diff-playground-screenshots.mjs`; 12 baseline screenshots versioned; CI strategy: main push auto-updates baseline, PRs get strict diff
+- **Node matrix `[20, 22]`** in CI (Node 18 removed: EOL April 2025)
+- **`FORCE_JAVASCRIPT_ACTIONS_TO_NODE24`** env added to suppress Node 20 actions deprecation warning
+- **`report-dead-surfaces.mjs`** expanded to scan all 6 playground HTML files (was single `index.html`); `--min-coverage` flag for CI gate
+- **`--update-baseline`** flag in screenshot diff script for one-command baseline refresh
 
 ---
 
