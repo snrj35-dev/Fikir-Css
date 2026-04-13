@@ -105,8 +105,24 @@ Metrikler:
 
 ---
 
+## Uzman Görüşü Özeti (2026-04-13)
+
+> Uzman değerlendirmesine göre eklenen kararlar:
+
+| Karar | Uzman Önerisi |
+|-------|---------------|
+| Milestone sırası | **M9 → M10 → M12-lite → M11 (Vue) → M11 (Svelte)** |
+| npm publish | GA publish yapma; prerelease (`0.6.0-beta.1`) veya npm/CDN vaatlerini kaldır |
+| Eksik bileşen önceliği | `stepper` > `stat` > `tree-view` > `timeline` > `kpi-card` |
+| Framework önceliği | Önce daha fazla component docs, sonra Vue, sonra Svelte |
+| site/ vs playground/ | Mümkünse birleştir — dış kullanıcı iki farklı ürün görüyor |
+| İlk bakış UX | Install + Themes + Examples üçlüsü; tema switcher ilk ekranda görünmeli |
+
+---
+
 ## Guardrails
 - CI yeşil olmadan M10+ başlamaz (M9 blocker).
+- README ve site üzerindeki npm/CDN vaatleri — paket yayınlanmadan kaldırılmalı veya uyarı eklenmeli.
 - Her milestone en az bir "canlı demo / çalışır örnek" içerir — sadece dokümantasyon değil.
 - `npm run test:ci` lokal ve CI'da yeşil kalır.
 - Yeni subpath export varsa `package.json` + `package-smoke.mjs` güncellenir.

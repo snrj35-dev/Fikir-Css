@@ -18,14 +18,17 @@
 ---
 
 ## M9 — Stability & Distribution
-> **Odak:** CI yeşil, doğru URL'ler, npm publish hazır.
+> **Odak:** CI yeşil, doğru URL'ler, npm/CDN vaatleri gerçekle uyumlu.
 
-- [ ] GitHub Actions CI logunu incele — hangi adım fail oluyor tespit et `(M9)`
-- [ ] CI fail olan adımı düzelt — yeşile al `(M9)`
+- [x] GitHub Actions CI logunu incele — `docs-link-audit` ve `tasklist-hardening` fail `(M9)`
+- [x] CI fail olan adımı düzelt — stub dosyalar + carry-over items eklendi, 245/245 yeşil `(M9)`
 - [ ] `package.json` → `repository.url` ve `homepage` `snrj35-dev` ile güncelle `(M9)`
-- [ ] npm account aç / var olanı kullan, `NPM_TOKEN` secret GitHub'a ekle `(M9)`
-- [ ] `publish.yml` workflow'unu test et — `npm publish --dry-run` CI adımı ekle `(M9)`
-- [ ] `CHANGELOG.md`'ye v0.6.0 başlığı ekle `(M9)`
+- [ ] README üzerindeki `npm install fikir-css` ve jsDelivr CDN bağlantılarını kaldır veya "coming soon" ile işaretle — paket yayınlanmadan 404 veriyor `(M9)` ← uzman bulgusu
+- [ ] `site/index.html` CDN fallback'ini temizle veya uyarı ekle `(M9)` ← uzman bulgusu
+- [ ] npm account / `NPM_TOKEN` secret GitHub'a ekle — GA publish yerine `0.6.0-beta.1` prerelease yap `(M9)` ← uzman önerisi
+- [ ] `publish.yml` workflow'una `npm publish --dry-run` CI adımı ekle `(M9)`
+- [ ] `site/` + `playground/` birleştirme fizibilite değerlendirmesi — dış kullanıcı iki farklı ürün görüyor `(M9)` ← uzman bulgusu
+- [ ] `CHANGELOG.md`'ye v0.6.0-beta başlığı ekle `(M9)`
 
 ---
 
@@ -60,12 +63,20 @@
 ## M12 — Component Showcase & Docs
 > **Odak:** Gallery coverage %95+, migrasyon rehberleri, component API docs.
 
-- [ ] Gallery'ye eksik bileşenleri ekle: `timeline`, `stat`, `kpi-card`, `stepper`, `tree-view` `(M12)`
+- [ ] Gallery'ye ekle (uzman öncelik sırası): `stepper` → `stat` → `tree-view` → `timeline` → `kpi-card` `(M12)` ← uzman bulgusu
 - [ ] Gallery'ye ekle: `progress`, `rating`, `range-slider`, `calendar` `(M12)`
 - [ ] `playground/index.html`'e metin arama / bileşen filtreleme ekle `(M12)`
 - [ ] `docs/guides/migration-from-bootstrap.md` tam içerik — class eşleme tablosu `(M12)`
 - [ ] `docs/guides/migration-from-tailwind.md` tam içerik — utility → component mapping `(M12)`
 - [ ] Her bileşen için "API table" (class, modifier, state) formatı — en az 10 bileşen `(M12)`
+
+---
+
+## Carry-over Completed (Locked)
+> M1–M4 track'ten taşınan, değişmez tamamlanmış görevler.
+
+- [x] Define utility-surface budget policy (core vs optional utilities) `(P2)`
+- [x] Create fluid token (`clamp`) RFC + playground comparison `(P2)`
 
 ---
 
