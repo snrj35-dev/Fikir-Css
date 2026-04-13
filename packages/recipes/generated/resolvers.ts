@@ -78,3 +78,117 @@ export function cardRecipe(input: CardRecipeInput = {}): string {
 
   return classes.join(" ");
 }
+
+export type InputRecipeInput = {  };
+const inputBase = ["input"];
+const inputVariants = {
+
+} as const;
+const inputDefaults = {} as const;
+
+export function inputRecipe(input: InputRecipeInput = {}): string {
+  const defaults = inputDefaults;
+  const variants = inputVariants;
+  const classes = [...inputBase];
+
+
+
+  return classes.join(" ");
+}
+
+type AlertTone = "default" | "danger" | "warning" | "success" | "info" | "neutral";
+export type AlertRecipeInput = { tone?: AlertTone; };
+const alertBase = ["alert"];
+const alertVariants = {
+  tone: {
+    "default": [],
+    "danger": ["alert-danger"],
+    "warning": ["alert-warning"],
+    "success": ["alert-success"],
+    "info": ["alert-info"],
+    "neutral": ["alert-neutral"]
+  }
+} as const;
+const alertDefaults = {
+  "tone": "default"
+} as const;
+
+export function alertRecipe(input: AlertRecipeInput = {}): string {
+  const defaults = alertDefaults;
+  const variants = alertVariants;
+  const classes = [...alertBase];
+
+  const tone = input.tone ?? defaults.tone;
+  classes.push(...variants.tone[tone as AlertTone]);
+
+  return classes.join(" ");
+}
+
+type BadgeTone = "neutral" | "primary" | "danger" | "warning" | "success" | "info";
+export type BadgeRecipeInput = { tone?: BadgeTone; };
+const badgeBase = ["badge"];
+const badgeVariants = {
+  tone: {
+    "neutral": ["badge-neutral"],
+    "primary": ["badge-primary"],
+    "danger": ["badge-danger"],
+    "warning": ["badge-warning"],
+    "success": ["badge-success"],
+    "info": ["badge-info"]
+  }
+} as const;
+const badgeDefaults = {
+  "tone": "neutral"
+} as const;
+
+export function badgeRecipe(input: BadgeRecipeInput = {}): string {
+  const defaults = badgeDefaults;
+  const variants = badgeVariants;
+  const classes = [...badgeBase];
+
+  const tone = input.tone ?? defaults.tone;
+  classes.push(...variants.tone[tone as BadgeTone]);
+
+  return classes.join(" ");
+}
+
+type ModalOpen = "true" | "false";
+export type ModalRecipeInput = { open?: ModalOpen; };
+const modalBase = ["modal"];
+const modalVariants = {
+  open: {
+    "true": [],
+    "false": []
+  }
+} as const;
+const modalDefaults = {
+  "open": false
+} as const;
+
+export function modalRecipe(input: ModalRecipeInput = {}): string {
+  const defaults = modalDefaults;
+  const variants = modalVariants;
+  const classes = [...modalBase];
+
+  const open = input.open ?? defaults.open;
+  classes.push(...variants.open[open as ModalOpen]);
+
+  return classes.join(" ");
+}
+
+export type TabsRecipeInput = {  };
+const tabsBase = ["tabs"];
+const tabsVariants = {
+
+} as const;
+const tabsDefaults = {} as const;
+
+export function tabsRecipe(input: TabsRecipeInput = {}): string {
+  const defaults = tabsDefaults;
+  const variants = tabsVariants;
+  const classes = [...tabsBase];
+
+
+
+  return classes.join(" ");
+}

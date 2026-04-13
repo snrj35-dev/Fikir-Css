@@ -1,0 +1,520 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fikir CSS — 5-Minute Quickstart</title>
+  <link rel="stylesheet" href="../dist/fikir.css" />
+  <style>
+    body { margin: 0; background: var(--color-bg-default); }
+
+    .qs-layout {
+      display: grid;
+      grid-template-columns: 14rem 1fr;
+      min-height: 100vh;
+    }
+
+    .qs-sidebar {
+      border-right: 1px solid var(--color-border-subtle);
+      padding: var(--space-4) var(--space-3);
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      background: var(--color-bg-surface);
+    }
+    .qs-sidebar h1 { font-size: 1rem; font-weight: 800; margin: 0 0 var(--space-1); }
+    .qs-sidebar p  { font-size: var(--font-size-sm); color: var(--color-fg-muted); margin: 0 0 var(--space-4); }
+
+    .step-link {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-2) var(--space-3);
+      border-radius: var(--radius-md);
+      text-decoration: none;
+      font-size: var(--font-size-sm);
+      color: var(--color-fg-muted);
+      cursor: pointer;
+      background: none;
+      border: none;
+      width: 100%;
+      text-align: left;
+      transition: background 100ms, color 100ms;
+    }
+    .step-link:hover { background: var(--color-bg-default); color: var(--color-fg-default); }
+    .step-link.active { background: var(--color-accent); color: #fff; }
+    .step-num {
+      width: 1.5rem; height: 1.5rem;
+      border-radius: 50%;
+      background: var(--color-border-subtle);
+      color: var(--color-fg-muted);
+      font-size: .7rem; font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+    }
+    .step-link.active .step-num { background: rgba(255,255,255,.25); color: #fff; }
+    .step-link.done .step-num { background: oklch(70% 0.14 145); color: #fff; }
+    .step-link.done { color: var(--color-fg-default); }
+
+    .qs-main { padding: var(--space-6); max-width: 52rem; }
+
+    .step-panel { display: none; }
+    .step-panel.active { display: block; }
+
+    .step-header { margin-bottom: var(--space-4); }
+    .step-badge { font-size: .7rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--color-accent); margin-bottom: var(--space-1); }
+    .step-title { font-size: 1.5rem; font-weight: 800; margin: 0 0 var(--space-1); }
+    .step-desc  { color: var(--color-fg-muted); margin: 0; }
+
+    .code-block {
+      background: var(--color-gray-900, #1a1a2e);
+      color: #e2e8f0;
+      border-radius: var(--radius-lg);
+      padding: var(--space-4);
+      font-family: monospace;
+      font-size: .85rem;
+      line-height: 1.7;
+      overflow-x: auto;
+      margin: var(--space-4) 0;
+      position: relative;
+    }
+    .code-block .kw { color: #93c5fd; }
+    .code-block .str { color: #86efac; }
+    .code-block .cm { color: #64748b; }
+    .copy-btn {
+      position: absolute; top: var(--space-2); right: var(--space-2);
+      background: rgba(255,255,255,.1); border: none; border-radius: var(--radius-sm);
+      color: #e2e8f0; font-size: .7rem; padding: 3px 8px; cursor: pointer;
+    }
+    .copy-btn:hover { background: rgba(255,255,255,.2); }
+
+    .preview-box {
+      border: 1px solid var(--color-border-subtle);
+      border-radius: var(--radius-lg);
+      padding: var(--space-4);
+      background: var(--color-bg-surface);
+      margin: var(--space-4) 0;
+    }
+
+    .step-nav {
+      display: flex; gap: var(--space-3); margin-top: var(--space-6);
+      padding-top: var(--space-4);
+      border-top: 1px solid var(--color-border-subtle);
+    }
+
+    .progress-bar {
+      height: 3px;
+      background: var(--color-border-subtle);
+      border-radius: 999px;
+      margin-bottom: var(--space-4);
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: var(--color-accent);
+      border-radius: 999px;
+      transition: width 300ms ease;
+    }
+
+    @media (max-width: 640px) {
+      .qs-layout { grid-template-columns: 1fr; }
+      .qs-sidebar { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="qs-layout">
+  <!-- Sidebar -->
+  <aside class="qs-sidebar">
+    <h1>5-Minute Quickstart</h1>
+    <p>Follow the steps to integrate Fikir CSS.</p>
+
+    <nav id="step-nav">
+      <button class="step-link active" data-step="1">
+        <span class="step-num">1</span> Install
+      </button>
+      <button class="step-link" data-step="2">
+        <span class="step-num">2</span> Import CSS
+      </button>
+      <button class="step-link" data-step="3">
+        <span class="step-num">3</span> Set theme
+      </button>
+      <button class="step-link" data-step="4">
+        <span class="step-num">4</span> First component
+      </button>
+      <button class="step-link" data-step="5">
+        <span class="step-num">5</span> Dark mode
+      </button>
+      <button class="step-link" data-step="6">
+        <span class="step-num">6</span> Typed resolvers
+      </button>
+      <button class="step-link" data-step="7">
+        <span class="step-num">7</span> Done!
+      </button>
+    </nav>
+
+    <div style="margin-top: var(--space-6)">
+      <button class="btn btn-outline btn-neutral btn-sm" id="theme-toggle">🌙 Dark</button>
+    </div>
+  </aside>
+
+  <!-- Main -->
+  <main class="qs-main">
+    <div class="progress-bar">
+      <div class="progress-fill" id="progress" style="width: 14%"></div>
+    </div>
+
+    <!-- Step 1 -->
+    <div class="step-panel active" id="panel-1">
+      <div class="step-header">
+        <div class="step-badge">Step 1 of 7</div>
+        <h2 class="step-title">Install Fikir CSS</h2>
+        <p class="step-desc">Add the package to your project with your package manager.</p>
+      </div>
+
+      <div class="code-block">
+        <button class="copy-btn" data-copy="npm install fikir-css">Copy</button>
+<span class="cm"># npm</span>
+npm install fikir-css
+
+<span class="cm"># or pnpm</span>
+pnpm add fikir-css
+
+<span class="cm"># or yarn</span>
+yarn add fikir-css
+      </div>
+
+      <div class="alert alert-info" role="note">
+        <p class="alert-title">No build step required</p>
+        <p class="alert-description">Fikir CSS ships a pre-built <code>dist/fikir.css</code>. You don't need to configure PostCSS, Sass, or any preprocessor.</p>
+      </div>
+
+      <div class="step-nav">
+        <button class="btn btn-primary" data-goto="2">Next: Import CSS →</button>
+      </div>
+    </div>
+
+    <!-- Step 2 -->
+    <div class="step-panel" id="panel-2">
+      <div class="step-header">
+        <div class="step-badge">Step 2 of 7</div>
+        <h2 class="step-title">Import the stylesheet</h2>
+        <p class="step-desc">One import. That's it.</p>
+      </div>
+
+      <p style="font-weight:600;margin-bottom:var(--space-2)">In a bundler (Vite / webpack / Parcel):</p>
+      <div class="code-block">
+        <button class="copy-btn" data-copy='import "fikir-css/css";'>Copy</button>
+<span class="cm">// src/main.js (or main.ts, main.jsx, etc.)</span>
+<span class="kw">import</span> <span class="str">"fikir-css/css"</span>;
+      </div>
+
+      <p style="font-weight:600;margin-bottom:var(--space-2)">In plain HTML:</p>
+      <div class="code-block">
+        <button class="copy-btn" data-copy='<link rel="stylesheet" href="node_modules/fikir-css/dist/fikir.css" />'>Copy</button>
+&lt;<span class="kw">link</span> <span class="str">rel="stylesheet"</span> <span class="str">href="node_modules/fikir-css/dist/fikir.css"</span> /&gt;
+      </div>
+
+      <p style="font-weight:600;margin-bottom:var(--space-2)">Via CDN (no install):</p>
+      <div class="code-block">
+        <button class="copy-btn" data-copy='<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fikir-css@0.5.0/dist/fikir.css" />'>Copy</button>
+&lt;<span class="kw">link</span> <span class="str">rel="stylesheet"</span>
+  <span class="str">href="https://cdn.jsdelivr.net/npm/fikir-css@0.5.0/dist/fikir.css"</span> /&gt;
+      </div>
+
+      <div class="step-nav">
+        <button class="btn btn-outline btn-neutral" data-goto="1">← Back</button>
+        <button class="btn btn-primary" data-goto="3">Next: Set theme →</button>
+      </div>
+    </div>
+
+    <!-- Step 3 -->
+    <div class="step-panel" id="panel-3">
+      <div class="step-header">
+        <div class="step-badge">Step 3 of 7</div>
+        <h2 class="step-title">Set the theme attribute</h2>
+        <p class="step-desc">Fikir CSS uses <code>data-theme</code> on the root element to activate the color palette.</p>
+      </div>
+
+      <div class="code-block">
+        <button class="copy-btn" data-copy='<html lang="en" data-theme="light">'>Copy</button>
+&lt;<span class="kw">html</span> <span class="str">lang="en"</span> <span class="str">data-theme="light"</span>&gt;
+      </div>
+
+      <p style="margin-bottom:var(--space-3)">Without <code>data-theme</code>, the CSS custom properties won't resolve and you'll see unstyled output. Try toggling it:</p>
+
+      <div class="preview-box">
+        <div style="display:flex;gap:var(--space-2);flex-wrap:wrap">
+          <button class="btn btn-primary btn-sm" onclick="document.documentElement.setAttribute('data-theme','light')">data-theme="light"</button>
+          <button class="btn btn-neutral btn-sm" onclick="document.documentElement.setAttribute('data-theme','dark')">data-theme="dark"</button>
+          <button class="btn btn-outline btn-danger btn-sm" onclick="document.documentElement.removeAttribute('data-theme')">Remove attribute</button>
+        </div>
+        <p style="margin-top:var(--space-3);font-size:var(--font-size-sm);color:var(--color-fg-muted)">Notice what happens to the background and text when <code>data-theme</code> is removed.</p>
+      </div>
+
+      <div class="step-nav">
+        <button class="btn btn-outline btn-neutral" data-goto="2">← Back</button>
+        <button class="btn btn-primary" data-goto="4">Next: First component →</button>
+      </div>
+    </div>
+
+    <!-- Step 4 -->
+    <div class="step-panel" id="panel-4">
+      <div class="step-header">
+        <div class="step-badge">Step 4 of 7</div>
+        <h2 class="step-title">Your first component</h2>
+        <p class="step-desc">Use semantic class names — no configuration needed.</p>
+      </div>
+
+      <div class="code-block">
+        <button class="copy-btn" data-copy='<button class="btn btn-primary">Get started</button>'>Copy</button>
+&lt;<span class="kw">button</span> <span class="str">class="btn btn-primary"</span>&gt;Get started&lt;/button&gt;
+&lt;<span class="kw">button</span> <span class="str">class="btn btn-neutral"</span>&gt;Cancel&lt;/button&gt;
+&lt;<span class="kw">button</span> <span class="str">class="btn btn-outline btn-danger"</span>&gt;Delete&lt;/button&gt;
+      </div>
+
+      <div class="preview-box">
+        <div class="cluster" style="gap:var(--space-2)">
+          <button class="btn btn-primary">Get started</button>
+          <button class="btn btn-neutral">Cancel</button>
+          <button class="btn btn-outline btn-danger">Delete</button>
+        </div>
+      </div>
+
+      <p style="margin-bottom:var(--space-3)">Add a card with form:</p>
+      <div class="code-block">
+        <button class="copy-btn" data-copy='<div class="card card-elevated" style="padding:1.5rem">'>Copy</button>
+&lt;<span class="kw">div</span> <span class="str">class="card card-elevated"</span> style="padding:1.5rem"&gt;
+  &lt;<span class="kw">div</span> <span class="str">class="field"</span>&gt;
+    &lt;<span class="kw">label</span> <span class="str">class="label"</span> for="email"&gt;Email&lt;/label&gt;
+    &lt;<span class="kw">input</span> <span class="str">class="input"</span> type="email" /&gt;
+  &lt;/div&gt;
+  &lt;<span class="kw">button</span> <span class="str">class="btn btn-primary"</span>&gt;Subscribe&lt;/button&gt;
+&lt;/div&gt;
+      </div>
+
+      <div class="preview-box">
+        <div class="card card-elevated" style="padding:1.5rem;max-width:24rem">
+          <div class="field">
+            <label class="label" for="qs-email">Email</label>
+            <input class="input" id="qs-email" type="email" placeholder="you@example.com" />
+            <p class="helper-text">We'll never share your email.</p>
+          </div>
+          <button class="btn btn-primary" style="margin-top:var(--space-3)">Subscribe</button>
+        </div>
+      </div>
+
+      <div class="step-nav">
+        <button class="btn btn-outline btn-neutral" data-goto="3">← Back</button>
+        <button class="btn btn-primary" data-goto="5">Next: Dark mode →</button>
+      </div>
+    </div>
+
+    <!-- Step 5 -->
+    <div class="step-panel" id="panel-5">
+      <div class="step-header">
+        <div class="step-badge">Step 5 of 7</div>
+        <h2 class="step-title">Dark mode in one line</h2>
+        <p class="step-desc">Toggle <code>data-theme</code> on <code>&lt;html&gt;</code> — every component updates automatically.</p>
+      </div>
+
+      <div class="code-block">
+        <button class="copy-btn" data-copy="document.documentElement.setAttribute('data-theme', 'dark')">Copy</button>
+<span class="cm">// Toggle dark / light mode</span>
+<span class="kw">const</span> current = document.documentElement.getAttribute(<span class="str">'data-theme'</span>);
+document.documentElement.setAttribute(
+  <span class="str">'data-theme'</span>,
+  current === <span class="str">'dark'</span> ? <span class="str">'light'</span> : <span class="str">'dark'</span>
+);
+      </div>
+
+      <div class="preview-box">
+        <p style="margin-bottom:var(--space-3);font-size:var(--font-size-sm);color:var(--color-fg-muted)">Click to toggle the whole page:</p>
+        <button class="btn btn-neutral btn-sm" id="qs-dark-toggle">🌙 Toggle dark mode</button>
+      </div>
+
+      <div class="alert" role="note" style="margin-top:var(--space-3)">
+        <p class="alert-title">No JS framework needed</p>
+        <p class="alert-description">Because state is driven by HTML attributes, dark mode works the same in React, Vue, Svelte, or plain HTML.</p>
+      </div>
+
+      <div class="step-nav">
+        <button class="btn btn-outline btn-neutral" data-goto="4">← Back</button>
+        <button class="btn btn-primary" data-goto="6">Next: Typed resolvers →</button>
+      </div>
+    </div>
+
+    <!-- Step 6 -->
+    <div class="step-panel" id="panel-6">
+      <div class="step-header">
+        <div class="step-badge">Step 6 of 7</div>
+        <h2 class="step-title">Typed recipe resolvers</h2>
+        <p class="step-desc">Generate class strings from typed options — great for React/Vue/Svelte component props.</p>
+      </div>
+
+      <div class="code-block">
+        <button class="copy-btn" data-copy='import { resolveBtn, resolveAlert } from "fikir-css/tooling";'>Copy</button>
+<span class="kw">import</span> { resolveBtn, resolveAlert, resolveBadge } <span class="kw">from</span> <span class="str">"fikir-css/tooling"</span>;
+
+<span class="cm">// Returns: "btn btn-solid btn-primary btn-md"</span>
+resolveBtn({ variant: <span class="str">"solid"</span>, tone: <span class="str">"primary"</span>, size: <span class="str">"md"</span> });
+
+<span class="cm">// Returns: "alert alert-warning"</span>
+resolveAlert({ tone: <span class="str">"warning"</span> });
+
+<span class="cm">// Returns: "badge badge-success"</span>
+resolveBadge({ tone: <span class="str">"success"</span> });
+      </div>
+
+      <p style="margin-bottom:var(--space-2)">In a React component:</p>
+      <div class="code-block">
+        <button class="copy-btn" data-copy="function Button({ tone = 'primary', size = 'md', children }) {">Copy</button>
+<span class="kw">function</span> Button({ tone = <span class="str">'primary'</span>, size = <span class="str">'md'</span>, children }) {
+  <span class="kw">return</span> &lt;button className={resolveBtn({ tone, size })}&gt;{children}&lt;/button&gt;;
+}
+
+<span class="cm">// &lt;Button tone="danger" size="sm"&gt;Delete&lt;/Button&gt;</span>
+<span class="cm">// → className="btn btn-solid btn-danger btn-sm"</span>
+      </div>
+
+      <div class="preview-box">
+        <div class="stack" style="gap:var(--space-2)">
+          <div class="cluster" style="gap:var(--space-2)">
+            <span class="badge badge-primary">badge-primary</span>
+            <span class="badge badge-success">badge-success</span>
+            <span class="badge badge-warning">badge-warning</span>
+            <span class="badge badge-danger">badge-danger</span>
+          </div>
+          <div class="alert alert-success" role="note" style="max-width:28rem">
+            <p class="alert-title">Success</p>
+            <p class="alert-description">resolveAlert({ tone: "success" }) → "alert alert-success"</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="step-nav">
+        <button class="btn btn-outline btn-neutral" data-goto="5">← Back</button>
+        <button class="btn btn-primary" data-goto="7">Next: Done! →</button>
+      </div>
+    </div>
+
+    <!-- Step 7 -->
+    <div class="step-panel" id="panel-7">
+      <div class="step-header">
+        <div class="step-badge">Step 7 of 7</div>
+        <h2 class="step-title">You're set up! 🎉</h2>
+        <p class="step-desc">Here's a summary of what you learned and where to go next.</p>
+      </div>
+
+      <div class="card card-elevated" style="padding:1.5rem;margin-bottom:var(--space-4)">
+        <h3 class="heading-3" style="margin-bottom:var(--space-3)">What you've done</h3>
+        <div class="stack" style="gap:var(--space-2)">
+          <div style="display:flex;align-items:center;gap:var(--space-2)">
+            <span class="badge badge-success">✓</span>
+            <span>Installed <code>fikir-css</code></span>
+          </div>
+          <div style="display:flex;align-items:center;gap:var(--space-2)">
+            <span class="badge badge-success">✓</span>
+            <span>Imported the stylesheet with one line</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:var(--space-2)">
+            <span class="badge badge-success">✓</span>
+            <span>Set <code>data-theme</code> for theming</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:var(--space-2)">
+            <span class="badge badge-success">✓</span>
+            <span>Used semantic class names for components</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:var(--space-2)">
+            <span class="badge badge-success">✓</span>
+            <span>Wired dark mode in one line of JS</span>
+          </div>
+          <div style="display:flex;align-items:center;gap:var(--space-2)">
+            <span class="badge badge-success">✓</span>
+            <span>Used typed resolvers from <code>fikir-css/tooling</code></span>
+          </div>
+        </div>
+      </div>
+
+      <h3 class="heading-3" style="margin-bottom:var(--space-3)">Where to go next</h3>
+      <div class="stack" style="gap:var(--space-3)">
+        <a href="./index.html" class="card" style="padding:1rem;text-decoration:none">
+          <p style="font-weight:600;margin:0">Component playground →</p>
+          <p style="font-size:var(--font-size-sm);color:var(--color-fg-muted);margin:var(--space-1) 0 0">Interactive demos of all 82 surfaces</p>
+        </a>
+        <a href="./token-explorer.html" class="card" style="padding:1rem;text-decoration:none">
+          <p style="font-weight:600;margin:0">Token explorer →</p>
+          <p style="font-size:var(--font-size-sm);color:var(--color-fg-muted);margin:var(--space-1) 0 0">Visual reference for all design tokens</p>
+        </a>
+        <a href="../docs/guides/adding-to-existing-project.md" class="card" style="padding:1rem;text-decoration:none">
+          <p style="font-weight:600;margin:0">Adding to an existing project →</p>
+          <p style="font-size:var(--font-size-sm);color:var(--color-fg-muted);margin:var(--space-1) 0 0">@layer strategy, Bootstrap/Tailwind side-by-side</p>
+        </a>
+        <a href="../docs/guides/overlay-js-helpers.md" class="card" style="padding:1rem;text-decoration:none">
+          <p style="font-weight:600;margin:0">Overlay JS helpers →</p>
+          <p style="font-size:var(--font-size-sm);color:var(--color-fg-muted);margin:var(--space-1) 0 0">Focus trap, keyboard dismiss, roving tabindex</p>
+        </a>
+      </div>
+
+      <div class="step-nav" style="margin-top:var(--space-6)">
+        <button class="btn btn-outline btn-neutral" data-goto="6">← Back</button>
+        <button class="btn btn-primary" data-goto="1">Restart from Step 1</button>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<script>
+  const TOTAL = 7;
+  const links = document.querySelectorAll('.step-link');
+  const panels = document.querySelectorAll('.step-panel');
+  const progress = document.getElementById('progress');
+  let current = 1;
+  const completed = new Set();
+
+  function goto(step) {
+    completed.add(current);
+    current = step;
+    links.forEach((l, i) => {
+      l.classList.toggle('active', i + 1 === step);
+      if (completed.has(i + 1) && i + 1 !== step) l.classList.add('done');
+    });
+    panels.forEach((p, i) => p.classList.toggle('active', i + 1 === step));
+    progress.style.width = `${Math.round((step / TOTAL) * 100)}%`;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  links.forEach((l) => l.addEventListener('click', () => goto(Number(l.dataset.step))));
+  document.querySelectorAll('[data-goto]').forEach((b) => b.addEventListener('click', () => goto(Number(b.dataset.goto))));
+
+  // Dark mode toggle
+  document.getElementById('theme-toggle').addEventListener('click', (e) => {
+    const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    e.target.textContent = next === 'dark' ? '☀️ Light' : '🌙 Dark';
+  });
+
+  // Step 5 inline toggle
+  document.getElementById('qs-dark-toggle')?.addEventListener('click', (e) => {
+    const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    e.target.textContent = next === 'dark' ? '☀️ Light mode' : '🌙 Dark mode';
+  });
+
+  // Copy buttons
+  document.querySelectorAll('.copy-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      navigator.clipboard.writeText(btn.dataset.copy).then(() => {
+        const orig = btn.textContent;
+        btn.textContent = 'Copied!';
+        setTimeout(() => { btn.textContent = orig; }, 1500);
+      });
+    });
+  });
+</script>
+
+</body>
+</html>

@@ -1,0 +1,16 @@
+/**
+ * fikir-css/slices/navigation — Navigation surface slice
+ *
+ * Opt-in import for navigation components only.
+ *
+ *   import "fikir-css/slices/navigation";
+ */
+@import "../components/tabs.css";
+@import "../components/accordion.css";
+@import "../components/breadcrumb.css";
+@import "../components/navbar.css";
+@import "../components/menu-bar.css";
+@import "../components/sidebar-nav.css";
+@import "../components/pagination.css";
+@import "../components/stepper.css";
+@import "../components/tree-view.css";

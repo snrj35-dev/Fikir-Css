@@ -1,0 +1,16 @@
+/**
+ * fikir-css/slices/overlays — Overlay surface slice
+ *
+ * Opt-in import for overlay components only.
+ *
+ *   import "fikir-css/slices/overlays";
+ */
+@import "../components/modal.css";
+@import "../components/toast.css";
+@import "../components/tooltip.css";
+@import "../components/popover.css";
+@import "../components/dropdown-menu.css";
+@import "../components/drawer.css";
+@import "../components/hover-card.css";
+@import "../components/loading-overlay.css";
+@import "../components/command-palette.css";

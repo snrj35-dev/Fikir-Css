@@ -1,0 +1,459 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>MyApp — Fikir CSS App Shell Starter</title>
+  <link rel="stylesheet" href="../../dist/fikir.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-block-size: 100dvh;
+      display: flex;
+      flex-direction: column;
+      background: var(--color-bg-default);
+      color: var(--color-fg-default);
+      font-family: var(--font-sans, system-ui, sans-serif);
+    }
+
+    /* ── Top bar ──────────────────────────────────────────────────── */
+    .t-topbar {
+      position: sticky;
+      inset-block-start: 0;
+      z-index: 40;
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      padding: 0 var(--space-5);
+      block-size: 3.25rem;
+      border-block-end: 1px solid var(--color-border-subtle);
+      background: color-mix(in oklch, var(--color-bg-surface) 95%, transparent);
+      backdrop-filter: blur(8px);
+      flex-shrink: 0;
+    }
+
+    .t-brand {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-weight: 700;
+      font-size: var(--font-size-md);
+      color: var(--color-fg-default);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+
+    .t-brand-mark {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      inline-size: 1.75rem;
+      block-size: 1.75rem;
+      border-radius: var(--radius-sm);
+      background: var(--color-accent, var(--color-primary-500));
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 900;
+      flex-shrink: 0;
+    }
+
+    .t-topbar-nav {
+      display: flex;
+      align-items: center;
+      gap: var(--space-1);
+      flex: 1;
+    }
+
+    .t-topbar-link {
+      padding: var(--space-1) var(--space-2);
+      border-radius: var(--radius-sm);
+      font-size: var(--font-size-sm);
+      color: var(--color-fg-muted);
+      text-decoration: none;
+      transition: color 120ms, background 120ms;
+    }
+    .t-topbar-link:hover { color: var(--color-fg-default); background: var(--color-bg-surface); }
+    .t-topbar-link[aria-current="page"] {
+      color: var(--color-fg-default);
+      font-weight: 600;
+      background: var(--color-bg-surface);
+    }
+
+    .t-topbar-end {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      flex-shrink: 0;
+    }
+
+    /* ── Layout ───────────────────────────────────────────────────── */
+    .t-body {
+      display: grid;
+      grid-template-columns: 14rem 1fr;
+      flex: 1;
+      min-block-size: 0;
+    }
+
+    /* ── Sidebar ──────────────────────────────────────────────────── */
+    .t-sidebar {
+      position: sticky;
+      inset-block-start: 3.25rem;
+      block-size: calc(100dvh - 3.25rem);
+      overflow-y: auto;
+      padding: var(--space-4) var(--space-3);
+      border-inline-end: 1px solid var(--color-border-subtle);
+      background: var(--color-bg-surface);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .t-sidebar-top { display: flex; flex-direction: column; gap: var(--space-5); }
+    .t-sidebar-bottom { padding-block-end: var(--space-2); }
+
+    .t-nav-group { display: flex; flex-direction: column; gap: var(--space-1); }
+
+    .t-nav-label {
+      padding: 0 var(--space-2);
+      margin-block-end: var(--space-1);
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--color-fg-muted);
+    }
+
+    .t-nav-link {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-1-5, 0.375rem) var(--space-2);
+      border-radius: var(--radius-sm);
+      font-size: var(--font-size-sm);
+      color: var(--color-fg-muted);
+      text-decoration: none;
+      transition: color 120ms, background 120ms;
+      line-height: 1.5;
+    }
+    .t-nav-link:hover { color: var(--color-fg-default); background: color-mix(in oklch, var(--color-border-subtle) 40%, var(--color-bg-surface)); }
+    .t-nav-link[aria-current="page"] {
+      color: var(--color-fg-default);
+      font-weight: 600;
+      background: color-mix(in oklch, var(--color-accent, var(--color-primary-500)) 12%, var(--color-bg-surface));
+    }
+
+    .t-nav-icon { inline-size: 1rem; text-align: center; flex-shrink: 0; font-style: normal; }
+
+    /* ── Main ─────────────────────────────────────────────────────── */
+    .t-main {
+      overflow-y: auto;
+      padding: var(--space-7, 1.75rem) var(--space-7, 1.75rem);
+    }
+
+    .t-page { max-inline-size: 56rem; margin: 0 auto; }
+
+    /* ── Page header ─────────────────────────────────────────────── */
+    .t-page-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: var(--space-4);
+      flex-wrap: wrap;
+      margin-block-end: var(--space-6);
+    }
+
+    .t-page-title {
+      margin: 0 0 var(--space-1);
+      font-size: var(--font-size-xl, 1.375rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--color-fg-default);
+    }
+
+    .t-page-desc {
+      margin: 0;
+      font-size: var(--font-size-sm);
+      color: var(--color-fg-muted);
+    }
+
+    /* ── Stat grid ───────────────────────────────────────────────── */
+    .t-stat-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+      gap: var(--space-4);
+      margin-block-end: var(--space-6);
+    }
+
+    .t-stat-delta {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.2rem;
+      font-size: var(--font-size-xs);
+      font-weight: 600;
+      padding: 0.1rem 0.35rem;
+      border-radius: 999px;
+    }
+    .t-stat-delta-up   { background: color-mix(in oklch, oklch(72% 0.17 145) 14%, transparent); color: oklch(40% 0.14 145); }
+    .t-stat-delta-down { background: color-mix(in oklch, var(--color-danger) 14%, transparent); color: var(--color-danger); }
+
+    html[data-theme="dark"] .t-stat-delta-up   { color: oklch(75% 0.17 145); }
+    html[data-theme="dark"] .t-stat-delta-down { color: color-mix(in oklch, var(--color-danger) 80%, #fff); }
+
+    /* ── Section heading ─────────────────────────────────────────── */
+    .t-section-heading {
+      margin: 0 0 var(--space-3);
+      font-size: var(--font-size-sm);
+      font-weight: 700;
+      color: var(--color-fg-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding-block-end: var(--space-3);
+      border-block-end: 1px solid var(--color-border-subtle);
+    }
+
+    /* ── Avatar fallback ─────────────────────────────────────────── */
+    .t-avatar {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      inline-size: 2rem;
+      block-size: 2rem;
+      border-radius: 999px;
+      background: var(--color-primary-500);
+      color: #fff;
+      font-size: var(--font-size-xs);
+      font-weight: 700;
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+
+    /* ── Responsive ───────────────────────────────────────────────── */
+    @media (max-width: 800px) {
+      .t-body  { grid-template-columns: 1fr; }
+      .t-sidebar { display: none; }
+      .t-main { padding: var(--space-4); }
+      .t-topbar-nav { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Topbar ─────────────────────────────────────────────────────────── -->
+  <header class="t-topbar" role="banner">
+    <a href="#" class="t-brand" aria-label="MyApp home">
+      <span class="t-brand-mark" aria-hidden="true">M</span>
+      MyApp
+    </a>
+
+    <nav class="t-topbar-nav" aria-label="Top navigation">
+      <a href="#" class="t-topbar-link" aria-current="page">Dashboard</a>
+      <a href="#" class="t-topbar-link">Reports</a>
+      <a href="#" class="t-topbar-link">Team</a>
+      <a href="#" class="t-topbar-link">Docs</a>
+    </nav>
+
+    <div class="t-topbar-end">
+      <button type="button" class="icon-button icon-button-sm" aria-label="Notifications" title="Notifications">
+        <span aria-hidden="true" style="font-size: 1rem;">🔔</span>
+      </button>
+      <button type="button" id="theme-toggle" class="btn btn-sm" aria-label="Toggle color scheme">Light mode</button>
+      <button type="button" class="t-avatar" aria-label="Account menu" title="Ada Johnson">AJ</button>
+    </div>
+  </header>
+
+  <!-- ── App body ───────────────────────────────────────────────────────── -->
+  <div class="t-body">
+
+    <!-- Sidebar -->
+    <aside class="t-sidebar" aria-label="Main navigation">
+      <div class="t-sidebar-top">
+        <nav class="t-nav-group" aria-label="Overview">
+          <p class="t-nav-label">Overview</p>
+          <a href="#" class="t-nav-link" aria-current="page">
+            <i class="t-nav-icon" aria-hidden="true">◼</i> Dashboard
+          </a>
+          <a href="#" class="t-nav-link">
+            <i class="t-nav-icon" aria-hidden="true">↗</i> Analytics
+          </a>
+          <a href="#" class="t-nav-link">
+            <i class="t-nav-icon" aria-hidden="true">◎</i> Activity
+          </a>
+        </nav>
+
+        <nav class="t-nav-group" aria-label="Manage">
+          <p class="t-nav-label">Manage</p>
+          <a href="#" class="t-nav-link">
+            <i class="t-nav-icon" aria-hidden="true">👥</i> Users
+          </a>
+          <a href="#" class="t-nav-link">
+            <i class="t-nav-icon" aria-hidden="true">◧</i> Projects
+          </a>
+          <a href="#" class="t-nav-link">
+            <i class="t-nav-icon" aria-hidden="true">💳</i> Billing
+          </a>
+        </nav>
+      </div>
+
+      <div class="t-sidebar-bottom">
+        <nav class="t-nav-group" aria-label="Account">
+          <a href="#" class="t-nav-link">
+            <i class="t-nav-icon" aria-hidden="true">⚙</i> Settings
+          </a>
+          <a href="#" class="t-nav-link">
+            <i class="t-nav-icon" aria-hidden="true">?</i> Help &amp; docs
+          </a>
+        </nav>
+      </div>
+    </aside>
+
+    <!-- Main content -->
+    <main class="t-main" id="main-content">
+      <div class="t-page">
+
+        <!-- Page header -->
+        <div class="t-page-header">
+          <div>
+            <h1 class="t-page-title">Dashboard</h1>
+            <p class="t-page-desc">Overview of your workspace activity for April 2026.</p>
+          </div>
+          <div class="cluster" style="gap: var(--space-2);">
+            <button type="button" class="btn btn-sm">Export CSV</button>
+            <button type="button" class="btn btn-primary btn-sm">+ New project</button>
+          </div>
+        </div>
+
+        <!-- Alert -->
+        <div class="alert" role="status" style="margin-block-end: var(--space-5);">
+          <p class="alert-title">Trial ends in 7 days</p>
+          <p class="alert-description">
+            Upgrade to a paid plan to keep full access to all features.
+            <a href="#" class="link">View plans →</a>
+          </p>
+        </div>
+
+        <!-- Stats -->
+        <div class="t-stat-grid">
+          <div class="stat">
+            <p class="stat-label">Total revenue</p>
+            <p class="stat-value">$48,230</p>
+            <p class="stat-meta">
+              <span class="t-stat-delta t-stat-delta-up">↑ 12.5%</span>
+              vs last month
+            </p>
+          </div>
+          <div class="stat">
+            <p class="stat-label">Active users</p>
+            <p class="stat-value">1,284</p>
+            <p class="stat-meta">
+              <span class="t-stat-delta t-stat-delta-up">↑ 4.2%</span>
+              vs last month
+            </p>
+          </div>
+          <div class="stat">
+            <p class="stat-label">Open tickets</p>
+            <p class="stat-value">37</p>
+            <p class="stat-meta">
+              <span class="t-stat-delta t-stat-delta-down">↑ 8</span>
+              since last week
+            </p>
+          </div>
+          <div class="stat">
+            <p class="stat-label">Avg. response time</p>
+            <p class="stat-value">2.4h</p>
+            <p class="stat-meta">
+              <span class="t-stat-delta t-stat-delta-up">↓ 18%</span>
+              improved
+            </p>
+          </div>
+        </div>
+
+        <!-- Recent activity -->
+        <section>
+          <h2 class="t-section-heading">Recent projects</h2>
+          <div style="overflow-x: auto;">
+            <table class="table" aria-label="Recent projects">
+              <thead class="table-head">
+                <tr class="table-row">
+                  <th class="table-head-cell">Project</th>
+                  <th class="table-head-cell">Owner</th>
+                  <th class="table-head-cell">Status</th>
+                  <th class="table-head-cell">Updated</th>
+                  <th class="table-head-cell">Budget</th>
+                </tr>
+              </thead>
+              <tbody class="table-body">
+                <tr class="table-row">
+                  <td class="table-cell"><strong>Project Alpha</strong></td>
+                  <td class="table-cell">
+                    <span class="cluster" style="gap: var(--space-2); display: inline-flex; align-items: center;">
+                      <span class="avatar avatar-sm"><span class="avatar-fallback">AJ</span></span>
+                      Ada Johnson
+                    </span>
+                  </td>
+                  <td class="table-cell"><span class="badge badge-primary">Active</span></td>
+                  <td class="table-cell" style="color: var(--color-fg-muted); font-size: var(--font-size-sm);">Apr 10, 2026</td>
+                  <td class="table-cell">$4,200</td>
+                </tr>
+                <tr class="table-row">
+                  <td class="table-cell"><strong>Project Beta</strong></td>
+                  <td class="table-cell">
+                    <span class="cluster" style="gap: var(--space-2); display: inline-flex; align-items: center;">
+                      <span class="avatar avatar-sm"><span class="avatar-fallback">MS</span></span>
+                      Marcus Silva
+                    </span>
+                  </td>
+                  <td class="table-cell"><span class="badge badge-neutral">Paused</span></td>
+                  <td class="table-cell" style="color: var(--color-fg-muted); font-size: var(--font-size-sm);">Apr 8, 2026</td>
+                  <td class="table-cell">$1,750</td>
+                </tr>
+                <tr class="table-row">
+                  <td class="table-cell"><strong>Project Gamma</strong></td>
+                  <td class="table-cell">
+                    <span class="cluster" style="gap: var(--space-2); display: inline-flex; align-items: center;">
+                      <span class="avatar avatar-sm"><span class="avatar-fallback">EP</span></span>
+                      Elena Park
+                    </span>
+                  </td>
+                  <td class="table-cell"><span class="badge badge-danger">Overdue</span></td>
+                  <td class="table-cell" style="color: var(--color-fg-muted); font-size: var(--font-size-sm);">Apr 3, 2026</td>
+                  <td class="table-cell">$890</td>
+                </tr>
+                <tr class="table-row">
+                  <td class="table-cell"><strong>Project Delta</strong></td>
+                  <td class="table-cell">
+                    <span class="cluster" style="gap: var(--space-2); display: inline-flex; align-items: center;">
+                      <span class="avatar avatar-sm"><span class="avatar-fallback">RK</span></span>
+                      Ryo Kimura
+                    </span>
+                  </td>
+                  <td class="table-cell"><span class="badge badge-primary">Active</span></td>
+                  <td class="table-cell" style="color: var(--color-fg-muted); font-size: var(--font-size-sm);">Apr 11, 2026</td>
+                  <td class="table-cell">$6,300</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div style="display: flex; justify-content: space-between; align-items: center; padding-block-start: var(--space-3);">
+            <p class="text-sm" style="margin: 0; color: var(--color-fg-muted);">Showing 4 of 24 projects</p>
+            <a href="#" class="link text-sm">View all projects →</a>
+          </div>
+        </section>
+
+      </div>
+    </main>
+  </div>
+
+  <script>
+    const html = document.documentElement;
+    const toggle = document.getElementById("theme-toggle");
+    toggle.addEventListener("click", () => {
+      const cur = html.getAttribute("data-theme") || "dark";
+      const next = cur === "dark" ? "light" : "dark";
+      html.setAttribute("data-theme", next);
+      toggle.textContent = next === "dark" ? "Light mode" : "Dark mode";
+    });
+  </script>
+</body>
+</html>

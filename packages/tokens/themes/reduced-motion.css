@@ -1,0 +1,20 @@
+@media (prefers-reduced-motion: reduce) {
+  @layer base {
+    :root {
+      --transition-duration-fast: 0ms;
+      --transition-duration-base: 0ms;
+      --transition-duration-slow: 0ms;
+      --animation-duration: 0ms;
+    }
+  }
+}
+
+@layer base {
+  [data-motion="reduced"],
+  .motion-reduced {
+    --transition-duration-fast: 0ms;
+    --transition-duration-base: 0ms;
+    --transition-duration-slow: 0ms;
+    --animation-duration: 0ms;
+  }
+}

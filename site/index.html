@@ -1,0 +1,718 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fikir CSS — Component Gallery</title>
+  <meta name="description" content="Contract-driven CSS design system. 82 UI surfaces, zero runtime, token-first." />
+  <!-- CSS loaded from ./dist/fikir.css (copied by the deploy workflow). CDN fallback for local preview. -->
+  <link rel="stylesheet" href="./dist/fikir.css"
+        onerror="this.onerror=null;this.href='https://cdn.jsdelivr.net/npm/fikir-css@0.5.0/dist/fikir.css'" />
+  <style>
+    /* Gallery chrome — not part of Fikir CSS */
+    *, *::before, *::after { box-sizing: border-box; }
+
+    body { margin: 0; font-family: system-ui, sans-serif; }
+
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      background: var(--color-bg-surface);
+      border-bottom: 1px solid var(--color-border-subtle);
+      padding: var(--space-3) var(--space-6);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-4);
+    }
+
+    .site-logo { font-weight: 700; font-size: 1.1rem; letter-spacing: -.02em; color: var(--color-fg-default); text-decoration: none; }
+    .site-logo span { color: var(--color-accent); }
+
+    .site-nav { display: flex; gap: var(--space-2); flex-wrap: wrap; }
+    .site-nav a {
+      font-size: var(--font-size-sm);
+      color: var(--color-fg-muted);
+      text-decoration: none;
+      padding: var(--space-1) var(--space-2);
+      border-radius: var(--radius-sm);
+      transition: background 120ms, color 120ms;
+    }
+    .site-nav a:hover { background: var(--color-bg-default); color: var(--color-fg-default); }
+
+    .site-body { display: grid; grid-template-columns: 14rem 1fr; min-height: 100vh; }
+
+    .site-sidebar {
+      border-right: 1px solid var(--color-border-subtle);
+      padding: var(--space-4) var(--space-3);
+      position: sticky;
+      top: 3.5rem;
+      height: calc(100vh - 3.5rem);
+      overflow-y: auto;
+      background: var(--color-bg-surface);
+    }
+    .side-group { margin-bottom: var(--space-4); }
+    .side-group-title { font-size: 0.7rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--color-fg-muted); padding: 0 var(--space-2); margin-bottom: var(--space-1); }
+    .side-link {
+      display: block;
+      font-size: var(--font-size-sm);
+      color: var(--color-fg-muted);
+      text-decoration: none;
+      padding: var(--space-1) var(--space-2);
+      border-radius: var(--radius-sm);
+      transition: background 100ms, color 100ms;
+    }
+    .side-link:hover { background: var(--color-bg-default); color: var(--color-fg-default); }
+
+    .site-content { padding: var(--space-6); background: var(--color-bg-default); }
+
+    .section {
+      margin-bottom: var(--space-6);
+      padding-bottom: var(--space-6);
+      border-bottom: 1px solid var(--color-border-subtle);
+    }
+    .section:last-child { border-bottom: none; }
+    .section-title {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--color-fg-default);
+      margin: 0 0 var(--space-1);
+    }
+    .section-desc {
+      font-size: var(--font-size-sm);
+      color: var(--color-fg-muted);
+      margin: 0 0 var(--space-4);
+    }
+    .preview-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-3);
+      align-items: flex-start;
+      padding: var(--space-4);
+      background: var(--color-bg-surface);
+      border: 1px solid var(--color-border-subtle);
+      border-radius: var(--radius-lg);
+      margin-bottom: var(--space-2);
+    }
+    .preview-row + .preview-row { margin-top: 0; }
+
+    .code-chip {
+      display: inline-block;
+      font-family: monospace;
+      font-size: .75rem;
+      background: var(--color-bg-default);
+      border: 1px solid var(--color-border-subtle);
+      border-radius: var(--radius-sm);
+      padding: 1px 6px;
+      color: var(--color-accent);
+    }
+    .preview-label {
+      font-size: .7rem;
+      color: var(--color-fg-muted);
+      margin-top: var(--space-1);
+      font-family: monospace;
+    }
+    .item { display: flex; flex-direction: column; gap: var(--space-1); align-items: flex-start; }
+
+    .hero {
+      background: var(--color-bg-surface);
+      border: 1px solid var(--color-border-subtle);
+      border-radius: var(--radius-lg);
+      padding: var(--space-6);
+      margin-bottom: var(--space-6);
+      text-align: center;
+    }
+    .hero h1 { margin: 0 0 var(--space-2); font-size: 2rem; font-weight: 800; }
+    .hero p { color: var(--color-fg-muted); margin: 0 0 var(--space-4); }
+    .hero-badges { display: flex; gap: var(--space-2); justify-content: center; flex-wrap: wrap; }
+
+    @media (max-width: 640px) {
+      .site-body { grid-template-columns: 1fr; }
+      .site-sidebar { display: none; }
+      .site-header { padding: var(--space-3) var(--space-4); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Header -->
+<header class="site-header">
+  <a href="#" class="site-logo">Fikir<span>CSS</span></a>
+  <nav class="site-nav">
+    <a href="https://github.com/snrj35-dev/Fikir-Css">GitHub</a>
+    <a href="https://www.npmjs.com/package/fikir-css">npm</a>
+    <a href="token-explorer.html">Tokens</a>
+  </nav>
+  <button class="btn btn-outline btn-neutral btn-sm" id="theme-toggle" aria-label="Toggle dark mode">
+    🌙 Dark
+  </button>
+</header>
+
+<div class="site-body">
+
+  <!-- Sidebar -->
+  <aside class="site-sidebar" aria-label="Component navigation">
+    <div class="side-group">
+      <div class="side-group-title">Actions</div>
+      <a class="side-link" href="#buttons">Buttons</a>
+      <a class="side-link" href="#icon-button">Icon Button</a>
+      <a class="side-link" href="#link">Link</a>
+    </div>
+    <div class="side-group">
+      <div class="side-group-title">Feedback</div>
+      <a class="side-link" href="#alert">Alert</a>
+      <a class="side-link" href="#badge">Badge</a>
+      <a class="side-link" href="#toast">Toast</a>
+      <a class="side-link" href="#spinner">Spinner</a>
+      <a class="side-link" href="#skeleton">Skeleton</a>
+    </div>
+    <div class="side-group">
+      <div class="side-group-title">Forms</div>
+      <a class="side-link" href="#input">Input</a>
+      <a class="side-link" href="#select">Select</a>
+      <a class="side-link" href="#checkbox">Checkbox</a>
+      <a class="side-link" href="#radio">Radio</a>
+      <a class="side-link" href="#switch">Switch</a>
+      <a class="side-link" href="#textarea">Textarea</a>
+    </div>
+    <div class="side-group">
+      <div class="side-group-title">Layout</div>
+      <a class="side-link" href="#card">Card</a>
+      <a class="side-link" href="#divider">Divider</a>
+      <a class="side-link" href="#surface">Surface</a>
+    </div>
+    <div class="side-group">
+      <div class="side-group-title">Navigation</div>
+      <a class="side-link" href="#tabs">Tabs</a>
+      <a class="side-link" href="#breadcrumb">Breadcrumb</a>
+      <a class="side-link" href="#pagination">Pagination</a>
+    </div>
+    <div class="side-group">
+      <div class="side-group-title">Overlay</div>
+      <a class="side-link" href="#modal">Modal</a>
+      <a class="side-link" href="#tooltip">Tooltip</a>
+    </div>
+    <div class="side-group">
+      <div class="side-group-title">Data</div>
+      <a class="side-link" href="#table">Table</a>
+      <a class="side-link" href="#empty-state">Empty State</a>
+      <a class="side-link" href="#stat">Stat</a>
+    </div>
+    <div class="side-group">
+      <div class="side-group-title">Typography</div>
+      <a class="side-link" href="#typography">Headings &amp; Text</a>
+    </div>
+  </aside>
+
+  <!-- Main content -->
+  <main class="site-content">
+
+    <!-- Hero -->
+    <div class="hero">
+      <h1>Fikir CSS</h1>
+      <p>Contract-driven design system · Zero runtime · Token-first · 82 surfaces</p>
+      <div class="hero-badges">
+        <span class="badge badge-neutral">v0.5.0</span>
+        <span class="badge badge-neutral">~12 KB gzip</span>
+        <span class="badge badge-primary">Zero runtime</span>
+        <span class="badge badge-neutral">TypeScript types</span>
+      </div>
+    </div>
+
+    <!-- ── BUTTONS ───────────────────────────────── -->
+    <section class="section" id="buttons">
+      <h2 class="section-title">Button</h2>
+      <p class="section-desc">Use <code class="code-chip">btn</code> as base, add variant + tone modifier classes.</p>
+
+      <div class="preview-row">
+        <div class="item"><button class="btn btn-primary">Primary</button><span class="preview-label">btn btn-primary</span></div>
+        <div class="item"><button class="btn btn-neutral">Neutral</button><span class="preview-label">btn btn-neutral</span></div>
+        <div class="item"><button class="btn btn-danger">Danger</button><span class="preview-label">btn btn-danger</span></div>
+        <div class="item"><button class="btn btn-outline btn-neutral">Outline</button><span class="preview-label">btn btn-outline btn-neutral</span></div>
+        <div class="item"><button class="btn btn-outline btn-primary">Outline Primary</button><span class="preview-label">btn btn-outline btn-primary</span></div>
+      </div>
+      <div class="preview-row">
+        <div class="item"><button class="btn btn-primary btn-sm">Small</button><span class="preview-label">btn-sm</span></div>
+        <div class="item"><button class="btn btn-primary btn-md">Medium</button><span class="preview-label">btn-md (default)</span></div>
+        <div class="item"><button class="btn btn-primary btn-lg">Large</button><span class="preview-label">btn-lg</span></div>
+      </div>
+      <div class="preview-row">
+        <div class="item"><button class="btn btn-primary" disabled>Disabled</button><span class="preview-label">disabled attr</span></div>
+      </div>
+    </section>
+
+    <!-- ── ICON BUTTON ───────────────────────────── -->
+    <section class="section" id="icon-button">
+      <h2 class="section-title">Icon Button</h2>
+      <p class="section-desc">Square button for icons — use <code class="code-chip">icon-button</code>.</p>
+      <div class="preview-row">
+        <div class="item"><button class="icon-button" aria-label="Close">✕</button><span class="preview-label">icon-button</span></div>
+        <div class="item"><button class="icon-button" aria-label="Settings">⚙</button><span class="preview-label">icon-button</span></div>
+        <div class="item"><button class="icon-button" aria-label="Search">🔍</button><span class="preview-label">icon-button</span></div>
+      </div>
+    </section>
+
+    <!-- ── LINK ──────────────────────────────────── -->
+    <section class="section" id="link">
+      <h2 class="section-title">Link</h2>
+      <div class="preview-row">
+        <div class="item"><a href="#" class="link">Default link</a><span class="preview-label">link</span></div>
+      </div>
+    </section>
+
+    <!-- ── ALERT ─────────────────────────────────── -->
+    <section class="section" id="alert">
+      <h2 class="section-title">Alert</h2>
+      <p class="section-desc">Use <code class="code-chip">alert</code> + tone modifier.</p>
+      <div class="preview-row" style="flex-direction: column">
+        <div class="item" style="width:100%">
+          <div class="alert" role="alert" style="width:100%">
+            <p class="alert-title">Default</p>
+            <p class="alert-description">A neutral informational message.</p>
+          </div>
+          <span class="preview-label">alert</span>
+        </div>
+        <div class="item" style="width:100%">
+          <div class="alert alert-danger" role="alert" style="width:100%">
+            <p class="alert-title">Error</p>
+            <p class="alert-description">Something went wrong. Please try again.</p>
+          </div>
+          <span class="preview-label">alert alert-danger</span>
+        </div>
+        <div class="item" style="width:100%">
+          <div class="alert alert-warning" role="alert" style="width:100%">
+            <p class="alert-title">Warning</p>
+            <p class="alert-description">Your session expires in 5 minutes.</p>
+          </div>
+          <span class="preview-label">alert alert-warning</span>
+        </div>
+        <div class="item" style="width:100%">
+          <div class="alert alert-success" role="alert" style="width:100%">
+            <p class="alert-title">Success</p>
+            <p class="alert-description">Your changes have been saved.</p>
+          </div>
+          <span class="preview-label">alert alert-success</span>
+        </div>
+        <div class="item" style="width:100%">
+          <div class="alert alert-info" role="alert" style="width:100%">
+            <p class="alert-title">Info</p>
+            <p class="alert-description">A new version is available.</p>
+          </div>
+          <span class="preview-label">alert alert-info</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── BADGE ─────────────────────────────────── -->
+    <section class="section" id="badge">
+      <h2 class="section-title">Badge</h2>
+      <div class="preview-row">
+        <div class="item"><span class="badge badge-neutral">Neutral</span><span class="preview-label">badge-neutral</span></div>
+        <div class="item"><span class="badge badge-primary">Primary</span><span class="preview-label">badge-primary</span></div>
+        <div class="item"><span class="badge badge-danger">Danger</span><span class="preview-label">badge-danger</span></div>
+        <div class="item"><span class="badge badge-warning">Warning</span><span class="preview-label">badge-warning</span></div>
+        <div class="item"><span class="badge badge-success">Success</span><span class="preview-label">badge-success</span></div>
+        <div class="item"><span class="badge badge-info">Info</span><span class="preview-label">badge-info</span></div>
+      </div>
+    </section>
+
+    <!-- ── TOAST ─────────────────────────────────── -->
+    <section class="section" id="toast">
+      <h2 class="section-title">Toast</h2>
+      <p class="section-desc">Normally positioned fixed; shown inline here for preview. Toggle <code class="code-chip">data-open="true"</code>.</p>
+      <div class="preview-row" style="flex-direction: column; gap: var(--space-2)">
+        <div class="item" style="width:100%">
+          <div class="toast toast--success" data-open="true" style="position:relative;inset:unset;translate:none;max-inline-size:100%;border-radius:var(--radius-md)">
+            <p class="toast-title">Saved successfully</p>
+          </div>
+          <span class="preview-label">toast toast--success</span>
+        </div>
+        <div class="item" style="width:100%">
+          <div class="toast toast--error" data-open="true" style="position:relative;inset:unset;translate:none;max-inline-size:100%;border-radius:var(--radius-md)">
+            <p class="toast-title">Upload failed</p>
+          </div>
+          <span class="preview-label">toast toast--error</span>
+        </div>
+        <div class="item" style="width:100%">
+          <div class="toast toast--warn" data-open="true" style="position:relative;inset:unset;translate:none;max-inline-size:100%;border-radius:var(--radius-md)">
+            <p class="toast-title">Session expiring soon</p>
+          </div>
+          <span class="preview-label">toast toast--warn</span>
+        </div>
+        <div class="item" style="width:100%">
+          <div class="toast toast--info" data-open="true" style="position:relative;inset:unset;translate:none;max-inline-size:100%;border-radius:var(--radius-md)">
+            <p class="toast-title">New version available</p>
+          </div>
+          <span class="preview-label">toast toast--info</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── SPINNER + SKELETON ────────────────────── -->
+    <section class="section" id="spinner">
+      <h2 class="section-title">Spinner</h2>
+      <div class="preview-row">
+        <div class="item"><div class="spinner" role="status" aria-label="Loading"></div><span class="preview-label">spinner</span></div>
+      </div>
+    </section>
+
+    <section class="section" id="skeleton">
+      <h2 class="section-title">Skeleton</h2>
+      <div class="preview-row" style="flex-direction: column; gap: var(--space-2); width: 100%">
+        <div class="skeleton" style="height: 1rem; width: 60%"></div>
+        <div class="skeleton" style="height: 1rem; width: 80%"></div>
+        <div class="skeleton" style="height: 1rem; width: 40%"></div>
+        <span class="preview-label">skeleton</span>
+      </div>
+    </section>
+
+    <!-- ── FORMS ─────────────────────────────────── -->
+    <section class="section" id="input">
+      <h2 class="section-title">Input / Field</h2>
+      <div class="preview-row" style="flex-direction: column; max-width: 28rem; gap: var(--space-4)">
+        <div class="field">
+          <label class="label" for="g-name">Name</label>
+          <input id="g-name" class="input" type="text" placeholder="Jane Doe" />
+          <p class="helper-text">Your display name.</p>
+        </div>
+        <div class="field">
+          <label class="label" for="g-email">Email</label>
+          <input id="g-email" class="input" type="email" placeholder="jane@example.com" />
+        </div>
+        <span class="preview-label">field · label · input · helper-text</span>
+      </div>
+    </section>
+
+    <section class="section" id="select">
+      <h2 class="section-title">Select</h2>
+      <div class="preview-row" style="max-width: 24rem">
+        <div class="field" style="width:100%">
+          <label class="label" for="g-select">Country</label>
+          <select id="g-select" class="select">
+            <option>Turkey</option>
+            <option>Germany</option>
+            <option>United States</option>
+          </select>
+        </div>
+        <span class="preview-label">select</span>
+      </div>
+    </section>
+
+    <section class="section" id="checkbox">
+      <h2 class="section-title">Checkbox · Radio · Switch</h2>
+      <div class="preview-row" style="gap: var(--space-6)">
+        <div class="item">
+          <label style="display:flex;align-items:center;gap:.5rem">
+            <input type="checkbox" class="checkbox" checked /> Checkbox
+          </label>
+          <span class="preview-label">checkbox</span>
+        </div>
+        <div class="item">
+          <label style="display:flex;align-items:center;gap:.5rem">
+            <input type="radio" class="radio" name="g-radio" checked /> Radio
+          </label>
+          <span class="preview-label">radio</span>
+        </div>
+        <div class="item">
+          <label style="display:flex;align-items:center;gap:.5rem">
+            <input type="checkbox" class="switch" role="switch" checked /> Switch
+          </label>
+          <span class="preview-label">switch</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="textarea">
+      <h2 class="section-title">Textarea</h2>
+      <div class="preview-row" style="max-width: 28rem">
+        <div class="field" style="width:100%">
+          <label class="label" for="g-ta">Message</label>
+          <textarea id="g-ta" class="textarea" rows="3" placeholder="Type your message…"></textarea>
+        </div>
+        <span class="preview-label">textarea</span>
+      </div>
+    </section>
+
+    <!-- ── CARD ──────────────────────────────────── -->
+    <section class="section" id="card">
+      <h2 class="section-title">Card</h2>
+      <div class="preview-row" style="gap: var(--space-4); align-items: stretch">
+        <div class="item" style="flex:1;min-width:200px">
+          <div class="card" style="padding:1rem;height:100%">
+            <p style="margin:0;font-weight:600">Plain card</p>
+            <p style="margin:.5rem 0 0;font-size:.875rem;color:var(--color-fg-muted)">Default variant.</p>
+          </div>
+          <span class="preview-label">card</span>
+        </div>
+        <div class="item" style="flex:1;min-width:200px">
+          <div class="card card-elevated" style="padding:1rem;height:100%">
+            <p style="margin:0;font-weight:600">Elevated card</p>
+            <p style="margin:.5rem 0 0;font-size:.875rem;color:var(--color-fg-muted)">With shadow.</p>
+          </div>
+          <span class="preview-label">card card-elevated</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── DIVIDER ───────────────────────────────── -->
+    <section class="section" id="divider">
+      <h2 class="section-title">Divider</h2>
+      <div class="preview-row" style="flex-direction:column">
+        <hr class="divider" style="width:100%" />
+        <span class="preview-label">divider</span>
+      </div>
+    </section>
+
+    <!-- ── SURFACE ───────────────────────────────── -->
+    <section class="section" id="surface">
+      <h2 class="section-title">Surface</h2>
+      <div class="preview-row">
+        <div class="surface" style="padding:1rem;border-radius:var(--radius-md);border:1px solid var(--color-border-subtle)">
+          Background surface layer
+        </div>
+        <span class="preview-label">surface</span>
+      </div>
+    </section>
+
+    <!-- ── TABS ──────────────────────────────────── -->
+    <section class="section" id="tabs">
+      <h2 class="section-title">Tabs</h2>
+      <div class="preview-row" style="flex-direction:column;width:100%">
+        <div class="tabs" style="width:100%">
+          <div class="tabs-list" role="tablist">
+            <button class="tabs-trigger" role="tab" aria-selected="true" id="t1">Overview</button>
+            <button class="tabs-trigger" role="tab" aria-selected="false" id="t2">Details</button>
+            <button class="tabs-trigger" role="tab" aria-selected="false" id="t3">Settings</button>
+          </div>
+          <div class="tabs-panel" role="tabpanel" data-open="true">Overview content goes here.</div>
+          <div class="tabs-panel" role="tabpanel" hidden>Details content goes here.</div>
+          <div class="tabs-panel" role="tabpanel" hidden>Settings content goes here.</div>
+        </div>
+        <span class="preview-label">tabs · tabs-list · tabs-trigger · tabs-panel</span>
+      </div>
+    </section>
+
+    <!-- ── BREADCRUMB ────────────────────────────── -->
+    <section class="section" id="breadcrumb">
+      <h2 class="section-title">Breadcrumb</h2>
+      <div class="preview-row">
+        <nav class="breadcrumb" aria-label="Breadcrumb">
+          <ol class="breadcrumb-list">
+            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Home</a></li>
+            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Products</a></li>
+            <li class="breadcrumb-item breadcrumb-item-current" aria-current="page">Detail</li>
+          </ol>
+        </nav>
+        <span class="preview-label">breadcrumb · breadcrumb-list · breadcrumb-item</span>
+      </div>
+    </section>
+
+    <!-- ── PAGINATION ────────────────────────────── -->
+    <section class="section" id="pagination">
+      <h2 class="section-title">Pagination</h2>
+      <div class="preview-row">
+        <nav class="pagination" aria-label="Pagination">
+          <button class="pagination-prev" aria-label="Previous">‹</button>
+          <button class="pagination-item">1</button>
+          <button class="pagination-item pagination-item--active" aria-current="page">2</button>
+          <button class="pagination-item">3</button>
+          <button class="pagination-next" aria-label="Next">›</button>
+        </nav>
+        <span class="preview-label">pagination · pagination-item · pagination-item--active</span>
+      </div>
+    </section>
+
+    <!-- ── MODAL ─────────────────────────────────── -->
+    <section class="section" id="modal">
+      <h2 class="section-title">Modal</h2>
+      <p class="section-desc">Toggle <code class="code-chip">data-open="true"</code> on the wrapper. Focus trap should be wired in JS.</p>
+      <div class="preview-row">
+        <button class="btn btn-primary" id="open-modal">Open modal</button>
+        <span class="preview-label">data-open driven</span>
+      </div>
+      <div class="modal" id="demo-modal" data-open="false" role="dialog" aria-modal="true" aria-labelledby="modal-demo-title">
+        <div class="modal-dialog" style="max-width:28rem">
+          <header class="modal-header">
+            <h2 id="modal-demo-title" style="margin:0;font-size:1.1rem;font-weight:700">Confirm action</h2>
+            <button class="icon-button" id="close-modal" aria-label="Close">✕</button>
+          </header>
+          <div class="modal-body">
+            <p style="margin:0;color:var(--color-fg-muted)">This modal is driven by <code>data-open</code> with no JS framework required.</p>
+          </div>
+          <footer class="modal-footer">
+            <button class="btn btn-outline btn-neutral" id="cancel-modal">Cancel</button>
+            <button class="btn btn-primary">Confirm</button>
+          </footer>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── TOOLTIP ───────────────────────────────── -->
+    <section class="section" id="tooltip">
+      <h2 class="section-title">Tooltip</h2>
+      <div class="preview-row">
+        <div class="tooltip-wrapper">
+          <button class="btn btn-neutral">Hover me</button>
+          <div class="tooltip" role="tooltip">This is a tooltip</div>
+        </div>
+        <span class="preview-label">tooltip-wrapper · tooltip</span>
+      </div>
+    </section>
+
+    <!-- ── TABLE ─────────────────────────────────── -->
+    <section class="section" id="table">
+      <h2 class="section-title">Table</h2>
+      <div class="preview-row" style="overflow-x:auto;width:100%">
+        <table class="table" style="width:100%">
+          <thead>
+            <tr>
+              <th>Name</th>
+              <th>Status</th>
+              <th>Role</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Alice Kim</td>
+              <td><span class="badge badge-primary">Active</span></td>
+              <td>Admin</td>
+            </tr>
+            <tr>
+              <td>Bob Chen</td>
+              <td><span class="badge badge-neutral">Invited</span></td>
+              <td>Editor</td>
+            </tr>
+            <tr>
+              <td>Carol Davis</td>
+              <td><span class="badge badge-danger">Suspended</span></td>
+              <td>Viewer</td>
+            </tr>
+          </tbody>
+        </table>
+        <span class="preview-label">table</span>
+      </div>
+    </section>
+
+    <!-- ── EMPTY STATE ───────────────────────────── -->
+    <section class="section" id="empty-state">
+      <h2 class="section-title">Empty State</h2>
+      <div class="preview-row">
+        <div class="empty-state" style="width:100%">
+          <p class="empty-state-title">No results found</p>
+          <p class="empty-state-description">Try adjusting your search or filters.</p>
+          <button class="btn btn-primary btn-sm">Clear filters</button>
+        </div>
+        <span class="preview-label">empty-state · empty-state-title · empty-state-description</span>
+      </div>
+    </section>
+
+    <!-- ── STAT ──────────────────────────────────── -->
+    <section class="section" id="stat">
+      <h2 class="section-title">Stat</h2>
+      <div class="preview-row" style="gap: var(--space-4)">
+        <div class="stat">
+          <p class="stat-label">Total users</p>
+          <p class="stat-value">12,480</p>
+          <p class="stat-change stat-change--up">+8.2%</p>
+        </div>
+        <div class="stat">
+          <p class="stat-label">Revenue</p>
+          <p class="stat-value">$42,900</p>
+          <p class="stat-change stat-change--up">+3.1%</p>
+        </div>
+        <div class="stat">
+          <p class="stat-label">Churn rate</p>
+          <p class="stat-value">2.4%</p>
+          <p class="stat-change stat-change--down">+0.4%</p>
+        </div>
+        <span class="preview-label">stat · stat-label · stat-value · stat-change--up/down</span>
+      </div>
+    </section>
+
+    <!-- ── TYPOGRAPHY ────────────────────────────── -->
+    <section class="section" id="typography">
+      <h2 class="section-title">Typography</h2>
+      <div class="preview-row" style="flex-direction:column;gap:var(--space-2)">
+        <div class="item"><h1 class="heading-1" style="margin:0">Heading 1</h1><span class="preview-label">heading-1</span></div>
+        <div class="item"><h2 class="heading-2" style="margin:0">Heading 2</h2><span class="preview-label">heading-2</span></div>
+        <div class="item"><h3 class="heading-3" style="margin:0">Heading 3</h3><span class="preview-label">heading-3</span></div>
+        <div class="item"><p class="text-muted" style="margin:0">Muted text — helper descriptions</p><span class="preview-label">text-muted</span></div>
+        <div class="item"><p class="visually-hidden">Visually hidden (screen-reader only)</p><span class="preview-label">visually-hidden</span></div>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+<script>
+  // Dark mode toggle (non-module, runs immediately)
+  const btn = document.getElementById('theme-toggle');
+  btn.addEventListener('click', () => {
+    const current = document.documentElement.getAttribute('data-theme');
+    const next = current === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    btn.textContent = next === 'dark' ? '☀️ Light' : '🌙 Dark';
+  });
+
+  // Smooth sidebar scroll highlight
+  const sections = document.querySelectorAll('.section[id]');
+  const links = document.querySelectorAll('.side-link');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        links.forEach(l => l.style.removeProperty('background'));
+        const active = document.querySelector(`.side-link[href="#${entry.target.id}"]`);
+        if (active) active.style.background = 'var(--color-bg-default)';
+      }
+    });
+  }, { rootMargin: '-30% 0px -60% 0px' });
+  sections.forEach(s => observer.observe(s));
+</script>
+
+<!-- Modal demo — powered by fikir-css/helpers -->
+<script type="module">
+  // On GitHub Pages the helpers are served from ./dist/helpers/index.mjs
+  // (copied there by the deploy workflow). Falls back to inline shim locally.
+  let createFocusTrap, bindOverlayKeyboard;
+  try {
+    ({ createFocusTrap, bindOverlayKeyboard } = await import('./dist/helpers/index.mjs'));
+  } catch {
+    // Local fallback shim (no dist/ in dev mode)
+    createFocusTrap = (el) => ({
+      activate: (trigger) => { el._trap_trigger = trigger; },
+      deactivate: () => { el._trap_trigger?.focus(); },
+    });
+    bindOverlayKeyboard = (el, { onClose }) => {
+      const onKey = (e) => { if (e.key === 'Escape') onClose(); };
+      const onClick = (e) => { if (e.target === el) onClose(); };
+      document.addEventListener('keydown', onKey);
+      el.addEventListener('click', onClick);
+      return { destroy: () => { document.removeEventListener('keydown', onKey); el.removeEventListener('click', onClick); } };
+    };
+  }
+
+  const modal   = document.getElementById('demo-modal');
+  const openBtn = document.getElementById('open-modal');
+  const closeBtn  = document.getElementById('close-modal');
+  const cancelBtn = document.getElementById('cancel-modal');
+
+  const trap = createFocusTrap(modal);
+  const { destroy } = bindOverlayKeyboard(modal, { onClose: closeModal });
+
+  function openModal() {
+    modal.setAttribute('data-open', 'true');
+    trap.activate(openBtn);
+  }
+  function closeModal() {
+    modal.setAttribute('data-open', 'false');
+    trap.deactivate();
+  }
+
+  openBtn.addEventListener('click', openModal);
+  closeBtn.addEventListener('click', closeModal);
+  cancelBtn.addEventListener('click', closeModal);
+</script>
+
+</body>
+</html>

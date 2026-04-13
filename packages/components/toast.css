@@ -32,10 +32,63 @@
     color: var(--color-fg-default);
   }
 
+  {{component.toastTitle}} {
+    font-size: var(--font-size-sm);
+    font-weight: 600;
+    margin-block-end: var(--space-1);
+  }
+
+  {{component.toastDescription}} {
+    font-size: var(--font-size-sm);
+    color: var(--color-fg-muted);
+  }
+
+  {{component.toastClose}} {
+    position: absolute;
+    inset-block-start: var(--space-2);
+    inset-inline-end: var(--space-2);
+    border: 0;
+    background: transparent;
+    cursor: pointer;
+    color: var(--color-fg-muted);
+    padding: var(--space-1);
+    border-radius: var(--radius-sm);
+    line-height: 1;
+  }
+
+  {{component.toastClose}}:hover {
+    color: var(--color-fg-default);
+    background: color-mix(in oklch, var(--color-border-subtle) 50%, transparent);
+  }
+
   {{component.toast}} .toast-actions {
     display: flex;
     justify-content: flex-end;
     gap: var(--space-2);
     margin-block-start: var(--space-2);
+  }
+
+  {{component.toast}}{{component.toastSuccess}},
+  {{component.toast}}[data-tone="success"] {
+    border-color: color-mix(in oklch, oklch(72% 0.17 145) 48%, var(--color-bg-surface));
+    background: color-mix(in oklch, oklch(72% 0.17 145) 10%, var(--color-bg-surface));
+  }
+
+  {{component.toast}}{{component.toastInfo}},
+  {{component.toast}}[data-tone="info"] {
+    border-color: color-mix(in oklch, oklch(62% 0.14 230) 48%, var(--color-bg-surface));
+    background: color-mix(in oklch, oklch(62% 0.14 230) 10%, var(--color-bg-surface));
+  }
+
+  {{component.toast}}{{component.toastWarn}},
+  {{component.toast}}[data-tone="warn"] {
+    border-color: color-mix(in oklch, oklch(80% 0.18 75) 48%, var(--color-bg-surface));
+    background: color-mix(in oklch, oklch(80% 0.18 75) 10%, var(--color-bg-surface));
+  }
+
+  {{component.toast}}{{component.toastError}},
+  {{component.toast}}[data-tone="error"] {
+    border-color: color-mix(in oklch, var(--color-danger) 48%, var(--color-bg-surface));
+    background: color-mix(in oklch, var(--color-danger) 10%, var(--color-bg-surface));
   }
 }

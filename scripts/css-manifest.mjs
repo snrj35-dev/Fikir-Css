@@ -90,6 +90,8 @@ export const cssManifest = [
   "packages/components/label.css",
   "packages/components/helper-text.css",
   "packages/components/error-text.css",
+  "packages/components/segmented-control.css",
+  "packages/components/settings-panel.css",
   "packages/components/badge.css",
   "packages/components/alert.css",
   "packages/utilities/spacing.css",

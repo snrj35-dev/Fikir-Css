@@ -1,7 +1,7 @@
-# Fikir CSS — Support Matrix (Baseline)
+# Fikir CSS — Support Matrix (v0.5.0)
 
 > Baseline audit date: 2026-04-11
-> Last reviewed: 2026-04-11
+> Last reviewed: 2026-04-12 (M2 Wave 6 applied; API stability badges added)
 
 This matrix classifies the currently public surface into support levels.
 
@@ -11,48 +11,57 @@ Support levels:
 - `rfc-only`: documented/spec'd but not implemented as a canonical surface
 - `planned`: intentionally deferred to future roadmap scope
 
-## Supported Surface (Current Baseline)
+## API Stability Badges
 
-### Core and foundation
-- `button`
-- `input`
-- `textarea`
-- `select`
-- `checkbox`
-- `radio`
-- `switch`
-- `card`
-- `badge`
-- `alert`
-- `label`
-- `helper-text`
-- `error-text`
-- `field`
+Each supported surface carries a stability badge:
 
-### Layout primitives
-- `container`
-- `stack`
-- `cluster`
-- `sidebar`
-- `switcher`
-- `center`
-- `grid`
+| Badge | Meaning |
+|-------|---------|
+| ![stable](https://img.shields.io/badge/stability-stable-green) | Selector contract is frozen. Changes require major version bump. |
+| ![beta](https://img.shields.io/badge/stability-beta-yellow) | Surface is complete but may receive additive changes in minor versions. |
+| ![experimental](https://img.shields.io/badge/stability-experimental-orange) | API may change without deprecation notice. Not for production use. |
 
-### M1 chosen slices
-- Overlay: `modal`, `toast`
-- Navigation: `tabs`, `pagination`
-- Data/display: `table`, `empty-state`
+Badge key used inline below: `[stable]` · `[beta]` · `[exp]`
+
+## Supported Surface (v0.5.0)
+
+### Core and foundation `[stable]`
+- `button` · `input` · `textarea` · `select` · `checkbox` · `radio` · `switch`
+- `card` · `badge` · `alert` · `label` · `helper-text` · `error-text` · `field`
+
+### Layout primitives `[stable]`
+- `container` · `stack` · `cluster` · `sidebar` · `switcher` · `center` · `grid`
+
+### Overlay (M1 baseline) `[stable]`
+- `modal` · `toast`
+
+### Navigation (M1 baseline) `[stable]`
+- `tabs` · `pagination`
+
+### Data/display (M1 baseline) `[stable]`
+- `table` · `empty-state`
+
+### Foundation extensions (Wave 1 — 2026-04-12) `[stable]`
+- `icon-button` · `link` · `divider` · `surface` · `visually-hidden` · `skeleton` · `spinner`
+
+### Overlay slice (Wave 2 — 2026-04-12) `[stable]`
+- `tooltip` · `popover` · `dropdown-menu`
+
+### Navigation slice (Wave 3 — 2026-04-12) `[stable]`
+- `accordion` · `breadcrumb` · `navbar` · `menu-bar` · `sidebar-nav`
+
+### Shell and layout slice (Wave 4 — 2026-04-12) `[stable]`
+- `stepper` · `page-header` · `section-block` · `app-shell` · `split-pane`
+
+### Data and display slice (Wave 5 — 2026-04-12) `[stable]`
+- `data-grid` · `result` · `stat` · `list` · `description-list`
+
+### Input augmentation slice (Wave 6 — 2026-04-12) `[beta]`
+- `combobox` · `search-box` · `autocomplete` · `command-palette`
+
+> Wave 6 surfaces are `[beta]`: selector contracts are locked but keyboard interaction helpers may be additive in the next minor.
 
 ## Experimental Surface (Implemented)
-
-### Foundation extensions and utilities-facing components
-- `icon-button`
-- `link`
-- `divider`
-- `surface`
-- `visually-hidden`
-- `skeleton`
-- `spinner`
 
 ### Forms and input extensions
 - `range-slider`
@@ -62,46 +71,24 @@ Support levels:
 - `otp-input`
 - `input-group`
 
-### Overlay and interaction
-- `tooltip`
-- `popover`
-- `dropdown-menu`
+### Overlay and interaction (extended)
 - `context-menu`
 - `progress`
 - `loading-overlay`
 - `drawer`
 - `hover-card`
 
-### Navigation and shell
-- `accordion`
-- `breadcrumb`
-- `navbar`
-- `menu-bar`
-- `sidebar-nav`
+### Navigation (extended)
 - `tree-view`
-- `stepper`
-- `page-header`
-- `section-block`
-- `app-shell`
-- `split-pane`
 
-### Data and display
-- `data-grid`
-- `result`
+### Data and display (extended)
 - `avatar`
 - `avatar-group`
 - `tag-chip`
-- `stat`
 - `timeline`
 - `kpi-card`
-- `list`
-- `description-list`
 
 ### Search/productivity and advanced surfaces
-- `combobox`
-- `search-box`
-- `autocomplete`
-- `command-palette`
 - `date-picker`
 - `date-range-picker`
 - `calendar`
@@ -123,10 +110,11 @@ Support levels:
 - `command-bar` pattern (`data-pattern="command-bar"`)
 - `filter-bar` pattern (`data-pattern="filter-bar"`)
 - `data-table-toolbar` pattern (`data-pattern="data-table-toolbar"`)
+- `settings-panel` pattern (`data-pattern="settings-panel"`) `[exp]`
 
 ## RFC-only Surface
 
-- `settings-panel` pattern spec (no canonical implemented component surface)
+> No surfaces are currently rfc-only. `settings-panel` was promoted to experimental (see below).
 
 ## Planned Surface
 

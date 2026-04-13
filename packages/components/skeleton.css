@@ -28,6 +28,49 @@
     border-radius: 999px;
   }
 
+  {{component.skeletonTable}} {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  {{component.skeletonTableRow}} {
+    display: flex;
+    gap: var(--space-3);
+    align-items: center;
+  }
+
+  {{component.skeletonTableRow}} {{component.skeletonText}} {
+    flex: 1;
+  }
+
+  {{component.skeletonForm}} {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-4);
+  }
+
+  {{component.skeletonFormRow}} {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
+  {{component.skeletonCard}} {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-3);
+    padding: var(--space-4);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-md);
+  }
+
+  {{component.skeletonContent}} {
+    display: flex;
+    flex-direction: column;
+    gap: var(--space-2);
+  }
+
   @keyframes skeleton-shimmer {
     from {
       background-position: 100% 0;

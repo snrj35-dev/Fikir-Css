@@ -1,0 +1,19 @@
+@layer base {
+  [data-shape="rounded"],
+  .shape-rounded {
+    --radius-sm: 0.5rem;
+    --radius-md: 0.875rem;
+    --radius-lg: 1.25rem;
+    --radius-xl: 1.75rem;
+    --radius-full: 999px;
+  }
+
+  [data-shape="sharp"],
+  .shape-sharp {
+    --radius-sm: 0;
+    --radius-md: 0;
+    --radius-lg: 0;
+    --radius-xl: 0;
+    --radius-full: 0;
+  }
+}

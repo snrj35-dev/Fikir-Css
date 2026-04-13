@@ -25,6 +25,28 @@ jobs:
       - name: Run minimal foundation test suite
         run: npm run test:ci
 
+      - name: Validate gzip size thresholds
+        run: npm run validate:size
+
       - name: Report CSS size diff
         if: always()
         run: npm run report:size
+
+      - name: Install Firefox (for screenshots)
+        if: always()
+        run: |
+          which firefox || (sudo apt-get update -qq && sudo apt-get install -y -qq firefox)
+        continue-on-error: true
+
+      - name: Capture playground screenshots
+        if: always()
+        run: npm run capture:playground
+        env:
+          FIREFOX_BIN: firefox
+          SCREENSHOT_VIEWPORT: "1440,2200"
+        continue-on-error: true
+
+      - name: Diff playground screenshots
+        if: always()
+        run: npm run screenshot:diff
+        continue-on-error: true

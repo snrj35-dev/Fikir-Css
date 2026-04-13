@@ -41,4 +41,32 @@
   {{component.tableRow}}[data-row-selected="true"] {
     background: color-mix(in oklch, var(--color-accent) 18%, var(--color-bg-surface));
   }
+
+  {{component.tableEmpty}},
+  {{component.tableLoading}},
+  {{component.tableError}} {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: var(--space-3);
+    padding: var(--space-8) var(--space-4);
+    text-align: center;
+    color: var(--color-fg-muted);
+    font-size: var(--font-size-sm);
+  }
+
+  {{component.tableStateMessage}} {
+    font-size: var(--font-size-sm);
+    color: var(--color-fg-muted);
+  }
+
+  {{component.tableError}} {{component.tableStateMessage}} {
+    color: var(--color-danger);
+  }
+
+  {{component.table}}[data-loading="true"] {{component.tableBody}} {
+    opacity: 0.5;
+    pointer-events: none;
+  }
 }

@@ -60,8 +60,35 @@
       const current = html.getAttribute("data-theme") || "light";
       const next = current === "light" ? "dark" : "light";
       html.setAttribute("data-theme", next);
-      toggleButton.textContent = next === "light" ? "Switch to dark" : "Switch to light";
+      toggleButton.textContent = next === "light" ? "Dark mode" : "Light mode";
     });
+  }
+
+  const sidebarLinks = document.querySelectorAll(".demo-sidebar-link[href^='#']");
+  if (sidebarLinks.length > 0 && "IntersectionObserver" in window) {
+    const sectionMap = new Map();
+    for (const link of sidebarLinks) {
+      const id = link.getAttribute("href").slice(1);
+      const el = document.getElementById(id);
+      if (el) sectionMap.set(id, link);
+    }
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) {
+            for (const link of sidebarLinks) link.classList.remove("active");
+            const activeLink = sectionMap.get(entry.target.id);
+            if (activeLink) activeLink.classList.add("active");
+          }
+        }
+      },
+      { rootMargin: "-20% 0px -70% 0px" }
+    );
+    for (const [, link] of sectionMap) {
+      const id = link.getAttribute("href").slice(1);
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    }
   }
 
   const supportedSectionNumbers = new Set(["6", "7", "10", "11", "16", "18", "26"]);

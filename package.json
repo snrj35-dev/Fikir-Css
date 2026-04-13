@@ -1,8 +1,17 @@
 {
-  "name": "fikir-css-mvp",
-  "version": "0.4.0",
-  "private": true,
-  "description": "Contract-driven CSS foundation output for Fikir CSS",
+  "name": "fikir-css",
+  "version": "0.5.0",
+  "description": "Contract-driven CSS design system. Zero-runtime, token-first, 82 surfaces in ~12KB gzip.",
+  "keywords": ["css", "design-system", "ui", "components", "tokens", "zero-runtime", "framework"],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/osman-developer/Fikir-Css.git"
+  },
+  "homepage": "https://github.com/osman-developer/Fikir-Css#readme",
+  "bugs": {
+    "url": "https://github.com/osman-developer/Fikir-Css/issues"
+  },
   "type": "module",
   "style": "./dist/fikir.css",
   "exports": {
@@ -12,23 +21,64 @@
     "./css": "./dist/fikir.css",
     "./contracts/selectors": "./dist/contracts/selectors.json",
     "./contracts/alias-migration": "./dist/contracts/alias-migration.json",
-    "./contracts/size-report": "./dist/contracts/size-report.json"
+    "./contracts/size-report": "./dist/contracts/size-report.json",
+    "./contracts/contract-drift-report": "./dist/contracts/contract-drift-report.json",
+    "./contracts/bundle-layers-report": "./dist/contracts/bundle-layers-report.json",
+    "./contracts/component-css-map": "./dist/contracts/component-css-map.json",
+    "./tooling": {
+      "types": "./dist/tooling/resolve-classes.d.ts",
+      "default": "./dist/tooling/resolve-classes.mjs"
+    },
+    "./resolvers": {
+      "types": "./dist/tooling/resolve-classes.d.ts",
+      "default": "./dist/tooling/resolve-classes.mjs"
+    },
+    "./helpers": {
+      "types": "./dist/helpers/index.d.ts",
+      "default": "./dist/helpers/index.mjs"
+    },
+    "./tokens": "./dist/tokens.json",
+    "./themes/dark": "./dist/themes/dark.css",
+    "./themes/light": "./dist/themes/light.css",
+    "./themes/high-contrast": "./dist/themes/high-contrast.css",
+    "./themes/compact": "./dist/themes/compact.css",
+    "./themes/comfortable": "./dist/themes/comfortable.css",
+    "./themes/reduced-motion": "./dist/themes/reduced-motion.css",
+    "./themes/shape": "./dist/themes/shape.css",
+    "./slices/forms": "./packages/slices/forms.css",
+    "./slices/overlays": "./packages/slices/overlays.css",
+    "./slices/navigation": "./packages/slices/navigation.css",
+    "./slices/data-display": "./packages/slices/data-display.css"
   },
   "files": [
     "dist/**",
+    "packages/slices/**",
+    "packages/components/**",
+    "packages/tokens/**",
     "README.md",
     "LICENSE",
     "docs/release/release-note-template.md",
     "docs/migration/migration-note-template.md"
   ],
+  "types": "./dist/tooling/resolve-classes.d.ts",
   "scripts": {
     "build": "node scripts/build-css.mjs",
     "build:css": "node scripts/build-css.mjs",
     "docs:validate": "node --test tests/source/docs-link-audit.test.mjs",
+    "docs:quality": "node scripts/check-docs-quality.mjs",
+    "docs:quality:strict": "node scripts/check-docs-quality.mjs --strict",
     "capture:playground": "node scripts/capture-playground-screenshots.mjs",
+    "screenshot:diff": "node scripts/diff-playground-screenshots.mjs",
     "validate:size": "node scripts/validate-size-thresholds.mjs",
     "validate:prefixed": "node scripts/validate-prefixed-smoke.mjs",
     "report:size": "node scripts/report-size-diff.mjs",
+    "report:contract-drift": "node scripts/report-contract-drift.mjs",
+    "report:bundle-layers": "node scripts/report-bundle-layers.mjs",
+    "report:contrast": "node scripts/report-contrast-regression.mjs",
+    "report:component-map": "node scripts/report-component-css-map.mjs",
+    "report:dead-surfaces": "node scripts/report-dead-surfaces.mjs",
+    "validate:recipe-strict": "node scripts/validate-recipe-strict.mjs",
+    "detect:flaky-tests": "node scripts/detect-flaky-tests.mjs",
     "validate:playground-baseline": "node scripts/validate-playground-baseline.mjs",
     "validate:publish": "node scripts/validate-publishable-outputs.mjs",
     "validate:version": "node scripts/validate-version-tag-consistency.mjs",

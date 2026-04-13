@@ -1,0 +1,26 @@
+@layer base {
+  [data-theme="high-contrast"],
+  .theme-high-contrast {
+    --color-bg-default: oklch(0% 0 0);
+    --color-bg-surface: oklch(4% 0 0);
+    --color-fg-default: oklch(100% 0 0);
+    --color-fg-muted: oklch(80% 0 0);
+    --color-border-subtle: oklch(60% 0 0);
+    --color-accent: oklch(68% 0.2 250);
+    --color-danger: oklch(62% 0.25 25);
+  }
+}
+
+@media (forced-colors: active) {
+  @layer base {
+    :root {
+      --color-bg-default: Canvas;
+      --color-bg-surface: Canvas;
+      --color-fg-default: CanvasText;
+      --color-fg-muted: GrayText;
+      --color-border-subtle: ButtonBorder;
+      --color-accent: Highlight;
+      --color-danger: LinkText;
+    }
+  }
+}

@@ -1,0 +1,630 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Settings — Fikir CSS Settings Starter</title>
+  <link rel="stylesheet" href="../../dist/fikir.css" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      min-block-size: 100dvh;
+      display: flex;
+      flex-direction: column;
+      background: var(--color-bg-default);
+      color: var(--color-fg-default);
+      font-family: var(--font-sans, system-ui, sans-serif);
+    }
+
+    /* ── Topbar ───────────────────────────────────────────────────── */
+    .s-topbar {
+      position: sticky;
+      inset-block-start: 0;
+      z-index: 40;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: var(--space-3);
+      padding: 0 var(--space-5);
+      block-size: 3.25rem;
+      border-block-end: 1px solid var(--color-border-subtle);
+      background: color-mix(in oklch, var(--color-bg-surface) 95%, transparent);
+      backdrop-filter: blur(8px);
+      flex-shrink: 0;
+    }
+
+    .s-topbar-brand {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-weight: 700;
+      font-size: var(--font-size-md);
+      letter-spacing: -0.02em;
+      color: var(--color-fg-default);
+      text-decoration: none;
+    }
+
+    .s-topbar-brand-mark {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      inline-size: 1.75rem;
+      block-size: 1.75rem;
+      border-radius: var(--radius-sm);
+      background: var(--color-accent, var(--color-primary-500));
+      color: #fff;
+      font-size: 0.75rem;
+      font-weight: 900;
+    }
+
+    .s-topbar-end {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+    }
+
+    .s-avatar {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      inline-size: 2rem;
+      block-size: 2rem;
+      border-radius: 999px;
+      background: var(--color-primary-500);
+      color: #fff;
+      font-size: var(--font-size-xs);
+      font-weight: 700;
+      cursor: pointer;
+      border: 0;
+    }
+
+    /* ── Shell fills remaining height ─────────────────────────────── */
+    .s-shell {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+    }
+
+    /* Fikir CSS .settings-panel uses display:grid; min-block-size:100% */
+    .settings-panel { flex: 1; }
+
+    /* ── Sidebar extras ───────────────────────────────────────────── */
+    .s-nav-section-label {
+      display: block;
+      padding: var(--space-3) var(--space-3) var(--space-1);
+      font-size: 0.65rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.07em;
+      color: var(--color-fg-muted);
+    }
+
+    .s-nav-divider {
+      block-size: 1px;
+      background: var(--color-border-subtle);
+      margin: var(--space-2) 0;
+    }
+
+    /* ── Profile card at top of sidebar ──────────────────────────── */
+    .s-profile-card {
+      display: flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: var(--space-3);
+      border-radius: var(--radius-md);
+      margin-block-end: var(--space-2);
+      background: color-mix(in oklch, var(--color-border-subtle) 30%, var(--color-bg-surface));
+    }
+
+    .s-profile-card-info { min-inline-size: 0; }
+    .s-profile-card-name {
+      font-size: var(--font-size-sm);
+      font-weight: 600;
+      color: var(--color-fg-default);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .s-profile-card-email {
+      font-size: var(--font-size-xs);
+      color: var(--color-fg-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    /* ── Content header ───────────────────────────────────────────── */
+    .s-content-header {
+      margin-block-end: var(--space-6);
+    }
+    .s-content-title {
+      margin: 0 0 var(--space-1);
+      font-size: var(--font-size-xl, 1.375rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+    .s-content-desc {
+      margin: 0;
+      font-size: var(--font-size-sm);
+      color: var(--color-fg-muted);
+    }
+
+    /* ── Danger zone card ─────────────────────────────────────────── */
+    .s-danger-zone {
+      border: 1px solid color-mix(in oklch, var(--color-danger) 35%, var(--color-border-subtle));
+      border-radius: var(--radius-md);
+      padding: var(--space-4);
+    }
+
+    /* ── Responsive ───────────────────────────────────────────────── */
+    @media (max-width: 700px) {
+      .settings-panel { grid-template-columns: 1fr; }
+      .settings-panel-sidebar { display: none; }
+      .settings-panel-content { padding: var(--space-4); }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── Topbar ─────────────────────────────────────────────────────────── -->
+  <header class="s-topbar" role="banner">
+    <a href="./app-shell-starter.html" class="s-topbar-brand">
+      <span class="s-topbar-brand-mark" aria-hidden="true">M</span>
+      MyApp
+    </a>
+    <div class="s-topbar-end">
+      <button type="button" id="theme-toggle" class="btn btn-sm">Light mode</button>
+      <button type="button" class="s-avatar" aria-label="Account menu" title="Ada Johnson">AJ</button>
+    </div>
+  </header>
+
+  <!-- ── Settings panel ─────────────────────────────────────────────────── -->
+  <div class="s-shell">
+    <div class="settings-panel">
+
+      <!-- Sidebar -->
+      <aside class="settings-panel-sidebar">
+        <!-- User profile card -->
+        <div class="s-profile-card">
+          <div class="s-avatar" style="cursor: default;" aria-hidden="true">AJ</div>
+          <div class="s-profile-card-info">
+            <p class="s-profile-card-name">Ada Johnson</p>
+            <p class="s-profile-card-email">ada@acme.io</p>
+          </div>
+        </div>
+
+        <nav class="settings-panel-nav" aria-label="Settings sections">
+          <span class="s-nav-section-label">Workspace</span>
+          <button class="settings-panel-nav-item" aria-current="page" data-active="true" data-target="general">General</button>
+          <button class="settings-panel-nav-item" data-target="members">Members</button>
+          <button class="settings-panel-nav-item" data-target="billing">Billing</button>
+          <button class="settings-panel-nav-item" data-target="integrations">Integrations</button>
+
+          <div class="s-nav-divider"></div>
+          <span class="s-nav-section-label">Account</span>
+          <button class="settings-panel-nav-item" data-target="profile">Profile</button>
+          <button class="settings-panel-nav-item" data-target="notifications">Notifications</button>
+          <button class="settings-panel-nav-item" data-target="appearance">Appearance</button>
+          <button class="settings-panel-nav-item" data-target="security">Security</button>
+        </nav>
+      </aside>
+
+      <!-- Main content -->
+      <main class="settings-panel-content" id="main-content">
+
+        <!-- ── General ───────────────────────────────────────────── -->
+        <section id="general" data-section>
+          <div class="s-content-header">
+            <h1 class="s-content-title">General</h1>
+            <p class="s-content-desc">Workspace-level settings visible to all members.</p>
+          </div>
+
+          <div class="settings-panel-row">
+            <div class="settings-panel-row-label">
+              <strong>Workspace name</strong>
+              <span>The display name across your workspace.</span>
+            </div>
+            <div class="settings-panel-row-control">
+              <input class="input" type="text" id="ws-name" value="Acme Corp" aria-label="Workspace name" style="inline-size: 14rem;" />
+            </div>
+          </div>
+
+          <div class="settings-panel-row">
+            <div class="settings-panel-row-label">
+              <strong>Workspace URL</strong>
+              <span>Your unique workspace identifier.</span>
+            </div>
+            <div class="settings-panel-row-control">
+              <div class="input-group" style="inline-size: 16rem;">
+                <span class="input-group-addon">acme.io/</span>
+                <input class="input" type="text" value="workspace" aria-label="Workspace slug" />
+              </div>
+            </div>
+          </div>
+
+          <div class="settings-panel-row">
+            <div class="settings-panel-row-label">
+              <strong>Default timezone</strong>
+              <span>Used for scheduling and report timestamps.</span>
+            </div>
+            <div class="settings-panel-row-control">
+              <select class="select" aria-label="Timezone" style="inline-size: 14rem;">
+                <option>UTC +0:00</option>
+                <option selected>UTC +3:00 (Istanbul)</option>
+                <option>UTC -5:00 (EST)</option>
+                <option>UTC -8:00 (PST)</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="settings-panel-row">
+            <div class="settings-panel-row-label">
+              <strong>Public workspace</strong>
+              <span>Anyone with the link can view this workspace.</span>
+            </div>
+            <div class="settings-panel-row-control">
+              <input class="switch" type="checkbox" role="switch" id="ws-public" aria-label="Enable public workspace" />
+            </div>
+          </div>
+
+          <div style="margin-block-start: var(--space-6);">
+            <div class="cluster" style="gap: var(--space-2);">
+              <button type="button" class="btn btn-primary btn-sm">Save changes</button>
+              <button type="button" class="btn btn-sm">Reset</button>
+            </div>
+          </div>
+
+          <div class="s-danger-zone" style="margin-block-start: var(--space-8);">
+            <h3 style="margin: 0 0 var(--space-1); font-size: var(--font-size-sm); color: var(--color-danger);">Danger zone</h3>
+            <p class="settings-panel-row-label" style="display: block; margin-block-end: var(--space-3);">
+              <span>Deleting this workspace is permanent and cannot be undone.</span>
+            </p>
+            <button type="button" class="btn btn-danger btn-sm">Delete workspace</button>
+          </div>
+        </section>
+
+        <!-- ── Notifications ─────────────────────────────────────── -->
+        <section id="notifications" data-section hidden>
+          <div class="s-content-header">
+            <h1 class="s-content-title">Notifications</h1>
+            <p class="s-content-desc">Control when and how you receive notifications.</p>
+          </div>
+
+          <div class="settings-panel-row">
+            <div class="settings-panel-row-label">
+              <strong>Email digests</strong>
+              <span>Receive a daily summary of workspace activity.</span>
+            </div>
+            <div class="settings-panel-row-control">
+              <input class="switch" type="checkbox" role="switch" checked aria-label="Enable email digests" />
+            </div>
+          </div>
+
+          <div class="settings-panel-row">
+            <div class="settings-panel-row-label">
+              <strong>Mention alerts</strong>
+              <span>Get notified when someone @mentions you.</span>
+            </div>
+            <div class="settings-panel-row-control">
+              <input class="switch" type="checkbox" role="switch" checked aria-label="Enable mention alerts" />
+            </div>
+          </div>
+
+          <div class="settings-panel-row">
+            <div class="settings-panel-row-label">
+              <strong>Project updates</strong>
+              <span>Notify me when a project status changes.</span>
+            </div>
+            <div class="settings-panel-row-control">
+              <input class="switch" type="checkbox" role="switch" aria-label="Enable project updates" />
+            </div>
+          </div>
+
+          <div class="settings-panel-row">
+            <div class="settings-panel-row-label">
+              <strong>Notification frequency</strong>
+              <span>How often to batch non-urgent notifications.</span>
+            </div>
+            <div class="settings-panel-row-control">
+              <div class="segmented-control" role="group" aria-label="Notification frequency">
+                <div class="segmented-control-item">
+                  <input type="radio" id="freq-realtime" name="freq" value="realtime" class="segmented-control-input" checked />
+                  <label for="freq-realtime" class="segmented-control-label">Real-time</label>
+                </div>
+                <div class="segmented-control-item">
+                  <input type="radio" id="freq-daily" name="freq" value="daily" class="segmented-control-input" />
+                  <label for="freq-daily" class="segmented-control-label">Daily</label>
+                </div>
+                <div class="segmented-control-item">
+                  <input type="radio" id="freq-weekly" name="freq" value="weekly" class="segmented-control-input" />
+                  <label for="freq-weekly" class="segmented-control-label">Weekly</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-block-start: var(--space-6);">
+            <button type="button" class="btn btn-primary btn-sm">Save preferences</button>
+          </div>
+        </section>
+
+        <!-- ── Appearance ─────────────────────────────────────────── -->
+        <section id="appearance" data-section hidden>
+          <div class="s-content-header">
+            <h1 class="s-content-title">Appearance</h1>
+            <p class="s-content-desc">Personalise how MyApp looks for you.</p>
+          </div>
+
+          <div class="settings-panel-row">
+            <div class="settings-panel-row-label">
+              <strong>Color scheme</strong>
+              <span>Choose light, dark, or follow your system preference.</span>
+            </div>
+            <div class="settings-panel-row-control">
+              <div class="segmented-control" role="group" aria-label="Color scheme">
+                <div class="segmented-control-item">
+                  <input type="radio" id="theme-light" name="color-scheme" value="light" class="segmented-control-input" />
+                  <label for="theme-light" class="segmented-control-label">Light</label>
+                </div>
+                <div class="segmented-control-item">
+                  <input type="radio" id="theme-dark" name="color-scheme" value="dark" class="segmented-control-input" checked />
+                  <label for="theme-dark" class="segmented-control-label">Dark</label>
+                </div>
+                <div class="segmented-control-item">
+                  <input type="radio" id="theme-system" name="color-scheme" value="system" class="segmented-control-input" />
+                  <label for="theme-system" class="segmented-control-label">System</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="settings-panel-row">
+            <div class="settings-panel-row-label">
+              <strong>Density</strong>
+              <span>Adjust UI spacing to your preference.</span>
+            </div>
+            <div class="settings-panel-row-control">
+              <div class="segmented-control" role="group" aria-label="UI density">
+                <div class="segmented-control-item">
+                  <input type="radio" id="density-compact" name="density" value="compact" class="segmented-control-input" />
+                  <label for="density-compact" class="segmented-control-label">Compact</label>
+                </div>
+                <div class="segmented-control-item">
+                  <input type="radio" id="density-default" name="density" value="default" class="segmented-control-input" checked />
+                  <label for="density-default" class="segmented-control-label">Default</label>
+                </div>
+                <div class="segmented-control-item">
+                  <input type="radio" id="density-comfortable" name="density" value="comfortable" class="segmented-control-input" />
+                  <label for="density-comfortable" class="segmented-control-label">Comfortable</label>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="settings-panel-row">
+            <div class="settings-panel-row-label">
+              <strong>Reduce motion</strong>
+              <span>Minimise animations throughout the interface.</span>
+            </div>
+            <div class="settings-panel-row-control">
+              <input class="switch" type="checkbox" role="switch" aria-label="Reduce motion" />
+            </div>
+          </div>
+        </section>
+
+        <!-- ── Security ───────────────────────────────────────────── -->
+        <section id="security" data-section hidden>
+          <div class="s-content-header">
+            <h1 class="s-content-title">Security</h1>
+            <p class="s-content-desc">Manage your password, sessions and two-factor authentication.</p>
+          </div>
+
+          <div class="settings-panel-row">
+            <div class="settings-panel-row-label">
+              <strong>Change password</strong>
+              <span>Last changed 3 months ago.</span>
+            </div>
+            <div class="settings-panel-row-control">
+              <button type="button" class="btn btn-sm">Update password</button>
+            </div>
+          </div>
+
+          <div class="settings-panel-row">
+            <div class="settings-panel-row-label">
+              <strong>Two-factor authentication</strong>
+              <span>Add an extra layer of security to your account.</span>
+            </div>
+            <div class="settings-panel-row-control">
+              <span class="badge badge-neutral" style="margin-inline-end: var(--space-2);">Disabled</span>
+              <button type="button" class="btn btn-sm">Enable 2FA</button>
+            </div>
+          </div>
+
+          <div class="settings-panel-row">
+            <div class="settings-panel-row-label">
+              <strong>Active sessions</strong>
+              <span>2 devices currently signed in.</span>
+            </div>
+            <div class="settings-panel-row-control">
+              <button type="button" class="btn btn-sm">Manage sessions</button>
+            </div>
+          </div>
+
+          <div class="settings-panel-row">
+            <div class="settings-panel-row-label">
+              <strong>API tokens</strong>
+              <span>Tokens for programmatic access to the API.</span>
+            </div>
+            <div class="settings-panel-row-control">
+              <button type="button" class="btn btn-sm">+ New token</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ── Profile ────────────────────────────────────────────── -->
+        <section id="profile" data-section hidden>
+          <div class="s-content-header">
+            <h1 class="s-content-title">Profile</h1>
+            <p class="s-content-desc">Your personal information visible to workspace members.</p>
+          </div>
+
+          <div class="settings-panel-row">
+            <div class="settings-panel-row-label">
+              <strong>Full name</strong>
+              <span>Your display name across the workspace.</span>
+            </div>
+            <div class="settings-panel-row-control">
+              <input class="input" type="text" value="Ada Johnson" aria-label="Full name" style="inline-size: 14rem;" />
+            </div>
+          </div>
+
+          <div class="settings-panel-row">
+            <div class="settings-panel-row-label">
+              <strong>Email address</strong>
+              <span>Used for login and notifications.</span>
+            </div>
+            <div class="settings-panel-row-control">
+              <input class="input" type="email" value="ada@acme.io" aria-label="Email address" style="inline-size: 14rem;" />
+            </div>
+          </div>
+
+          <div class="settings-panel-row">
+            <div class="settings-panel-row-label">
+              <strong>Job title</strong>
+            </div>
+            <div class="settings-panel-row-control">
+              <input class="input" type="text" placeholder="e.g. Product Designer" aria-label="Job title" style="inline-size: 14rem;" />
+            </div>
+          </div>
+
+          <div style="margin-block-start: var(--space-6);">
+            <div class="cluster" style="gap: var(--space-2);">
+              <button type="button" class="btn btn-primary btn-sm">Save profile</button>
+              <button type="button" class="btn btn-sm">Cancel</button>
+            </div>
+          </div>
+        </section>
+
+        <!-- ── Billing (placeholder) ──────────────────────────────── -->
+        <section id="billing" data-section hidden>
+          <div class="s-content-header">
+            <h1 class="s-content-title">Billing</h1>
+            <p class="s-content-desc">Manage your subscription plan and payment methods.</p>
+          </div>
+          <div class="alert" role="status">
+            <p class="alert-title">You are on the Free plan</p>
+            <p class="alert-description">Upgrade to Pro for unlimited projects, advanced analytics and priority support.</p>
+          </div>
+          <div style="margin-block-start: var(--space-4);">
+            <button type="button" class="btn btn-primary btn-sm">Upgrade to Pro</button>
+          </div>
+        </section>
+
+        <!-- ── Members / Integrations (placeholder) ───────────────── -->
+        <section id="members" data-section hidden>
+          <div class="s-content-header">
+            <h1 class="s-content-title">Members</h1>
+            <p class="s-content-desc">Invite people and manage roles within your workspace.</p>
+          </div>
+          <div class="cluster" style="gap: var(--space-2); margin-block-end: var(--space-4);">
+            <input class="input" type="email" placeholder="colleague@company.com" aria-label="Invite by email" style="inline-size: 16rem;" />
+            <button type="button" class="btn btn-primary btn-sm">Send invite</button>
+          </div>
+        </section>
+
+        <section id="integrations" data-section hidden>
+          <div class="s-content-header">
+            <h1 class="s-content-title">Integrations</h1>
+            <p class="s-content-desc">Connect third-party services to your workspace.</p>
+          </div>
+          <div class="settings-panel-row">
+            <div class="settings-panel-row-label">
+              <strong>Slack</strong>
+              <span>Post notifications to a Slack channel.</span>
+            </div>
+            <div class="settings-panel-row-control">
+              <span class="badge badge-neutral" style="margin-inline-end: var(--space-2);">Not connected</span>
+              <button type="button" class="btn btn-sm">Connect</button>
+            </div>
+          </div>
+          <div class="settings-panel-row">
+            <div class="settings-panel-row-label">
+              <strong>GitHub</strong>
+              <span>Link repositories to projects.</span>
+            </div>
+            <div class="settings-panel-row-control">
+              <span class="badge badge-primary" style="margin-inline-end: var(--space-2);">Connected</span>
+              <button type="button" class="btn btn-sm">Disconnect</button>
+            </div>
+          </div>
+        </section>
+
+      </main><!-- /.settings-panel-content -->
+    </div><!-- /.settings-panel -->
+  </div><!-- /.s-shell -->
+
+  <!-- Toast -->
+  <div class="toast-viewport" aria-live="polite">
+    <article id="toast-saved" class="toast toast--success" data-open="false">
+      <p class="toast-title">Saved</p>
+      <p class="toast-description">Your settings have been updated.</p>
+    </article>
+  </div>
+
+  <script>
+    const html = document.documentElement;
+
+    /* Theme toggle button */
+    const toggleBtn = document.getElementById("theme-toggle");
+    toggleBtn.addEventListener("click", () => {
+      const cur = html.getAttribute("data-theme") || "dark";
+      const next = cur === "dark" ? "light" : "dark";
+      html.setAttribute("data-theme", next);
+      toggleBtn.textContent = next === "dark" ? "Light mode" : "Dark mode";
+      /* Keep segmented control in sync */
+      const radio = document.getElementById("theme-" + next);
+      if (radio) radio.checked = true;
+    });
+
+    /* Color scheme segmented control */
+    document.querySelectorAll('[name="color-scheme"]').forEach(r =>
+      r.addEventListener("change", () => {
+        if (r.value !== "system") {
+          html.setAttribute("data-theme", r.value);
+          toggleBtn.textContent = r.value === "dark" ? "Light mode" : "Dark mode";
+        }
+      })
+    );
+
+    /* Sidebar navigation — show/hide sections */
+    const sections = document.querySelectorAll("[data-section]");
+    const navItems = document.querySelectorAll(".settings-panel-nav-item[data-target]");
+
+    function showSection(targetId) {
+      sections.forEach(s => s.hidden = s.id !== targetId);
+      navItems.forEach(n => {
+        const active = n.dataset.target === targetId;
+        n.toggleAttribute("aria-current", active);
+        n.toggleAttribute("data-active", active);
+        if (active) { n.setAttribute("aria-current", "page"); n.setAttribute("data-active", "true"); }
+        else { n.removeAttribute("aria-current"); n.removeAttribute("data-active"); }
+      });
+    }
+
+    navItems.forEach(item =>
+      item.addEventListener("click", () => showSection(item.dataset.target))
+    );
+
+    /* Simple save feedback */
+    document.querySelectorAll('.btn-primary').forEach(btn => {
+      btn.addEventListener("click", () => {
+        const t = document.getElementById("toast-saved");
+        t.dataset.open = "true";
+        setTimeout(() => t.dataset.open = "false", 2500);
+      });
+    });
+  </script>
+</body>
+</html>

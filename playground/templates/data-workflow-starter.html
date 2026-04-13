@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Data Workflow — Fikir CSS Starter</title>
+  <link rel="stylesheet" href="../../dist/fikir.css" />
+  <style>
+    body { margin: 0; background: var(--color-bg-default); min-block-size: 100dvh; }
+    .page-root { padding: var(--space-6); max-inline-size: 72rem; margin: 0 auto; }
+    .toolbar { display: flex; align-items: center; gap: var(--space-2); flex-wrap: wrap; }
+    .toolbar-spacer { flex: 1; }
+    .table-scroll { overflow-x: auto; }
+  </style>
+</head>
+<body>
+  <nav class="navbar" aria-label="Main navigation">
+    <div class="navbar-brand"><strong>DataApp</strong></div>
+    <div class="navbar-end">
+      <button type="button" id="theme-toggle" class="btn btn--sm">Toggle theme</button>
+    </div>
+  </nav>
+
+  <main class="page-root stack" style="--stack-gap: var(--space-5)">
+    <!-- Page header -->
+    <div class="page-header">
+      <div class="page-header-body">
+        <h1 class="page-header-title">Projects</h1>
+        <p class="page-header-description">Manage all active projects in this workspace.</p>
+      </div>
+      <div class="cluster">
+        <button type="button" class="btn btn-primary btn--sm" id="btn-new-project">+ New project</button>
+      </div>
+    </div>
+
+    <!-- Alert (dismissible) -->
+    <div id="onboarding-alert" class="alert" role="alert" style="display: flex; justify-content: space-between; align-items: center;">
+      <div>
+        <p class="alert-title">Welcome to Projects</p>
+        <p class="alert-description">Create your first project to get started. Need help? <a href="#" class="link">See the guide</a>.</p>
+      </div>
+      <button type="button" class="icon-button icon-button-sm" aria-label="Dismiss" id="dismiss-alert">✕</button>
+    </div>
+
+    <!-- Toolbar: filter bar pattern -->
+    <div class="toolbar" role="toolbar" aria-label="Table controls">
+      <div class="field" style="flex: 1; min-inline-size: 14rem; max-inline-size: 22rem;">
+        <input class="input" type="search" placeholder="Search projects…" aria-label="Search projects" id="search-input" />
+      </div>
+
+      <select class="select" aria-label="Filter by status" id="status-filter" style="inline-size: 10rem;">
+        <option value="">All statuses</option>
+        <option value="active">Active</option>
+        <option value="paused">Paused</option>
+        <option value="overdue">Overdue</option>
+      </select>
+
+      <div class="segmented-control" role="group" aria-label="View mode">
+        <div class="segmented-control-item">
+          <input type="radio" id="view-table" name="view" value="table" class="segmented-control-input" checked />
+          <label for="view-table" class="segmented-control-label">Table</label>
+        </div>
+        <div class="segmented-control-item">
+          <input type="radio" id="view-cards" name="view" value="cards" class="segmented-control-input" />
+          <label for="view-cards" class="segmented-control-label">Cards</label>
+        </div>
+      </div>
+
+      <div class="toolbar-spacer"></div>
+
+      <span class="text-sm" id="row-count" style="color: var(--color-fg-muted);">3 projects</span>
+    </div>
+
+    <!-- Table view -->
+    <div id="table-view">
+      <div class="table-scroll">
+        <table class="table" aria-label="Projects table" aria-rowcount="3">
+          <thead class="table-head">
+            <tr class="table-row">
+              <th class="table-head-cell"><input type="checkbox" class="checkbox" aria-label="Select all" /></th>
+              <th class="table-head-cell">Project</th>
+              <th class="table-head-cell">Owner</th>
+              <th class="table-head-cell">Status</th>
+              <th class="table-head-cell">Due date</th>
+              <th class="table-head-cell">Budget</th>
+              <th class="table-head-cell"></th>
+            </tr>
+          </thead>
+          <tbody class="table-body" id="table-body">
+            <tr class="table-row" data-status="active">
+              <td class="table-cell"><input type="checkbox" class="checkbox" aria-label="Select Project Alpha" /></td>
+              <td class="table-cell"><strong>Project Alpha</strong></td>
+              <td class="table-cell"><div class="cluster" style="gap: var(--space-2)"><span class="avatar avatar-sm">AJ</span>Ada Johnson</div></td>
+              <td class="table-cell"><span class="badge badge-primary">Active</span></td>
+              <td class="table-cell">May 30, 2026</td>
+              <td class="table-cell">$12,000</td>
+              <td class="table-cell"><button type="button" class="icon-button icon-button-sm" aria-label="More actions">⋯</button></td>
+            </tr>
+            <tr class="table-row" data-status="paused">
+              <td class="table-cell"><input type="checkbox" class="checkbox" aria-label="Select Project Beta" /></td>
+              <td class="table-cell"><strong>Project Beta</strong></td>
+              <td class="table-cell"><div class="cluster" style="gap: var(--space-2)"><span class="avatar avatar-sm">MS</span>Marcus Silva</div></td>
+              <td class="table-cell"><span class="badge badge-neutral">Paused</span></td>
+              <td class="table-cell">Jun 15, 2026</td>
+              <td class="table-cell">$4,500</td>
+              <td class="table-cell"><button type="button" class="icon-button icon-button-sm" aria-label="More actions">⋯</button></td>
+            </tr>
+            <tr class="table-row" data-status="overdue">
+              <td class="table-cell"><input type="checkbox" class="checkbox" aria-label="Select Project Gamma" /></td>
+              <td class="table-cell"><strong>Project Gamma</strong></td>
+              <td class="table-cell"><div class="cluster" style="gap: var(--space-2)"><span class="avatar avatar-sm">EP</span>Elena Park</div></td>
+              <td class="table-cell"><span class="badge badge-danger">Overdue</span></td>
+              <td class="table-cell">Apr 1, 2026</td>
+              <td class="table-cell">$7,800</td>
+              <td class="table-cell"><button type="button" class="icon-button icon-button-sm" aria-label="More actions">⋯</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Pagination -->
+      <nav class="pagination" aria-label="Table pagination" style="margin-block-start: var(--space-4);">
+        <button class="pagination-prev" type="button" aria-label="Previous page" disabled>←</button>
+        <button class="pagination-item pagination-item-active" type="button" aria-current="page" aria-label="Page 1">1</button>
+        <button class="pagination-item" type="button" aria-label="Page 2">2</button>
+        <button class="pagination-item" type="button" aria-label="Page 3">3</button>
+        <button class="pagination-next" type="button" aria-label="Next page">→</button>
+      </nav>
+    </div>
+
+    <!-- Card view (hidden by default) -->
+    <div id="card-view" hidden style="display: none;">
+      <div class="cluster" style="gap: var(--space-4); flex-wrap: wrap; align-items: stretch;">
+        <div class="card card-p-md stack" style="flex: 1; min-inline-size: 16rem;">
+          <div class="cluster" style="justify-content: space-between;"><strong>Project Alpha</strong><span class="badge badge-primary">Active</span></div>
+          <p class="text-sm" style="color: var(--color-fg-muted);">Due May 30 · $12,000</p>
+        </div>
+        <div class="card card-p-md stack" style="flex: 1; min-inline-size: 16rem;">
+          <div class="cluster" style="justify-content: space-between;"><strong>Project Beta</strong><span class="badge badge-neutral">Paused</span></div>
+          <p class="text-sm" style="color: var(--color-fg-muted);">Due Jun 15 · $4,500</p>
+        </div>
+        <div class="card card-p-md stack" style="flex: 1; min-inline-size: 16rem;">
+          <div class="cluster" style="justify-content: space-between;"><strong>Project Gamma</strong><span class="badge badge-danger">Overdue</span></div>
+          <p class="text-sm" style="color: var(--color-fg-muted);">Due Apr 1 · $7,800</p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Toast viewport -->
+  <div class="toast-viewport" aria-live="polite" aria-atomic="true">
+    <article id="toast-saved" class="toast toast--success" data-open="false">
+      <p class="toast-title">Project created</p>
+      <p class="toast-description">Your new project has been saved.</p>
+      <button class="toast-close icon-button icon-button-sm" type="button" aria-label="Close" onclick="document.getElementById('toast-saved').dataset.open='false'">✕</button>
+    </article>
+  </div>
+
+  <script>
+    const html = document.documentElement;
+    document.getElementById("theme-toggle").addEventListener("click", () => {
+      const cur = html.getAttribute("data-theme") || "dark";
+      html.setAttribute("data-theme", cur === "light" ? "dark" : "light");
+    });
+    document.getElementById("dismiss-alert").addEventListener("click", () => {
+      document.getElementById("onboarding-alert").hidden = true;
+    });
+    document.getElementById("btn-new-project").addEventListener("click", () => {
+      document.getElementById("toast-saved").dataset.open = "true";
+      setTimeout(() => { document.getElementById("toast-saved").dataset.open = "false"; }, 3500);
+    });
+    document.querySelectorAll('[name="view"]').forEach(r => r.addEventListener("change", () => {
+      document.getElementById("table-view").style.display = r.value === "table" ? "" : "none";
+      const cv = document.getElementById("card-view");
+      cv.hidden = r.value !== "cards";
+      cv.style.display = r.value === "cards" ? "" : "none";
+    }));
+    document.getElementById("status-filter").addEventListener("change", function () {
+      const val = this.value;
+      document.querySelectorAll("#table-body tr").forEach(row => {
+        row.style.display = !val || row.dataset.status === val ? "" : "none";
+      });
+    });
+  </script>
+</body>
+</html>

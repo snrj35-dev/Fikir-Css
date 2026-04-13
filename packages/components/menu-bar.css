@@ -71,4 +71,55 @@
   {{component.menuBarLink}}:focus-visible {
     background: var(--color-bg-default);
   }
+
+  {{component.menuBarDivider}} {
+    block-size: 1px;
+    background: var(--color-border-subtle);
+    margin-block: var(--space-1);
+  }
+
+  {{component.menuBarSubmenu}} {
+    position: relative;
+  }
+
+  {{component.menuBarSubtrigger}} {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+    inline-size: 100%;
+    border: 0;
+    border-radius: var(--radius-sm);
+    background: transparent;
+    color: var(--color-fg-default);
+    font-size: var(--font-size-sm);
+    text-align: start;
+    padding: var(--space-2) var(--space-3);
+    cursor: pointer;
+  }
+
+  {{component.menuBarSubtrigger}}:hover,
+  {{component.menuBarSubtrigger}}:focus-visible,
+  {{component.menuBarSubmenu}}[data-open="true"] > {{component.menuBarSubtrigger}} {
+    background: var(--color-bg-default);
+  }
+
+  {{component.menuBarSubmenuContent}} {
+    position: absolute;
+    inset-block-start: 0;
+    inset-inline-start: 100%;
+    z-index: 21;
+    min-inline-size: 11rem;
+    display: none;
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-md);
+    background: var(--color-bg-surface);
+    box-shadow: var(--shadow-sm);
+    padding: var(--space-1);
+  }
+
+  {{component.menuBarSubmenu}}[data-open="true"] > {{component.menuBarSubmenuContent}} {
+    display: grid;
+    gap: var(--space-1);
+  }
 }

@@ -1,58 +1,455 @@
 <!doctype html>
-<html lang="en" data-theme="light">
+<html lang="en" data-theme="dark">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Fikir CSS v0.4 Foundation Playground</title>
+    <title>Fikir CSS — Component Playground</title>
     <link id="fikir-css-bundle" rel="stylesheet" href="../dist/fikir.css" />
     <link rel="stylesheet" href="./demo.css" />
   </head>
   <body>
-    <main class="demo-shell stack">
-      <p id="build-warning" class="build-warning" role="status" hidden>
-        Build output missing: <code>dist/fikir.css</code> is not loaded. Run <code>npm run build</code>.
-      </p>
+    <!-- ── Build warning ──────────────────────────────────────────────────── -->
+    <p id="build-warning" class="build-warning" role="status" hidden>
+      ⚠ Build output missing: <code>dist/fikir.css</code> not loaded. Run <code>npm run build</code>.
+    </p>
 
-      <header class="cluster justify-between demo-page-header">
-        <div class="stack">
-          <h1>Fikir CSS v0.4 Foundation Playground</h1>
-          <p class="text-sm">Showcase only: current class surface and layout primitives.</p>
+    <!-- ── Top navbar ─────────────────────────────────────────────────────── -->
+    <header class="demo-topbar" role="banner">
+      <div class="demo-topbar-brand">
+        <span class="demo-logo-mark" aria-hidden="true">◈</span>
+        <span class="demo-logo-name">Fikir CSS</span>
+        <span class="demo-logo-version badge badge-neutral">v1.0-M2</span>
+      </div>
+      <nav class="demo-topbar-links" aria-label="Quick links">
+        <a class="demo-topbar-link" href="./templates/app-shell-starter.html" target="_blank">App Shell</a>
+        <a class="demo-topbar-link" href="./templates/settings-starter.html" target="_blank">Settings</a>
+        <a class="demo-topbar-link" href="./templates/data-workflow-starter.html" target="_blank">Data Workflow</a>
+        <a class="demo-topbar-link" href="../docs/hub.md" target="_blank">Docs</a>
+      </nav>
+      <div class="demo-topbar-actions">
+        <div class="demo-support-pills cluster">
+          <span class="support-pill" data-support-level="supported">supported</span>
+          <span class="support-pill" data-support-level="experimental">experimental</span>
+          <span class="support-pill">showcase</span>
         </div>
-        <div class="cluster">
-          <span class="badge">Theme</span>
-          <button id="theme-toggle" class="btn btn-outline btn-sm" type="button">Switch to dark</button>
+        <div style="display:flex;gap:.5rem;align-items:center">
+          <a href="./quickstart.html" class="btn btn--sm btn-outline btn-neutral" style="text-decoration:none">5-min quickstart</a>
+          <a href="./token-explorer.html" class="btn btn--sm btn-outline btn-neutral" style="text-decoration:none">Token explorer</a>
+          <button id="theme-toggle" class="btn btn--sm" type="button">Light mode</button>
         </div>
-      </header>
+      </div>
+    </header>
 
-      <p class="text-sm demo-support-legend">
-        Section labels:
-        <span class="badge badge-primary">supported</span>
-        <span class="badge badge-neutral">experimental</span>
-        <span class="badge">showcase</span>
-      </p>
+    <!-- ── App body: sidebar + main ────────────────────────────────────────── -->
+    <div class="demo-app-body">
 
-      <section class="section stack">
-        <h2>0) Standalone Example Pages</h2>
-        <article class="card card-p-md stack demo-frame">
-          <p class="text-sm">Use these pages for end-to-end usage flows beyond single-section showcase blocks.</p>
-          <div class="cluster">
-            <a class="link" href="./getting-started.html">Getting started</a>
-            <a class="link" href="./form-validation-example.html">Form validation</a>
-            <a class="link" href="./app-shell-example.html">App shell</a>
-            <a class="link" href="./data-display-example.html">Data display</a>
-            <a class="link" href="./data-table-workflow-example.html">Data table workflow</a>
-            <a class="link" href="./dashboard-example.html">Dashboard</a>
-            <a class="link" href="./settings-example.html">Settings</a>
-            <a class="link" href="./settings-workflow-example.html">Settings workflow</a>
-            <a class="link" href="./tree-table-workflow-example.html">Tree + table workflow</a>
-            <a class="link" href="./result-status-example.html">Result status</a>
-            <a class="link" href="./toast-example.html">Toast baseline</a>
-            <a class="link" href="./accessibility-notes.html">Accessibility notes</a>
-          </div>
-        </article>
+      <!-- Sidebar navigation -->
+      <nav class="demo-sidebar" aria-label="Component sections">
+        <div class="demo-sidebar-section">
+          <p class="demo-sidebar-label">M2 New</p>
+          <a class="demo-sidebar-link" href="#sec-m2">✦ M2 Showcase</a>
+          <a class="demo-sidebar-link" href="#sec-segmented">Segmented Control</a>
+          <a class="demo-sidebar-link" href="#sec-settings-panel">Settings Panel</a>
+          <a class="demo-sidebar-link" href="#sec-toast-variants">Toast Variants</a>
+          <a class="demo-sidebar-link" href="#sec-skeleton-presets">Skeleton Presets</a>
+          <a class="demo-sidebar-link" href="#sec-table-states">Table States</a>
+        </div>
+        <div class="demo-sidebar-section">
+          <p class="demo-sidebar-label">Core</p>
+          <a class="demo-sidebar-link" href="#sec-1">Components</a>
+          <a class="demo-sidebar-link" href="#sec-2">Layouts</a>
+          <a class="demo-sidebar-link" href="#sec-forms">Forms</a>
+          <a class="demo-sidebar-link" href="#sec-input-augment">Input Augmentation</a>
+        </div>
+        <div class="demo-sidebar-section">
+          <p class="demo-sidebar-label">Overlays</p>
+          <a class="demo-sidebar-link" href="#sec-6">Modal</a>
+          <a class="demo-sidebar-link" href="#sec-7">Toast</a>
+          <a class="demo-sidebar-link" href="#sec-overlays">Popover / Tooltip</a>
+        </div>
+        <div class="demo-sidebar-section">
+          <p class="demo-sidebar-label">Navigation</p>
+          <a class="demo-sidebar-link" href="#sec-16">Tabs</a>
+          <a class="demo-sidebar-link" href="#sec-nav">Navbar / Sidebar</a>
+          <a class="demo-sidebar-link" href="#sec-18">Accordion</a>
+        </div>
+        <div class="demo-sidebar-section">
+          <p class="demo-sidebar-label">Data</p>
+          <a class="demo-sidebar-link" href="#sec-26">Table</a>
+          <a class="demo-sidebar-link" href="#sec-data">Data Grid</a>
+          <a class="demo-sidebar-link" href="#sec-11">Pagination</a>
+        </div>
+        <div class="demo-sidebar-section">
+          <p class="demo-sidebar-label">Templates</p>
+          <a class="demo-sidebar-link" href="#sec-examples">Example pages</a>
+        </div>
+      </nav>
+
+      <!-- Main content area -->
+      <main class="demo-main" id="main-content">
+
+      <!-- ── M2 SHOWCASE ─────────────────────────────────────────────────── -->
+      <section class="demo-section" id="sec-m2">
+        <h2 class="demo-section-heading">✦ M2 New Surfaces</h2>
+        <p class="demo-section-desc">Components and patterns added in the M2 milestone.</p>
+        <div class="demo-cards">
+          <article class="demo-card card card-elevated card-p-md stack">
+            <h3>Segmented Control</h3>
+            <div class="segmented-control" role="group" aria-label="View mode">
+              <div class="segmented-control-item">
+                <input type="radio" id="sc1-list" name="sc1" value="list" class="segmented-control-input" checked />
+                <label for="sc1-list" class="segmented-control-label">List</label>
+              </div>
+              <div class="segmented-control-item">
+                <input type="radio" id="sc1-grid" name="sc1" value="grid" class="segmented-control-input" />
+                <label for="sc1-grid" class="segmented-control-label">Grid</label>
+              </div>
+              <div class="segmented-control-item">
+                <input type="radio" id="sc1-board" name="sc1" value="board" class="segmented-control-input" />
+                <label for="sc1-board" class="segmented-control-label">Board</label>
+              </div>
+            </div>
+          </article>
+          <article class="demo-card card card-elevated card-p-md stack">
+            <h3>Toast Variants</h3>
+            <div class="cluster" style="flex-wrap: wrap;">
+              <button class="btn btn--sm" type="button" data-toast-show="demo-toast-success">Success</button>
+              <button class="btn btn--sm" type="button" data-toast-show="demo-toast-info">Info</button>
+              <button class="btn btn--sm" type="button" data-toast-show="demo-toast-warn">Warning</button>
+              <button class="btn btn--sm" type="button" data-toast-show="demo-toast-error">Error</button>
+            </div>
+          </article>
+          <article class="demo-card card card-elevated card-p-md stack">
+            <h3>Table States</h3>
+            <div class="table-empty" style="padding: var(--space-4);">
+              <span aria-hidden="true" style="font-size: 2rem;">📭</span>
+              <p class="table-state-message">No results found</p>
+              <button class="btn btn--sm" type="button">Clear filters</button>
+            </div>
+          </article>
+        </div>
       </section>
 
-      <section class="section stack">
+      <!-- ── SEGMENTED CONTROL ───────────────────────────────────────────── -->
+      <section class="demo-section" id="sec-segmented">
+        <h2 class="demo-section-heading">Segmented Control <span class="support-pill">experimental</span></h2>
+        <div class="demo-cards">
+          <article class="demo-card card card-elevated card-p-md stack">
+            <h3>Size variants</h3>
+            <div class="stack" style="--stack-gap: var(--space-3)">
+              <div class="segmented-control segmented-control--sm" role="group" aria-label="Time range small">
+                <div class="segmented-control-item"><input type="radio" id="sc-sm-1d" name="sc-sm" value="1d" class="segmented-control-input" checked /><label for="sc-sm-1d" class="segmented-control-label">1D</label></div>
+                <div class="segmented-control-item"><input type="radio" id="sc-sm-7d" name="sc-sm" value="7d" class="segmented-control-input" /><label for="sc-sm-7d" class="segmented-control-label">7D</label></div>
+                <div class="segmented-control-item"><input type="radio" id="sc-sm-30d" name="sc-sm" value="30d" class="segmented-control-input" /><label for="sc-sm-30d" class="segmented-control-label">30D</label></div>
+              </div>
+              <div class="segmented-control" role="group" aria-label="Time range default">
+                <div class="segmented-control-item"><input type="radio" id="sc-md-1d" name="sc-md" value="1d" class="segmented-control-input" checked /><label for="sc-md-1d" class="segmented-control-label">1 Day</label></div>
+                <div class="segmented-control-item"><input type="radio" id="sc-md-7d" name="sc-md" value="7d" class="segmented-control-input" /><label for="sc-md-7d" class="segmented-control-label">7 Days</label></div>
+                <div class="segmented-control-item"><input type="radio" id="sc-md-30d" name="sc-md" value="30d" class="segmented-control-input" /><label for="sc-md-30d" class="segmented-control-label">30 Days</label></div>
+              </div>
+              <div class="segmented-control segmented-control--lg" role="group" aria-label="Time range large">
+                <div class="segmented-control-item"><input type="radio" id="sc-lg-1d" name="sc-lg" value="1d" class="segmented-control-input" checked /><label for="sc-lg-1d" class="segmented-control-label">This Day</label></div>
+                <div class="segmented-control-item"><input type="radio" id="sc-lg-7d" name="sc-lg" value="7d" class="segmented-control-input" /><label for="sc-lg-7d" class="segmented-control-label">This Week</label></div>
+                <div class="segmented-control-item"><input type="radio" id="sc-lg-30d" name="sc-lg" value="30d" class="segmented-control-input" /><label for="sc-lg-30d" class="segmented-control-label">This Month</label></div>
+              </div>
+            </div>
+          </article>
+          <article class="demo-card card card-elevated card-p-md stack">
+            <h3>Disabled item</h3>
+            <div class="segmented-control" role="group" aria-label="Disabled example">
+              <div class="segmented-control-item"><input type="radio" id="sc-dis-a" name="sc-dis" value="a" class="segmented-control-input" checked /><label for="sc-dis-a" class="segmented-control-label">Option A</label></div>
+              <div class="segmented-control-item"><input type="radio" id="sc-dis-b" name="sc-dis" value="b" class="segmented-control-input" disabled /><label for="sc-dis-b" class="segmented-control-label">Disabled</label></div>
+              <div class="segmented-control-item"><input type="radio" id="sc-dis-c" name="sc-dis" value="c" class="segmented-control-input" /><label for="sc-dis-c" class="segmented-control-label">Option C</label></div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ── SETTINGS PANEL ─────────────────────────────────────────────── -->
+      <section class="demo-section" id="sec-settings-panel">
+        <h2 class="demo-section-heading">Settings Panel <span class="support-pill">experimental</span></h2>
+        <div class="settings-panel" style="min-block-size: 24rem; border: 1px solid var(--color-border-subtle); border-radius: var(--radius-md); overflow: hidden;">
+          <aside class="settings-panel-sidebar">
+            <nav class="settings-panel-nav" aria-label="Settings nav demo">
+              <a href="#" class="settings-panel-nav-item" aria-current="page" data-active="true">General</a>
+              <a href="#" class="settings-panel-nav-item">Profile</a>
+              <a href="#" class="settings-panel-nav-item">Notifications</a>
+              <a href="#" class="settings-panel-nav-item">Security</a>
+            </nav>
+          </aside>
+          <div class="settings-panel-content" style="padding: var(--space-4);">
+            <div class="settings-panel-section">
+              <h3 class="settings-panel-section-title">General</h3>
+              <div class="settings-panel-row">
+                <div class="settings-panel-row-label"><strong>Workspace name</strong><span>Display name for your workspace.</span></div>
+                <div class="settings-panel-row-control"><input class="input" type="text" value="Acme Corp" style="inline-size: 12rem;" /></div>
+              </div>
+              <div class="settings-panel-row">
+                <div class="settings-panel-row-label"><strong>Public access</strong><span>Allow public discovery.</span></div>
+                <div class="settings-panel-row-control"><input class="switch" type="checkbox" role="switch" /></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ── TOAST VARIANTS ─────────────────────────────────────────────── -->
+      <section class="demo-section" id="sec-toast-variants">
+        <h2 class="demo-section-heading">Toast Variants <span class="support-pill" data-support-level="supported">supported</span></h2>
+        <div class="demo-cards">
+          <article class="demo-card card card-plain card-p-md stack">
+            <h3>Tone variants (inline preview)</h3>
+            <div class="stack" style="--stack-gap: var(--space-2)">
+              <div class="toast toast--success" data-open="true" data-demo-inline-toast style="position: relative;">
+                <p class="toast-title">Saved successfully</p>
+                <p class="toast-description">Your changes have been persisted.</p>
+              </div>
+              <div class="toast toast--info" data-open="true" data-demo-inline-toast style="position: relative;">
+                <p class="toast-title">Update available</p>
+                <p class="toast-description">A new version is ready to install.</p>
+              </div>
+              <div class="toast toast--warn" data-open="true" data-demo-inline-toast style="position: relative;">
+                <p class="toast-title">Quota at 90%</p>
+                <p class="toast-description">Upgrade soon to avoid service limits.</p>
+              </div>
+              <div class="toast toast--error" data-open="true" data-demo-inline-toast style="position: relative;">
+                <p class="toast-title">Request failed</p>
+                <p class="toast-description">Check your connection and try again.</p>
+              </div>
+            </div>
+          </article>
+          <article class="demo-card card card-elevated card-p-md stack">
+            <h3>Live toast trigger</h3>
+            <p class="text-sm" style="color: var(--color-fg-muted);">Toasts appear in the bottom-right corner.</p>
+            <div class="cluster" style="flex-wrap: wrap; gap: var(--space-2);">
+              <button class="btn btn--sm" type="button" data-toast-show="demo-toast-success">✓ Success</button>
+              <button class="btn btn--sm" type="button" data-toast-show="demo-toast-info">ℹ Info</button>
+              <button class="btn btn--sm" type="button" data-toast-show="demo-toast-warn">⚠ Warning</button>
+              <button class="btn btn--sm" type="button" data-toast-show="demo-toast-error">✖ Error</button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ── SKELETON PRESETS ────────────────────────────────────────────── -->
+      <section class="demo-section" id="sec-skeleton-presets">
+        <h2 class="demo-section-heading">Skeleton Presets <span class="support-pill" data-support-level="supported">supported</span></h2>
+        <div class="demo-cards">
+          <article class="demo-card card card-elevated card-p-md stack">
+            <h3>Form skeleton</h3>
+            <div class="skeleton-form">
+              <div class="skeleton-form-row">
+                <span class="skeleton skeleton-text" style="inline-size: 6rem;"></span>
+                <span class="skeleton skeleton-block" style="block-size: 2.25rem;"></span>
+              </div>
+              <div class="skeleton-form-row">
+                <span class="skeleton skeleton-text" style="inline-size: 5rem;"></span>
+                <span class="skeleton skeleton-block" style="block-size: 2.25rem;"></span>
+              </div>
+            </div>
+          </article>
+          <article class="demo-card card card-elevated card-p-md stack">
+            <h3>Table skeleton</h3>
+            <div class="skeleton-table">
+              <div class="skeleton-table-row">
+                <span class="skeleton demo-skeleton-circle"></span>
+                <span class="skeleton skeleton-text"></span>
+                <span class="skeleton skeleton-text" style="inline-size: 4rem;"></span>
+              </div>
+              <div class="skeleton-table-row">
+                <span class="skeleton demo-skeleton-circle"></span>
+                <span class="skeleton skeleton-text"></span>
+                <span class="skeleton skeleton-text" style="inline-size: 4rem;"></span>
+              </div>
+              <div class="skeleton-table-row">
+                <span class="skeleton demo-skeleton-circle"></span>
+                <span class="skeleton skeleton-text"></span>
+                <span class="skeleton skeleton-text" style="inline-size: 4rem;"></span>
+              </div>
+            </div>
+          </article>
+          <article class="demo-card card card-elevated card-p-md stack">
+            <h3>Card skeleton</h3>
+            <div class="skeleton-card">
+              <span class="skeleton skeleton-block" style="block-size: 8rem;"></span>
+              <span class="skeleton skeleton-text"></span>
+              <span class="skeleton skeleton-text" style="inline-size: 75%;"></span>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ── TABLE STATES ────────────────────────────────────────────────── -->
+      <section class="demo-section" id="sec-table-states">
+        <h2 class="demo-section-heading">Table Empty / Loading / Error States <span class="support-pill" data-support-level="supported">supported</span></h2>
+        <div class="demo-cards">
+          <article class="demo-card card card-elevated card-p-md stack">
+            <h3>Empty state</h3>
+            <div class="table-empty">
+              <span aria-hidden="true" style="font-size: 2.5rem;">📭</span>
+              <p class="table-state-message">No projects yet</p>
+              <button class="btn btn-primary btn--sm" type="button">Create project</button>
+            </div>
+          </article>
+          <article class="demo-card card card-elevated card-p-md stack">
+            <h3>Loading state (table[data-loading])</h3>
+            <table class="table" data-loading="true" aria-label="Loading table">
+              <thead class="table-head"><tr class="table-row"><th class="table-head-cell">Name</th><th class="table-head-cell">Status</th></tr></thead>
+              <tbody class="table-body"><tr class="table-row"><td class="table-cell">Project Alpha</td><td class="table-cell">Active</td></tr></tbody>
+            </table>
+            <div class="cluster" style="align-items: center; gap: var(--space-2); color: var(--color-fg-muted);">
+              <span class="spinner spinner-sm" aria-hidden="true"></span>
+              <span class="text-sm">Loading…</span>
+            </div>
+          </article>
+          <article class="demo-card card card-elevated card-p-md stack">
+            <h3>Error state</h3>
+            <div class="table-error">
+              <span aria-hidden="true" style="font-size: 2.5rem;">⚠️</span>
+              <p class="table-state-message">Failed to load data</p>
+              <button class="btn btn--sm" type="button">Retry</button>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <!-- ── INPUT AUGMENTATION (promoted M2→supported) ───────────────── -->
+      <section class="demo-section" id="sec-input-augment">
+        <h2 class="demo-section-heading">Input Augmentation <span class="support-pill" data-support-level="supported">supported</span></h2>
+        <div class="demo-cards">
+
+          <!-- Search Box -->
+          <article class="demo-card card card-elevated card-p-md stack">
+            <h3>Search Box</h3>
+            <p class="text-sm" style="color: var(--color-fg-muted);">Inline search with attached action button.</p>
+            <form role="search" class="stack" style="--stack-gap: var(--space-2);" onsubmit="return false;">
+              <div class="search-box">
+                <input class="search-box-input" type="search" placeholder="Search projects…" aria-label="Search projects" />
+                <button class="search-box-action" type="submit">Search</button>
+              </div>
+              <div class="search-box">
+                <input class="search-box-input" type="search" placeholder="Disabled search" aria-label="Disabled search" disabled />
+                <button class="search-box-action" type="submit" disabled>Search</button>
+              </div>
+            </form>
+          </article>
+
+          <!-- Combobox -->
+          <article class="demo-card card card-elevated card-p-md stack">
+            <h3>Combobox</h3>
+            <p class="text-sm" style="color: var(--color-fg-muted);">Filterable select with keyboard navigation. Use <code>data-active</code> on highlighted option, <code>aria-selected</code> on chosen value.</p>
+            <div class="combobox" id="demo-combobox">
+              <input
+                class="combobox-input"
+                type="text"
+                role="combobox"
+                aria-expanded="true"
+                aria-autocomplete="list"
+                aria-controls="demo-combobox-list"
+                aria-label="Choose framework"
+                placeholder="Choose framework…"
+                value=""
+                autocomplete="off"
+              />
+              <ul class="combobox-list" id="demo-combobox-list" role="listbox" aria-label="Frameworks">
+                <li class="combobox-option" role="option" aria-selected="false" data-active="true">React</li>
+                <li class="combobox-option" role="option" aria-selected="false">Vue</li>
+                <li class="combobox-option" role="option" aria-selected="true">Svelte</li>
+                <li class="combobox-option" role="option" aria-selected="false">Solid</li>
+                <li class="combobox-option" role="option" aria-selected="false">Angular</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- Autocomplete -->
+          <article class="demo-card card card-elevated card-p-md stack">
+            <h3>Autocomplete</h3>
+            <p class="text-sm" style="color: var(--color-fg-muted);">Free-text input with inline suggestion list. <code>aria-autocomplete="list"</code> on the input; <code>data-active</code> tracks keyboard focus in the list.</p>
+            <div class="autocomplete" id="demo-autocomplete">
+              <input
+                class="autocomplete-input"
+                type="text"
+                role="combobox"
+                aria-expanded="true"
+                aria-autocomplete="list"
+                aria-controls="demo-autocomplete-list"
+                aria-label="Country"
+                placeholder="Type a country…"
+                autocomplete="off"
+              />
+              <ul class="autocomplete-list" id="demo-autocomplete-list" role="listbox" aria-label="Country suggestions">
+                <li class="autocomplete-option" role="option" data-active="true">Turkey</li>
+                <li class="autocomplete-option" role="option">Tunisia</li>
+                <li class="autocomplete-option" role="option">Turkmenistan</li>
+              </ul>
+            </div>
+          </article>
+
+          <!-- Command Palette -->
+          <article class="demo-card card card-elevated card-p-md stack">
+            <h3>Command Palette</h3>
+            <p class="text-sm" style="color: var(--color-fg-muted);">Modal command launcher. Trigger with <kbd>⌘K</kbd>. <code>data-active</code> tracks highlighted item.</p>
+            <div class="command-palette" id="demo-command-palette">
+              <div
+                class="command-palette-dialog"
+                role="dialog"
+                aria-label="Command palette"
+                aria-modal="true"
+              >
+                <input
+                  class="command-palette-input"
+                  type="text"
+                  placeholder="Type a command or search…"
+                  aria-label="Command search"
+                  aria-autocomplete="list"
+                  aria-controls="demo-cp-list"
+                  autocomplete="off"
+                />
+                <ul class="command-palette-list" id="demo-cp-list" role="listbox" aria-label="Commands">
+                  <li class="command-palette-item" role="option" data-active="true">→ New project</li>
+                  <li class="command-palette-item" role="option">→ Go to settings</li>
+                  <li class="command-palette-item" role="option">→ Invite team member</li>
+                  <li class="command-palette-item" role="option">→ View changelog</li>
+                  <li class="command-palette-item" role="option">→ Sign out</li>
+                </ul>
+              </div>
+            </div>
+          </article>
+
+        </div>
+      </section>
+
+      <section class="demo-section" id="sec-examples">
+        <h2 class="demo-section-heading">Starter Templates &amp; Example Pages</h2>
+        <div class="demo-cards">
+          <article class="demo-card card card-elevated card-p-md stack">
+            <h3>Starter templates</h3>
+            <p class="text-sm" style="color: var(--color-fg-muted);">Copy-paste starting points for common app patterns.</p>
+            <div class="stack" style="--stack-gap: var(--space-2)">
+              <a class="link" href="./templates/app-shell-starter.html" target="_blank">App Shell Starter ↗</a>
+              <a class="link" href="./templates/settings-starter.html" target="_blank">Settings Page Starter ↗</a>
+              <a class="link" href="./templates/data-workflow-starter.html" target="_blank">Data Workflow Starter ↗</a>
+            </div>
+          </article>
+          <article class="demo-card card card-elevated card-p-md stack">
+            <h3>Example pages</h3>
+            <div class="stack" style="--stack-gap: var(--space-2)">
+              <a class="link" href="./getting-started.html">Getting started</a>
+              <a class="link" href="./form-validation-example.html">Form validation</a>
+              <a class="link" href="./app-shell-example.html">App shell</a>
+              <a class="link" href="./data-display-example.html">Data display</a>
+              <a class="link" href="./dashboard-example.html">Dashboard</a>
+              <a class="link" href="./settings-example.html">Settings</a>
+              <a class="link" href="./settings-workflow-example.html">Settings workflow</a>
+              <a class="link" href="./tree-table-workflow-example.html">Tree table workflow</a>
+              <a class="link" href="./result-status-example.html">Result &amp; status</a>
+              <a class="link" href="./toast-example.html">Toast examples</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="section stack" id="sec-1">
         <h2>1) Component Surface</h2>
         <div class="cluster demo-cards">
           <article id="core-extensions" class="card card-elevated card-p-md stack demo-card">
@@ -119,13 +516,13 @@
               <span class="skeleton skeleton-text"></span>
               <span class="skeleton skeleton-text" style="inline-size: 72%"></span>
               <span class="skeleton skeleton-block"></span>
-              <span class="skeleton skeleton-circle"></span>
+              <span class="skeleton demo-skeleton-circle"></span>
             </div>
           </article>
         </div>
       </section>
 
-      <section class="section stack">
+      <section class="section stack" id="sec-2">
         <h2>2) Layout Primitives</h2>
         <div class="stack card card-plain card-p-md demo-frame">
           <h3>`stack` in a settings form</h3>
@@ -260,7 +657,7 @@
         </article>
       </section>
 
-      <section class="section stack">
+      <section class="section stack" id="sec-forms">
         <h2>6) Input Validation Surface</h2>
         <article class="card card-p-md stack demo-frame">
           <p class="text-sm">
@@ -463,7 +860,7 @@
         </article>
       </section>
 
-      <section class="section stack">
+      <section class="section stack" id="sec-6">
         <h2>10) Modal Surface</h2>
         <article class="card card-p-md stack demo-frame">
           <p class="text-sm">Modal uses `data-open` state and semantic dialog attributes.</p>
@@ -493,7 +890,7 @@
         </div>
       </section>
 
-      <section class="section stack">
+      <section class="section stack" id="sec-7">
         <h2>11) Toast Surface</h2>
         <article class="card card-p-md stack demo-frame">
           <p class="text-sm">Toast items use `data-open` and live region semantics.</p>
@@ -506,7 +903,7 @@
         </article>
       </section>
 
-      <section class="section stack">
+      <section class="section stack" id="sec-overlays">
         <h2>12) Tooltip Surface</h2>
         <article class="card card-p-md stack demo-frame">
           <p class="text-sm">Tooltip state uses `data-open` and `aria-describedby` relation.</p>
@@ -674,7 +1071,7 @@
         </article>
       </section>
 
-      <section class="section stack">
+      <section class="section stack" id="sec-16">
         <h2>16) Tabs Surface</h2>
         <article class="card card-p-md stack demo-frame">
           <p class="text-sm">Tabs use `data-active` on triggers/panels with one active panel at a time.</p>
@@ -685,20 +1082,20 @@
               <button class="tabs-trigger" role="tab" type="button" data-tabs-trigger="security" data-active="false">Security</button>
             </div>
 
-            <section class="tabs-panel" data-tabs-panel="profile" data-active="true">
+            <section class="tabs-panel" role="tabpanel" data-tabs-panel="profile" data-active="true">
               <p class="text-sm">Profile settings and personal details.</p>
             </section>
-            <section class="tabs-panel" data-tabs-panel="billing" data-active="false">
+            <section class="tabs-panel" role="tabpanel" data-tabs-panel="billing" data-active="false">
               <p class="text-sm">Billing methods and invoice preferences.</p>
             </section>
-            <section class="tabs-panel" data-tabs-panel="security" data-active="false">
+            <section class="tabs-panel" role="tabpanel" data-tabs-panel="security" data-active="false">
               <p class="text-sm">Password, sessions and 2FA controls.</p>
             </section>
           </div>
         </article>
       </section>
 
-      <section class="section stack">
+      <section class="section stack" id="sec-18">
         <h2>17) Accordion Surface</h2>
         <article class="card card-p-md stack demo-frame">
           <p class="text-sm">Accordion item open state is represented with `data-open` on each item.</p>
@@ -719,7 +1116,7 @@
         </article>
       </section>
 
-      <section class="section stack">
+      <section class="section stack" id="sec-11">
         <h2>18) Pagination Surface</h2>
         <article class="card card-p-md stack demo-frame">
           <p class="text-sm">Pagination uses semantic links/buttons; current page is marked with `aria-current`.</p>
@@ -756,7 +1153,7 @@
         </article>
       </section>
 
-      <section class="section stack">
+      <section class="section stack" id="sec-nav">
         <h2>20) Navbar Surface</h2>
         <article class="card card-p-md stack demo-frame">
           <p class="text-sm">Navbar surface combines brand area and navigation items.</p>
@@ -933,7 +1330,7 @@
         </article>
       </section>
 
-      <section class="section stack">
+      <section class="section stack" id="sec-26">
         <h2>26) Table + Empty State Surface</h2>
 
         <article class="card card-p-md stack demo-frame">
@@ -988,7 +1385,7 @@
         </article>
       </section>
 
-      <section class="section stack">
+      <section class="section stack" id="sec-data">
         <h2>26.1) Data Grid Surface</h2>
         <article class="card card-p-md stack demo-frame">
           <p class="text-sm">Minimal data-grid surface with role-based semantics and selected row state.</p>
@@ -1849,7 +2246,9 @@
           </div>
         </article>
       </section>
-    </main>
+
+      </main>
+    </div><!-- /.demo-app-body -->
 
     <div class="toast-viewport" aria-live="polite" aria-atomic="true">
       <article id="demo-toast-info" class="toast" data-open="false">
@@ -1859,13 +2258,27 @@
           <button class="btn btn-outline btn-sm" type="button" data-toast-hide="demo-toast-info">Close</button>
         </div>
       </article>
-
       <article id="demo-toast-danger" class="toast" data-open="false" data-tone="danger">
         <strong>Failed</strong>
         <p class="text-sm">Request failed. Try again.</p>
         <div class="toast-actions">
           <button class="btn btn-outline btn-sm" type="button" data-toast-hide="demo-toast-danger">Close</button>
         </div>
+      </article>
+      <article id="demo-toast-success" class="toast toast--success" data-open="false">
+        <p class="toast-title">Saved successfully</p>
+        <p class="toast-description">Your changes have been persisted.</p>
+        <button class="toast-close icon-button icon-button-sm" type="button" aria-label="Close" data-toast-hide="demo-toast-success">✕</button>
+      </article>
+      <article id="demo-toast-warn" class="toast toast--warn" data-open="false">
+        <p class="toast-title">Quota at 90%</p>
+        <p class="toast-description">Upgrade to avoid service limits.</p>
+        <button class="toast-close icon-button icon-button-sm" type="button" aria-label="Close" data-toast-hide="demo-toast-warn">✕</button>
+      </article>
+      <article id="demo-toast-error" class="toast toast--error" data-open="false">
+        <p class="toast-title">Request failed</p>
+        <p class="toast-description">Check your connection and try again.</p>
+        <button class="toast-close icon-button icon-button-sm" type="button" aria-label="Close" data-toast-hide="demo-toast-error">✕</button>
       </article>
     </div>
 

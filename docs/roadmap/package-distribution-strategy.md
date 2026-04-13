@@ -43,10 +43,10 @@ Current model:
 Minimal consumer flow:
 1. Build artifacts at repo root (`npm run build`)
 2. Create local package tarball (`npm pack`)
-3. Install tarball in consumer project (`npm install ../fikir-css-mvp-<version>.tgz`)
+3. Install tarball in consumer project (`npm install ../fikir-css-<version>.tgz`)
 4. Consume CSS:
-   - plain HTML: `<link rel="stylesheet" href="./node_modules/fikir-css-mvp/dist/fikir.css" />`
-   - bundler entrypoint: `import "fikir-css-mvp/css";`
+   - plain HTML: `<link rel="stylesheet" href="./node_modules/fikir-css/dist/fikir.css" />`
+   - bundler entrypoint: `import "fikir-css/css";`
 
 Reference starter example:
 - `examples/starter-consumer/`

@@ -1,4 +1,5 @@
-import { mkdtemp, mkdir, readFile, rm, writeFile } from "node:fs/promises";
+import { access, mkdtemp, mkdir, readFile, rm, writeFile } from "node:fs/promises";
+import { constants } from "node:fs";
 import { spawnSync } from "node:child_process";
 import { tmpdir } from "node:os";
 import { dirname, resolve } from "node:path";
@@ -19,54 +20,34 @@ const screenshotJobs = [
     output: "playground/screenshots/playground-dark.png"
   },
   {
-    source: "playground/getting-started.html",
+    source: "playground/templates/app-shell-starter.html",
     theme: "light",
-    output: "playground/screenshots/sections/supported-foundation-light.png"
+    output: "playground/screenshots/templates/app-shell-light.png"
   },
   {
-    source: "playground/getting-started.html",
+    source: "playground/templates/app-shell-starter.html",
     theme: "dark",
-    output: "playground/screenshots/sections/supported-foundation-dark.png"
+    output: "playground/screenshots/templates/app-shell-dark.png"
   },
   {
-    source: "playground/settings-workflow-example.html",
+    source: "playground/templates/settings-starter.html",
     theme: "light",
-    output: "playground/screenshots/sections/supported-forms-light.png"
+    output: "playground/screenshots/templates/settings-light.png"
   },
   {
-    source: "playground/settings-workflow-example.html",
+    source: "playground/templates/settings-starter.html",
     theme: "dark",
-    output: "playground/screenshots/sections/supported-forms-dark.png"
+    output: "playground/screenshots/templates/settings-dark.png"
   },
   {
-    source: "playground/toast-example.html",
+    source: "playground/templates/data-workflow-starter.html",
     theme: "light",
-    output: "playground/screenshots/sections/supported-toast-light.png"
+    output: "playground/screenshots/templates/data-workflow-light.png"
   },
   {
-    source: "playground/toast-example.html",
+    source: "playground/templates/data-workflow-starter.html",
     theme: "dark",
-    output: "playground/screenshots/sections/supported-toast-dark.png"
-  },
-  {
-    source: "playground/tree-table-workflow-example.html",
-    theme: "light",
-    output: "playground/screenshots/sections/supported-pagination-table-light.png"
-  },
-  {
-    source: "playground/tree-table-workflow-example.html",
-    theme: "dark",
-    output: "playground/screenshots/sections/supported-pagination-table-dark.png"
-  },
-  {
-    source: "playground/data-display-example.html",
-    theme: "light",
-    output: "playground/screenshots/sections/supported-data-display-light.png"
-  },
-  {
-    source: "playground/data-display-example.html",
-    theme: "dark",
-    output: "playground/screenshots/sections/supported-data-display-dark.png"
+    output: "playground/screenshots/templates/data-workflow-dark.png"
   }
 ];
 
@@ -115,6 +96,10 @@ async function capturePng(inputHtmlPath, outputPngPath) {
   }
 }
 
+async function sourceExists(p) {
+  try { await access(p, constants.F_OK); return true; } catch { return false; }
+}
+
 async function main() {
   const tempDir = await mkdtemp(resolve(tmpdir(), "fikir-playground-capture-"));
 
@@ -122,6 +107,11 @@ async function main() {
     for (const job of screenshotJobs) {
       const sourcePath = resolve(rootDir, job.source);
       const outputPath = resolve(rootDir, job.output);
+
+      if (!(await sourceExists(sourcePath))) {
+        console.log(`skipped (source not found): ${job.source}`);
+        continue;
+      }
 
       let captureSourcePath = sourcePath;
 

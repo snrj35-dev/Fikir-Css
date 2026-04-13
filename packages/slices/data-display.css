@@ -1,0 +1,22 @@
+/**
+ * fikir-css/slices/data-display — Data & display surface slice
+ *
+ * Opt-in import for data/display components only.
+ *
+ *   import "fikir-css/slices/data-display";
+ */
+@import "../components/table.css";
+@import "../components/data-grid.css";
+@import "../components/list.css";
+@import "../components/description-list.css";
+@import "../components/stat.css";
+@import "../components/result.css";
+@import "../components/empty-state.css";
+@import "../components/skeleton.css";
+@import "../components/spinner.css";
+@import "../components/avatar.css";
+@import "../components/avatar-group.css";
+@import "../components/tag-chip.css";
+@import "../components/timeline.css";
+@import "../components/kpi-card.css";
+@import "../components/badge.css";

@@ -1,6 +1,6 @@
-import { access, mkdir, readFile, writeFile } from "node:fs/promises";
+import { access, copyFile, mkdir, readFile, readdir, writeFile } from "node:fs/promises";
 import { constants } from "node:fs";
-import { dirname, resolve } from "node:path";
+import { basename, dirname, resolve } from "node:path";
 import { gzipSync } from "node:zlib";
 
 import config from "../fikir.config.mjs";
@@ -380,12 +380,69 @@ async function buildCss() {
 
   await writeFileEnsured(sizeReportOutFile, `${JSON.stringify(report, null, 2)}\n`);
 
+  // Copy tooling file to dist/tooling/ so it is included in the npm tarball
+  const toolingSrc = resolve(rootDir, "packages/tooling/resolve-classes.mjs");
+  const toolingDest = resolve(rootDir, "dist/tooling/resolve-classes.mjs");
+  await mkdir(dirname(toolingDest), { recursive: true });
+  await copyFile(toolingSrc, toolingDest);
+  await copyFile(
+    resolve(rootDir, "packages/tooling/resolve-classes.d.ts"),
+    resolve(rootDir, "dist/tooling/resolve-classes.d.ts")
+  );
+
+  // Copy helpers package to dist/helpers/ so it is included in the npm tarball
+  const helpersSrc = resolve(rootDir, "packages/helpers");
+  const helpersDest = resolve(rootDir, "dist/helpers");
+  await mkdir(helpersDest, { recursive: true });
+  await copyFile(resolve(helpersSrc, "index.mjs"), resolve(helpersDest, "index.mjs"));
+  await copyFile(resolve(helpersSrc, "index.d.ts"), resolve(helpersDest, "index.d.ts"));
+  console.log("Helpers: dist/helpers/ (index.mjs, index.d.ts)");
+
+  // Copy theme CSS files to dist/themes/ for opt-in distribution
+  const themesSrc = resolve(rootDir, "packages/tokens/themes");
+  const themesDest = resolve(rootDir, "dist/themes");
+  await mkdir(themesDest, { recursive: true });
+  const themeFiles = (await readdir(themesSrc)).filter(f => f.endsWith(".css"));
+  for (const theme of themeFiles) {
+    await copyFile(resolve(themesSrc, theme), resolve(themesDest, theme));
+  }
+
+  // Generate dist/tokens.json (W3C DTCG format) from core + semantic tokens
+  const tokenSources = [
+    resolve(rootDir, "packages/tokens/core.css"),
+    resolve(rootDir, "packages/tokens/semantic.css"),
+  ];
+  const rawTokens = {};
+  for (const src of tokenSources) {
+    const css = await readFile(src, "utf8");
+    for (const match of css.matchAll(/\s*(--[\w-]+)\s*:\s*([^;}\n]+)/g)) {
+      rawTokens[match[1].trim()] = match[2].trim();
+    }
+  }
+  const inferTokenType = (n) => {
+    if (n.startsWith("--color-")) return "color";
+    if (n.startsWith("--space-") || n.startsWith("--font-size-") || n.startsWith("--radius-") || n.startsWith("--container-")) return "dimension";
+    if (n.startsWith("--shadow-")) return "shadow";
+    return "string";
+  };
+  const dtcg = {};
+  for (const [name, value] of Object.entries(rawTokens)) {
+    const group = name.replace(/^--/, "").split("-")[0];
+    const key = name.replace(/^--/, "").replace(/-([a-z0-9])/g, (_, c) => c.toUpperCase());
+    if (!dtcg[group]) dtcg[group] = {};
+    dtcg[group][key] = { $value: value, $type: inferTokenType(name) };
+  }
+  const tokensOutFile = resolve(rootDir, "dist/tokens.json");
+  await writeFile(tokensOutFile, JSON.stringify(dtcg, null, 2), "utf8");
+
   console.log(`Built ${outFile}`);
   console.log(`Selectors manifest: ${selectorsManifestOutFile}`);
   console.log(`Alias migration: ${aliasMigrationOutFile}`);
   console.log(`Size report: ${sizeReportOutFile}`);
   console.log(`Size diff: ${report.diffBytes} bytes`);
   console.log(`Gzip size diff: ${report.diffGzipBytes} bytes`);
+  console.log(`Tooling: dist/tooling/resolve-classes.mjs`);
+  console.log(`Themes: dist/themes/ (${themeFiles.length} files)`);
 }
 
 buildCss().catch((error) => {

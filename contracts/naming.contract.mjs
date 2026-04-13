@@ -271,10 +271,66 @@ export const namingContract = {
     "component.badgeNeutral": { domain: "component", base: "badge-neutral" },
     "component.badgePrimary": { domain: "component", base: "badge-primary" },
     "component.badgeDanger": { domain: "component", base: "badge-danger" },
+    "component.badgeWarning": { domain: "component", base: "badge-warning" },
+    "component.badgeSuccess": { domain: "component", base: "badge-success" },
+    "component.badgeInfo": { domain: "component", base: "badge-info" },
     "component.alert": { domain: "component", base: "alert" },
     "component.alertTitle": { domain: "component", base: "alert-title" },
     "component.alertDescription": { domain: "component", base: "alert-description" },
     "component.alertDanger": { domain: "component", base: "alert-danger" },
+    "component.alertWarning": { domain: "component", base: "alert-warning" },
+    "component.alertSuccess": { domain: "component", base: "alert-success" },
+    "component.alertInfo": { domain: "component", base: "alert-info" },
+    "component.alertNeutral": { domain: "component", base: "alert-neutral" },
+
+    // Segmented control (M2)
+    "component.segmentedControl": { domain: "component", base: "segmented-control" },
+    "component.segmentedControlItem": { domain: "component", base: "segmented-control-item" },
+    "component.segmentedControlInput": { domain: "component", base: "segmented-control-input" },
+    "component.segmentedControlLabel": { domain: "component", base: "segmented-control-label" },
+    "component.segmentedControlSm": { domain: "component", base: "segmented-control--sm" },
+    "component.segmentedControlLg": { domain: "component", base: "segmented-control--lg" },
+
+    // Menu-bar submenu (M2 hardening)
+    "component.menuBarSubtrigger": { domain: "component", base: "menu-bar-subtrigger" },
+    "component.menuBarSubmenu": { domain: "component", base: "menu-bar-submenu" },
+    "component.menuBarSubmenuContent": { domain: "component", base: "menu-bar-submenu-content" },
+    "component.menuBarDivider": { domain: "component", base: "menu-bar-divider" },
+
+    // Toast variants (M2)
+    "component.toastSuccess": { domain: "component", base: "toast--success" },
+    "component.toastInfo": { domain: "component", base: "toast--info" },
+    "component.toastWarn": { domain: "component", base: "toast--warn" },
+    "component.toastError": { domain: "component", base: "toast--error" },
+    "component.toastTitle": { domain: "component", base: "toast-title" },
+    "component.toastDescription": { domain: "component", base: "toast-description" },
+    "component.toastClose": { domain: "component", base: "toast-close" },
+
+    // Skeleton presets (M2)
+    "component.skeletonTable": { domain: "component", base: "skeleton-table" },
+    "component.skeletonTableRow": { domain: "component", base: "skeleton-table-row" },
+    "component.skeletonForm": { domain: "component", base: "skeleton-form" },
+    "component.skeletonFormRow": { domain: "component", base: "skeleton-form-row" },
+    "component.skeletonCard": { domain: "component", base: "skeleton-card" },
+    "component.skeletonContent": { domain: "component", base: "skeleton-content" },
+
+    // Table states (M2)
+    "component.tableEmpty": { domain: "component", base: "table-empty" },
+    "component.tableLoading": { domain: "component", base: "table-loading" },
+    "component.tableError": { domain: "component", base: "table-error" },
+    "component.tableStateMessage": { domain: "component", base: "table-state-message" },
+
+    // Settings panel (M2 — promoted from RFC-only)
+    "component.settingsPanel": { domain: "component", base: "settings-panel" },
+    "component.settingsPanelSidebar": { domain: "component", base: "settings-panel-sidebar" },
+    "component.settingsPanelNav": { domain: "component", base: "settings-panel-nav" },
+    "component.settingsPanelNavItem": { domain: "component", base: "settings-panel-nav-item" },
+    "component.settingsPanelContent": { domain: "component", base: "settings-panel-content" },
+    "component.settingsPanelSection": { domain: "component", base: "settings-panel-section" },
+    "component.settingsPanelSectionTitle": { domain: "component", base: "settings-panel-section-title" },
+    "component.settingsPanelRow": { domain: "component", base: "settings-panel-row" },
+    "component.settingsPanelRowLabel": { domain: "component", base: "settings-panel-row-label" },
+    "component.settingsPanelRowControl": { domain: "component", base: "settings-panel-row-control" },
 
     // Utilities
     "utility.p0": { domain: "utility", base: "p-0" },

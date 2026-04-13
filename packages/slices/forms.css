@@ -1,0 +1,22 @@
+/**
+ * fikir-css/slices/forms — Form surface slice
+ *
+ * Opt-in import for form components only.
+ * Use instead of the full bundle when you only need form surfaces.
+ *
+ *   import "fikir-css/slices/forms";
+ */
+@import "../components/field.css";
+@import "../components/label.css";
+@import "../components/helper-text.css";
+@import "../components/error-text.css";
+@import "../components/input.css";
+@import "../components/textarea.css";
+@import "../components/select.css";
+@import "../components/checkbox.css";
+@import "../components/radio.css";
+@import "../components/switch.css";
+@import "../components/input-group.css";
+@import "../components/search-box.css";
+@import "../components/combobox.css";
+@import "../components/autocomplete.css";
