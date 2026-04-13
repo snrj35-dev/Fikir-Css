@@ -86,7 +86,7 @@
     "github:bootstrap": "node scripts/bootstrap-github-roadmap.mjs",
     "test:source": "node --test tests/source/*.test.mjs",
     "test:build": "node --test tests/build/*.test.mjs",
-    "test:ci": "npm run test:source && npm run docs:validate && npm run build && npm run validate:size && npm run validate:prefixed && npm run validate:playground-baseline && npm run validate:publish && npm run validate:version && npm run package:smoke && npm run test:build",
+    "test:ci": "npm run build && npm run test:source && npm run docs:validate && npm run validate:size && npm run validate:prefixed && npm run validate:playground-baseline && npm run validate:publish && npm run validate:version && npm run package:smoke && npm run test:build",
     "test": "npm run test:ci"
   }
 }
