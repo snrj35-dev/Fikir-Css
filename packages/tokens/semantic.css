@@ -3,10 +3,19 @@
   [data-theme="light"] {
     --color-bg-default: var(--color-gray-50);
     --color-bg-surface: #ffffff;
+    --color-bg-elevated: #ffffff;
     --color-fg-default: var(--color-gray-900);
     --color-fg-muted: var(--color-gray-700);
     --color-border-subtle: var(--color-gray-300);
     --color-accent: var(--color-primary-500);
     --color-danger: var(--color-danger-500);
+    --color-success: var(--color-success-500);
+    --color-warning: var(--color-warning-500);
+    --color-info: var(--color-info-500);
+
+    --color-danger-subtle: color-mix(in oklch, var(--color-danger) 12%, var(--color-bg-surface));
+    --color-success-subtle: color-mix(in oklch, var(--color-success) 12%, var(--color-bg-surface));
+    --color-warning-subtle: color-mix(in oklch, var(--color-warning) 14%, var(--color-bg-surface));
+    --color-info-subtle: color-mix(in oklch, var(--color-info) 10%, var(--color-bg-surface));
   }
 }

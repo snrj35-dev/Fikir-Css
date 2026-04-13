@@ -5,23 +5,40 @@
     --space-2: 0.5rem;
     --space-3: 0.75rem;
     --space-4: 1rem;
+    --space-5: 1.25rem;
     --space-6: 1.5rem;
+    --space-8: 2rem;
+    --space-10: 2.5rem;
+    --space-12: 3rem;
 
     --font-size-xs: 0.75rem;
     --font-size-sm: 0.875rem;
     --font-size-md: 1rem;
     --font-size-lg: 1.125rem;
+    --font-size-xl: 1.25rem;
+    --font-size-2xl: 1.5rem;
 
     --radius-sm: 0.375rem;
     --radius-md: 0.625rem;
     --radius-lg: 0.875rem;
+    --radius-xl: 1.25rem;
 
-    --shadow-sm: 0 2px 8px rgb(0 0 0 / 0.08);
-    --shadow-md: 0 8px 24px rgb(0 0 0 / 0.12);
+    --transition-duration-fast: 100ms;
+    --transition-duration-base: 180ms;
+    --transition-duration-slow: 320ms;
+
+    --shadow-sm: 0 1px 3px rgb(0 0 0 / 0.06), 0 2px 8px rgb(0 0 0 / 0.08);
+    --shadow-md: 0 4px 12px rgb(0 0 0 / 0.1), 0 8px 24px rgb(0 0 0 / 0.12);
+    --shadow-lg: 0 12px 40px rgb(0 0 0 / 0.16), 0 4px 12px rgb(0 0 0 / 0.08);
 
     --color-primary-500: oklch(62% 0.18 262);
     --color-primary-600: oklch(56% 0.18 262);
-    --color-danger-500: oklch(62% 0.2 24);
+    --color-danger-500: oklch(60% 0.2 24);
+    --color-success-500: oklch(58% 0.18 145);
+    --color-success-600: oklch(50% 0.17 145);
+    --color-warning-500: oklch(72% 0.17 85);
+    --color-warning-600: oklch(60% 0.16 85);
+    --color-info-500: oklch(62% 0.18 262);
 
     --color-gray-50: oklch(98% 0.004 260);
     --color-gray-100: oklch(95% 0.006 260);

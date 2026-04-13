@@ -115,15 +115,29 @@
     .item { display: flex; flex-direction: column; gap: var(--space-1); align-items: flex-start; }
 
     .hero {
-      background: var(--color-bg-surface);
+      background:
+        radial-gradient(ellipse 80% 60% at 50% -10%,
+          color-mix(in oklch, var(--color-accent) 14%, transparent),
+          transparent),
+        var(--color-bg-surface);
       border: 1px solid var(--color-border-subtle);
-      border-radius: var(--radius-lg);
-      padding: var(--space-6);
+      border-radius: var(--radius-xl);
+      padding: var(--space-10) var(--space-6);
       margin-bottom: var(--space-6);
       text-align: center;
     }
-    .hero h1 { margin: 0 0 var(--space-2); font-size: 2rem; font-weight: 800; }
-    .hero p { color: var(--color-fg-muted); margin: 0 0 var(--space-4); }
+    .hero h1 {
+      margin: 0 0 var(--space-3);
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.1;
+    }
+    .hero h1 em {
+      font-style: normal;
+      color: var(--color-accent);
+    }
+    .hero p { color: var(--color-fg-muted); margin: 0 0 var(--space-4); font-size: var(--font-size-lg); max-width: 40rem; margin-inline: auto; }
     .hero-badges { display: flex; gap: var(--space-2); justify-content: center; flex-wrap: wrap; }
 
     /* ── Onboarding sections ─────────────────────── */
@@ -168,6 +182,33 @@
 
     .hero-actions { display: flex; gap: var(--space-2); justify-content: center; flex-wrap: wrap; margin-top: var(--space-4); }
 
+    /* ── Sidebar toggle ─────────────────────────── */
+    .sidebar-toggle {
+      display: none;
+      background: none;
+      border: 1px solid var(--color-border-subtle);
+      border-radius: var(--radius-sm);
+      padding: var(--space-1) var(--space-2);
+      cursor: pointer;
+      color: var(--color-fg-muted);
+      font-size: var(--font-size-sm);
+      line-height: 1;
+      transition: background var(--transition-duration-fast, 100ms), color var(--transition-duration-fast, 100ms);
+    }
+    .sidebar-toggle:hover { background: var(--color-bg-default); color: var(--color-fg-default); }
+    @media (max-width: 860px) {
+      .sidebar-toggle { display: flex; align-items: center; gap: var(--space-1); }
+    }
+    .site-body.sidebar-collapsed { grid-template-columns: 0 1fr; }
+    .site-body.sidebar-collapsed .site-sidebar { width: 0; overflow: hidden; padding: 0; border: none; }
+
+    /* ── Active sidebar link ─────────────────────── */
+    .side-link.is-active {
+      background: color-mix(in oklch, var(--color-accent) 10%, var(--color-bg-default));
+      color: var(--color-accent);
+      font-weight: 600;
+    }
+
     @media (max-width: 640px) {
       .site-body { grid-template-columns: 1fr; }
       .site-sidebar { display: none; }
@@ -179,11 +220,17 @@
 
 <!-- Header -->
 <header class="site-header">
-  <a href="#" class="site-logo">Fikir<span>CSS</span></a>
+  <div style="display:flex;align-items:center;gap:var(--space-3)">
+    <button class="sidebar-toggle" id="sidebar-toggle" aria-label="Toggle sidebar" aria-expanded="true">
+      <span aria-hidden="true">&#9776;</span> Menu
+    </button>
+    <a href="#" class="site-logo">Fikir<span>CSS</span></a>
+  </div>
   <nav class="site-nav">
     <a href="https://github.com/snrj35-dev/Fikir-Css">GitHub</a>
     <a href="https://www.npmjs.com/package/fikir-css">npm</a>
     <a href="token-explorer.html">Tokens</a>
+    <a href="../playground/index.html">Playground</a>
   </nav>
   <button class="btn btn-outline btn-neutral btn-sm" id="theme-toggle" aria-label="Toggle dark mode">
     🌙 Dark
@@ -261,7 +308,7 @@
 
     <!-- Hero -->
     <div class="hero">
-      <h1>Fikir CSS</h1>
+      <h1>Fikir <em>CSS</em></h1>
       <p>Contract-driven design system · Zero runtime · Token-first · 82 surfaces</p>
       <div class="hero-badges">
         <span class="badge badge-neutral">v0.6.0-beta</span>
@@ -1079,18 +1126,34 @@
     });
   }
 
-  // Smooth sidebar scroll highlight
+  // Sidebar toggle
+  const sidebarToggleBtn = document.getElementById('sidebar-toggle');
+  const siteBody = document.querySelector('.site-body');
+  if (sidebarToggleBtn && siteBody) {
+    sidebarToggleBtn.addEventListener('click', () => {
+      const collapsed = siteBody.classList.toggle('sidebar-collapsed');
+      sidebarToggleBtn.setAttribute('aria-expanded', String(!collapsed));
+      sidebarToggleBtn.innerHTML = collapsed
+        ? '<span aria-hidden="true">&#9776;</span> Menu'
+        : '<span aria-hidden="true">&#9776;</span> Menu';
+    });
+  }
+
+  // Sidebar scroll highlight with is-active class
   const sections = document.querySelectorAll('.section[id]');
   const links = document.querySelectorAll('.side-link');
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
-        links.forEach(l => l.style.removeProperty('background'));
+        links.forEach(l => l.classList.remove('is-active'));
         const active = document.querySelector(`.side-link[href="#${entry.target.id}"]`);
-        if (active) active.style.background = 'var(--color-bg-default)';
+        if (active) {
+          active.classList.add('is-active');
+          active.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+        }
       }
     });
-  }, { rootMargin: '-30% 0px -60% 0px' });
+  }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
   sections.forEach(s => observer.observe(s));
 </script>
 

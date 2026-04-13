@@ -1,10 +1,20 @@
 @layer base {
   [data-theme="dark"] {
-    --color-bg-default: oklch(18% 0.01 260);
-    --color-bg-surface: oklch(24% 0.01 260);
-    --color-fg-default: oklch(96% 0.01 260);
-    --color-fg-muted: oklch(84% 0.01 260);
-    --color-border-subtle: oklch(32% 0.01 260);
-    --color-danger: color-mix(in oklch, var(--color-danger-500) 72%, var(--color-fg-default));
+    --color-bg-default: oklch(16% 0.01 260);
+    --color-bg-surface: oklch(22% 0.012 260);
+    --color-bg-elevated: oklch(26% 0.012 260);
+    --color-fg-default: oklch(96% 0.008 260);
+    --color-fg-muted: oklch(72% 0.01 260);
+    --color-border-subtle: oklch(34% 0.012 260);
+
+    --color-danger: color-mix(in oklch, var(--color-danger-500) 80%, var(--color-fg-default));
+    --color-success: color-mix(in oklch, var(--color-success-500) 80%, var(--color-fg-default));
+    --color-warning: color-mix(in oklch, var(--color-warning-500) 85%, var(--color-fg-default));
+    --color-info: color-mix(in oklch, var(--color-info-500) 80%, var(--color-fg-default));
+
+    --color-danger-subtle: color-mix(in oklch, var(--color-danger) 16%, var(--color-bg-surface));
+    --color-success-subtle: color-mix(in oklch, var(--color-success) 16%, var(--color-bg-surface));
+    --color-warning-subtle: color-mix(in oklch, var(--color-warning) 16%, var(--color-bg-surface));
+    --color-info-subtle: color-mix(in oklch, var(--color-info) 14%, var(--color-bg-surface));
   }
 }
