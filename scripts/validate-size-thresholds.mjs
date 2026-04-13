@@ -25,7 +25,8 @@ async function main() {
     );
   }
 
-  if (report.diffBytes > MAX_DIFF_BYTES) {
+  const coldStart = !report.previousBytes;
+  if (!coldStart && report.diffBytes > MAX_DIFF_BYTES) {
     failures.push(
       `size diff ${formatSigned(report.diffBytes)} exceeds MAX_DIFF_BYTES=${MAX_DIFF_BYTES}`
     );
@@ -41,7 +42,7 @@ async function main() {
 
   if (typeof report.diffGzipBytes !== "number") {
     failures.push("size report missing diffGzipBytes");
-  } else if (report.diffGzipBytes > MAX_GZIP_DIFF_BYTES) {
+  } else if (!coldStart && report.diffGzipBytes > MAX_GZIP_DIFF_BYTES) {
     failures.push(
       `gzip diff ${formatSigned(report.diffGzipBytes)} exceeds MAX_GZIP_DIFF_BYTES=${MAX_GZIP_DIFF_BYTES}`
     );

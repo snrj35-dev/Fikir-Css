@@ -1,6 +1,6 @@
 {
   "name": "fikir-css",
-  "version": "0.6.0-beta.4",
+  "version": "0.6.0-beta.5",
   "description": "Contract-driven CSS design system. Zero-runtime, token-first, 82 surfaces in ~12KB gzip.",
   "keywords": ["css", "design-system", "ui", "components", "tokens", "zero-runtime", "framework"],
   "license": "MIT",
