@@ -1,12 +1,11 @@
 # Svelte Adapter Guidance
 
-> Created: 2026-04-12
-> Scope: M3 — recipe + headless usage in Svelte 5 / SvelteKit
+> Updated: M11 — recipe + headless usage in Svelte 5 / SvelteKit
 
 ## Installation
 
 ```bash
-npm install fikir-css
+npm install fikir-css@beta
 ```
 
 ```ts
@@ -104,6 +103,57 @@ import "fikir-css/css";
     </div>
   {/each}
 </div>
+```
+
+## Dark Mode Store
+
+```ts
+// src/lib/theme.ts
+import { writable } from 'svelte/store'
+
+type Theme = 'light' | 'dark' | 'high-contrast'
+
+function createThemeStore() {
+  const { subscribe, set } = writable<Theme>('light')
+
+  return {
+    subscribe,
+    set(t: Theme) {
+      document.documentElement.setAttribute('data-theme', t)
+      localStorage.setItem('theme', t)
+      set(t)
+    },
+    toggle() {
+      const current = document.documentElement.getAttribute('data-theme')
+      this.set(current === 'dark' ? 'light' : 'dark')
+    },
+    init() {
+      const saved = localStorage.getItem('theme') as Theme | null
+      const preferred = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+      this.set(saved ?? preferred)
+    }
+  }
+}
+
+export const theme = createThemeStore()
+```
+
+Usage in layout:
+
+```svelte
+<!-- src/routes/+layout.svelte -->
+<script lang="ts">
+  import 'fikir-css/css'
+  import { theme } from '$lib/theme'
+  import { onMount } from 'svelte'
+  onMount(() => theme.init())
+</script>
+
+<button class="btn btn-outline btn-neutral btn-sm" on:click={() => theme.toggle()}>
+  {$theme === 'dark' ? '☀️ Light' : '🌙 Dark'}
+</button>
+
+<slot />
 ```
 
 ## SvelteKit SSR

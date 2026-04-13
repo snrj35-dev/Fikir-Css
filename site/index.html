@@ -241,6 +241,12 @@
       <a class="side-link" href="#stat">Stat</a>
     </div>
     <div class="side-group">
+      <div class="side-group-title">Complex</div>
+      <a class="side-link" href="#stepper">Stepper</a>
+      <a class="side-link" href="#timeline">Timeline</a>
+      <a class="side-link" href="#tree-view">Tree View</a>
+    </div>
+    <div class="side-group">
       <div class="side-group-title">Typography</div>
       <a class="side-link" href="#typography">Headings &amp; Text</a>
     </div>
@@ -786,12 +792,103 @@
           <p class="stat-label">Churn rate</p>
           <p class="stat-value">2.4%</p>
           <p class="stat-change stat-change--down">+0.4%</p>
-        </div>
         <span class="preview-label">stat · stat-label · stat-value · stat-change--up/down</span>
       </div>
     </section>
 
-    <!-- ── TYPOGRAPHY ────────────────────────────── -->
+    <!-- ── STEPPER ───────────────────────────── -->
+    <section class="section" id="stepper">
+      <h2 class="section-title">Stepper</h2>
+      <p class="section-desc">Multi-step progress indicator. Use <code class="code-chip">data-state</code> (<code class="code-chip">complete</code> / <code class="code-chip">active</code> / <code class="code-chip">upcoming</code>) on each <code class="code-chip">stepper-item</code>.</p>
+      <div class="preview-row">
+        <div class="item">
+          <ol class="stepper">
+            <li class="stepper-item" data-state="complete">
+              <span class="stepper-marker" aria-hidden="true">✓</span>
+              <span class="stepper-label">Account details</span>
+            </li>
+            <li class="stepper-item" data-state="active">
+              <span class="stepper-marker" aria-hidden="true">2</span>
+              <span class="stepper-label">Billing info</span>
+            </li>
+            <li class="stepper-item" data-state="upcoming">
+              <span class="stepper-marker" aria-hidden="true">3</span>
+              <span class="stepper-label">Review &amp; confirm</span>
+            </li>
+          </ol>
+          <span class="preview-label">stepper · stepper-item[data-state] · stepper-marker · stepper-label</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── TIMELINE ───────────────────────────── -->
+    <section class="section" id="timeline">
+      <h2 class="section-title">Timeline</h2>
+      <p class="section-desc">Ordered event list. Last item hides the connector line.</p>
+      <div class="preview-row">
+        <div class="item">
+          <ol class="timeline">
+            <li class="timeline-item">
+              <span class="timeline-marker" aria-hidden="true"></span>
+              <div class="timeline-content">
+                <p class="timeline-title">Account created</p>
+                <p class="timeline-meta">Jan 12, 2025</p>
+              </div>
+            </li>
+            <li class="timeline-item">
+              <span class="timeline-marker" aria-hidden="true"></span>
+              <div class="timeline-content">
+                <p class="timeline-title">First deploy</p>
+                <p class="timeline-meta">Feb 3, 2025</p>
+              </div>
+            </li>
+            <li class="timeline-item">
+              <span class="timeline-marker" aria-hidden="true"></span>
+              <div class="timeline-content">
+                <p class="timeline-title">v1.0 released</p>
+                <p class="timeline-meta">Apr 1, 2025</p>
+              </div>
+            </li>
+          </ol>
+          <span class="preview-label">timeline · timeline-item · timeline-marker · timeline-content · timeline-title · timeline-meta</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── TREE VIEW ──────────────────────────── -->
+    <section class="section" id="tree-view">
+      <h2 class="section-title">Tree View</h2>
+      <p class="section-desc">Hierarchical list. Toggle <code class="code-chip">data-tree-expanded</code> (<code class="code-chip">true</code>/<code class="code-chip">false</code>) on <code class="code-chip">tree-view-item</code> to expand/collapse children.</p>
+      <div class="preview-row">
+        <div class="item">
+          <div class="tree-view" role="tree" aria-label="File tree">
+            <ul class="tree-view-group" role="group">
+              <li class="tree-view-item" data-tree-expanded="true" role="treeitem" aria-expanded="true">
+                <button class="tree-view-toggle btn btn-outline btn-neutral btn-sm" onclick="this.closest('[data-tree-expanded]').dataset.treeExpanded = this.closest('[data-tree-expanded]').dataset.treeExpanded === 'true' ? 'false' : 'true'; this.setAttribute('aria-expanded', this.closest('[data-tree-expanded]').dataset.treeExpanded)" aria-expanded="true">▾ src</button>
+                <ul class="tree-view-group" role="group">
+                  <li class="tree-view-item" role="treeitem">
+                    <span class="tree-view-label">App.vue</span>
+                  </li>
+                  <li class="tree-view-item" data-tree-expanded="false" role="treeitem" aria-expanded="false">
+                    <button class="tree-view-toggle btn btn-outline btn-neutral btn-sm" onclick="this.closest('[data-tree-expanded]').dataset.treeExpanded = this.closest('[data-tree-expanded]').dataset.treeExpanded === 'true' ? 'false' : 'true'; this.setAttribute('aria-expanded', this.closest('[data-tree-expanded]').dataset.treeExpanded)" aria-expanded="false">▾ components</button>
+                    <ul class="tree-view-group" role="group">
+                      <li class="tree-view-item" role="treeitem"><span class="tree-view-label">Button.vue</span></li>
+                      <li class="tree-view-item" role="treeitem"><span class="tree-view-label">Modal.vue</span></li>
+                    </ul>
+                  </li>
+                </ul>
+              </li>
+              <li class="tree-view-item" role="treeitem">
+                <span class="tree-view-label">package.json</span>
+              </li>
+            </ul>
+          </div>
+          <span class="preview-label">tree-view · tree-view-group · tree-view-item[data-tree-expanded] · tree-view-toggle · tree-view-label</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ── TYPOGRAPHY ──────────────────────────── -->
     <section class="section" id="typography">
       <h2 class="section-title">Typography</h2>
       <div class="preview-row" style="flex-direction:column;gap:var(--space-2)">

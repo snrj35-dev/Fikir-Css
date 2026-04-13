@@ -1,30 +1,24 @@
-# Vue Adapter Guidance
+# Fikir CSS × Vue 3 Adapter Guide
 
-> Created: 2026-04-12
-> Scope: M3 — recipe + headless usage in Vue 3
+> Updated: M11
 
 ## Installation
 
 ```bash
-npm install fikir-css
+npm install fikir-css@beta
 ```
+
+In your `main.ts` / `main.js`:
 
 ```ts
-// src/main.ts
-import "fikir-css/css";
+import 'fikir-css/css'
+import { createApp } from 'vue'
+import App from './App.vue'
+
+createApp(App).mount('#app')
 ```
 
-## Using Semantic Components
-
-```vue
-<template>
-  <button type="button" class="btn btn-primary" @click="handleSave">
-    Save
-  </button>
-</template>
-```
-
-## Headless Pattern with ref
+## `useTheme()` Composable
 
 ```vue
 <template>

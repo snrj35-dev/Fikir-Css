@@ -95,6 +95,17 @@
     .shadow-item { display: flex; flex-direction: column; align-items: center; gap: var(--space-2); }
     .shadow-label { font-family: monospace; font-size: .7rem; color: var(--color-fg-muted); }
 
+    /* Compare mode */
+    .compare-bar { display: flex; align-items: center; gap: var(--space-3); padding: var(--space-3) var(--space-4); background: var(--color-bg-surface); border: 1px solid var(--color-border-subtle); border-radius: var(--radius-lg); margin-bottom: var(--space-6); flex-wrap: wrap; }
+    .compare-bar label { font-size: var(--font-size-sm); color: var(--color-fg-muted); }
+    .compare-panel { display: none; }
+    .compare-panel.active { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); margin-bottom: var(--space-6); }
+    .compare-column { padding: var(--space-4); border: 1px solid var(--color-border-subtle); border-radius: var(--radius-lg); }
+    .compare-column-title { font-size: .7rem; font-weight: 700; text-transform: uppercase; letter-spacing: .06em; color: var(--color-fg-muted); margin: 0 0 var(--space-3); }
+    .compare-swatch-row { display: grid; grid-template-columns: 2rem 1fr; gap: var(--space-2); align-items: center; margin-bottom: var(--space-2); }
+    .compare-swatch { width: 2rem; height: 2rem; border-radius: var(--radius-sm); border: 1px solid var(--color-border-subtle); }
+    .compare-token-name { font-family: monospace; font-size: .7rem; color: var(--color-fg-default); }
+
     /* Typography tokens */
     .type-grid { display: flex; flex-direction: column; gap: var(--space-3); }
     .type-row { display: flex; align-items: baseline; gap: var(--space-4); }
@@ -111,7 +122,50 @@
   </div>
   <div style="display:flex;gap:var(--space-2);align-items:center">
     <a href="./index.html" class="btn btn-outline btn-neutral btn-sm">← Playground</a>
+    <button class="btn btn-outline btn-neutral btn-sm" id="compare-toggle">↔ Compare</button>
     <button class="btn btn-outline btn-neutral btn-sm" id="theme-toggle">🌙 Dark</button>
+  </div>
+</div>
+
+<!-- ── COMPARE BAR + PANEL ───────────────────── -->
+<div class="compare-bar">
+  <span style="font-weight:600;font-size:var(--font-size-sm)">Compare themes:</span>
+  <label>Theme A: <select id="theme-a" class="input" style="font-size:.8rem;padding:.2rem .5rem">
+    <option value="light" selected>Light</option>
+    <option value="dark">Dark</option>
+    <option value="high-contrast">High Contrast</option>
+  </select></label>
+  <label>Theme B: <select id="theme-b" class="input" style="font-size:.8rem;padding:.2rem .5rem">
+    <option value="light">Light</option>
+    <option value="dark" selected>Dark</option>
+    <option value="high-contrast">High Contrast</option>
+  </select></label>
+</div>
+
+<div class="compare-panel" id="compare-panel">
+  <div class="compare-column" id="col-a" data-theme="light">
+    <p class="compare-column-title" id="col-a-title">Light</p>
+    <div class="compare-swatch-row"><div class="compare-swatch" style="background:var(--color-bg-default)"></div><span class="compare-token-name">--color-bg-default</span></div>
+    <div class="compare-swatch-row"><div class="compare-swatch" style="background:var(--color-bg-surface)"></div><span class="compare-token-name">--color-bg-surface</span></div>
+    <div class="compare-swatch-row"><div class="compare-swatch" style="background:var(--color-fg-default)"></div><span class="compare-token-name">--color-fg-default</span></div>
+    <div class="compare-swatch-row"><div class="compare-swatch" style="background:var(--color-fg-muted)"></div><span class="compare-token-name">--color-fg-muted</span></div>
+    <div class="compare-swatch-row"><div class="compare-swatch" style="background:var(--color-accent)"></div><span class="compare-token-name">--color-accent</span></div>
+    <div class="compare-swatch-row"><div class="compare-swatch" style="background:var(--color-danger)"></div><span class="compare-token-name">--color-danger</span></div>
+    <div class="compare-swatch-row"><div class="compare-swatch" style="background:var(--color-success)"></div><span class="compare-token-name">--color-success</span></div>
+    <div class="compare-swatch-row"><div class="compare-swatch" style="background:var(--color-warning)"></div><span class="compare-token-name">--color-warning</span></div>
+    <div class="compare-swatch-row"><div class="compare-swatch" style="background:var(--color-border-subtle)"></div><span class="compare-token-name">--color-border-subtle</span></div>
+  </div>
+  <div class="compare-column" id="col-b" data-theme="dark">
+    <p class="compare-column-title" id="col-b-title">Dark</p>
+    <div class="compare-swatch-row"><div class="compare-swatch" style="background:var(--color-bg-default)"></div><span class="compare-token-name">--color-bg-default</span></div>
+    <div class="compare-swatch-row"><div class="compare-swatch" style="background:var(--color-bg-surface)"></div><span class="compare-token-name">--color-bg-surface</span></div>
+    <div class="compare-swatch-row"><div class="compare-swatch" style="background:var(--color-fg-default)"></div><span class="compare-token-name">--color-fg-default</span></div>
+    <div class="compare-swatch-row"><div class="compare-swatch" style="background:var(--color-fg-muted)"></div><span class="compare-token-name">--color-fg-muted</span></div>
+    <div class="compare-swatch-row"><div class="compare-swatch" style="background:var(--color-accent)"></div><span class="compare-token-name">--color-accent</span></div>
+    <div class="compare-swatch-row"><div class="compare-swatch" style="background:var(--color-danger)"></div><span class="compare-token-name">--color-danger</span></div>
+    <div class="compare-swatch-row"><div class="compare-swatch" style="background:var(--color-success)"></div><span class="compare-token-name">--color-success</span></div>
+    <div class="compare-swatch-row"><div class="compare-swatch" style="background:var(--color-warning)"></div><span class="compare-token-name">--color-warning</span></div>
+    <div class="compare-swatch-row"><div class="compare-swatch" style="background:var(--color-border-subtle)"></div><span class="compare-token-name">--color-border-subtle</span></div>
   </div>
 </div>
 
@@ -322,6 +376,33 @@
     document.documentElement.setAttribute('data-theme', next);
     btn.textContent = next === 'dark' ? '☀️ Light' : '🌙 Dark';
   });
+
+  const comparePanel = document.getElementById('compare-panel');
+  const compareToggle = document.getElementById('compare-toggle');
+  const themeASelect = document.getElementById('theme-a');
+  const themeBSelect = document.getElementById('theme-b');
+  const colA = document.getElementById('col-a');
+  const colB = document.getElementById('col-b');
+  const colATitle = document.getElementById('col-a-title');
+  const colBTitle = document.getElementById('col-b-title');
+
+  function updateCompare() {
+    const a = themeASelect.value;
+    const b = themeBSelect.value;
+    colA.setAttribute('data-theme', a);
+    colB.setAttribute('data-theme', b);
+    colATitle.textContent = a.charAt(0).toUpperCase() + a.slice(1).replace('-', ' ');
+    colBTitle.textContent = b.charAt(0).toUpperCase() + b.slice(1).replace('-', ' ');
+  }
+
+  compareToggle.addEventListener('click', () => {
+    const isActive = comparePanel.classList.toggle('active');
+    compareToggle.textContent = isActive ? '✕ Close compare' : '↔ Compare';
+    if (isActive) updateCompare();
+  });
+
+  themeASelect.addEventListener('change', updateCompare);
+  themeBSelect.addEventListener('change', updateCompare);
 </script>
 
 </body>

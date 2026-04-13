@@ -197,6 +197,21 @@ Per-component CSS import (`import 'fikir-css/button.css'`) şu an **desteklenmiy
 
 ---
 
+## site/ + playground/ Birleştirme Fizibilite Değerlendirmesi (M9)
+
+| Kriter | site/ | playground/ | Karar |
+|--------|-------|-------------|-------|
+| Amaç | Pazarlama + kurulum + gallery | İnteraktif bileşen demosu + JS örnekleri | Farklı odak |
+| URL | `snrj35-dev.github.io/Fikir-Css/` | `snrj35-dev.github.io/Fikir-Css/playground/` | Zaten iç içe |
+| Deploy | Aynı GitHub Pages workflow | Aynı | ✅ |
+| Bakım maliyeti | Düşük — statik HTML | Orta — JS helpers, toast wiring | — |
+
+**Karar: Birleştirme YOK, bağlantı VAR.**
+- `site/index.html` → "Real App Examples" bölümüne playground bağlantısı eklendi (M9'da yapıldı)
+- `playground/index.html` → header'da "← Site" geri bağlantısı yeterli
+- İki dosya ayrı amaca hizmet ediyor; birleştirmek bakım karmaşıklığı yaratır
+- Kullanıcı deneyimi: site = "ilk bakış + kurulum", playground = "derin interaktif keşif"
+
 ## Guardrails
 - CI yeşil olmadan M10+ başlamaz (M9 blocker).
 - README ve site üzerindeki npm/CDN vaatleri — paket yayınlanmadan kaldırılmalı veya uyarı eklenmeli.

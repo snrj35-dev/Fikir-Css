@@ -4,7 +4,7 @@
 
 A single `fikir.css` file gives you 82 battle-tested UI surfaces. No build step for consumers. State via `data-*` attributes, not class proliferation.
 
-**v0.5.0** &nbsp;·&nbsp; **~91 KB raw / ~12 KB gzip** &nbsp;·&nbsp; **82 surfaces**
+**v0.6.0-beta** &nbsp;·&nbsp; **~92 KB raw / ~10.5 KB gzip** &nbsp;·&nbsp; **82 surfaces** &nbsp;·&nbsp; [![npm](https://img.shields.io/npm/v/fikir-css/beta)](https://www.npmjs.com/package/fikir-css)
 
 🔗 **[Live component gallery →](https://snrj35-dev.github.io/Fikir-Css/)** &nbsp;·&nbsp; [GitHub](https://github.com/snrj35-dev/Fikir-Css)
 
@@ -303,6 +303,46 @@ Components use `data-*` attributes for state (not CSS classes):
 - [Versioning / semver policy](./docs/release/versioning-semver-policy.md)
 
 </details>
+
+---
+
+## Theme Switching
+
+Activate any theme with a single attribute — no rebuild, no JS class toggling:
+
+```html
+<html data-theme="dark">          <!-- dark mode -->
+<html data-theme="high-contrast"> <!-- WCAG AAA -->
+<html data-density="compact">     <!-- compact spacing -->
+<html data-theme="dark" data-density="compact"> <!-- combine -->
+```
+
+Toggle with JS:
+
+```js
+document.documentElement.setAttribute('data-theme', 'dark')
+document.documentElement.removeAttribute('data-density') // back to default
+```
+
+→ Full guide: [docs/guides/theme-system.md](./docs/guides/theme-system.md)
+
+---
+
+## Why not Tailwind / Bootstrap?
+
+| | Fikir CSS | Tailwind CSS | Bootstrap 5 |
+|--|-----------|-------------|-------------|
+| **Bundle** | ~10.5 KB gzip | ~3–12 KB (purged, build required) | ~22 KB gzip |
+| **Build step** | ❌ None | ✅ Required | ❌ None |
+| **Runtime JS** | ❌ Zero | ❌ Zero | ✅ Required (modals, dropdowns) |
+| **Dark mode** | `data-theme="dark"` | `dark:` variant | `data-bs-theme="dark"` |
+| **Compact/density theme** | ✅ `data-density` | ❌ Manual | ❌ |
+| **TypeScript resolvers** | ✅ `fikir-css/tooling` | ❌ | ❌ |
+| **Component count** | 82 surfaces | Utility only | ~40 components |
+| **ARIA semantics in API** | ✅ `data-*` state selectors | ❌ | Partial |
+
+→ Full benchmark: [docs/benchmark.md](./docs/benchmark.md)
+→ Migration guides: [Bootstrap](./docs/migration/from-bootstrap.md) · [Tailwind](./docs/migration/from-tailwind.md)
 
 ---
 
