@@ -142,6 +142,30 @@ Metrikler:
 
 ---
 
+## Uzman Görüşü #3 Özeti (2026-04-13) + Doğrulama
+
+> Üçüncü uzman — Frontend Mimarisi açısı
+
+| Uzman İddiası | Doğrulama | Aksiyon |
+|--------------|------------|--------|
+| Performance benchmark dokümanı yok | ⚠️ **KİSMEN DOĞRU** — `docs/testing/parsing-cost-benchmark.md` var ama sadece _metodoloji_ stub'u, gerçek data yok | M12'ye benchmark tamamlama görevi eklendi |
+| a11y standartları belirsiz | ✅ **DOĞRU** — CSS'te 18 aria satırı var; per-component a11y checklist dokümanı yok | M12 doc şablonuna a11y checklist eklendi |
+| Tree-shaking / modular import mümkün mü? | ✅ **DOĞRU tespit** — Per-component CSS export **sıfır** (`./button.css` yok); sadece tam bundle veya tema CSS'leri importlanabilir | Teknik karar notu eklendi (bkz. aşağı) |
+| M10 önce gelmeli | ✅ Zaten planda | — |
+| `0.6.0-beta.1` publish | ✅ Zaten planda | — |
+| Bileşen önceliği stepper > tree-view > timeline > kpi-card | ✅ M12 güncellendi | — |
+| 10 saniyede üç soru cevaplanmalı | ✅ M9 site yeniden düzeni görevi zaten var | — |
+
+**Teknik karar notu — Tree-shaking:**
+Per-component CSS import (`import 'fikir-css/button.css'`) şu an **desteklenmiyor**. Bu bilingli bir mimarı tercih: tüm bundle 10.5 KB gzip olduğundan ayrıştırma için kültürel baskı düşük. Ancak çok büyük projelerde talep olabilir. M9–M12 kapsamı dışında, **M13+ olası çalışma** olarak not edildi.
+
+**Net yeni kararlar (uzman #3'ten):**
+- a11y checklist — per-component doc şablonuna eklendi (M12)
+- `parsing-cost-benchmark.md` gerçek Lighthouse datalarıyla tamamlanmalı (M12)
+- "Neden Tailwind değil?" karşılaştırma tablosu README veya migrasyon rehberine eklenmeli (M12)
+
+---
+
 ## Guardrails
 - CI yeşil olmadan M10+ başlamaz (M9 blocker).
 - README ve site üzerindeki npm/CDN vaatleri — paket yayınlanmadan kaldırılmalı veya uyarı eklenmeli.

@@ -70,8 +70,11 @@
 - [ ] `playground/index.html`'e metin arama / bileşen filtreleme ekle `(M12)`
 - [ ] `docs/guides/migration-from-bootstrap.md` tam içerik — class eşleme tablosu `(M12)`
 - [ ] `docs/guides/migration-from-tailwind.md` tam içerik — utility → component mapping `(M12)`
-- [ ] Her bileşen için standart doc şablonu oluştur: "ne zaman kullanılır / required classes / modifier'lar / state'ler / a11y / örnek markup / anti-pattern" — en az 10 bileşen `(M12)` ← uzman #2 bulgusu
+- [ ] Her bileşen için standart doc şablonu oluştur: "ne zaman kullanılır / required classes / modifier'lar / state'ler / **a11y checklist** / örnek markup / anti-pattern" — en az 10 bileşen `(M12)` ← uzman #2 + #3
 - [ ] "API table" formatını doc şablonuna dahil et `(M12)`
+- [ ] `docs/testing/parsing-cost-benchmark.md` gerçek Lighthouse verileriyle tamamla — şu an sadece metodoloji stub'u `(M12)` ← uzman #3 bulgusu
+- [ ] README'ye "Neden Tailwind değil?" karşılaştırma tablosu ekle (bundle size, theming, learning curve) `(M12)` ← uzman #3 bulgusu
+- [ ] Per-component CSS tree-shaking (`import 'fikir-css/button.css'`) — M13+ için RFC notu yaz; şu an bilinçli mimari tercih (10.5 KB gzip yeterli) `(M12-note)` ← uzman #3 bulgusu
 
 ---
 
