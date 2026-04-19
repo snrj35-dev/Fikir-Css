@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Progress fixture</title>
+  <link rel="stylesheet" href="../../../dist/fikir.css" />
+</head>
+<body style="padding: 2rem">
+  <!-- Determinate progress bar -->
+  <div class="progress" id="progress-1">
+    <div class="progress-label">
+      <span id="progress-label-1">Upload progress</span>
+      <span id="progress-value-1" aria-hidden="true">45%</span>
+    </div>
+    <div
+      class="progress-track"
+      role="progressbar"
+      aria-valuenow="45"
+      aria-valuemin="0"
+      aria-valuemax="100"
+      aria-labelledby="progress-label-1"
+    >
+      <div id="progress-indicator-1" class="progress-indicator" style="--progress: 45%"></div>
+    </div>
+  </div>
+
+  <br />
+
+  <!-- Indeterminate progress bar -->
+  <div class="progress" id="progress-2">
+    <div class="progress-label">
+      <span id="progress-label-2">Processing…</span>
+    </div>
+    <div
+      class="progress-track"
+      role="progressbar"
+      aria-valuetext="Loading"
+      aria-labelledby="progress-label-2"
+    >
+      <div class="progress-indicator" data-indeterminate></div>
+    </div>
+  </div>
+
+  <br />
+
+  <button id="set-75" class="btn btn-sm btn-outline" type="button">Set to 75%</button>
+  <button id="set-100" class="btn btn-sm btn-solid btn-primary" type="button">Complete (100%)</button>
+
+  <script>
+    document.getElementById('set-75').addEventListener('click', () => {
+      const track = document.querySelector('#progress-1 [role="progressbar"]');
+      const indicator = document.getElementById('progress-indicator-1');
+      track.setAttribute('aria-valuenow', '75');
+      indicator.style.setProperty('--progress', '75%');
+      document.getElementById('progress-value-1').textContent = '75%';
+    });
+    document.getElementById('set-100').addEventListener('click', () => {
+      const track = document.querySelector('#progress-1 [role="progressbar"]');
+      const indicator = document.getElementById('progress-indicator-1');
+      track.setAttribute('aria-valuenow', '100');
+      indicator.style.setProperty('--progress', '100%');
+      document.getElementById('progress-value-1').textContent = '100%';
+    });
+  </script>
+</body>
+</html>

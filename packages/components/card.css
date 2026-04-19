@@ -3,6 +3,14 @@
   This file is reserved for composition behavior that does not introduce new canonical selectors.
 */
 @layer components {
+  {{component.cardInteractive}}:hover,
+  {{component.cardInteractive}}:focus-within {
+    background: var(--card-hover-bg, var(--card-bg, var(--color-bg-surface)));
+    border-color: var(--card-hover-border-color, var(--card-border-color, var(--color-border-subtle)));
+    box-shadow: var(--card-hover-shadow, var(--card-shadow, none));
+    transform: var(--card-hover-transform, none);
+  }
+
   {{component.card}}[data-card-layout="stack"] > * + * {
     margin-block-start: var(--space-3);
   }

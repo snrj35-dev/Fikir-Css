@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Modal fixture</title>
+  <link rel="stylesheet" href="../../../dist/fikir.css" />
+</head>
+<body>
+  <button id="open-btn" class="btn btn-solid btn-primary">Open modal</button>
+
+  <div
+    id="modal"
+    class="modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modal-title"
+  >
+    <div class="modal-backdrop" id="modal-backdrop"></div>
+    <div class="modal-dialog">
+      <header class="modal-header">
+        <h2 id="modal-title">Test Modal</h2>
+        <button id="modal-close" class="btn btn-ghost btn-xs" aria-label="Close modal">✕</button>
+      </header>
+      <div class="modal-body">
+        <p>Modal content.</p>
+        <input id="first-input" class="input" type="text" placeholder="First focusable" />
+        <input id="second-input" class="input" type="text" placeholder="Second focusable" />
+      </div>
+      <footer class="modal-footer">
+        <button id="cancel-btn" class="btn btn-ghost">Cancel</button>
+        <button id="confirm-btn" class="btn btn-solid btn-primary">Confirm</button>
+      </footer>
+    </div>
+  </div>
+
+  <script>
+    const modal     = document.getElementById('modal');
+    const openBtn   = document.getElementById('open-btn');
+    const closeBtn  = document.getElementById('modal-close');
+    const cancelBtn = document.getElementById('cancel-btn');
+    const backdrop  = document.getElementById('modal-backdrop');
+    let previousFocus = null;
+
+    const FOCUSABLE = 'button:not([disabled]),input:not([disabled]),a[href],[tabindex]:not([tabindex="-1"])';
+
+    function trapFocus(e) {
+      const els   = [...modal.querySelectorAll(FOCUSABLE)];
+      const first = els[0];
+      const last  = els[els.length - 1];
+      if (e.key === 'Tab') {
+        if (e.shiftKey && document.activeElement === first) {
+          e.preventDefault(); last.focus();
+        } else if (!e.shiftKey && document.activeElement === last) {
+          e.preventDefault(); first.focus();
+        }
+      }
+      if (e.key === 'Escape') closeModal();
+    }
+
+    function openModal() {
+      previousFocus = document.activeElement;
+      modal.dataset.open = 'true';
+      modal.querySelector(FOCUSABLE)?.focus();
+      modal.addEventListener('keydown', trapFocus);
+    }
+
+    function closeModal() {
+      delete modal.dataset.open;
+      modal.removeEventListener('keydown', trapFocus);
+      previousFocus?.focus();
+    }
+
+    openBtn.addEventListener('click', openModal);
+    closeBtn.addEventListener('click', closeModal);
+    cancelBtn.addEventListener('click', closeModal);
+    backdrop.addEventListener('click', closeModal);
+  </script>
+</body>
+</html>

@@ -20,7 +20,8 @@ function getResolverSelectorKeys(recipes) {
     }
   }
 
-  return new Set(keys);
+  // data-pattern compounds use [data-pattern="..."] selectors — no CSS recipe layer entry
+  return new Set(keys.filter((k) => !k.startsWith("pattern.")));
 }
 
 test("single class surface: resolver selectors are covered by recipe layer", () => {

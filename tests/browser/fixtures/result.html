@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Result fixture</title>
+  <link rel="stylesheet" href="../../../dist/fikir.css" />
+</head>
+<body style="padding: 2rem">
+  <div id="result-success" class="result" data-result-tone="success">
+    <div class="result-media" aria-hidden="true">✓</div>
+    <h2 id="result-success-title" class="result-title">Payment successful</h2>
+    <p class="result-description">Your payment of $99.00 has been processed.</p>
+    <div class="result-actions">
+      <a id="result-success-link" class="btn btn-solid btn-primary" href="#">View receipt</a>
+    </div>
+  </div>
+
+  <hr />
+
+  <div id="result-danger" class="result" data-result-tone="danger">
+    <div class="result-media" aria-hidden="true">✕</div>
+    <h2 id="result-danger-title" class="result-title">Payment failed</h2>
+    <p class="result-description">We could not process your payment. Please try again.</p>
+    <div class="result-actions">
+      <button id="result-retry" class="btn btn-solid btn-danger" type="button">Retry payment</button>
+    </div>
+  </div>
+
+  <hr />
+
+  <div id="result-info" class="result" data-result-tone="info">
+    <div class="result-media" aria-hidden="true">ℹ</div>
+    <h2 id="result-info-title" class="result-title">Pending approval</h2>
+    <p class="result-description">Your request is awaiting review.</p>
+  </div>
+
+  <hr />
+
+  <div id="result-warning" class="result" data-result-tone="warning">
+    <div class="result-media" aria-hidden="true">⚠</div>
+    <h2 id="result-warning-title" class="result-title">Action required</h2>
+    <p class="result-description">Please verify your email before continuing.</p>
+  </div>
+</body>
+</html>

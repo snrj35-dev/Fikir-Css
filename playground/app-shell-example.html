@@ -41,7 +41,23 @@
       <div class="app-shell">
         <header class="app-shell-topbar">
           <strong>Workspace</strong>
-          <span class="badge">Team</span>
+
+          <!-- Command bar pattern example -->
+          <div data-pattern="command-bar" style="flex: 1 1 auto;">
+            <form class="search-box" role="search" aria-label="Command bar search">
+              <input class="search-box-input" type="search" aria-label="Search tasks" placeholder="Search..." />
+              <button class="search-box-action" type="submit">Search</button>
+            </form>
+
+            <div data-slot="actions">
+              <button class="btn btn-outline btn-sm" type="button">Filter</button>
+              <button class="btn btn-primary btn-sm" type="button">New</button>
+            </div>
+
+            <span class="badge">Team</span>
+          </div>
+
+          <button class="btn btn-ghost btn-sm" type="button">Settings</button>
         </header>
 
         <div class="app-shell-content">
@@ -56,13 +72,23 @@
           </aside>
 
           <main class="app-shell-main">
-            <section class="cluster" style="--cluster-gap: var(--space-2)" data-pattern="data-table-toolbar">
-              <form class="search-box" role="search" aria-label="Task search">
-                <input class="search-box-input" type="search" aria-label="Search tasks" />
-                <button class="search-box-action" type="submit">Search</button>
-              </form>
-              <button class="btn btn-outline btn-sm" type="button">Filter</button>
-              <button class="btn btn-primary btn-sm" type="button">Create task</button>
+            <section class="stack" style="--stack-gap: var(--space-2)" data-pattern="data-table-toolbar">
+              <div data-slot="controls">
+                <div data-slot="search">
+                  <form class="search-box" role="search" aria-label="Task search">
+                    <input class="search-box-input" type="search" aria-label="Search tasks" />
+                    <button class="search-box-action" type="submit">Search</button>
+                  </form>
+                </div>
+
+                <div data-slot="filters">
+                  <button class="btn btn-outline btn-sm" type="button">Filter</button>
+                </div>
+
+                <div data-slot="actions">
+                  <button class="btn btn-primary btn-sm" type="button">Create task</button>
+                </div>
+              </div>
             </section>
 
             <article class="section-block">

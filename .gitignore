@@ -25,3 +25,9 @@ Thumbs.db
 # Temporary
 *.tmp
 *.swp
+
+# Playwright browser test artifacts
+tests/browser/results/
+tests/browser/report/
+playwright-report/
+test-results/

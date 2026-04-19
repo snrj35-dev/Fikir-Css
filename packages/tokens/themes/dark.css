@@ -7,14 +7,18 @@
     --color-fg-muted: oklch(72% 0.01 260);
     --color-border-subtle: oklch(34% 0.012 260);
 
-    --color-danger: color-mix(in oklch, var(--color-danger-500) 80%, var(--color-fg-default));
+    --color-neutral: var(--color-fg-default);
+    --color-primary: var(--color-accent);
     --color-success: color-mix(in oklch, var(--color-success-500) 80%, var(--color-fg-default));
     --color-warning: color-mix(in oklch, var(--color-warning-500) 85%, var(--color-fg-default));
+    --color-danger: color-mix(in oklch, var(--color-danger-500) 80%, var(--color-fg-default));
     --color-info: color-mix(in oklch, var(--color-info-500) 80%, var(--color-fg-default));
 
-    --color-danger-subtle: color-mix(in oklch, var(--color-danger) 16%, var(--color-bg-surface));
+    --color-neutral-subtle: color-mix(in oklch, var(--color-border-subtle) 34%, var(--color-bg-surface));
+    --color-primary-subtle: color-mix(in oklch, var(--color-primary) 16%, var(--color-bg-surface));
     --color-success-subtle: color-mix(in oklch, var(--color-success) 16%, var(--color-bg-surface));
     --color-warning-subtle: color-mix(in oklch, var(--color-warning) 16%, var(--color-bg-surface));
+    --color-danger-subtle: color-mix(in oklch, var(--color-danger) 16%, var(--color-bg-surface));
     --color-info-subtle: color-mix(in oklch, var(--color-info) 14%, var(--color-bg-surface));
   }
 }

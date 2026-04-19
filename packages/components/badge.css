@@ -1,34 +1,56 @@
 @layer components {
-  {{component.badge}} {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    gap: var(--space-1);
-    border-radius: 999px;
-    border: 1px solid var(--color-border-subtle);
-    padding: var(--space-1) var(--space-2);
+  {{component.badge}} { justify-content: center; gap: var(--space-1); line-height: 1.2; border: 1px solid transparent; background: transparent; color: var(--color-fg-default); }
+
+  {{component.badgePrimary}} { --badge-tone: var(--color-primary); --badge-tone-subtle: var(--color-primary-subtle); --badge-contrast: var(--color-gray-50); --badge-plain-fg: var(--color-primary); }
+  {{component.badgeNeutral}} { --badge-tone: var(--color-border-subtle); --badge-tone-subtle: var(--color-neutral-subtle); --badge-contrast: var(--color-fg-default); --badge-plain-fg: var(--color-fg-muted); --badge-solid-border: var(--color-border-subtle); }
+  {{component.badgeDanger}} { --badge-tone: var(--color-danger); --badge-tone-subtle: var(--color-danger-subtle); --badge-contrast: var(--color-gray-50); --badge-plain-fg: var(--color-danger); }
+  {{component.badgeWarning}} { --badge-tone: var(--color-warning); --badge-tone-subtle: var(--color-warning-subtle); --badge-contrast: var(--color-fg-default); --badge-plain-fg: var(--color-warning); }
+  {{component.badgeSuccess}} { --badge-tone: var(--color-success); --badge-tone-subtle: var(--color-success-subtle); --badge-contrast: var(--color-gray-50); --badge-plain-fg: var(--color-success); }
+  {{component.badgeInfo}} { --badge-tone: var(--color-info); --badge-tone-subtle: var(--color-info-subtle); --badge-contrast: var(--color-gray-50); --badge-plain-fg: var(--color-info); }
+
+  {{component.badgeSolid}},
+  {{component.badge}}{{component.badgePrimary}}:not({{component.badgeSoft}}):not({{component.badgeOutline}}):not({{component.badgePlain}}) { background: var(--badge-tone, var(--color-primary)); border-color: var(--badge-solid-border, transparent); color: var(--badge-contrast, var(--color-gray-50)); }
+
+  {{component.badgeSoft}},
+  {{component.badge}}{{component.badgeNeutral}}:not({{component.badgeSolid}}):not({{component.badgeOutline}}):not({{component.badgePlain}}),
+  {{component.badge}}{{component.badgeDanger}}:not({{component.badgeSolid}}):not({{component.badgeOutline}}):not({{component.badgePlain}}),
+  {{component.badge}}{{component.badgeWarning}}:not({{component.badgeSolid}}):not({{component.badgeOutline}}):not({{component.badgePlain}}),
+  {{component.badge}}{{component.badgeSuccess}}:not({{component.badgeSolid}}):not({{component.badgeOutline}}):not({{component.badgePlain}}),
+  {{component.badge}}{{component.badgeInfo}}:not({{component.badgeSolid}}):not({{component.badgeOutline}}):not({{component.badgePlain}}) { background: var(--badge-tone-subtle, var(--color-primary-subtle)); border-color: color-mix(in oklch, var(--badge-tone, var(--color-primary)) 36%, var(--color-bg-surface)); color: var(--color-fg-default); }
+
+  {{component.badgeOutline}} { background: transparent; border-color: color-mix(in oklch, var(--badge-tone, var(--color-primary)) 42%, var(--color-bg-surface)); color: var(--badge-plain-fg, var(--badge-tone, var(--color-primary))); }
+  {{component.badgePlain}} { background: transparent; border-color: transparent; color: var(--badge-plain-fg, var(--color-fg-default)); }
+}
+
+/* Size contract: xs / sm / md / lg */
+@layer components {
+  {{component.badgeXs}} {
+    padding: 0.125rem 0.5rem;
     font-size: var(--font-size-xs);
-    font-weight: 700;
     line-height: 1.2;
-    background: color-mix(in oklch, var(--color-border-subtle) 28%, var(--color-bg-surface));
-    color: var(--color-fg-default);
   }
 
-  {{component.badgeNeutral}} {
-    background: color-mix(in oklch, var(--color-border-subtle) 28%, var(--color-bg-surface));
-    color: var(--color-fg-default);
-    border-color: var(--color-border-subtle);
+  {{component.badgeSm}} {
+    padding: 0.25rem 0.625rem;
+    font-size: var(--font-size-sm);
+    line-height: 1.2;
   }
 
-  {{component.badgePrimary}} {
-    background: var(--color-primary-500);
-    color: var(--color-gray-50);
-    border-color: transparent;
+  {{component.badgeMd}} {
+    padding: 0.375rem 0.75rem;
+    font-size: var(--font-size-md);
+    line-height: 1.2;
   }
 
-  {{component.badgeDanger}} {
-    background: color-mix(in oklch, var(--color-danger) 22%, var(--color-bg-surface));
-    color: var(--color-fg-default);
-    border-color: color-mix(in oklch, var(--color-danger) 52%, var(--color-bg-surface));
+  {{component.badgeLg}} {
+    padding: 0.5rem 0.875rem;
+    font-size: var(--font-size-lg);
+    line-height: 1.2;
+  }
+
+  /* Default badge size (md) */
+  {{component.badge}}:not({{component.badgeXs}}):not({{component.badgeSm}}):not({{component.badgeMd}}):not({{component.badgeLg}}) {
+    padding: 0.375rem 0.75rem;
+    font-size: var(--font-size-md);
   }
 }

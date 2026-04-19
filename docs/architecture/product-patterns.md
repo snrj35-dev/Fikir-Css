@@ -58,14 +58,15 @@ Detay: `docs/architecture/settings-panel-pattern-spec.md`
 
 ## Pattern 5: Filter Bar
 Canonical not:
-- v0.2'de `filter-bar` adında canonical framework class'ı yoktur.
-- Pattern, `cluster` + `input-group` + `select` + `btn` + `badge` kompozisyonu ile kurulur.
+- `filter-bar` adında canonical framework class'ı yoktur.
+- Pattern, `data-pattern="filter-bar"` wrapper'ı ve `data-slot` contract'i ile kurulur.
 
 Kullanım notu:
 - Filtre kontrolleri ve aksiyonlar tek satırda başlayıp küçük ekranlarda satır kırabilmelidir.
-- Aktif filtre özeti mevcut semantic surface ile gösterilmelidir.
+- Aktif filtre özeti `tag-chip` veya `badge` ile verilmelidir.
 
 Detay: `docs/architecture/filter-bar-pattern-spec.md`
+RFC: `docs/rfcs/patterns/filter-bar-rfc.md`
 
 ## Pattern 6: Command Bar
 Canonical not:
@@ -80,15 +81,16 @@ Detay: `docs/architecture/command-bar-pattern-spec.md`
 
 ## Pattern 7: Data Table Toolbar
 Canonical not:
-- v0.2'de `data-table-toolbar` adında canonical framework class'ı yoktur.
-- Pattern, `search-box` + `select` + `btn` + `badge` + `table` kompozisyonu ile kurulur.
+- `data-table-toolbar` adında canonical framework class'ı yoktur.
+- Pattern, `data-pattern="data-table-toolbar"` wrapper'ı ve `data-slot` contract'i ile kurulur.
 
 Kullanım notu:
 - Toolbar kontrolleri etkilediği tablo ile ilişkilendirilmelidir (`aria-controls`).
-- Arama/filtre ve toplu aksiyon alanları ayrı cluster grupları halinde kurulmalıdır.
+- `column-visibility`, `density`, `export` ve toplu aksiyon alanları ayrı slot grupları halinde kurulmalıdır.
 - Seçili satır özeti ve aktif filtre özeti mevcut surface ile verilmelidir.
 
 Detay: `docs/architecture/data-table-toolbar-pattern-spec.md`
+RFC: `docs/rfcs/patterns/data-table-toolbar-rfc.md`
 
 ## Related Specs/RFCs
 - `docs/rfcs/components/page-header-rfc.md`
@@ -99,4 +101,6 @@ Detay: `docs/architecture/data-table-toolbar-pattern-spec.md`
 - `docs/architecture/filter-bar-pattern-spec.md`
 - `docs/architecture/command-bar-pattern-spec.md`
 - `docs/architecture/data-table-toolbar-pattern-spec.md`
+- `docs/rfcs/patterns/filter-bar-rfc.md`
+- `docs/rfcs/patterns/data-table-toolbar-rfc.md`
 - `docs/architecture/search-filter-composite-examples.md`

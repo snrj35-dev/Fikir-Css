@@ -28,4 +28,8 @@
     border-left-width: 3px;
     color: var(--color-fg-default);
   }
+
+  {{component.alert}}[data-style="outline"] {
+    background: var(--color-bg-surface);
+  }
 }

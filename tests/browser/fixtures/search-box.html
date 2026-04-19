@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Search box fixture</title>
+  <link rel="stylesheet" href="../../../dist/fikir.css" />
+</head>
+<body style="padding: 2rem">
+  <label class="label" for="search-input">Search</label>
+  <div class="search-box" id="search-box-1">
+    <input
+      id="search-input"
+      class="search-box-input input"
+      type="search"
+      placeholder="Search…"
+      aria-label="Search"
+      autocomplete="off"
+    />
+    <button
+      id="search-clear"
+      class="search-box-action btn btn-ghost btn-icon btn-sm"
+      type="button"
+      aria-label="Clear search"
+      hidden
+    >
+      ✕
+    </button>
+    <button
+      id="search-submit"
+      class="search-box-action btn btn-ghost btn-icon btn-sm"
+      type="submit"
+      aria-label="Submit search"
+    >
+      🔍
+    </button>
+  </div>
+
+  <br />
+
+  <!-- Pre-filled search box -->
+  <div class="search-box" id="search-box-2">
+    <input
+      id="search-input-2"
+      class="search-box-input input"
+      type="search"
+      value="existing query"
+      aria-label="Search (pre-filled)"
+      autocomplete="off"
+    />
+    <button
+      id="search-clear-2"
+      class="search-box-action btn btn-ghost btn-icon btn-sm"
+      type="button"
+      aria-label="Clear search"
+    >
+      ✕
+    </button>
+  </div>
+
+  <script>
+    function wireSearchBox(inputId, clearId) {
+      const input = document.getElementById(inputId);
+      const clear = document.getElementById(clearId);
+      if (!input || !clear) return;
+
+      function updateClear() {
+        if (input.value.length > 0) {
+          clear.removeAttribute('hidden');
+        } else {
+          clear.setAttribute('hidden', '');
+        }
+      }
+
+      input.addEventListener('input', updateClear);
+
+      clear.addEventListener('click', () => {
+        input.value = '';
+        clear.setAttribute('hidden', '');
+        input.focus();
+      });
+
+      updateClear();
+    }
+
+    wireSearchBox('search-input',   'search-clear');
+    wireSearchBox('search-input-2', 'search-clear-2');
+  </script>
+</body>
+</html>

@@ -1,16 +1,17 @@
 # Svelte Adapter Guidance
 
-> Updated: M11 — recipe + headless usage in Svelte 5 / SvelteKit
+> Updated: M18 — v0.6.0, Svelte 4 / SvelteKit
 
 ## Installation
 
 ```bash
-npm install fikir-css@beta
+npm install fikir-css
 ```
 
 ```ts
 // src/app.ts or routes/+layout.ts
 import "fikir-css/css";
+import "fikir-css/themes/compact"; // opt-in: enables data-density="compact"
 ```
 
 ## Using Semantic Components
@@ -105,37 +106,34 @@ import "fikir-css/css";
 </div>
 ```
 
-## Dark Mode Store
+## Theme & Density Store
 
 ```ts
 // src/lib/theme.ts
 import { writable } from 'svelte/store'
 
-type Theme = 'light' | 'dark' | 'high-contrast'
+export const theme = writable<'light' | 'dark'>('light')
+export const density = writable<'comfortable' | 'compact'>('comfortable')
 
-function createThemeStore() {
-  const { subscribe, set } = writable<Theme>('light')
-
-  return {
-    subscribe,
-    set(t: Theme) {
-      document.documentElement.setAttribute('data-theme', t)
-      localStorage.setItem('theme', t)
-      set(t)
-    },
-    toggle() {
-      const current = document.documentElement.getAttribute('data-theme')
-      this.set(current === 'dark' ? 'light' : 'dark')
-    },
-    init() {
-      const saved = localStorage.getItem('theme') as Theme | null
-      const preferred = window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
-      this.set(saved ?? preferred)
-    }
-  }
+export function toggleTheme() {
+  theme.update((t) => {
+    const next = t === 'light' ? 'dark' : 'light'
+    document.documentElement.setAttribute('data-theme', next)
+    return next
+  })
 }
 
-export const theme = createThemeStore()
+export function toggleDensity() {
+  density.update((d) => {
+    const next = d === 'comfortable' ? 'compact' : 'comfortable'
+    if (next === 'compact') {
+      document.documentElement.setAttribute('data-density', 'compact')
+    } else {
+      document.documentElement.removeAttribute('data-density')
+    }
+    return next
+  })
+}
 ```
 
 Usage in layout:
@@ -144,13 +142,15 @@ Usage in layout:
 <!-- src/routes/+layout.svelte -->
 <script lang="ts">
   import 'fikir-css/css'
-  import { theme } from '$lib/theme'
-  import { onMount } from 'svelte'
-  onMount(() => theme.init())
+  import 'fikir-css/themes/compact'
+  import { theme, density, toggleTheme, toggleDensity } from '$lib/theme'
 </script>
 
-<button class="btn btn-outline btn-neutral btn-sm" on:click={() => theme.toggle()}>
+<button class="btn btn-outline btn-neutral btn-sm" on:click={toggleTheme}>
   {$theme === 'dark' ? '☀️ Light' : '🌙 Dark'}
+</button>
+<button class="btn btn-outline btn-neutral btn-sm" on:click={toggleDensity}>
+  {$density === 'comfortable' ? '⬛ Compact' : '⬜ Comfortable'}
 </button>
 
 <slot />

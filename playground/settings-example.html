@@ -24,13 +24,23 @@
           </div>
         </header>
 
+        <!-- Inline notice: success confirmation -->
+        <div class="inline-notice" data-tone="success" role="status" aria-live="polite">
+          <div class="inline-notice-icon" aria-hidden="true">✓</div>
+          <div class="inline-notice-content">
+            <h3 class="inline-notice-title">Settings updated</h3>
+            <p class="inline-notice-body">Your notification preferences have been saved successfully.</p>
+          </div>
+          <button class="inline-notice-close" aria-label="Dismiss success message" type="button">×</button>
+        </div>
+
         <div class="sidebar" style="--sidebar-width: 16rem; --sidebar-gap: var(--space-4)">
           <aside>
             <nav class="sidebar-nav" aria-label="Settings navigation">
               <section class="sidebar-nav-section">
-                <a class="sidebar-nav-item" href="#general" aria-current="page">General</a>
+                <a class="sidebar-nav-item" href="#general">General</a>
                 <a class="sidebar-nav-item" href="#security">Security</a>
-                <a class="sidebar-nav-item" href="#notifications">Notifications</a>
+                <a class="sidebar-nav-item" href="#notifications" aria-current="page">Notifications</a>
               </section>
             </nav>
           </aside>
@@ -68,6 +78,54 @@
                   <input class="checkbox" type="checkbox" checked />
                   Allow SSO login
                 </label>
+              </div>
+            </section>
+
+            <section id="notifications" class="section-block">
+              <header class="section-header">
+                <h2 style="margin: 0">Notifications</h2>
+              </header>
+              <div class="section-body stack" style="--stack-gap: var(--space-3)">
+                <label class="cluster text-sm">
+                  <input class="switch" type="checkbox" checked />
+                  Email notifications
+                </label>
+
+                <div class="field">
+                  <label class="label" for="quiet-hours-start">Quiet hours start time</label>
+                  <div class="time-picker">
+                    <input
+                      id="quiet-hours-start"
+                      class="time-picker-input input"
+                      type="text"
+                      placeholder="HH:MM"
+                      value="22:00"
+                      aria-label="Quiet hours start time"
+                    />
+                    <button class="time-picker-trigger btn btn-sm btn-outline" type="button" aria-label="Open time picker">
+                      🕒
+                    </button>
+                  </div>
+                  <p class="helper-text">When to stop sending notifications.</p>
+                </div>
+
+                <div class="field">
+                  <label class="label" for="quiet-hours-end">Quiet hours end time</label>
+                  <div class="time-picker">
+                    <input
+                      id="quiet-hours-end"
+                      class="time-picker-input input"
+                      type="text"
+                      placeholder="HH:MM"
+                      value="08:00"
+                      aria-label="Quiet hours end time"
+                    />
+                    <button class="time-picker-trigger btn btn-sm btn-outline" type="button" aria-label="Open time picker">
+                      🕒
+                    </button>
+                  </div>
+                  <p class="helper-text">When to resume sending notifications.</p>
+                </div>
               </div>
             </section>
           </section>

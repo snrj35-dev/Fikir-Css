@@ -8,9 +8,12 @@ const execFileAsync = promisify(execFile);
 
 const requiredPackagedFiles = [
   "dist/fikir.css",
+  "dist/tokens.json",
   "dist/contracts/selectors.json",
   "dist/contracts/alias-migration.json",
   "dist/contracts/size-report.json",
+  "dist/contracts/component-css-map.json",
+  "dist/contracts/bundle-layers-report.json",
   "dist/tooling/resolve-classes.mjs",
   "dist/tooling/resolve-classes.d.ts",
   "dist/helpers/index.mjs",
@@ -18,6 +21,10 @@ const requiredPackagedFiles = [
   "dist/themes/dark.css",
   "dist/themes/light.css",
   "dist/themes/high-contrast.css",
+  "dist/themes/compact.css",
+  "dist/themes/comfortable.css",
+  "dist/themes/reduced-motion.css",
+  "dist/themes/shape.css",
   "README.md",
   "LICENSE",
   "docs/release/release-note-template.md",
@@ -27,9 +34,13 @@ const requiredPackagedFiles = [
 // Subpath imports that must resolve without error
 const requiredExports = [
   "./dist/contracts/selectors.json",
+  "./dist/contracts/component-css-map.json",
   "./dist/tooling/resolve-classes.mjs",
   "./dist/helpers/index.mjs",
-  "./dist/themes/dark.css"
+  "./dist/tokens.json",
+  "./dist/themes/dark.css",
+  "./dist/themes/compact.css",
+  "./dist/themes/shape.css",
 ];
 
 const forbiddenPrefixes = [

@@ -28,4 +28,30 @@
     cursor: not-allowed;
     opacity: 0.7;
   }
+
+  /* Size contract: sm / md / lg */
+  {{component.selectSm}} {
+    padding-inline: var(--space-2);
+    min-block-size: 2.25rem;
+    font-size: var(--font-size-sm);
+  }
+
+  {{component.selectMd}} {
+    padding-inline: var(--space-3);
+    min-block-size: 2.5rem;
+    font-size: var(--font-size-md);
+  }
+
+  {{component.selectLg}} {
+    padding-inline: var(--space-4);
+    min-block-size: 2.75rem;
+    font-size: var(--font-size-lg);
+  }
+
+  /* Default select size (md) */
+  {{component.select}}:not({{component.selectSm}}):not({{component.selectMd}}):not({{component.selectLg}}) {
+    padding-inline: var(--space-3);
+    min-block-size: 2.5rem;
+    font-size: var(--font-size-md);
+  }
 }

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Accordion fixture</title>
+  <link rel="stylesheet" href="../../../dist/fikir.css" />
+</head>
+<body style="padding: 2rem">
+  <div class="accordion" id="accordion">
+    <div class="accordion-item" id="item-1">
+      <button
+        id="trigger-1"
+        class="accordion-trigger"
+        aria-expanded="false"
+        aria-controls="panel-1"
+        type="button"
+      >
+        Section 1
+      </button>
+      <div id="panel-1" class="accordion-panel" role="region" aria-labelledby="trigger-1" hidden>
+        <p>Content for section 1.</p>
+      </div>
+    </div>
+    <div class="accordion-item" id="item-2">
+      <button
+        id="trigger-2"
+        class="accordion-trigger"
+        aria-expanded="false"
+        aria-controls="panel-2"
+        type="button"
+      >
+        Section 2
+      </button>
+      <div id="panel-2" class="accordion-panel" role="region" aria-labelledby="trigger-2" hidden>
+        <p>Content for section 2.</p>
+        <a id="panel-2-link" href="#">A link inside panel</a>
+      </div>
+    </div>
+    <div class="accordion-item" id="item-3">
+      <button
+        id="trigger-3"
+        class="accordion-trigger"
+        aria-expanded="false"
+        aria-controls="panel-3"
+        type="button"
+      >
+        Section 3
+      </button>
+      <div id="panel-3" class="accordion-panel" role="region" aria-labelledby="trigger-3" hidden>
+        <p>Content for section 3.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.querySelectorAll('.accordion-trigger').forEach((trigger) => {
+      trigger.addEventListener('click', () => {
+        const item    = trigger.closest('.accordion-item');
+        const panel   = document.getElementById(trigger.getAttribute('aria-controls'));
+        const isOpen  = item.dataset.open === 'true';
+
+        item.dataset.open         = isOpen ? 'false' : 'true';
+        trigger.setAttribute('aria-expanded', String(!isOpen));
+        if (isOpen) panel.setAttribute('hidden', '');
+        else panel.removeAttribute('hidden');
+      });
+    });
+  </script>
+</body>
+</html>

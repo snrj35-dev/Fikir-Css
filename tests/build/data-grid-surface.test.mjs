@@ -42,6 +42,9 @@ test("data-grid surface: playground includes role-based grid markup", async () =
   const html = await readFile(playgroundIndexPath, "utf8");
 
   assert.ok(html.includes("26.1) Data Grid Surface"));
+  assert.ok(html.includes('data-pattern="filter-bar"'));
+  assert.ok(html.includes('id="demo-grid-region" class="select"'));
+  assert.ok(html.includes('data-slot="chips"'));
   assert.ok(html.includes('class="data-grid" role="grid"'));
   assert.ok(html.includes('class="data-grid-head" role="rowgroup"'));
   assert.ok(html.includes('class="data-grid-body" role="rowgroup"'));

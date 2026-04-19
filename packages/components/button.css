@@ -1,10 +1,69 @@
-/*
-  Button canonical class surface is generated into @layer recipes from contracts/recipes.contract.mjs.
-  This file is reserved for non-canonical behavioral refinements.
-*/
 @layer components {
-  {{component.btn}}:disabled {
-    cursor: not-allowed;
-    opacity: 0.65;
+  {{component.btn}} { border: 1px solid transparent; background: transparent; color: var(--color-fg-default); text-decoration: none; text-underline-offset: 0.2em; }
+
+  {{component.btnPrimary}} { --btn-tone: var(--color-primary); --btn-tone-subtle: var(--color-primary-subtle); --btn-contrast: var(--color-gray-50); --btn-outline-fg: var(--color-primary); --btn-plain-fg: var(--color-primary); }
+  {{component.btnNeutral}} { --btn-tone: var(--color-border-subtle); --btn-tone-subtle: var(--color-neutral-subtle); --btn-contrast: var(--color-fg-default); --btn-outline-fg: var(--color-fg-default); --btn-plain-fg: var(--color-fg-muted); --btn-solid-border: var(--color-border-subtle); }
+  {{component.btnDanger}} { --btn-tone: var(--color-danger); --btn-tone-subtle: var(--color-danger-subtle); --btn-contrast: var(--color-gray-50); --btn-outline-fg: var(--color-danger); --btn-plain-fg: var(--color-danger); }
+
+  {{component.btnSolid}},
+  {{component.btn}}{{component.btnPrimary}}:not({{component.btnSoft}}):not({{component.btnOutline}}):not({{component.btnGhost}}):not({{component.btnPlain}}),
+  {{component.btn}}{{component.btnNeutral}}:not({{component.btnSoft}}):not({{component.btnOutline}}):not({{component.btnGhost}}):not({{component.btnPlain}}),
+  {{component.btn}}{{component.btnDanger}}:not({{component.btnSoft}}):not({{component.btnOutline}}):not({{component.btnGhost}}):not({{component.btnPlain}}) { background: var(--btn-tone, var(--color-primary)); border-color: var(--btn-solid-border, transparent); color: var(--btn-contrast, var(--color-gray-50)); }
+
+  {{component.btnSoft}} { background: var(--btn-tone-subtle, var(--color-primary-subtle)); border-color: color-mix(in oklch, var(--btn-tone, var(--color-primary)) 30%, var(--color-bg-surface)); color: var(--color-fg-default); }
+  {{component.btnOutline}} { background: transparent; border-color: color-mix(in oklch, var(--btn-tone, var(--color-primary)) 42%, var(--color-bg-surface)); color: var(--btn-outline-fg, var(--btn-tone, var(--color-primary))); }
+  {{component.btnGhost}} { background: transparent; border-color: transparent; color: var(--btn-outline-fg, var(--btn-tone, var(--color-primary))); }
+  {{component.btnPlain}} { background: transparent; border-color: transparent; color: var(--btn-plain-fg, var(--btn-outline-fg, var(--btn-tone, var(--color-primary)))); }
+
+  {{component.btnSolid}}:hover:not(:disabled),
+  {{component.btn}}{{component.btnPrimary}}:not({{component.btnSoft}}):not({{component.btnOutline}}):not({{component.btnGhost}}):not({{component.btnPlain}}):hover:not(:disabled),
+  {{component.btn}}{{component.btnNeutral}}:not({{component.btnSoft}}):not({{component.btnOutline}}):not({{component.btnGhost}}):not({{component.btnPlain}}):hover:not(:disabled),
+  {{component.btn}}{{component.btnDanger}}:not({{component.btnSoft}}):not({{component.btnOutline}}):not({{component.btnGhost}}):not({{component.btnPlain}}):hover:not(:disabled) { background: color-mix(in oklch, var(--btn-tone, var(--color-primary)) 86%, var(--color-fg-default)); }
+
+  {{component.btnSolid}}:active:not(:disabled),
+  {{component.btn}}{{component.btnPrimary}}:not({{component.btnSoft}}):not({{component.btnOutline}}):not({{component.btnGhost}}):not({{component.btnPlain}}):active:not(:disabled),
+  {{component.btn}}{{component.btnNeutral}}:not({{component.btnSoft}}):not({{component.btnOutline}}):not({{component.btnGhost}}):not({{component.btnPlain}}):active:not(:disabled),
+  {{component.btn}}{{component.btnDanger}}:not({{component.btnSoft}}):not({{component.btnOutline}}):not({{component.btnGhost}}):not({{component.btnPlain}}):active:not(:disabled) { background: color-mix(in oklch, var(--btn-tone, var(--color-primary)) 74%, var(--color-fg-default)); }
+
+  {{component.btnSoft}}:hover:not(:disabled) { background: color-mix(in oklch, var(--btn-tone, var(--color-primary)) 20%, var(--color-bg-surface)); }
+  {{component.btnSoft}}:active:not(:disabled) { background: color-mix(in oklch, var(--btn-tone, var(--color-primary)) 26%, var(--color-bg-surface)); }
+  {{component.btnOutline}}:hover:not(:disabled) { background: color-mix(in oklch, var(--btn-tone, var(--color-primary)) 10%, var(--color-bg-surface)); }
+  {{component.btnOutline}}:active:not(:disabled) { background: color-mix(in oklch, var(--btn-tone, var(--color-primary)) 16%, var(--color-bg-surface)); }
+  {{component.btnGhost}}:hover:not(:disabled) { background: color-mix(in oklch, var(--btn-tone, var(--color-primary)) 12%, transparent); }
+  {{component.btnGhost}}:active:not(:disabled) { background: color-mix(in oklch, var(--btn-tone, var(--color-primary)) 18%, transparent); }
+  {{component.btnPlain}}:hover:not(:disabled) { color: color-mix(in oklch, var(--btn-tone, var(--color-primary)) 84%, var(--color-fg-default)); text-decoration: underline; }
+  {{component.btnPlain}}:active:not(:disabled) { color: color-mix(in oklch, var(--btn-tone, var(--color-primary)) 72%, var(--color-fg-default)); text-decoration: underline; }
+  {{component.btn}}:disabled { cursor: not-allowed; opacity: 0.65; }
+
+  /* Size contract: xs / sm / md / lg */
+  {{component.btnXs}} {
+    padding: 0.25rem 0.75rem;
+    min-block-size: 2rem;
+    font-size: var(--font-size-xs);
+  }
+
+  {{component.btnSm}} {
+    padding: 0.5rem 1rem;
+    min-block-size: 2.25rem;
+    font-size: var(--font-size-sm);
+  }
+
+  {{component.btnMd}} {
+    padding: 0.75rem 1.25rem;
+    min-block-size: 2.5rem;
+    font-size: var(--font-size-md);
+  }
+
+  {{component.btnLg}} {
+    padding: 1rem 1.5rem;
+    min-block-size: 2.75rem;
+    font-size: var(--font-size-lg);
+  }
+
+  /* Default button size (md) */
+  {{component.btn}}:not({{component.btnXs}}):not({{component.btnSm}}):not({{component.btnMd}}):not({{component.btnLg}}) {
+    padding: 0.75rem 1.25rem;
+    min-block-size: 2.5rem;
+    font-size: var(--font-size-md);
   }
 }

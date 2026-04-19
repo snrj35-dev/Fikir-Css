@@ -73,6 +73,7 @@ function isExternalReference(reference) {
 function looksLikePathToken(token) {
   if (!token || token.includes("\n") || token.includes(" ")) return false;
   if (token.includes("*")) return false;
+  if (token.includes("[")) return false;
 
   const normalized = token.replace(/^\.\//, "");
 

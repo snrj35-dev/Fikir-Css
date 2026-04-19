@@ -1,0 +1,79 @@
+@layer components {
+  /* Empty Search State Pattern */
+  [data-pattern="empty-search-state"] {
+    text-align: center;
+    padding: var(--space-4);
+    display: grid;
+    gap: var(--space-3);
+    grid-auto-flow: row;
+  }
+
+  [data-pattern="empty-search-state"][data-variant="first-use"] {
+    /* Encourage starting search */
+    opacity: 0.8;
+  }
+
+  [data-pattern="empty-search-state"][data-variant="first-use"] .empty-state-title {
+    color: var(--color-fg-default);
+  }
+
+  [data-pattern="empty-search-state"][data-variant="first-use"] .empty-state-icon {
+    font-size: 3rem;
+    margin-block-end: var(--space-2);
+  }
+
+  [data-pattern="empty-search-state"][data-variant="no-results"] {
+    /* Problem state but not error */
+  }
+
+  [data-pattern="empty-search-state"][data-variant="no-results"] .empty-state-title {
+    color: var(--color-fg-default);
+  }
+
+  [data-pattern="empty-search-state"][data-variant="no-results"] .empty-state-icon {
+    font-size: 3rem;
+    margin-block-end: var(--space-2);
+    color: var(--color-fg-muted);
+  }
+
+  [data-pattern="empty-search-state"][data-variant="filtered-empty"] {
+    /* Filter result state */
+  }
+
+  [data-pattern="empty-search-state"][data-variant="filtered-empty"] .empty-state-title {
+    color: var(--color-fg-default);
+  }
+
+  [data-pattern="empty-search-state"][data-variant="filtered-empty"] .empty-state-icon {
+    font-size: 3rem;
+    margin-block-end: var(--space-2);
+    color: var(--color-fg-muted);
+  }
+
+  /* Slot styling */
+  [data-pattern="empty-search-state"] [data-slot="icon"] {
+    display: block;
+    font-size: 3rem;
+    margin-block-end: var(--space-2);
+  }
+
+  [data-pattern="empty-search-state"] [data-slot="title"] {
+    font-size: var(--font-size-lg);
+    font-weight: 500;
+    color: var(--color-fg-default);
+    margin: 0;
+  }
+
+  [data-pattern="empty-search-state"] [data-slot="description"] {
+    font-size: var(--font-size-sm);
+    color: var(--color-fg-muted);
+    margin: 0;
+  }
+
+  [data-pattern="empty-search-state"] [data-slot="actions"] {
+    display: grid;
+    gap: var(--space-2);
+    justify-items: center;
+    margin-block-start: var(--space-2);
+  }
+}

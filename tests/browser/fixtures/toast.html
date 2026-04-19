@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Toast fixture</title>
+  <link rel="stylesheet" href="../../../dist/fikir.css" />
+</head>
+<body style="padding: 2rem">
+  <button id="show-info"    class="btn btn-sm btn-outline" type="button">Show info toast</button>
+  <button id="show-success" class="btn btn-sm btn-outline" type="button">Show success toast</button>
+  <button id="show-danger"  class="btn btn-sm btn-outline" type="button">Show danger toast</button>
+
+  <!-- Toast viewport — aria-live region -->
+  <div
+    id="toast-viewport"
+    class="toast-viewport"
+    aria-live="polite"
+    aria-atomic="false"
+    role="region"
+    aria-label="Notifications"
+  ></div>
+
+  <script>
+    let toastCount = 0;
+
+    function showToast({ tone = 'info', title, description }) {
+      const id = `toast-${++toastCount}`;
+      const toast = document.createElement('div');
+      toast.id = id;
+      toast.className = 'toast';
+      toast.setAttribute('data-tone', tone);
+      toast.setAttribute('role', 'status');
+      if (tone === 'danger') toast.setAttribute('role', 'alert');
+      toast.innerHTML = `
+        <div class="toast-title">${title}</div>
+        ${description ? `<div class="toast-description">${description}</div>` : ''}
+        <button class="toast-close btn btn-ghost btn-xs" aria-label="Dismiss" type="button">✕</button>
+      `;
+      // show
+      document.getElementById('toast-viewport').appendChild(toast);
+      requestAnimationFrame(() => { toast.dataset.open = 'true'; });
+
+      toast.querySelector('.toast-close').addEventListener('click', () => {
+        delete toast.dataset.open;
+        setTimeout(() => toast.remove(), 300);
+      });
+
+      // auto dismiss after 4s
+      setTimeout(() => {
+        if (toast.isConnected) {
+          delete toast.dataset.open;
+          setTimeout(() => toast.remove(), 300);
+        }
+      }, 4000);
+
+      return id;
+    }
+
+    document.getElementById('show-info').addEventListener('click', () => {
+      showToast({ tone: 'info', title: 'Info', description: 'Something happened.' });
+    });
+    document.getElementById('show-success').addEventListener('click', () => {
+      showToast({ tone: 'success', title: 'Success!', description: 'Operation completed.' });
+    });
+    document.getElementById('show-danger').addEventListener('click', () => {
+      showToast({ tone: 'danger', title: 'Error', description: 'Something went wrong.' });
+    });
+  </script>
+</body>
+</html>

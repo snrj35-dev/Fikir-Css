@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <title>Cross-theme smoke fixture</title>
+  <link id="base-css"  rel="stylesheet" href="../../../dist/fikir.css" />
+  <link id="theme-css" rel="stylesheet" href="" />
+</head>
+<body>
+  <!-- Semantic surface elements for contrast/token checks -->
+  <div id="surface" style="background: var(--color-bg-default); color: var(--color-fg-default); padding: 1rem">
+    <p id="default-text">Default text</p>
+    <p id="muted-text" style="color: var(--color-fg-muted)">Muted text</p>
+
+    <button id="btn-primary" class="btn btn-solid btn-primary">Primary</button>
+    <button id="btn-danger"  class="btn btn-solid btn-danger">Danger</button>
+
+    <div id="badge-success" class="badge" data-tone="success">Success</div>
+    <div id="badge-danger"  class="badge" data-tone="danger">Error</div>
+
+    <input id="text-input" class="input" type="text" value="Hello" aria-label="Text input" />
+    <input id="disabled-input" class="input" type="text" value="Disabled" disabled aria-disabled="true" aria-label="Disabled input" />
+
+    <div id="card-sample" class="card">Card surface</div>
+  </div>
+
+  <script>
+    window.getTokenValue = (token) => {
+      return getComputedStyle(document.documentElement).getPropertyValue(token).trim();
+    };
+
+    window.loadTheme = (href, themeAttr) => {
+      document.getElementById('theme-css').setAttribute('href', href);
+      if (themeAttr) document.documentElement.setAttribute('data-theme', themeAttr);
+      else document.documentElement.removeAttribute('data-theme');
+    };
+  </script>
+</body>
+</html>

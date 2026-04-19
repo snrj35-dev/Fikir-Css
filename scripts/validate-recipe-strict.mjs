@@ -1,14 +1,14 @@
 /**
- * validate-recipe-strict.mjs — Recipe-typing strict mode validator (M2)
+ * validate-recipe-strict.mjs — Recipe-typing strict mode validator
  *
- * Validates that all recipe definitions in recipes.contract.mjs:
- * 1. Reference only keys that exist in naming.contract.mjs
- * 2. Have no undefined variant values
- * 3. Have no duplicate variant keys within a recipe
- * 4. Have a `base` property that references valid selector keys
+ * Validates all resolver definitions in recipesContract.resolvers:
+ * 1. Each resolver has a non-empty `base` array
+ * 2. Every key in `base` exists in namingContract.selectors
+ * 3. Every selector key in `variants.*.* ` arrays exists in namingContract.selectors
+ * 4. No undefined / null values in variant maps
+ * 5. `defaults` values match keys that exist in the corresponding variant axis
  */
 
-import { readFile } from "node:fs/promises";
 import { resolve, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -21,44 +21,53 @@ async function loadContracts() {
   return { namingContract, recipesContract };
 }
 
-function validateRecipes(namingContract, recipesContract) {
+function validateResolvers(namingContract, resolvers) {
   const errors = [];
   const selectorKeys = new Set(Object.keys(namingContract.selectors));
 
-  for (const [recipeName, recipe] of Object.entries(recipesContract)) {
-    if (!recipe.base) {
-      errors.push(`[${recipeName}] Missing 'base' property`);
-      continue;
-    }
-
-    if (!selectorKeys.has(recipe.base)) {
-      errors.push(`[${recipeName}] base key '${recipe.base}' not found in namingContract`);
-    }
-
-    if (!recipe.variants || typeof recipe.variants !== "object") {
-      continue;
-    }
-
-    for (const [variantAxis, variantMap] of Object.entries(recipe.variants)) {
-      if (typeof variantMap !== "object") {
-        errors.push(`[${recipeName}] variant axis '${variantAxis}' is not an object`);
-        continue;
-      }
-
-      const seenKeys = new Set();
-      for (const [variantKey, selectorKey] of Object.entries(variantMap)) {
-        if (seenKeys.has(variantKey)) {
-          errors.push(`[${recipeName}] duplicate variant key '${variantKey}' in axis '${variantAxis}'`);
+  for (const [name, recipe] of Object.entries(resolvers)) {
+    // 1. base must be a non-empty array
+    if (!Array.isArray(recipe.base) || recipe.base.length === 0) {
+      errors.push(`[${name}] 'base' must be a non-empty array`);
+    } else {
+      for (const key of recipe.base) {
+        if (!selectorKeys.has(key)) {
+          errors.push(`[${name}] base key '${key}' not found in namingContract.selectors`);
         }
-        seenKeys.add(variantKey);
+      }
+    }
 
-        if (selectorKey === undefined || selectorKey === null) {
-          errors.push(`[${recipeName}] variant '${variantAxis}.${variantKey}' has undefined selector key`);
+    // 2. variants — each value must be an array of valid selector keys
+    if (recipe.variants && typeof recipe.variants === "object") {
+      for (const [axis, axisMap] of Object.entries(recipe.variants)) {
+        if (typeof axisMap !== "object" || axisMap === null) {
+          errors.push(`[${name}] variant axis '${axis}' must be an object`);
           continue;
         }
+        for (const [value, keys] of Object.entries(axisMap)) {
+          if (!Array.isArray(keys)) {
+            errors.push(`[${name}] variant '${axis}.${value}' must be an array`);
+            continue;
+          }
+          for (const key of keys) {
+            if (key === undefined || key === null) {
+              errors.push(`[${name}] variant '${axis}.${value}' contains null/undefined`);
+            } else if (!selectorKeys.has(key)) {
+              errors.push(`[${name}] variant '${axis}.${value}' references missing key '${key}'`);
+            }
+          }
+        }
+      }
+    }
 
-        if (typeof selectorKey === "string" && !selectorKeys.has(selectorKey)) {
-          errors.push(`[${recipeName}] variant '${variantAxis}.${variantKey}' references missing key '${selectorKey}'`);
+    // 3. defaults — each default value must exist as a key in the referenced axis
+    if (recipe.defaults && recipe.variants) {
+      for (const [axis, defaultValue] of Object.entries(recipe.defaults)) {
+        const axisMap = recipe.variants[axis];
+        if (!axisMap) {
+          errors.push(`[${name}] default axis '${axis}' not found in variants`);
+        } else if (!Object.prototype.hasOwnProperty.call(axisMap, defaultValue)) {
+          errors.push(`[${name}] default '${axis}=${defaultValue}' is not a valid variant key`);
         }
       }
     }
@@ -69,11 +78,12 @@ function validateRecipes(namingContract, recipesContract) {
 
 async function main() {
   const { namingContract, recipesContract } = await loadContracts();
-  const errors = validateRecipes(namingContract, recipesContract);
+  const resolvers = recipesContract.resolvers ?? {};
+  const errors = validateResolvers(namingContract, resolvers);
 
-  const recipeCount = Object.keys(recipesContract).length;
-  console.log(`Recipe strict-mode validation`);
-  console.log(`- recipes checked: ${recipeCount}`);
+  const resolverCount = Object.keys(resolvers).length;
+  console.log("Recipe strict-mode validation");
+  console.log(`- resolvers checked: ${resolverCount}`);
 
   if (errors.length > 0) {
     console.error(`- ERRORS: ${errors.length}`);
@@ -82,7 +92,7 @@ async function main() {
     }
     process.exit(1);
   } else {
-    console.log(`- result: all recipes valid`);
+    console.log("- result: all resolvers valid ✓");
   }
 }
 

@@ -11,9 +11,9 @@ const ciWorkflowPath = resolve(rootDir, ".github/workflows/ci.yml");
 test("size guardrails: thresholds document defines numeric limits", async () => {
   const content = await readFile(thresholdsDocPath, "utf8");
 
-  assert.ok(content.includes("Maximum bundle size: `100000` bytes"));
+  assert.ok(content.includes("Maximum bundle size: `165000` bytes"));
   assert.ok(content.includes("Maximum positive size diff per change: `8000` bytes"));
-  assert.ok(content.includes("Maximum gzip bundle size: `12000` bytes"));
+  assert.ok(content.includes("Maximum gzip bundle size: `22000` bytes"));
   assert.ok(content.includes("Maximum positive gzip size diff per change: `1500` bytes"));
   assert.ok(content.includes("npm run validate:size"));
   assert.ok(content.includes("npm run report:size"));

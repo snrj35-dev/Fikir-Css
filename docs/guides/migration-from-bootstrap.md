@@ -1,7 +1,6 @@
 # From Bootstrap to Fikir CSS
 
-> Created: 2026-04-12
-> Scope: M3 migration quickstart
+> Updated: M18 — v0.6.0
 
 ## Key Differences
 
@@ -19,8 +18,8 @@
 
 | Bootstrap | Fikir CSS |
 |-----------|-----------|
-| `btn btn-primary` | `btn btn-primary` |
-| `btn btn-secondary` | `btn` |
+| `btn btn-primary` | `btn btn-solid btn-primary btn-md` |
+| `btn btn-secondary` | `btn btn-outline btn-neutral btn-md` |
 | `btn btn-danger` | `btn btn-danger` |
 | `btn btn-sm` | `btn btn-sm` |
 | `btn btn-lg` | `btn btn-lg` |
@@ -48,11 +47,11 @@
 ### Cards
 
 | Bootstrap | Fikir CSS |
-|-----------|-----------|
-| `card` | `card` |
-| `card-header` | `card-header` |
-| `card-body` | `card-body` |
-| `card-footer` | `card-footer` |
+|-----------|----------|
+| `card` | `card card-elevated card-p-md` |
+| `card-header` | — (use `data-card-slot="header"` or a heading element directly) |
+| `card-body` | — (card padding is set by `card-p-sm/md/lg` modifier) |
+| `card-footer` | `data-card-slot="footer"` |
 | `card-title` | Use semantic heading inside |
 
 ### Navigation
@@ -76,11 +75,13 @@ Bootstrap bundles JavaScript for dropdowns, modals, tooltips, etc. Fikir CSS is 
     <div class="modal-content">...
 
 <!-- Fikir CSS modal (your JS sets data-open) -->
-<div class="modal" data-open="false" role="dialog" aria-modal="true">
+<div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
   <div class="modal-dialog">...
 ```
 
-For behavior, see `docs/architecture/headless-examples.md`.
+Note: CSS shows the modal when `data-open="true"`. Use `removeAttribute("data-open")` to close (not `data-open="false"`).
+
+For behavior, see `docs/guides/overlay-js-helpers.md` and `docs/architecture/headless-examples.md`.
 
 ## Grid Migration
 

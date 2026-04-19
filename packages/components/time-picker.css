@@ -1,0 +1,134 @@
+@layer components {
+  {{component.timePicker}} {
+    inline-size: 100%;
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  {{component.timePickerInput}} {
+    inline-size: 100%;
+    min-block-size: 2.5rem;
+    padding-inline: var(--space-3);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border-subtle);
+    background: var(--color-bg-surface);
+    color: var(--color-fg-default);
+    font-size: var(--font-size-sm);
+    font-family: monospace;
+  }
+
+  {{component.timePickerInput}}:focus-visible {
+    border-color: var(--color-accent);
+  }
+
+  {{component.timePickerTrigger}} {
+    min-block-size: 2.5rem;
+    padding-inline: var(--space-3);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border-subtle);
+    background: var(--color-bg-surface);
+    color: var(--color-fg-default);
+    cursor: pointer;
+  }
+
+  {{component.timePickerPanel}} {
+    display: none;
+    padding: var(--space-3);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-md);
+    background: var(--color-bg-surface);
+    color: var(--color-fg-default);
+    box-shadow: var(--shadow-sm);
+  }
+
+  {{component.timePicker}}[data-open="true"] {{component.timePickerPanel}} {
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  {{component.timePickerFields}} {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(4rem, 1fr));
+    gap: var(--space-2);
+  }
+
+  {{component.timePickerField}} {
+    display: grid;
+    gap: var(--space-1);
+  }
+
+  {{component.timePickerFieldLabel}} {
+    font-size: var(--font-size-xs);
+    color: var(--color-fg-muted);
+    font-weight: 500;
+  }
+
+  {{component.timePickerFieldInput}} {
+    inline-size: 100%;
+    min-block-size: 2rem;
+    padding: var(--space-1) var(--space-2);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-sm);
+    background: var(--color-bg-default);
+    color: var(--color-fg-default);
+    text-align: center;
+    font-size: var(--font-size-sm);
+    font-family: monospace;
+  }
+
+  {{component.timePickerFieldInput}}:focus-visible {
+    border-color: var(--color-accent);
+  }
+
+  {{component.timePickerFieldSpinner}} {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-1);
+  }
+
+  {{component.timePickerIncrement}} {
+    min-block-size: 1.5rem;
+    padding: 0;
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-sm);
+    background: var(--color-bg-default);
+    color: var(--color-fg-default);
+    cursor: pointer;
+    font-size: var(--font-size-xs);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  {{component.timePickerIncrement}}:hover {
+    background: var(--color-bg-surface);
+  }
+
+  {{component.timePickerIncrement}}:active {
+    background: var(--color-accent);
+    color: var(--color-gray-50);
+  }
+
+  {{component.timePickerDecrement}} {
+    min-block-size: 1.5rem;
+    padding: 0;
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-sm);
+    background: var(--color-bg-default);
+    color: var(--color-fg-default);
+    cursor: pointer;
+    font-size: var(--font-size-xs);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  {{component.timePickerDecrement}}:hover {
+    background: var(--color-bg-surface);
+  }
+
+  {{component.timePickerDecrement}}:active {
+    background: var(--color-accent);
+    color: var(--color-gray-50);
+  }
+}

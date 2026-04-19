@@ -1,0 +1,68 @@
+@layer components {
+  [data-pattern="copy-button"] {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-1);
+  }
+
+  /* Default icon: copy */
+  [data-pattern="copy-button"] [data-icon="copy"] {
+    display: inline-flex;
+  }
+
+  [data-pattern="copy-button"] [data-icon="check"] {
+    display: none;
+  }
+
+  /* Copied state */
+  [data-pattern="copy-button"][data-copied="true"] [data-icon="copy"] {
+    display: none;
+  }
+
+  [data-pattern="copy-button"][data-copied="true"] [data-icon="check"] {
+    display: inline-flex;
+  }
+
+  [data-pattern="copy-button"][data-copied="true"] {
+    color: var(--color-success);
+  }
+
+  /* Label swap */
+  [data-pattern="copy-button"] [data-label="copy"] {
+    display: inline;
+  }
+
+  [data-pattern="copy-button"] [data-label="copied"] {
+    display: none;
+  }
+
+  [data-pattern="copy-button"][data-copied="true"] [data-label="copy"] {
+    display: none;
+  }
+
+  [data-pattern="copy-button"][data-copied="true"] [data-label="copied"] {
+    display: inline;
+  }
+
+  /* Tooltip-style feedback (absolute, no JS needed for positioning) */
+  [data-pattern="copy-button"] [data-slot="feedback"] {
+    position: absolute;
+    inset-block-end: calc(100% + var(--space-1));
+    inset-inline-start: 50%;
+    translate: -50% 0;
+    background: var(--color-fg-default);
+    color: var(--color-bg-default);
+    font-size: var(--font-size-xs);
+    padding: 2px var(--space-2);
+    border-radius: var(--radius-sm);
+    white-space: nowrap;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.15s ease;
+  }
+
+  [data-pattern="copy-button"][data-copied="true"] [data-slot="feedback"] {
+    opacity: 1;
+  }
+}

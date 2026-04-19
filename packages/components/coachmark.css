@@ -1,0 +1,263 @@
+@layer components {
+  /* Base coachmark popover container */
+  [data-pattern="coachmark"] {
+    position: absolute;
+    display: none;
+    z-index: 48;
+    min-inline-size: 12rem;
+    max-inline-size: 24rem;
+    padding: var(--space-3);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border-default);
+    background: var(--color-bg-surface);
+    color: var(--color-fg-default);
+    box-shadow: var(--shadow-md);
+    gap: var(--space-2);
+  }
+
+  [data-pattern="coachmark"][data-active="true"] {
+    display: grid;
+    grid-auto-flow: row;
+    align-content: start;
+  }
+
+  /* Icon slot */
+  [data-pattern="coachmark"] [data-slot="icon"] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    inline-size: 1.5rem;
+    block-size: 1.5rem;
+    font-size: var(--font-size-lg);
+    color: var(--color-fg-muted);
+    flex-shrink: 0;
+  }
+
+  /* Title slot */
+  [data-pattern="coachmark"] [data-slot="title"] {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-semibold);
+    line-height: var(--line-height-tight);
+    color: var(--color-fg-default);
+    margin: 0;
+  }
+
+  /* Description slot */
+  [data-pattern="coachmark"] [data-slot="description"] {
+    font-size: var(--font-size-sm);
+    line-height: var(--line-height-relaxed);
+    color: var(--color-fg-muted);
+    margin: 0;
+  }
+
+  /* Action button area */
+  [data-pattern="coachmark"] [data-slot="action"],
+  [data-pattern="coachmark"] [data-slot="secondary-action"] {
+    align-self: start;
+    margin-block-start: var(--space-1);
+  }
+
+  [data-pattern="coachmark"] [data-slot="action"] {
+    /* styles delegated to .btn recipe */
+  }
+
+  [data-pattern="coachmark"] [data-slot="secondary-action"] {
+    /* secondary action uses button styles but may be text-only */
+  }
+
+  /* Variant: info (default) */
+  [data-pattern="coachmark"],
+  [data-pattern="coachmark"][data-variant="info"] {
+    border-color: var(--color-tone-info);
+    border-inline-start-width: 4px;
+  }
+
+  [data-pattern="coachmark"][data-variant="info"] [data-slot="icon"] {
+    color: var(--color-tone-info);
+  }
+
+  /* Variant: tip */
+  [data-pattern="coachmark"][data-variant="tip"] {
+    border-color: var(--color-tone-info);
+    border-inline-start-width: 4px;
+  }
+
+  [data-pattern="coachmark"][data-variant="tip"] [data-slot="icon"] {
+    color: var(--color-tone-info);
+  }
+
+  /* Variant: warning */
+  [data-pattern="coachmark"][data-variant="warning"] {
+    border-color: var(--color-tone-warning);
+    border-inline-start-width: 4px;
+  }
+
+  [data-pattern="coachmark"][data-variant="warning"] [data-slot="icon"] {
+    color: var(--color-tone-warning);
+  }
+
+  /* Variant: success */
+  [data-pattern="coachmark"][data-variant="success"] {
+    border-color: var(--color-tone-success);
+    border-inline-start-width: 4px;
+  }
+
+  [data-pattern="coachmark"][data-variant="success"] [data-slot="icon"] {
+    color: var(--color-tone-success);
+  }
+
+  /* Variant: danger */
+  [data-pattern="coachmark"][data-variant="danger"] {
+    border-color: var(--color-tone-danger);
+    border-inline-start-width: 4px;
+  }
+
+  [data-pattern="coachmark"][data-variant="danger"] [data-slot="icon"] {
+    color: var(--color-tone-danger);
+  }
+
+  /* Variant: neutral */
+  [data-pattern="coachmark"][data-variant="neutral"] {
+    border-color: var(--color-border-subtle);
+  }
+
+  [data-pattern="coachmark"][data-variant="neutral"] [data-slot="icon"] {
+    color: var(--color-fg-muted);
+  }
+
+  /* Arrow pointer (optional) */
+  [data-pattern="coachmark"] [data-coachmark-arrow] {
+    position: absolute;
+    display: none;
+    inline-size: 8px;
+    block-size: 8px;
+    background: var(--color-bg-surface);
+    border-inline-end: 1px solid var(--color-border-default);
+    border-block-end: 1px solid var(--color-border-default);
+    transform: rotate(45deg);
+    z-index: -1;
+  }
+
+  [data-pattern="coachmark"][data-arrow="true"] [data-coachmark-arrow] {
+    display: block;
+  }
+
+  /* Position: top (default) */
+  [data-pattern="coachmark"],
+  [data-pattern="coachmark"][data-position="top"] {
+    inset-block-end: calc(100% + var(--space-2));
+    inset-inline-start: 50%;
+    transform: translateX(-50%);
+  }
+
+  [data-pattern="coachmark"][data-position="top"] [data-coachmark-arrow] {
+    inset-block-start: 100%;
+    inset-inline-start: 50%;
+    transform: translateX(-50%) rotate(45deg);
+  }
+
+  /* Position: bottom */
+  [data-pattern="coachmark"][data-position="bottom"] {
+    inset-block-start: calc(100% + var(--space-2));
+    inset-inline-start: 50%;
+    transform: translateX(-50%);
+  }
+
+  [data-pattern="coachmark"][data-position="bottom"] [data-coachmark-arrow] {
+    inset-block-end: 100%;
+    inset-inline-start: 50%;
+    transform: translateX(-50%) rotate(-135deg);
+  }
+
+  /* Position: start (left in LTR, right in RTL) */
+  [data-pattern="coachmark"][data-position="start"] {
+    inset-block-start: 50%;
+    inset-inline-end: calc(100% + var(--space-2));
+    transform: translateY(-50%);
+  }
+
+  [data-pattern="coachmark"][data-position="start"] [data-coachmark-arrow] {
+    inset-block-start: 50%;
+    inset-inline-start: 100%;
+    transform: translateY(-50%) rotate(135deg);
+  }
+
+  /* Position: end (right in LTR, left in RTL) */
+  [data-pattern="coachmark"][data-position="end"] {
+    inset-block-start: 50%;
+    inset-inline-start: calc(100% + var(--space-2));
+    transform: translateY(-50%);
+  }
+
+  [data-pattern="coachmark"][data-position="end"] [data-coachmark-arrow] {
+    inset-block-start: 50%;
+    inset-inline-end: 100%;
+    transform: translateY(-50%) rotate(-45deg);
+  }
+
+  /* Density: compact */
+  [data-pattern="coachmark"][data-density="compact"] {
+    padding: var(--space-2);
+    gap: var(--space-1);
+  }
+
+  [data-pattern="coachmark"][data-density="compact"] [data-slot="title"] {
+    font-size: var(--font-size-xs);
+  }
+
+  [data-pattern="coachmark"][data-density="compact"] [data-slot="description"] {
+    font-size: var(--font-size-xs);
+  }
+
+  /* Density: comfortable */
+  [data-pattern="coachmark"][data-density="comfortable"] {
+    padding: var(--space-4);
+    gap: var(--space-3);
+  }
+
+  [data-pattern="coachmark"][data-density="comfortable"] [data-slot="title"] {
+    font-size: var(--font-size-base);
+  }
+
+  [data-pattern="coachmark"][data-density="comfortable"] [data-slot="description"] {
+    font-size: var(--font-size-base);
+  }
+
+  /* Focus-within for interactive states */
+  [data-pattern="coachmark"]:focus-within {
+    outline: none;
+    box-shadow: var(--shadow-md), 0 0 0 2px var(--color-bg-surface),
+                0 0 0 4px var(--color-tone-info);
+  }
+
+  /* Hover effect (optional elevation) */
+  [data-pattern="coachmark"]:hover {
+    box-shadow: var(--shadow-lg);
+  }
+
+  /* High contrast support */
+  @media (forced-colors: active) {
+    [data-pattern="coachmark"] {
+      border-color: CanvasText;
+      border-inline-start-width: 2px;
+    }
+
+    [data-pattern="coachmark"] [data-slot="icon"] {
+      color: CanvasText;
+    }
+
+    [data-pattern="coachmark"]:focus-within {
+      outline: 2px solid Highlight;
+    }
+  }
+
+  /* Reduced motion support */
+  @media (prefers-reduced-motion: reduce) {
+    [data-pattern="coachmark"] {
+      /* no animations defined in base; but if JS adds transitions, they'll be disabled */
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}

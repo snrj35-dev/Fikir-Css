@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Fikir CSS — Design System</title>
-  <meta name="description" content="Contract-driven CSS design system. 82 UI surfaces, zero runtime, token-first." />
+  <meta name="description" content="Contract-driven CSS design system. 99 UI surfaces, zero runtime, token-first." />
   <!-- CSS loaded from ./dist/fikir.css (copied by the deploy workflow). Run `npm run build` locally. -->
   <link rel="stylesheet" href="./dist/fikir.css" />
   <style>
@@ -74,12 +74,37 @@
       opacity: .7;
     }
     .side-link {
-      display: flex; align-items: center;
+      display: flex; align-items: center; justify-content: space-between; gap: var(--space-2);
       font-size: var(--font-size-sm); color: var(--color-fg-muted);
       text-decoration: none; padding: 0.3rem var(--space-2);
       border-radius: var(--radius-sm);
       transition: background var(--transition-duration-fast), color var(--transition-duration-fast);
       border-left: 2px solid transparent;
+    }
+    .side-link[data-support-level]::after {
+      content: attr(data-support-level);
+      display: inline-flex; align-items: center; justify-content: center;
+      border-radius: 999px; padding: 0.1rem 0.45rem;
+      font-size: 0.62rem; font-weight: 700; text-transform: lowercase;
+      border: 1px solid var(--color-border-subtle);
+      background: color-mix(in oklch, var(--color-border-subtle) 30%, var(--color-bg-surface));
+      color: var(--color-fg-muted);
+      flex-shrink: 0;
+    }
+    .side-link[data-support-level="supported"]::after {
+      color: var(--color-accent);
+      border-color: color-mix(in oklch, var(--color-accent) 25%, var(--color-border-subtle));
+      background: color-mix(in oklch, var(--color-accent) 10%, var(--color-bg-surface));
+    }
+    .side-link[data-support-level="beta"]::after {
+      color: var(--color-fg-default);
+      border-color: color-mix(in oklch, var(--color-warning) 35%, var(--color-border-subtle));
+      background: color-mix(in oklch, var(--color-warning) 16%, var(--color-bg-surface));
+    }
+    .side-link[data-support-level="experimental"]::after {
+      color: var(--color-fg-default);
+      border-color: color-mix(in oklch, var(--color-danger) 25%, var(--color-border-subtle));
+      background: color-mix(in oklch, var(--color-danger) 10%, var(--color-bg-surface));
     }
     .side-link:hover { background: var(--color-bg-default); color: var(--color-fg-default); }
     .side-link.is-active {
@@ -291,63 +316,63 @@
     </div>
     <div class="side-group">
       <div class="side-group-title">Actions</div>
-      <a class="side-link" href="#buttons">Buttons</a>
-      <a class="side-link" href="#icon-button">Icon Button</a>
-      <a class="side-link" href="#link">Link</a>
+      <a class="side-link" href="#buttons" data-support-level="supported">Buttons</a>
+      <a class="side-link" href="#icon-button" data-support-level="supported">Icon Button</a>
+      <a class="side-link" href="#link" data-support-level="supported">Link</a>
     </div>
     <div class="side-group">
       <div class="side-group-title">Feedback</div>
-      <a class="side-link" href="#alert">Alert</a>
-      <a class="side-link" href="#badge">Badge</a>
-      <a class="side-link" href="#toast">Toast</a>
-      <a class="side-link" href="#spinner">Spinner</a>
-      <a class="side-link" href="#skeleton">Skeleton</a>
+      <a class="side-link" href="#alert" data-support-level="supported">Alert</a>
+      <a class="side-link" href="#badge" data-support-level="supported">Badge</a>
+      <a class="side-link" href="#toast" data-support-level="supported">Toast</a>
+      <a class="side-link" href="#spinner" data-support-level="supported">Spinner</a>
+      <a class="side-link" href="#skeleton" data-support-level="supported">Skeleton</a>
     </div>
     <div class="side-group">
       <div class="side-group-title">Forms</div>
-      <a class="side-link" href="#input">Input</a>
-      <a class="side-link" href="#select">Select</a>
-      <a class="side-link" href="#checkbox">Checkbox</a>
-      <a class="side-link" href="#radio">Radio</a>
-      <a class="side-link" href="#switch">Switch</a>
-      <a class="side-link" href="#textarea">Textarea</a>
+      <a class="side-link" href="#input" data-support-level="supported">Input</a>
+      <a class="side-link" href="#select" data-support-level="supported">Select</a>
+      <a class="side-link" href="#checkbox" data-support-level="supported">Checkbox</a>
+      <a class="side-link" href="#radio" data-support-level="supported">Radio</a>
+      <a class="side-link" href="#switch" data-support-level="supported">Switch</a>
+      <a class="side-link" href="#textarea" data-support-level="supported">Textarea</a>
     </div>
     <div class="side-group">
       <div class="side-group-title">Layout</div>
-      <a class="side-link" href="#card">Card</a>
-      <a class="side-link" href="#divider">Divider</a>
-      <a class="side-link" href="#surface">Surface</a>
+      <a class="side-link" href="#card" data-support-level="supported">Card</a>
+      <a class="side-link" href="#divider" data-support-level="supported">Divider</a>
+      <a class="side-link" href="#surface" data-support-level="supported">Surface</a>
     </div>
     <div class="side-group">
       <div class="side-group-title">Navigation</div>
-      <a class="side-link" href="#tabs">Tabs</a>
-      <a class="side-link" href="#breadcrumb">Breadcrumb</a>
-      <a class="side-link" href="#pagination">Pagination</a>
+      <a class="side-link" href="#tabs" data-support-level="supported">Tabs</a>
+      <a class="side-link" href="#breadcrumb" data-support-level="supported">Breadcrumb</a>
+      <a class="side-link" href="#pagination" data-support-level="supported">Pagination</a>
     </div>
     <div class="side-group">
       <div class="side-group-title">Overlay</div>
-      <a class="side-link" href="#modal">Modal</a>
-      <a class="side-link" href="#tooltip">Tooltip</a>
+      <a class="side-link" href="#modal" data-support-level="supported">Modal</a>
+      <a class="side-link" href="#tooltip" data-support-level="supported">Tooltip</a>
     </div>
     <div class="side-group">
       <div class="side-group-title">Data</div>
-      <a class="side-link" href="#table">Table</a>
-      <a class="side-link" href="#empty-state">Empty State</a>
-      <a class="side-link" href="#stat">Stat</a>
+      <a class="side-link" href="#table" data-support-level="supported">Table</a>
+      <a class="side-link" href="#empty-state" data-support-level="supported">Empty State</a>
+      <a class="side-link" href="#stat" data-support-level="supported">Stat</a>
     </div>
     <div class="side-group">
       <div class="side-group-title">Complex</div>
-      <a class="side-link" href="#stepper">Stepper</a>
-      <a class="side-link" href="#timeline">Timeline</a>
-      <a class="side-link" href="#tree-view">Tree View</a>
-      <a class="side-link" href="#progress">Progress</a>
-      <a class="side-link" href="#rating">Rating</a>
-      <a class="side-link" href="#range-slider">Range Slider</a>
-      <a class="side-link" href="#calendar">Calendar</a>
+      <a class="side-link" href="#stepper" data-support-level="supported">Stepper</a>
+      <a class="side-link" href="#timeline" data-support-level="supported">Timeline</a>
+      <a class="side-link" href="#tree-view" data-support-level="supported">Tree View</a>
+      <a class="side-link" href="#progress" data-support-level="supported">Progress</a>
+      <a class="side-link" href="#rating" data-support-level="beta">Rating</a>
+      <a class="side-link" href="#range-slider" data-support-level="supported">Range Slider</a>
+      <a class="side-link" href="#calendar" data-support-level="beta">Calendar</a>
     </div>
     <div class="side-group">
       <div class="side-group-title">Typography</div>
-      <a class="side-link" href="#typography">Headings &amp; Text</a>
+      <a class="side-link" href="#typography" data-support-level="experimental">Headings &amp; Text</a>
     </div>
   </aside>
 
@@ -358,18 +383,18 @@
     <div class="hero">
       <div class="hero-eyebrow">◈ Contract-driven · Token-first · Zero runtime</div>
       <h1>The CSS system that<br><em>scales with you</em></h1>
-      <p class="hero-desc">82 UI surfaces, one stylesheet. Theme switching with a single attribute. No JavaScript required.</p>
+      <p class="hero-desc">99 UI surfaces, one stylesheet. Theme switching with a single attribute. No JavaScript required.</p>
       <div class="hero-actions">
         <a href="#install" class="btn btn-primary">Get started</a>
         <a href="playground/index.html" class="btn btn-outline btn-neutral">Open Playground →</a>
       </div>
-      <div class="hero-stats">
-        <div class="hero-stat">
-          <div class="hero-stat-value">82</div>
-          <div class="hero-stat-label">UI surfaces</div>
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-value">99</div>
+        <div class="hero-stat-label">UI surfaces</div>
         </div>
         <div class="hero-stat">
-          <div class="hero-stat-value">~10.5 KB</div>
+          <div class="hero-stat-value">~18 KB</div>
           <div class="hero-stat-label">gzip</div>
         </div>
         <div class="hero-stat">
@@ -382,6 +407,31 @@
         </div>
       </div>
     </div>
+
+    <section class="section onboarding-section" id="start-here">
+      <h2 class="section-title">0 — Start Here</h2>
+      <p class="section-desc">Use this site as the curated gallery for high-value, mostly supported surfaces. Use the playground as the workflow lab for templates, interaction-heavy checks, and beta coverage.</p>
+      <div class="examples-grid">
+        <a class="example-card" href="#install">
+          <span class="badge badge-primary example-card-badge">Consumer</span>
+          <div class="example-card-title">Build With Supported Defaults</div>
+          <div class="example-card-desc">Start from install, themes, and gallery examples when you want the stable path first.</div>
+        </a>
+        <a class="example-card" href="https://github.com/snrj35-dev/Fikir-Css/blob/main/docs/paths/contributor-path.md" target="_blank">
+          <span class="badge badge-neutral example-card-badge">Contributor</span>
+          <div class="example-card-title">Follow The Contribution Path</div>
+          <div class="example-card-desc">Go to the contributor path, support matrix, and RFC flow when you are extending the system.</div>
+        </a>
+        <a class="example-card" href="https://github.com/snrj35-dev/Fikir-Css/blob/main/docs/paths/maintainer-path.md" target="_blank">
+          <span class="badge badge-warning example-card-badge">Maintainer</span>
+          <div class="example-card-title">Release And Govern</div>
+          <div class="example-card-desc">Use the maintainer path for release flow, selector freeze policy, and support-level governance.</div>
+        </a>
+      </div>
+      <p class="section-desc" style="margin-top:var(--space-3);margin-bottom:0">
+        Site role: gallery-first onboarding and copy-paste surfaces. Playground role: starter templates, workflow demos, support-tier visibility, and deeper interaction smoke paths.
+      </p>
+    </section>
 
     <!-- ── 1. INSTALL ──────────────────────────────────── -->
     <section class="section onboarding-section" id="install">
@@ -396,9 +446,9 @@
           </div>
         </div>
         <div>
-          <div class="install-option-label">Option B — npm (beta)</div>
+          <div class="install-option-label">Option B — npm (stable)</div>
           <div class="install-code">
-            <code id="npm-snippet">npm install fikir-css@beta</code>
+            <code id="npm-snippet">npm install fikir-css</code>
             <button class="btn btn-outline btn-neutral btn-sm copy-btn" onclick="copySnippet('npm-snippet', this)">Copy</button>
           </div>
         </div>
@@ -410,6 +460,10 @@
           </div>
         </div>
       </div>
+      <p class="section-desc" style="margin-top:var(--space-3);margin-bottom:0">
+        Prerelease channels are opt-in: use <code class="code-chip">npm install fikir-css@beta</code> or
+        <code class="code-chip">npm install fikir-css@rc</code> only when a release note explicitly asks for them.
+      </p>
     </section>
 
     <!-- ── 2. THEMES ──────────────────────────────────── -->
@@ -488,30 +542,32 @@
     <!-- ── COMPONENT GALLERY ────────────────────────────── -->
     <h2 class="gallery-heading" id="gallery">
       Component Gallery
-      <span class="gallery-heading-count">82 surfaces</span>
+      <span class="gallery-heading-count">99 surfaces</span>
     </h2>
 
     <!-- ── BUTTONS ───────────────────────────────────────── -->
     <section class="section" id="buttons">
       <h2 class="section-title">Button</h2>
-      <p class="section-desc"><code class="code-chip">btn</code> is the base class — it provides sizing, focus ring, and cursor. A <strong>tone modifier</strong> (<code class="code-chip">btn-primary</code>, <code class="code-chip">btn-neutral</code>, etc.) is required for color. <code class="code-chip">btn</code> alone is intentionally invisible so it composes cleanly.</p>
+      <p class="section-desc"><code class="code-chip">btn</code> is the base class. The official contract is <strong>style + tone + size</strong>: use a style modifier like <code class="code-chip">btn-solid</code> or <code class="code-chip">btn-ghost</code>, then pair it with a tone such as <code class="code-chip">btn-primary</code> or <code class="code-chip">btn-danger</code>.</p>
 
       <div class="preview-row">
-        <div class="item"><button class="btn">btn only</button><span class="preview-label">btn (no tone — transparent)</span></div>
-        <div class="item"><button class="btn btn-primary">Primary</button><span class="preview-label">btn btn-primary</span></div>
-        <div class="item"><button class="btn btn-neutral">Neutral</button><span class="preview-label">btn btn-neutral</span></div>
-        <div class="item"><button class="btn btn-danger">Danger</button><span class="preview-label">btn btn-danger</span></div>
-        <div class="item"><button class="btn btn-outline btn-neutral">Outline</button><span class="preview-label">btn btn-outline btn-neutral</span></div>
-        <div class="item"><button class="btn btn-outline btn-primary">Outline Primary</button><span class="preview-label">btn btn-outline btn-primary</span></div>
+        <div class="item"><button class="btn btn-solid btn-primary">Solid</button><span class="preview-label">btn btn-solid btn-primary</span></div>
+        <div class="item"><button class="btn btn-soft btn-primary">Soft</button><span class="preview-label">btn btn-soft btn-primary</span></div>
+        <div class="item"><button class="btn btn-outline btn-primary">Outline</button><span class="preview-label">btn btn-outline btn-primary</span></div>
+        <div class="item"><button class="btn btn-ghost btn-primary">Ghost</button><span class="preview-label">btn btn-ghost btn-primary</span></div>
+        <div class="item"><button class="btn btn-plain btn-primary">Plain</button><span class="preview-label">btn btn-plain btn-primary</span></div>
       </div>
       <div class="preview-row">
-        <div class="item"><button class="btn btn-primary btn-sm">Small</button><span class="preview-label">btn-sm</span></div>
-        <div class="item"><button class="btn btn-primary btn-md">Medium</button><span class="preview-label">btn-md (default)</span></div>
-        <div class="item"><button class="btn btn-primary btn-lg">Large</button><span class="preview-label">btn-lg</span></div>
+        <div class="item"><button class="btn btn-solid btn-neutral">Neutral</button><span class="preview-label">btn btn-solid btn-neutral</span></div>
+        <div class="item"><button class="btn btn-outline btn-neutral">Neutral Outline</button><span class="preview-label">btn btn-outline btn-neutral</span></div>
+        <div class="item"><button class="btn btn-solid btn-danger">Danger</button><span class="preview-label">btn btn-solid btn-danger</span></div>
+        <div class="item"><button class="btn btn-ghost btn-danger">Danger Ghost</button><span class="preview-label">btn btn-ghost btn-danger</span></div>
       </div>
       <div class="preview-row">
-        <div class="item"><button class="btn btn-primary" disabled>Disabled</button><span class="preview-label">disabled attr</span></div>
-        <div class="item"><button class="btn btn-neutral" disabled>Disabled</button><span class="preview-label">btn-neutral disabled</span></div>
+        <div class="item"><button class="btn btn-solid btn-primary btn-sm">Small</button><span class="preview-label">btn-sm</span></div>
+        <div class="item"><button class="btn btn-solid btn-primary btn-md">Medium</button><span class="preview-label">btn-md (default)</span></div>
+        <div class="item"><button class="btn btn-solid btn-primary btn-lg">Large</button><span class="preview-label">btn-lg</span></div>
+        <div class="item"><button class="btn btn-solid btn-primary" disabled>Disabled</button><span class="preview-label">disabled attr</span></div>
       </div>
     </section>
 
@@ -537,7 +593,7 @@
     <!-- ── ALERT ─────────────────────────────────── -->
     <section class="section" id="alert">
       <h2 class="section-title">Alert</h2>
-      <p class="section-desc">Use <code class="code-chip">alert</code> + tone modifier.</p>
+      <p class="section-desc">Use <code class="code-chip">alert</code> with a tone class. The default style is soft; <code class="code-chip">data-style="outline"</code> is the official alternate.</p>
       <div class="preview-row" style="flex-direction: column">
         <div class="item" style="width:100%">
           <div class="alert" role="alert" style="width:100%">
@@ -554,11 +610,11 @@
           <span class="preview-label">alert alert-danger</span>
         </div>
         <div class="item" style="width:100%">
-          <div class="alert alert-warning" role="alert" style="width:100%">
+          <div class="alert alert-warning" data-style="outline" role="alert" style="width:100%">
             <p class="alert-title">Warning</p>
             <p class="alert-description">Your session expires in 5 minutes.</p>
           </div>
-          <span class="preview-label">alert alert-warning</span>
+          <span class="preview-label">alert alert-warning data-style="outline"</span>
         </div>
         <div class="item" style="width:100%">
           <div class="alert alert-success" role="alert" style="width:100%">
@@ -581,12 +637,12 @@
     <section class="section" id="badge">
       <h2 class="section-title">Badge</h2>
       <div class="preview-row">
-        <div class="item"><span class="badge badge-neutral">Neutral</span><span class="preview-label">badge-neutral</span></div>
-        <div class="item"><span class="badge badge-primary">Primary</span><span class="preview-label">badge-primary</span></div>
-        <div class="item"><span class="badge badge-danger">Danger</span><span class="preview-label">badge-danger</span></div>
-        <div class="item"><span class="badge badge-warning">Warning</span><span class="preview-label">badge-warning</span></div>
-        <div class="item"><span class="badge badge-success">Success</span><span class="preview-label">badge-success</span></div>
-        <div class="item"><span class="badge badge-info">Info</span><span class="preview-label">badge-info</span></div>
+        <div class="item"><span class="badge badge-solid badge-primary">Solid</span><span class="preview-label">badge badge-solid badge-primary</span></div>
+        <div class="item"><span class="badge badge-soft badge-primary">Soft</span><span class="preview-label">badge badge-soft badge-primary</span></div>
+        <div class="item"><span class="badge badge-outline badge-primary">Outline</span><span class="preview-label">badge badge-outline badge-primary</span></div>
+        <div class="item"><span class="badge badge-plain badge-primary">Plain</span><span class="preview-label">badge badge-plain badge-primary</span></div>
+        <div class="item"><span class="badge badge-soft badge-success">Success</span><span class="preview-label">badge badge-soft badge-success</span></div>
+        <div class="item"><span class="badge badge-outline badge-danger">Danger</span><span class="preview-label">badge badge-outline badge-danger</span></div>
       </div>
     </section>
 
@@ -614,10 +670,10 @@
           <span class="preview-label">toast toast--warn</span>
         </div>
         <div class="item" style="width:100%">
-          <div class="toast toast--info" data-open="true" style="position:relative;inset:unset;translate:none;max-inline-size:100%;border-radius:var(--radius-md)">
+          <div class="toast toast--info" data-style="outline" data-open="true" style="position:relative;inset:unset;translate:none;max-inline-size:100%;border-radius:var(--radius-md)">
             <p class="toast-title">New version available</p>
           </div>
-          <span class="preview-label">toast toast--info</span>
+          <span class="preview-label">toast toast--info data-style="outline"</span>
         </div>
       </div>
     </section>
@@ -719,11 +775,18 @@
       <h2 class="section-title">Card</h2>
       <div class="preview-row" style="gap: var(--space-4); align-items: stretch">
         <div class="item" style="flex:1;min-width:200px">
-          <div class="card" style="padding:1rem;height:100%">
-            <p style="margin:0;font-weight:600">Plain card</p>
-            <p style="margin:.5rem 0 0;font-size:.875rem;color:var(--color-fg-muted)">Default variant.</p>
+          <div class="card card-flat" style="padding:1rem;height:100%">
+            <p style="margin:0;font-weight:600">Flat card</p>
+            <p style="margin:.5rem 0 0;font-size:.875rem;color:var(--color-fg-muted)">Default container style.</p>
           </div>
-          <span class="preview-label">card</span>
+          <span class="preview-label">card card-flat</span>
+        </div>
+        <div class="item" style="flex:1;min-width:200px">
+          <div class="card card-subtle" style="padding:1rem;height:100%">
+            <p style="margin:0;font-weight:600">Subtle card</p>
+            <p style="margin:.5rem 0 0;font-size:.875rem;color:var(--color-fg-muted)">Uses the default page layer.</p>
+          </div>
+          <span class="preview-label">card card-subtle</span>
         </div>
         <div class="item" style="flex:1;min-width:200px">
           <div class="card card-elevated" style="padding:1rem;height:100%">
@@ -731,6 +794,13 @@
             <p style="margin:.5rem 0 0;font-size:.875rem;color:var(--color-fg-muted)">With shadow.</p>
           </div>
           <span class="preview-label">card card-elevated</span>
+        </div>
+        <div class="item" style="flex:1;min-width:200px">
+          <a href="#card" class="card card-interactive" style="padding:1rem;height:100%;display:block;text-decoration:none">
+            <p style="margin:0;font-weight:600">Interactive card</p>
+            <p style="margin:.5rem 0 0;font-size:.875rem;color:var(--color-fg-muted)">Hover or focus this surface.</p>
+          </a>
+          <span class="preview-label">card card-interactive</span>
         </div>
       </div>
     </section>
@@ -748,11 +818,12 @@
     <section class="section" id="surface">
       <h2 class="section-title">Surface</h2>
       <div class="preview-row">
-        <div class="surface" style="padding:1rem;border-radius:var(--radius-md);border:1px solid var(--color-border-subtle)">
-          Background surface layer
-        </div>
-        <span class="preview-label">surface</span>
+        <div class="surface surface-flat" style="padding:1rem">Flat</div>
+        <div class="surface surface-subtle" style="padding:1rem">Subtle</div>
+        <div class="surface surface-elevated" style="padding:1rem">Elevated</div>
+        <a href="#surface" class="surface surface-interactive" style="padding:1rem;text-decoration:none">Interactive</a>
       </div>
+      <span class="preview-label">surface-flat · surface-subtle · surface-elevated · surface-interactive</span>
     </section>
 
     <!-- ── TABS ──────────────────────────────────── -->

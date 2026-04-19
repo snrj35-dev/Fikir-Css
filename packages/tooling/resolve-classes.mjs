@@ -71,13 +71,16 @@ export default resolveClasses;
 // "Last write wins" for conflicting variant axes (mirrors CSS cascade behavior).
 
 /**
- * @param {{ variant?: 'solid'|'outline', tone?: 'primary'|'neutral'|'danger', size?: 'sm'|'md'|'lg' }} [opts]
+ * @param {{ variant?: 'solid'|'soft'|'outline'|'ghost'|'plain', tone?: 'primary'|'neutral'|'danger', size?: 'sm'|'md'|'lg' }} [opts]
  * @returns {string}
  */
 export function resolveBtn({ variant = "solid", tone = "primary", size = "md" } = {}) {
   const cls = ["btn"];
   if (variant === "solid") cls.push("btn-solid");
+  if (variant === "soft") cls.push("btn-soft");
   if (variant === "outline") cls.push("btn-outline");
+  if (variant === "ghost") cls.push("btn-ghost");
+  if (variant === "plain") cls.push("btn-plain");
   if (tone === "primary") cls.push("btn-primary");
   if (tone === "neutral") cls.push("btn-neutral");
   if (tone === "danger") cls.push("btn-danger");
@@ -88,12 +91,16 @@ export function resolveBtn({ variant = "solid", tone = "primary", size = "md" } 
 }
 
 /**
- * @param {{ variant?: 'plain'|'elevated', padding?: 'sm'|'md'|'lg' }} [opts]
+ * @param {{ variant?: 'flat'|'subtle'|'elevated'|'interactive'|'plain', padding?: 'sm'|'md'|'lg' }} [opts]
  * @returns {string}
  */
-export function resolveCard({ variant = "plain", padding = "md" } = {}) {
+export function resolveCard({ variant = "flat", padding = "md" } = {}) {
   const cls = ["card"];
+  if (variant === "flat") cls.push("card-flat");
+  if (variant === "subtle") cls.push("card-subtle");
   if (variant === "elevated") cls.push("card-elevated");
+  if (variant === "interactive") cls.push("card-interactive");
+  if (variant === "plain") cls.push("card-plain");
   if (padding === "sm") cls.push("card-p-sm");
   if (padding === "lg") cls.push("card-p-lg");
   if (padding === "md") cls.push("card-p-md");
@@ -108,7 +115,7 @@ export function resolveInput() {
 }
 
 /**
- * @param {{ tone?: 'default'|'danger' }} [opts]
+ * @param {{ tone?: 'default'|'danger'|'warning'|'success'|'info'|'neutral' }} [opts]
  * @returns {string}
  */
 export function resolveAlert({ tone = "default" } = {}) {
@@ -122,11 +129,15 @@ export function resolveAlert({ tone = "default" } = {}) {
 }
 
 /**
- * @param {{ tone?: 'neutral'|'primary'|'danger'|'warning'|'success'|'info' }} [opts]
+ * @param {{ variant?: 'solid'|'soft'|'outline'|'plain', tone?: 'neutral'|'primary'|'danger'|'warning'|'success'|'info' }} [opts]
  * @returns {string}
  */
-export function resolveBadge({ tone = "neutral" } = {}) {
+export function resolveBadge({ variant = "soft", tone = "neutral" } = {}) {
   const cls = ["badge"];
+  if (variant === "solid") cls.push("badge-solid");
+  if (variant === "soft") cls.push("badge-soft");
+  if (variant === "outline") cls.push("badge-outline");
+  if (variant === "plain") cls.push("badge-plain");
   if (tone === "neutral") cls.push("badge-neutral");
   if (tone === "primary") cls.push("badge-primary");
   if (tone === "danger") cls.push("badge-danger");

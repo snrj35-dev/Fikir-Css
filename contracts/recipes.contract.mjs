@@ -8,9 +8,13 @@ export const recipesContract = {
         ["justify-content", "center"],
         ["gap", "var(--space-2)"],
         ["border-radius", "var(--radius-md)"],
-        ["border", "1px solid transparent"],
+        ["border", "1px solid var(--btn-border-color, transparent)"],
+        ["background", "var(--btn-bg, transparent)"],
+        ["color", "var(--btn-fg, var(--color-fg-default))"],
         ["cursor", "pointer"],
         ["font-weight", "600"],
+        ["text-decoration", "var(--btn-text-decoration, none)"],
+        ["text-underline-offset", "0.2em"],
         ["transition", "background-color 120ms ease, color 120ms ease, border-color 120ms ease"]
       ]
     },
@@ -28,50 +32,93 @@ export const recipesContract = {
     },
     buttonSolid: {
       selector: "component.btnSolid",
-      declarations: [["background", "var(--color-primary-500)"], ["color", "var(--color-gray-50)"]]
+      declarations: []
+    },
+    buttonSoft: {
+      selector: "component.btnSoft",
+      declarations: []
     },
     buttonOutline: {
       selector: "component.btnOutline",
-      declarations: [
-        ["border-color", "var(--color-border-subtle)"],
-        ["color", "var(--color-fg-default)"],
-        ["background", "transparent"]
-      ]
+      declarations: []
+    },
+    buttonGhost: {
+      selector: "component.btnGhost",
+      declarations: []
+    },
+    buttonPlain: {
+      selector: "component.btnPlain",
+      declarations: []
     },
     buttonPrimary: {
       selector: "component.btnPrimary",
-      declarations: [["background", "var(--color-primary-500)"], ["color", "var(--color-gray-50)"]]
+      declarations: []
     },
     buttonNeutral: {
       selector: "component.btnNeutral",
-      declarations: [
-        ["background", "var(--color-bg-surface)"],
-        ["color", "var(--color-fg-default)"],
-        ["border-color", "var(--color-border-subtle)"]
-      ]
+      declarations: []
     },
     buttonDanger: {
       selector: "component.btnDanger",
-      declarations: [["background", "var(--color-danger)"], ["color", "var(--color-gray-50)"]]
+      declarations: []
     },
     cardBase: {
       selector: "component.card",
       declarations: [
         ["display", "block"],
-        ["background", "var(--color-bg-surface)"],
+        ["background", "var(--card-bg, var(--color-bg-surface))"],
         ["color", "var(--color-fg-default)"],
-        ["border", "1px solid var(--color-border-subtle)"],
+        ["border", "1px solid var(--card-border-color, var(--color-border-subtle))"],
         ["border-radius", "var(--radius-lg)"],
-        ["box-shadow", "var(--shadow-sm)"]
+        ["box-shadow", "var(--card-shadow, none)"],
+        ["cursor", "var(--card-cursor, default)"],
+        ["transition", "background-color 120ms ease, border-color 120ms ease, box-shadow 120ms ease, transform 120ms ease"]
+      ]
+    },
+    cardFlat: {
+      selector: "component.cardFlat",
+      declarations: [
+        ["--card-bg", "var(--color-bg-surface)"],
+        ["--card-border-color", "var(--color-border-subtle)"],
+        ["--card-shadow", "none"]
       ]
     },
     cardPlain: {
       selector: "component.cardPlain",
-      declarations: [["box-shadow", "none"]]
+      declarations: [
+        ["--card-bg", "var(--color-bg-surface)"],
+        ["--card-border-color", "var(--color-border-subtle)"],
+        ["--card-shadow", "none"]
+      ]
+    },
+    cardSubtle: {
+      selector: "component.cardSubtle",
+      declarations: [
+        ["--card-bg", "var(--color-bg-default)"],
+        ["--card-border-color", "var(--color-border-subtle)"],
+        ["--card-shadow", "none"]
+      ]
     },
     cardElevated: {
       selector: "component.cardElevated",
-      declarations: [["box-shadow", "var(--shadow-sm)"]]
+      declarations: [
+        ["--card-bg", "var(--color-bg-surface)"],
+        ["--card-border-color", "var(--color-border-subtle)"],
+        ["--card-shadow", "var(--shadow-sm)"]
+      ]
+    },
+    cardInteractive: {
+      selector: "component.cardInteractive",
+      declarations: [
+        ["--card-bg", "var(--color-bg-surface)"],
+        ["--card-border-color", "var(--color-border-subtle)"],
+        ["--card-shadow", "none"],
+        ["--card-hover-bg", "color-mix(in oklch, var(--color-accent) 6%, var(--color-bg-surface))"],
+        ["--card-hover-border-color", "color-mix(in oklch, var(--color-accent) 24%, var(--color-border-subtle))"],
+        ["--card-hover-shadow", "var(--shadow-sm)"],
+        ["--card-hover-transform", "translateY(-1px)"],
+        ["--card-cursor", "pointer"]
+      ]
     },
     cardPSm: {
       selector: "component.cardPSm",
@@ -146,9 +193,9 @@ export const recipesContract = {
     alertNeutral: {
       selector: "component.alertNeutral",
       declarations: [
-        ["background", "var(--color-bg-surface)"],
+        ["background", "var(--color-neutral-subtle)"],
         ["border-color", "var(--color-border-subtle)"],
-        ["color", "var(--color-fg-muted)"]
+        ["color", "var(--color-fg-default)"]
       ]
     },
     badgeBase: {
@@ -156,57 +203,57 @@ export const recipesContract = {
       declarations: [
         ["display", "inline-flex"],
         ["align-items", "center"],
+        ["justify-content", "center"],
+        ["gap", "var(--space-1)"],
         ["border-radius", "var(--radius-sm)"],
         ["padding", "var(--space-1) var(--space-2)"],
         ["font-size", "var(--font-size-xs)"],
-        ["font-weight", "600"]
+        ["font-weight", "600"],
+        ["line-height", "1.2"],
+        ["border", "1px solid var(--badge-border-color, transparent)"],
+        ["background", "var(--badge-bg, transparent)"],
+        ["color", "var(--badge-fg, var(--color-fg-default))"]
       ]
+    },
+    badgeSolid: {
+      selector: "component.badgeSolid",
+      declarations: []
+    },
+    badgeSoft: {
+      selector: "component.badgeSoft",
+      declarations: []
+    },
+    badgeOutline: {
+      selector: "component.badgeOutline",
+      declarations: []
+    },
+    badgePlain: {
+      selector: "component.badgePlain",
+      declarations: []
     },
     badgeNeutral: {
       selector: "component.badgeNeutral",
-      declarations: [
-        ["background", "var(--color-bg-surface)"],
-        ["border", "1px solid var(--color-border-subtle)"],
-        ["color", "var(--color-fg-default)"]
-      ]
+      declarations: []
     },
     badgePrimary: {
       selector: "component.badgePrimary",
-      declarations: [
-        ["background", "var(--color-primary-500)"],
-        ["color", "var(--color-gray-50)"]
-      ]
+      declarations: []
     },
     badgeDanger: {
       selector: "component.badgeDanger",
-      declarations: [
-        ["background", "var(--color-danger)"],
-        ["color", "var(--color-gray-50)"]
-      ]
+      declarations: []
     },
     badgeWarning: {
       selector: "component.badgeWarning",
-      declarations: [
-        ["background", "color-mix(in oklch, var(--color-warning) 22%, var(--color-bg-surface))"],
-        ["color", "color-mix(in oklch, var(--color-warning-600) 90%, var(--color-fg-default))"],
-        ["border-color", "color-mix(in oklch, var(--color-warning) 60%, var(--color-bg-surface))"]
-      ]
+      declarations: []
     },
     badgeSuccess: {
       selector: "component.badgeSuccess",
-      declarations: [
-        ["background", "color-mix(in oklch, var(--color-success) 20%, var(--color-bg-surface))"],
-        ["color", "color-mix(in oklch, var(--color-success-600) 90%, var(--color-fg-default))"],
-        ["border-color", "color-mix(in oklch, var(--color-success) 55%, var(--color-bg-surface))"]
-      ]
+      declarations: []
     },
     badgeInfo: {
       selector: "component.badgeInfo",
-      declarations: [
-        ["background", "var(--color-info-subtle)"],
-        ["color", "color-mix(in oklch, var(--color-info) 70%, var(--color-fg-default))"],
-        ["border-color", "color-mix(in oklch, var(--color-info) 40%, var(--color-bg-surface))"]
-      ]
+      declarations: []
     },
     modalBase: {
       selector: "component.modal",
@@ -235,7 +282,10 @@ export const recipesContract = {
       variants: {
         variant: {
           solid: ["component.btnSolid"],
-          outline: ["component.btnOutline"]
+          soft: ["component.btnSoft"],
+          outline: ["component.btnOutline"],
+          ghost: ["component.btnGhost"],
+          plain: ["component.btnPlain"]
         },
         tone: {
           primary: ["component.btnPrimary"],
@@ -250,12 +300,15 @@ export const recipesContract = {
       }
     },
     card: {
-      defaults: { variant: "plain", padding: "md" },
+      defaults: { variant: "flat", padding: "md" },
       base: ["component.card"],
       variants: {
         variant: {
+          flat: ["component.cardFlat"],
           plain: ["component.cardPlain"],
-          elevated: ["component.cardElevated"]
+          subtle: ["component.cardSubtle"],
+          elevated: ["component.cardElevated"],
+          interactive: ["component.cardInteractive"]
         },
         padding: {
           sm: ["component.cardPSm"],
@@ -284,9 +337,15 @@ export const recipesContract = {
       }
     },
     badge: {
-      defaults: { tone: "neutral" },
+      defaults: { variant: "soft", tone: "neutral" },
       base: ["component.badge"],
       variants: {
+        variant: {
+          solid: ["component.badgeSolid"],
+          soft: ["component.badgeSoft"],
+          outline: ["component.badgeOutline"],
+          plain: ["component.badgePlain"]
+        },
         tone: {
           neutral: ["component.badgeNeutral"],
           primary: ["component.badgePrimary"],
@@ -310,6 +369,110 @@ export const recipesContract = {
     tabs: {
       defaults: {},
       base: ["component.tabs"],
+      variants: {}
+    },
+
+    // M16+ data-pattern resolvers — selector is [data-pattern="<base>"]
+    coachmark: {
+      selectorType: "data-pattern",
+      defaults: { tone: "info" },
+      base: ["pattern.coachmark"],
+      variants: {
+        tone: {
+          info: [],
+          warning: [],
+          success: [],
+          danger: [],
+          neutral: []
+        }
+      }
+    },
+    authScreen: {
+      selectorType: "data-pattern",
+      defaults: { variant: "centered" },
+      base: ["pattern.authScreen"],
+      variants: {
+        variant: {
+          centered: [],
+          split: []
+        }
+      }
+    },
+    emptySearchState: {
+      selectorType: "data-pattern",
+      defaults: { variant: "no-results" },
+      base: ["pattern.emptySearchState"],
+      variants: {
+        variant: {
+          "first-use": [],
+          "no-results": [],
+          "filtered-empty": []
+        }
+      }
+    },
+    statGroup: {
+      selectorType: "data-pattern",
+      defaults: { variant: "default" },
+      base: ["pattern.statGroup"],
+      variants: {
+        variant: {
+          default: [],
+          compact: [],
+          divided: []
+        }
+      }
+    },
+    timeRangePicker: {
+      selectorType: "data-pattern",
+      defaults: { variant: "inline" },
+      base: ["pattern.timeRangePicker"],
+      variants: {
+        variant: {
+          inline: [],
+          block: []
+        }
+      }
+    },
+    filterBar: {
+      selectorType: "data-pattern",
+      defaults: {},
+      base: ["pattern.filterBar"],
+      variants: {}
+    },
+    dataTableToolbar: {
+      selectorType: "data-pattern",
+      defaults: {},
+      base: ["pattern.dataTableToolbar"],
+      variants: {}
+    },
+    commandBar: {
+      selectorType: "data-pattern",
+      defaults: {},
+      base: ["pattern.commandBar"],
+      variants: {}
+    },
+    copyButton: {
+      selectorType: "data-pattern",
+      defaults: {},
+      base: ["pattern.copyButton"],
+      variants: {}
+    },
+    passwordInput: {
+      selectorType: "data-pattern",
+      defaults: {},
+      base: ["pattern.passwordInput"],
+      variants: {}
+    },
+    searchResultItem: {
+      selectorType: "data-pattern",
+      defaults: {},
+      base: ["pattern.searchResultItem"],
+      variants: {}
+    },
+    onboardingChecklist: {
+      selectorType: "data-pattern",
+      defaults: {},
+      base: ["pattern.onboardingChecklist"],
       variants: {}
     }
   }

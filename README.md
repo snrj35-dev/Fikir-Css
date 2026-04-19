@@ -2,11 +2,27 @@
 
 **Contract-driven CSS design system.** Zero-runtime. Predictable cascade. Token-first.
 
-A single `fikir.css` file gives you 82 battle-tested UI surfaces. No build step for consumers. State via `data-*` attributes, not class proliferation.
+A single `fikir.css` file gives you 99 UI surfaces. No build step for consumers. State via `data-*` attributes, not class proliferation.
 
-**v0.6.0** &nbsp;·&nbsp; **~92 KB raw / ~10.5 KB gzip** &nbsp;·&nbsp; **82 surfaces** &nbsp;·&nbsp; [![npm](https://img.shields.io/npm/v/fikir-css)](https://www.npmjs.com/package/fikir-css)
+**v0.6.0** &nbsp;·&nbsp; **~152 KB raw / ~18 KB gzip** &nbsp;·&nbsp; **99 surfaces** &nbsp;·&nbsp; [![npm](https://img.shields.io/npm/v/fikir-css)](https://www.npmjs.com/package/fikir-css)
 
 🔗 **[Live component gallery →](https://snrj35-dev.github.io/Fikir-Css/)** &nbsp;·&nbsp; [GitHub](https://github.com/snrj35-dev/Fikir-Css)
+
+---
+
+## What
+
+Fikir CSS is a contract-driven CSS design system for teams that want semantic selectors, token-based theming, and zero runtime by default.
+
+- One stylesheet covers 99 surfaces across component, layout, overlay, navigation, and data UI
+- Public surfaces are explicitly labeled as `supported`, `beta`, `experimental`, or `deprecated`
+- Consumers can stay in plain HTML, or opt into resolvers and helpers only when needed
+
+## Why
+
+- No mandatory consumer build step for the default path
+- Theme, density, and motion are controlled with tokens and `data-*` attributes instead of framework-specific runtime APIs
+- The product story is explicit: supported surfaces are stable, beta surfaces are opt-in, experimental surfaces are not sold as ready
 
 ---
 
@@ -72,8 +88,11 @@ Copy this into any `.html` file and open it:
 ### Option 2 — npm
 
 ```bash
-npm install fikir-css@beta
+npm install fikir-css
 ```
+
+Use prerelease channels only when a release note explicitly calls for them:
+`npm install fikir-css@beta` or `npm install fikir-css@rc`.
 
 ```html
 <!-- HTML -->
@@ -108,6 +127,36 @@ cd Fikir-Css
 npm install && npm run build
 # open playground/index.html — no dev server needed
 ```
+
+---
+
+## Themes
+
+Themes are activated with attributes, not recompilation:
+
+- `data-theme="light|dark|high-contrast"`
+- `data-density="compact|comfortable"`
+- `data-motion="reduced"` when you need an explicit reduced-motion path
+
+Full guide: [docs/guides/theme-system.md](./docs/guides/theme-system.md)
+
+## Examples
+
+- [Site gallery](https://snrj35-dev.github.io/Fikir-Css/) is the curated, copy-paste-first surface gallery for high-value usage
+- [Playground](./playground/index.html) is the workflow lab for templates, interaction-heavy demos, support-tier labeling, and broader smoke coverage
+- [React example](./examples/react-vite/) shows typed resolvers and helper usage in a real framework fixture
+
+## Support Snapshot
+
+Only `supported` surfaces are presented as production-ready defaults in quick start and starter examples.
+
+| Level | Meaning |
+|------|---------|
+| `supported` | Stable, documented, selector contract frozen |
+| `beta` | Usable, but additive or compatibility changes may still happen |
+| `experimental` | Not recommended for production; may change or disappear |
+
+See the full matrix in [docs/roadmap/support-matrix.md](./docs/roadmap/support-matrix.md).
 
 ---
 
@@ -244,35 +293,40 @@ When writing application-specific CSS alongside Fikir CSS, **always consume Fiki
 
 ---
 
-## Supported Surfaces
+## Support Levels
 
-| Tier | Components |
-|------|-----------|
-| **Core forms** | `button` `input` `textarea` `select` `checkbox` `radio` `switch` `field` `label` `helper-text` `error-text` |
-| **Core display** | `card` `badge` `alert` `surface` `divider` `link` `icon-button` |
-| **Layout** | `container` `stack` `cluster` `sidebar` `switcher` `center` `grid` |
-| **Overlays** | `modal` `toast` `tooltip` `popover` `dropdown-menu` `drawer` |
-| **Navigation** | `navbar` `sidebar-nav` `breadcrumb` `tabs` `menu-bar` `accordion` |
-| **Data** | `table` `data-grid` `pagination` `empty-state` `stat` `list` `description-list` |
-| **Input augmentation** | `combobox` `search-box` `autocomplete` `command-palette` |
-| **M2 new** | `segmented-control` `settings-panel` `skeleton` presets · `toast` tone variants · `table` state patterns |
+Current tier summary, aligned with [`docs/roadmap/support-matrix.md`](./docs/roadmap/support-matrix.md):
 
-Full matrix: [`docs/roadmap/support-matrix.md`](./docs/roadmap/support-matrix.md)
+| Level | Count | Summary |
+|------|-------|---------|
+| `supported` | 69 surfaces | Production-ready, selector contract frozen |
+| `beta` | 22 surfaces | Usable, but additive or compatibility changes may land in MINOR releases |
+| `experimental` | 10 surfaces + 2 patterns | No semver guarantee; not recommended for production |
+| `deprecated` | 0 | No deprecated public surface in the v1.0.0 baseline |
+
+### Supported families
+
+- Core / foundation: `button`, `icon-button`, `link`, `badge`, `alert`, `card`, `surface`, `divider`, `skeleton`, `spinner`, `visually-hidden`
+- Form / input: `field`, `label`, `helper-text`, `error-text`, `input`, `textarea`, `select`, `checkbox`, `radio`, `switch`, `input-group`, `number-input`, `range-slider`, `segmented-control`, `otp-input`, `search-box`
+- Overlay / feedback: `modal`, `drawer`, `popover`, `tooltip`, `dropdown-menu`, `toast`, `progress`, `loading-overlay`, `hover-card`, `result`
+- Navigation: `tabs`, `accordion`, `breadcrumb`, `pagination`, `navbar`, `menu-bar`, `sidebar-nav`, `stepper`, `command-palette`, `tree-view`
+- Data / display: `table`, `data-grid`, `list`, `description-list`, `avatar`, `avatar-group`, `stat`, `kpi-card`, `empty-state`, `timeline`, `tag-chip`
+- Layout / shell: `stack`, `cluster`, `container`, `center`, `grid`, `switcher`, `sidebar`, `page-header`, `section-block`, `app-shell`, `split-pane`
+
+For the full list of beta and experimental surfaces with rationale and upgrade guidance, see **[docs/release/what-is-stable-in-v1.md](./docs/release/what-is-stable-in-v1.md)**.
 
 ---
 
-## Who Is This For?
+## Start Here
 
-| I want to… | Start here |
-|------------|-----------|
-| Use components in a project | [Quick Start](#quick-start) · [Playground](./playground/index.html) · [Anti-patterns](./docs/guides/anti-patterns.md) |
-| Migrate from Tailwind / Bootstrap / MUI | [Migration guides](./docs/guides/) |
-| Use React / Vue / Svelte | [React](./docs/guides/react-adapter.md) · [Vue](./docs/guides/vue-adapter.md) · [Svelte](./docs/guides/svelte-adapter.md) |
-| Wire headless behavior (JS) | [Headless contract](./docs/architecture/headless-contract-spec.md) · [Examples](./docs/architecture/headless-examples.md) |
-| Customize tokens / brand theme | [Brand cookbook](./docs/architecture/brand-theme-cookbook.md) |
-| Contribute a new component | [RFC guide](./docs/contributor/how-to-add-component-rfc.md) |
-| Understand the architecture | [Technical summary](./docs/architecture/technical-summary.md) |
-| Browse all docs | [Docs hub](./docs/hub.md) |
+| Role | First path |
+|------|------------|
+| Consumer | [User path](./docs/paths/user-path.md) · [Quick Start](#quick-start) · [Site gallery](https://snrj35-dev.github.io/Fikir-Css/) · [Playground](./playground/index.html) |
+| Contributor | [Contributor path](./docs/paths/contributor-path.md) · [Support matrix](./docs/roadmap/support-matrix.md) · [RFC guide](./docs/contributor/how-to-add-component-rfc.md) |
+| Maintainer | [Maintainer path](./docs/paths/maintainer-path.md) · [Release flow](./docs/release/release-promotion-flow.md) · [Semver policy](./docs/governance/semver-policy.md) |
+
+Need a framework or competitor migration plan? Start at [docs/migration/README.md](./docs/migration/README.md).  
+Need the full navigation tree? Use [docs/hub.md](./docs/hub.md).
 
 ---
 
@@ -364,7 +418,8 @@ Components use `data-*` attributes for state (not CSS classes):
 - [v1.0 support freeze checklist](./docs/release/v1.0-support-freeze-checklist.md)
 - [v1.0 migration guarantee policy](./docs/release/v1.0-migration-guarantee-policy.md)
 - [Release checklist](./docs/release/release-checklist.md)
-- [Versioning / semver policy](./docs/release/versioning-semver-policy.md)
+- [Selector contract freeze](./docs/governance/selector-contract-freeze.md)
+- [Versioning / semver policy](./docs/governance/semver-policy.md)
 
 </details>
 
@@ -406,7 +461,7 @@ document.documentElement.removeAttribute('data-density') // back to default
 | **ARIA semantics in API** | ✅ `data-*` state selectors | ❌ | Partial |
 
 → Full benchmark: [docs/benchmark.md](./docs/benchmark.md)
-→ Migration guides: [Bootstrap](./docs/migration/from-bootstrap.md) · [Tailwind](./docs/migration/from-tailwind.md)
+→ Migration guides: [Migration hub](./docs/migration/README.md)
 
 ---
 

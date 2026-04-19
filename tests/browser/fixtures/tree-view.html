@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Tree view fixture</title>
+  <link rel="stylesheet" href="../../../dist/fikir.css" />
+</head>
+<body style="padding: 2rem">
+  <ul class="tree-view" role="tree" aria-label="File tree">
+    <li class="tree-view-item" role="treeitem" aria-expanded="false" aria-level="1" tabindex="0" id="node-1">
+      <div class="tree-view-label">
+        <button class="tree-view-toggle" aria-label="Expand src" tabindex="-1">›</button>
+        <span>src</span>
+      </div>
+      <ul class="tree-view-group" role="group" hidden>
+        <li class="tree-view-item" role="treeitem" aria-level="2" tabindex="-1" id="node-2">
+          <div class="tree-view-label">
+            <span class="tree-view-toggle" aria-hidden="true"></span>
+            <span>index.js</span>
+          </div>
+        </li>
+        <li class="tree-view-item" role="treeitem" aria-level="2" tabindex="-1" id="node-3">
+          <div class="tree-view-label">
+            <span class="tree-view-toggle" aria-hidden="true"></span>
+            <span>main.js</span>
+          </div>
+        </li>
+      </ul>
+    </li>
+    <li class="tree-view-item" role="treeitem" aria-expanded="false" aria-level="1" tabindex="-1" id="node-4">
+      <div class="tree-view-label">
+        <button class="tree-view-toggle" aria-label="Expand tests" tabindex="-1">›</button>
+        <span>tests</span>
+      </div>
+      <ul class="tree-view-group" role="group" hidden>
+        <li class="tree-view-item" role="treeitem" aria-level="2" tabindex="-1" id="node-5">
+          <div class="tree-view-label">
+            <span class="tree-view-toggle" aria-hidden="true"></span>
+            <span>app.test.js</span>
+          </div>
+        </li>
+      </ul>
+    </li>
+  </ul>
+
+  <script>
+    const items = () => [...document.querySelectorAll('[role="treeitem"]')].filter(
+      el => el.closest('[role="group"][hidden]') === null
+    );
+
+    function expand(item) {
+      const group = item.querySelector('[role="group"]');
+      if (!group) return;
+      group.removeAttribute('hidden');
+      item.setAttribute('aria-expanded', 'true');
+    }
+
+    function collapse(item) {
+      const group = item.querySelector('[role="group"]');
+      if (!group) return;
+      group.setAttribute('hidden', '');
+      item.setAttribute('aria-expanded', 'false');
+    }
+
+    function moveFocus(item) {
+      items().forEach((i) => i.setAttribute('tabindex', '-1'));
+      item.setAttribute('tabindex', '0');
+      item.focus();
+    }
+
+    document.querySelector('[role="tree"]').addEventListener('keydown', (e) => {
+      const all    = items();
+      const active = document.activeElement;
+      const idx    = all.indexOf(active);
+
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        const next = all[idx + 1]; if (next) moveFocus(next);
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        const prev = all[idx - 1]; if (prev) moveFocus(prev);
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        if (active.getAttribute('aria-expanded') === 'false') expand(active);
+        else { const first = active.querySelector('[role="treeitem"]'); if (first) moveFocus(first); }
+      } else if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        if (active.getAttribute('aria-expanded') === 'true') collapse(active);
+        else {
+          const parent = active.closest('[role="group"]')?.closest('[role="treeitem"]');
+          if (parent) moveFocus(parent);
+        }
+      } else if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        active.getAttribute('aria-expanded') === 'true' ? collapse(active) : expand(active);
+      }
+    });
+  </script>
+</body>
+</html>

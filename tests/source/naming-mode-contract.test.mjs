@@ -107,6 +107,7 @@ test("naming-mode prefixed: no selector leaks plain-mode class name", () => {
   const map = buildSelectorMap(namingContract, { mode: "prefixed" });
 
   for (const [key, descriptor] of Object.entries(namingContract.selectors)) {
+    if (descriptor.domain === "pattern") continue; // pattern selectors are intentionally not prefixed
     assert.notEqual(
       map[key],
       descriptor.base,
@@ -190,7 +191,7 @@ test("naming-mode contract: defaults define mode, utilityPrefix, componentPrefix
 });
 
 test("naming-mode contract: all selector descriptors have domain and base", () => {
-  const allowedDomains = new Set(["component", "utility"]);
+  const allowedDomains = new Set(["component", "utility", "pattern"]);
 
   for (const [key, descriptor] of Object.entries(namingContract.selectors)) {
     assert.ok(

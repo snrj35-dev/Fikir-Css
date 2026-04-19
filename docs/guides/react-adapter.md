@@ -1,7 +1,6 @@
 # React Adapter Guidance
 
-> Created: 2026-04-12
-> Scope: M3 — recipe + headless usage in React
+> Updated: M18 — v0.6.0
 
 ## Installation
 
@@ -12,6 +11,7 @@ npm install fikir-css
 ```tsx
 // src/main.tsx
 import "fikir-css/css";
+import "fikir-css/themes/compact"; // opt-in: enables data-density="compact"
 ```
 
 ## Using Semantic Components
@@ -43,6 +43,69 @@ export function Button({
     <button type="button" className={resolveBtn({ variant, size })} {...props}>
       {children}
     </button>
+  );
+}
+```
+
+## Theme & Density Toggle Hooks
+
+```tsx
+function useTheme() {
+  const [theme, setTheme] = useState<'light' | 'dark'>('light');
+  const toggle = () => {
+    const next = theme === 'light' ? 'dark' : 'light';
+    document.documentElement.setAttribute('data-theme', next);
+    setTheme(next);
+  };
+  return [theme, toggle] as const;
+}
+
+function useDensity() {
+  const [density, setDensity] = useState<'comfortable' | 'compact'>('comfortable');
+  const toggle = () => {
+    const next = density === 'comfortable' ? 'compact' : 'comfortable';
+    next === 'compact'
+      ? document.documentElement.setAttribute('data-density', 'compact')
+      : document.documentElement.removeAttribute('data-density');
+    setDensity(next);
+  };
+  return [density, toggle] as const;
+}
+```
+
+## Overlay Helpers (Focus Trap + Keyboard)
+
+```tsx
+import { useEffect, useRef } from 'react';
+import { createFocusTrap, bindOverlayKeyboard } from 'fikir-css/helpers';
+
+function Modal({ open, onClose }: { open: boolean; onClose: () => void }) {
+  const modalRef = useRef<HTMLDivElement>(null);
+  const trapRef = useRef<ReturnType<typeof createFocusTrap> | null>(null);
+  const kbdRef = useRef<{ destroy(): void } | null>(null);
+
+  useEffect(() => {
+    trapRef.current = createFocusTrap(modalRef.current!);
+    return () => { kbdRef.current?.destroy(); };
+  }, []);
+
+  useEffect(() => {
+    if (open) {
+      trapRef.current?.activate();
+      kbdRef.current = bindOverlayKeyboard(modalRef.current!, { onClose });
+    } else {
+      trapRef.current?.deactivate();
+      kbdRef.current?.destroy();
+      kbdRef.current = null;
+    }
+  }, [open, onClose]);
+
+  // Always in DOM — CSS shows/hides via data-open
+  return (
+    <div ref={modalRef} className="modal" data-open={String(open)}
+      role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div className="modal-dialog">…</div>
+    </div>
   );
 }
 ```

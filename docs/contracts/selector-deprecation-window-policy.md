@@ -1,7 +1,8 @@
 # Fikir CSS — Selector Deprecation Window Policy
 
 > Created: 2026-04-12
-> Version: v1.0 Track
+> Version: v1.0 Track  
+> See also: `docs/governance/selector-contract-freeze.md`
 
 ## Purpose
 
@@ -133,4 +134,5 @@ In cases where a selector must be removed immediately (security issue, critical 
 - `docs/contracts/alias-removal-checklist.md` — active deprecation tracker
 - `docs/contracts/contract-compatibility-matrix.md` — breaking change definitions
 - `docs/contracts/token-lifecycle-policy.md` — equivalent policy for tokens
-- `docs/release/versioning-semver-policy.md` — version bump governance
+- `docs/governance/selector-contract-freeze.md` — what is frozen once a surface is `supported`
+- `docs/governance/semver-policy.md` — version bump governance

@@ -1,0 +1,107 @@
+@layer components {
+  [data-pattern="filter-bar"] {
+    --filter-bar-gap: var(--space-3);
+    --filter-bar-row-gap: var(--space-2);
+    --filter-bar-panel-padding: var(--space-3);
+    --filter-bar-search-min: 16rem;
+    display: grid;
+    gap: var(--filter-bar-gap);
+    padding: var(--filter-bar-panel-padding);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-lg);
+    background: color-mix(in oklch, var(--color-bg-default) 72%, var(--color-bg-surface));
+  }
+
+  {{component.card}}[data-pattern="filter-bar"] {
+    --filter-bar-panel-padding: 0;
+    border-color: transparent;
+    background: transparent;
+  }
+
+  [data-pattern="filter-bar"] [data-slot="controls"],
+  [data-pattern="filter-bar"] [data-slot="filters"],
+  [data-pattern="filter-bar"] [data-slot="chips"],
+  [data-pattern="filter-bar"] [data-slot="actions"],
+  [data-pattern="filter-bar"] [data-slot="reset"] {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--filter-bar-row-gap);
+  }
+
+  [data-pattern="filter-bar"] [data-slot="controls"],
+  [data-pattern="filter-bar"] [data-slot="filters"] {
+    align-items: flex-end;
+  }
+
+  [data-pattern="filter-bar"] [data-slot="search"] {
+    flex: 1 1 var(--filter-bar-search-min);
+    min-inline-size: min(100%, var(--filter-bar-search-min));
+  }
+
+  [data-pattern="filter-bar"] [data-slot="search"] {{component.searchBox}},
+  [data-pattern="filter-bar"] [data-slot="search"] {{component.inputGroup}} {
+    inline-size: 100%;
+  }
+
+  [data-pattern="filter-bar"] [data-slot="filters"] {
+    flex: 999 1 20rem;
+    min-inline-size: min(100%, 18rem);
+  }
+
+  [data-pattern="filter-bar"] fieldset[data-slot="filters"] {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    min-inline-size: 0;
+  }
+
+  [data-pattern="filter-bar"] fieldset[data-slot="filters"] > legend {
+    margin: 0 0 var(--space-1);
+    padding: 0;
+    color: var(--color-fg-muted);
+    font-size: var(--font-size-xs);
+    font-weight: 600;
+  }
+
+  [data-pattern="filter-bar"] [data-slot="filters"] {{component.select}} {
+    min-inline-size: clamp(8rem, 24vw, 11rem);
+  }
+
+  [data-pattern="filter-bar"] [data-slot="reset"] {
+    margin-inline-start: auto;
+  }
+
+  [data-pattern="filter-bar"] [data-slot="summary"] {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: var(--space-2);
+    padding-top: var(--space-2);
+    border-top: 1px solid var(--color-border-subtle);
+  }
+
+  [data-pattern="filter-bar"] [data-slot="chips"] {
+    min-inline-size: 0;
+  }
+
+  [data-pattern="filter-bar"] [data-slot="chips"] {{component.tagChip}},
+  [data-pattern="filter-bar"] [data-slot="chips"] {{component.badge}} {
+    max-inline-size: 100%;
+  }
+
+  [data-pattern="filter-bar"] [data-slot="meta"] {
+    color: var(--color-fg-muted);
+    font-size: var(--font-size-sm);
+  }
+
+  @media (max-width: 48rem) {
+    [data-pattern="filter-bar"] [data-slot="reset"] {
+      margin-inline-start: 0;
+    }
+
+    [data-pattern="filter-bar"] [data-slot="summary"] {
+      align-items: flex-start;
+    }
+  }
+}

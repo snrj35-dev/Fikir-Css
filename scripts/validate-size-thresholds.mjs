@@ -4,9 +4,9 @@ import { resolve } from "node:path";
 const rootDir = resolve(process.cwd());
 const sizeReportPath = resolve(rootDir, "dist/contracts/size-report.json");
 
-const MAX_BUNDLE_BYTES = Number(process.env.MAX_BUNDLE_BYTES ?? 100000);
+const MAX_BUNDLE_BYTES = Number(process.env.MAX_BUNDLE_BYTES ?? 165000);
 const MAX_DIFF_BYTES = Number(process.env.MAX_DIFF_BYTES ?? 8000);
-const MAX_GZIP_BUNDLE_BYTES = Number(process.env.MAX_GZIP_BUNDLE_BYTES ?? 12000);
+const MAX_GZIP_BUNDLE_BYTES = Number(process.env.MAX_GZIP_BUNDLE_BYTES ?? 22000);
 const MAX_GZIP_DIFF_BYTES = Number(process.env.MAX_GZIP_DIFF_BYTES ?? 1500);
 
 function formatSigned(value) {

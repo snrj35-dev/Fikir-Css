@@ -4,6 +4,9 @@
   "version": "0.0.0",
   "description": "Local tarball consumer smoke example for Fikir CSS",
   "scripts": {
-    "start": "echo Open index.html in your browser"
+    "start": "npx --yes serve ."
+  },
+  "dependencies": {
+    "fikir-css": "^0.6.0"
   }
 }

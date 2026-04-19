@@ -1,0 +1,142 @@
+@layer components {
+  [data-pattern="onboarding-checklist"] {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  /* Progress bar */
+  [data-pattern="onboarding-checklist"] [data-slot="progress"] {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    padding: var(--space-3) var(--space-4);
+    border-block-end: 1px solid var(--color-border-subtle);
+  }
+
+  [data-pattern="onboarding-checklist"] [data-slot="progress-bar"] {
+    flex: 1;
+    block-size: 6px;
+    border-radius: var(--radius-full);
+    background: var(--color-bg-muted);
+    overflow: hidden;
+  }
+
+  [data-pattern="onboarding-checklist"] [data-slot="progress-fill"] {
+    block-size: 100%;
+    border-radius: var(--radius-full);
+    background: var(--color-primary);
+    transition: inline-size 0.3s ease;
+  }
+
+  [data-pattern="onboarding-checklist"] [data-slot="progress-label"] {
+    font-size: var(--font-size-xs);
+    color: var(--color-fg-muted);
+    white-space: nowrap;
+  }
+
+  /* Individual item */
+  [data-pattern="onboarding-checklist"] [data-slot="item"] {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--space-3);
+    padding: var(--space-4);
+    border-block-end: 1px solid var(--color-border-subtle);
+    cursor: pointer;
+    transition: background 0.1s ease;
+  }
+
+  [data-pattern="onboarding-checklist"] [data-slot="item"]:last-of-type {
+    border-block-end: none;
+  }
+
+  [data-pattern="onboarding-checklist"] [data-slot="item"]:hover {
+    background: var(--color-bg-subtle);
+  }
+
+  /* Status indicator */
+  [data-pattern="onboarding-checklist"] [data-slot="item"] [data-slot="status-icon"] {
+    flex-shrink: 0;
+    inline-size: 1.5rem;
+    block-size: 1.5rem;
+    border-radius: var(--radius-full);
+    border: 2px solid var(--color-border-default);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--font-size-xs);
+    margin-block-start: 2px;
+    transition: background 0.15s, border-color 0.15s;
+  }
+
+  /* Done state */
+  [data-pattern="onboarding-checklist"] [data-slot="item"][data-status="done"] [data-slot="status-icon"] {
+    background: var(--color-success);
+    border-color: var(--color-success);
+    color: #fff;
+  }
+
+  /* Current/active state */
+  [data-pattern="onboarding-checklist"] [data-slot="item"][data-status="current"] [data-slot="status-icon"] {
+    border-color: var(--color-primary);
+    background: color-mix(in oklch, var(--color-primary) 12%, transparent);
+    color: var(--color-primary);
+  }
+
+  [data-pattern="onboarding-checklist"] [data-slot="item"][data-status="current"] {
+    background: color-mix(in oklch, var(--color-primary) 4%, transparent);
+  }
+
+  /* Upcoming state */
+  [data-pattern="onboarding-checklist"] [data-slot="item"][data-status="upcoming"] {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  /* Item content */
+  [data-pattern="onboarding-checklist"] [data-slot="item"] [data-slot="content"] {
+    flex: 1 1 auto;
+  }
+
+  [data-pattern="onboarding-checklist"] [data-slot="item"] [data-slot="item-title"] {
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    color: var(--color-fg-default);
+    margin: 0;
+  }
+
+  [data-pattern="onboarding-checklist"] [data-slot="item"][data-status="done"] [data-slot="item-title"] {
+    text-decoration: line-through;
+    color: var(--color-fg-muted);
+  }
+
+  [data-pattern="onboarding-checklist"] [data-slot="item"] [data-slot="item-description"] {
+    font-size: var(--font-size-xs);
+    color: var(--color-fg-muted);
+    margin: 2px 0 0;
+  }
+
+  /* Expand/collapse chevron */
+  [data-pattern="onboarding-checklist"] [data-slot="item"] [data-slot="chevron"] {
+    flex-shrink: 0;
+    color: var(--color-fg-muted);
+    align-self: center;
+    transition: rotate 0.2s ease;
+  }
+
+  [data-pattern="onboarding-checklist"] [data-slot="item"][data-expanded="true"] [data-slot="chevron"] {
+    rotate: 90deg;
+  }
+
+  /* Expanded detail panel */
+  [data-pattern="onboarding-checklist"] [data-slot="detail"] {
+    display: none;
+    padding: var(--space-3) var(--space-4) var(--space-4) calc(var(--space-4) + 1.5rem + var(--space-3));
+    background: var(--color-bg-subtle);
+    border-block-end: 1px solid var(--color-border-subtle);
+  }
+
+  [data-pattern="onboarding-checklist"] [data-slot="item"][data-expanded="true"] + [data-slot="detail"] {
+    display: block;
+  }
+}

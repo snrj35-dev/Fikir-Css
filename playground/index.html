@@ -21,20 +21,25 @@
         <span class="demo-logo-version badge badge-neutral">v0.6.0</span>
       </div>
       <nav class="demo-topbar-links" aria-label="Quick links">
+        <a class="demo-topbar-link" href="../index.html">Gallery</a>
         <a class="demo-topbar-link" href="./templates/app-shell-starter.html" target="_blank">App Shell</a>
         <a class="demo-topbar-link" href="./templates/settings-starter.html" target="_blank">Settings</a>
         <a class="demo-topbar-link" href="./templates/data-workflow-starter.html" target="_blank">Data Workflow</a>
+        <a class="demo-topbar-link" href="./variant-showcase.html" target="_blank">Variants</a>
         <a class="demo-topbar-link" href="https://github.com/snrj35-dev/Fikir-Css/tree/main/docs" target="_blank">Docs</a>
       </nav>
       <div class="demo-topbar-actions">
         <div class="demo-support-pills cluster">
           <span class="support-pill" data-support-level="supported">supported</span>
+          <span class="support-pill" data-support-level="beta">beta</span>
           <span class="support-pill" data-support-level="experimental">experimental</span>
           <span class="support-pill">showcase</span>
         </div>
         <div style="display:flex;gap:.5rem;align-items:center">
           <a href="./quickstart.html" class="btn btn-sm btn-outline btn-neutral" style="text-decoration:none">5-min quickstart</a>
           <a href="./token-explorer.html" class="btn btn-sm btn-outline btn-neutral" style="text-decoration:none">Token explorer</a>
+          <button id="density-toggle" class="btn btn-sm btn-outline btn-neutral" type="button" title="Toggle compact density">Density: default</button>
+          <button id="motion-toggle" class="btn btn-sm btn-outline btn-neutral" type="button" title="Toggle reduced motion">Motion: on</button>
           <button id="theme-toggle" class="btn btn-sm" type="button">Light mode</button>
         </div>
       </div>
@@ -55,37 +60,37 @@
         </div>
         <div class="demo-sidebar-section">
           <p class="demo-sidebar-label">M2 New</p>
-          <a class="demo-sidebar-link" href="#sec-m2">✦ M2 Showcase</a>
-          <a class="demo-sidebar-link" href="#sec-segmented">Segmented Control</a>
-          <a class="demo-sidebar-link" href="#sec-settings-panel">Settings Panel</a>
-          <a class="demo-sidebar-link" href="#sec-toast-variants">Toast Variants</a>
-          <a class="demo-sidebar-link" href="#sec-skeleton-presets">Skeleton Presets</a>
-          <a class="demo-sidebar-link" href="#sec-table-states">Table States</a>
+          <a class="demo-sidebar-link" href="#sec-m2" data-support-level="mixed">✦ M2 Showcase</a>
+          <a class="demo-sidebar-link" href="#sec-segmented" data-support-level="supported">Segmented Control</a>
+          <a class="demo-sidebar-link" href="#sec-settings-panel" data-support-level="beta">Settings Panel</a>
+          <a class="demo-sidebar-link" href="#sec-toast-variants" data-support-level="supported">Toast Variants</a>
+          <a class="demo-sidebar-link" href="#sec-skeleton-presets" data-support-level="supported">Skeleton Presets</a>
+          <a class="demo-sidebar-link" href="#sec-table-states" data-support-level="supported">Table States</a>
         </div>
         <div class="demo-sidebar-section">
           <p class="demo-sidebar-label">Core</p>
-          <a class="demo-sidebar-link" href="#sec-1">Components</a>
-          <a class="demo-sidebar-link" href="#sec-2">Layouts</a>
-          <a class="demo-sidebar-link" href="#sec-forms">Forms</a>
-          <a class="demo-sidebar-link" href="#sec-input-augment">Input Augmentation</a>
+          <a class="demo-sidebar-link" href="#sec-1" data-support-level="supported">Components</a>
+          <a class="demo-sidebar-link" href="#sec-2" data-support-level="supported">Layouts</a>
+          <a class="demo-sidebar-link" href="#sec-forms" data-support-level="supported">Forms</a>
+          <a class="demo-sidebar-link" href="#sec-input-augment" data-support-level="mixed">Input Augmentation</a>
         </div>
         <div class="demo-sidebar-section">
           <p class="demo-sidebar-label">Overlays</p>
-          <a class="demo-sidebar-link" href="#sec-6">Modal</a>
-          <a class="demo-sidebar-link" href="#sec-7">Toast</a>
-          <a class="demo-sidebar-link" href="#sec-overlays">Popover / Tooltip</a>
+          <a class="demo-sidebar-link" href="#sec-6" data-support-level="supported">Modal</a>
+          <a class="demo-sidebar-link" href="#sec-7" data-support-level="supported">Toast</a>
+          <a class="demo-sidebar-link" href="#sec-overlays" data-support-level="supported">Popover / Tooltip</a>
         </div>
         <div class="demo-sidebar-section">
           <p class="demo-sidebar-label">Navigation</p>
-          <a class="demo-sidebar-link" href="#sec-16">Tabs</a>
-          <a class="demo-sidebar-link" href="#sec-nav">Navbar / Sidebar</a>
-          <a class="demo-sidebar-link" href="#sec-18">Accordion</a>
+          <a class="demo-sidebar-link" href="#sec-16" data-support-level="supported">Tabs</a>
+          <a class="demo-sidebar-link" href="#sec-nav" data-support-level="supported">Navbar / Sidebar</a>
+          <a class="demo-sidebar-link" href="#sec-18" data-support-level="supported">Accordion</a>
         </div>
         <div class="demo-sidebar-section">
           <p class="demo-sidebar-label">Data</p>
-          <a class="demo-sidebar-link" href="#sec-26">Table</a>
-          <a class="demo-sidebar-link" href="#sec-data">Data Grid</a>
-          <a class="demo-sidebar-link" href="#sec-11">Pagination</a>
+          <a class="demo-sidebar-link" href="#sec-26" data-support-level="supported">Table</a>
+          <a class="demo-sidebar-link" href="#sec-data" data-support-level="supported">Data Grid</a>
+          <a class="demo-sidebar-link" href="#sec-11" data-support-level="supported">Pagination</a>
         </div>
         <div class="demo-sidebar-section">
           <p class="demo-sidebar-label">Templates</p>
@@ -96,10 +101,37 @@
       <!-- Main content area -->
       <main class="demo-main" id="main-content">
 
+      <section class="demo-section" id="sec-intro">
+        <h1 class="demo-section-heading">Workflow Playground <span class="support-pill" data-support-level="mixed">lab</span></h1>
+        <p class="demo-section-desc">Use the site gallery for curated, copy-paste-first supported examples. Use this playground for workflow templates, interaction-heavy scenarios, and the parts of the system that still need support-tier context.</p>
+        <div class="demo-cards">
+          <article class="demo-card card card-elevated card-p-md stack">
+            <h3>Use the site when</h3>
+            <p class="text-sm">You want the shortest path to install, theme setup, and stable gallery examples.</p>
+            <a class="link" href="../index.html">Open the gallery</a>
+          </article>
+          <article class="demo-card card card-elevated card-p-md stack">
+            <h3>Use the playground when</h3>
+            <p class="text-sm">You need workflow starters, template pages, smoke paths, or interaction-rich demos that go beyond a simple gallery tile.</p>
+            <a class="link" href="#sec-examples">Jump to templates</a>
+          </article>
+          <article class="demo-card card card-elevated card-p-md stack">
+            <h3>Read the labels</h3>
+            <p class="text-sm">This page keeps `supported`, `beta`, `experimental`, and `mixed` labels visible so contributors and consumers can evaluate risk quickly.</p>
+            <div class="cluster">
+              <span class="support-pill" data-support-level="supported">supported</span>
+              <span class="support-pill" data-support-level="beta">beta</span>
+              <span class="support-pill" data-support-level="experimental">experimental</span>
+              <span class="support-pill" data-support-level="mixed">mixed</span>
+            </div>
+          </article>
+        </div>
+      </section>
+
       <!-- ── M2 SHOWCASE ─────────────────────────────────────────────────── -->
       <section class="demo-section" id="sec-m2">
-        <h2 class="demo-section-heading">✦ M2 New Surfaces</h2>
-        <p class="demo-section-desc">Components and patterns added in the M2 milestone.</p>
+        <h2 class="demo-section-heading">✦ M2 New Surfaces <span class="support-pill" data-support-level="mixed">mixed</span></h2>
+        <p class="demo-section-desc">Segmented control, toast variants, skeleton presets, and table states are supported; settings panel remains beta.</p>
         <div class="demo-cards">
           <article class="demo-card card card-elevated card-p-md stack">
             <h3>Segmented Control</h3>
@@ -140,7 +172,7 @@
 
       <!-- ── SEGMENTED CONTROL ───────────────────────────────────────────── -->
       <section class="demo-section" id="sec-segmented">
-        <h2 class="demo-section-heading">Segmented Control <span class="support-pill">experimental</span></h2>
+        <h2 class="demo-section-heading">Segmented Control <span class="support-pill" data-support-level="supported">supported</span></h2>
         <div class="demo-cards">
           <article class="demo-card card card-elevated card-p-md stack">
             <h3>Size variants</h3>
@@ -175,7 +207,7 @@
 
       <!-- ── SETTINGS PANEL ─────────────────────────────────────────────── -->
       <section class="demo-section" id="sec-settings-panel">
-        <h2 class="demo-section-heading">Settings Panel <span class="support-pill">experimental</span></h2>
+        <h2 class="demo-section-heading">Settings Panel <span class="support-pill" data-support-level="beta">beta</span></h2>
         <div class="settings-panel" style="min-block-size: 24rem; border: 1px solid var(--color-border-subtle); border-radius: var(--radius-md); overflow: hidden;">
           <aside class="settings-panel-sidebar">
             <nav class="settings-panel-nav" aria-label="Settings nav demo">
@@ -323,7 +355,7 @@
 
       <!-- ── INPUT AUGMENTATION (promoted M2→supported) ───────────────── -->
       <section class="demo-section" id="sec-input-augment">
-        <h2 class="demo-section-heading">Input Augmentation <span class="support-pill" data-support-level="supported">supported</span></h2>
+        <h2 class="demo-section-heading">Input Augmentation <span class="support-pill" data-support-level="mixed">mixed</span></h2>
         <div class="demo-cards">
 
           <!-- Search Box -->
@@ -1070,6 +1102,43 @@
       </section>
 
       <section class="section stack">
+        <h2>14.2) Split Button Surface</h2>
+        <article class="card card-p-md stack demo-frame">
+          <p class="text-sm">Split button joins a primary button with a dropdown-backed secondary action menu.</p>
+          <div class="cluster">
+            <div id="demo-split-button" class="split-button dropdown-menu" data-open="false">
+              <button class="split-button-action btn btn-solid btn-primary btn-sm" type="button">
+                Publish now
+              </button>
+              <button
+                class="split-button-toggle btn btn-solid btn-primary btn-sm"
+                type="button"
+                data-dropdown-toggle="demo-split-button"
+                data-split-button-toggle
+                aria-label="Open publish options"
+                aria-haspopup="menu"
+                aria-expanded="false"
+                aria-controls="demo-split-button-menu"
+              >
+                <span aria-hidden="true">▾</span>
+              </button>
+              <div id="demo-split-button-menu" class="dropdown-menu-content" data-split-button-menu role="menu">
+                <button class="dropdown-menu-item" type="button" role="menuitem" data-dropdown-close="demo-split-button">
+                  Schedule release
+                </button>
+                <button class="dropdown-menu-item" type="button" role="menuitem" data-dropdown-close="demo-split-button">
+                  Save draft
+                </button>
+                <button class="dropdown-menu-item" type="button" role="menuitem" data-dropdown-close="demo-split-button">
+                  Duplicate flow
+                </button>
+              </div>
+            </div>
+          </div>
+        </article>
+      </section>
+
+      <section class="section stack">
         <h2>15) Drawer Surface</h2>
         <article class="card card-p-md stack demo-frame">
           <p class="text-sm">Drawer uses `data-open` state and dialog semantics on side panel.</p>
@@ -1396,8 +1465,55 @@
       <section class="section stack" id="sec-data">
         <h2>26.1) Data Grid Surface</h2>
         <article class="card card-p-md stack demo-frame">
-          <p class="text-sm">Minimal data-grid surface with role-based semantics and selected row state.</p>
-          <section class="data-grid" role="grid" aria-label="Revenue data grid">
+          <p class="text-sm">Minimal data-grid surface with integrated filter bar, role-based semantics, and selected row state.</p>
+          <section data-pattern="filter-bar" aria-label="Revenue grid filters">
+            <div data-slot="controls">
+              <div data-slot="search">
+                <form class="search-box" role="search" aria-label="Revenue grid search">
+                  <input class="search-box-input" type="search" aria-label="Search accounts" value="enterprise" />
+                  <button class="search-box-action" type="submit">Search</button>
+                </form>
+              </div>
+
+              <fieldset data-slot="filters" aria-label="Revenue grid filters">
+                <legend>Filters</legend>
+                <label class="label" for="demo-grid-region">Region</label>
+                <select id="demo-grid-region" class="select">
+                  <option>All</option>
+                  <option selected>EMEA</option>
+                  <option>North America</option>
+                </select>
+
+                <label class="cluster text-sm">
+                  <input class="checkbox" type="checkbox" checked />
+                  Expansion only
+                </label>
+              </fieldset>
+
+              <div data-slot="reset">
+                <button class="btn btn-outline btn-sm" type="button">Reset</button>
+              </div>
+
+              <div data-slot="actions">
+                <button class="btn btn-primary btn-sm" type="button">Apply</button>
+              </div>
+            </div>
+
+            <div data-slot="summary">
+              <div data-slot="chips">
+                <span class="tag-chip">
+                  <span class="tag-chip-label">region: EMEA</span>
+                </span>
+                <span class="tag-chip">
+                  <span class="tag-chip-label">segment: expansion</span>
+                  <button class="tag-chip-remove" type="button" aria-label="Remove segment filter">×</button>
+                </span>
+              </div>
+              <span data-slot="meta" class="text-sm">2 visible rows</span>
+            </div>
+          </section>
+
+          <section id="demo-revenue-grid" class="data-grid" role="grid" aria-label="Revenue data grid">
             <div class="data-grid-head" role="rowgroup">
               <div class="data-grid-row" role="row" style="--data-grid-columns: 4">
                 <div class="data-grid-cell" role="columnheader">Account</div>
@@ -1680,22 +1796,50 @@
           </article>
 
           <article class="card card-p-md stack demo-frame" data-pattern="filter-bar">
-            <p class="text-sm">Filter bar implementation: mevcut controls ile filtre kompozisyonu.</p>
-            <div class="cluster" style="--cluster-gap: var(--space-2)">
-              <label class="label" for="demo-filter-status">Status</label>
-              <select id="demo-filter-status" class="select">
-                <option>All</option>
-                <option selected>Active</option>
-                <option>Archived</option>
-              </select>
+            <p class="text-sm">Filter bar implementation: search, filters, chips, reset, and apply areas share one contract.</p>
+            <div data-slot="controls">
+              <div data-slot="search">
+                <form class="search-box" role="search" aria-label="Filter bar search">
+                  <input class="search-box-input" type="search" aria-label="Search issues" value="validation" />
+                  <button class="search-box-action" type="submit">Search</button>
+                </form>
+              </div>
 
-              <label class="cluster text-sm">
-                <input class="checkbox" type="checkbox" checked />
-                High priority
-              </label>
+              <fieldset data-slot="filters" aria-label="Issue filters">
+                <legend>Filters</legend>
+                <label class="label" for="demo-filter-status">Status</label>
+                <select id="demo-filter-status" class="select">
+                  <option>All</option>
+                  <option selected>Active</option>
+                  <option>Archived</option>
+                </select>
 
-              <button class="btn btn-outline btn-sm" type="button">Reset</button>
-              <button class="btn btn-primary btn-sm" type="button">Apply</button>
+                <label class="cluster text-sm">
+                  <input class="checkbox" type="checkbox" checked />
+                  High priority
+                </label>
+              </fieldset>
+
+              <div data-slot="reset">
+                <button class="btn btn-outline btn-sm" type="button">Reset</button>
+              </div>
+
+              <div data-slot="actions">
+                <button class="btn btn-primary btn-sm" type="button">Apply</button>
+              </div>
+            </div>
+
+            <div data-slot="summary">
+              <div data-slot="chips">
+                <span class="tag-chip">
+                  <span class="tag-chip-label">status: active</span>
+                </span>
+                <span class="tag-chip">
+                  <span class="tag-chip-label">priority: high</span>
+                  <button class="tag-chip-remove" type="button" aria-label="Remove priority filter">×</button>
+                </span>
+              </div>
+              <span data-slot="meta" class="text-sm">12 matching issues</span>
             </div>
           </article>
 
@@ -1718,64 +1862,86 @@
         <h2>33) Data Table Toolbar Pattern</h2>
         <div class="stack" style="--stack-gap: var(--space-3)">
           <article class="card card-p-md stack demo-frame" data-pattern="data-table-toolbar">
-            <p class="text-sm">Data table toolbar: search + filter + bulk action kompozisyonu.</p>
+            <p class="text-sm">Data table toolbar: search, filters, column visibility, density, export, and bulk actions share one slot contract.</p>
 
-            <div class="sidebar" style="--sidebar-width: 32rem; --sidebar-gap: var(--space-2)">
-              <div class="cluster" style="--cluster-gap: var(--space-2)">
+            <div data-slot="controls">
+              <div data-slot="search">
                 <form class="search-box" role="search" aria-label="Issue table search">
                   <input class="search-box-input" type="search" aria-label="Search issues" value="validation" />
                   <button class="search-box-action" type="submit">Search</button>
                 </form>
+              </div>
 
+              <div data-slot="filters">
                 <label class="label" for="demo-table-status-filter">Status</label>
-                <select id="demo-table-status-filter" class="select">
+                <select id="demo-table-status-filter" class="select" aria-controls="demo-issues-table">
                   <option>All</option>
                   <option selected>Open</option>
                   <option>Closed</option>
                 </select>
               </div>
 
-              <div class="cluster" style="--cluster-gap: var(--space-2)">
-                <button class="btn btn-outline btn-sm" type="button" aria-controls="demo-issues-table">
-                  Export
-                </button>
-                <button class="btn btn-primary btn-sm" type="button" aria-controls="demo-issues-table">
-                  Bulk close
-                </button>
+              <div data-slot="column-visibility">
+                <button class="btn btn-outline btn-sm" type="button" aria-controls="demo-issues-table">Columns</button>
+              </div>
+
+              <div data-slot="density">
+                <label class="label" for="demo-table-density">Density</label>
+                <select id="demo-table-density" class="select" aria-controls="demo-issues-table">
+                  <option>Compact</option>
+                  <option selected>Default</option>
+                  <option>Comfortable</option>
+                </select>
+              </div>
+
+              <div data-slot="actions">
+                <div data-slot="export">
+                  <button class="btn btn-outline btn-sm" type="button" aria-controls="demo-issues-table">Export</button>
+                </div>
+                <button class="btn btn-primary btn-sm" type="button" aria-controls="demo-issues-table">Bulk close</button>
               </div>
             </div>
 
-            <div class="cluster" style="--cluster-gap: var(--space-2)">
-              <span class="badge">status: open</span>
-              <span class="text-sm">3 selected</span>
+            <div data-slot="summary">
+              <div data-slot="active-filters">
+                <span class="tag-chip">
+                  <span class="tag-chip-label">status: open</span>
+                </span>
+                <span class="tag-chip">
+                  <span class="tag-chip-label">density: default</span>
+                </span>
+              </div>
+              <span data-slot="selection-summary" class="text-sm">3 selected</span>
             </div>
 
-            <table id="demo-issues-table" class="table" aria-label="Issue table snapshot">
-              <thead class="table-head">
-                <tr class="table-row">
-                  <th class="table-head-cell" scope="col">Issue</th>
-                  <th class="table-head-cell" scope="col">Owner</th>
-                  <th class="table-head-cell" scope="col">State</th>
-                </tr>
-              </thead>
-              <tbody class="table-body">
-                <tr class="table-row" data-row-selected="true">
-                  <td class="table-cell">#248 Naming contract checks</td>
-                  <td class="table-cell">Core Team</td>
-                  <td class="table-cell">Open</td>
-                </tr>
-                <tr class="table-row" data-row-selected="true">
-                  <td class="table-cell">#251 Input validation docs</td>
-                  <td class="table-cell">Design Ops</td>
-                  <td class="table-cell">Open</td>
-                </tr>
-                <tr class="table-row">
-                  <td class="table-cell">#260 Build pipeline polish</td>
-                  <td class="table-cell">Platform</td>
-                  <td class="table-cell">Closed</td>
-                </tr>
-              </tbody>
-            </table>
+            <div data-slot="surface" style="overflow-x: auto">
+              <table id="demo-issues-table" class="table" aria-label="Issue table snapshot">
+                <thead class="table-head">
+                  <tr class="table-row">
+                    <th class="table-head-cell" scope="col">Issue</th>
+                    <th class="table-head-cell" scope="col">Owner</th>
+                    <th class="table-head-cell" scope="col">State</th>
+                  </tr>
+                </thead>
+                <tbody class="table-body">
+                  <tr class="table-row" data-row-selected="true">
+                    <td class="table-cell">#248 Naming contract checks</td>
+                    <td class="table-cell">Core Team</td>
+                    <td class="table-cell">Open</td>
+                  </tr>
+                  <tr class="table-row" data-row-selected="true">
+                    <td class="table-cell">#251 Input validation docs</td>
+                    <td class="table-cell">Design Ops</td>
+                    <td class="table-cell">Open</td>
+                  </tr>
+                  <tr class="table-row">
+                    <td class="table-cell">#260 Build pipeline polish</td>
+                    <td class="table-cell">Platform</td>
+                    <td class="table-cell">Closed</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
           </article>
         </div>
       </section>

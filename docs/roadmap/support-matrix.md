@@ -1,129 +1,204 @@
-# Fikir CSS — Support Matrix (v0.5.0)
+# Fikir CSS — Support Matrix
 
-> Baseline audit date: 2026-04-11
-> Last reviewed: 2026-04-12 (M2 Wave 6 applied; API stability badges added)
+> Version: v1.0 preparation  
+> Baseline: v0.6.0  
+> Last updated: 2026-04-19 (M21.1 — support matrix final freeze)
 
-This matrix classifies the currently public surface into support levels.
+Stability levels are defined in [`docs/governance/semver-policy.md`](../governance/semver-policy.md).
 
-Support levels:
-- `supported`: committed for the current supportable foundation slice
-- `experimental`: implemented, documented, and demoed but not yet in the supported commitment set
-- `rfc-only`: documented/spec'd but not implemented as a canonical surface
-- `planned`: intentionally deferred to future roadmap scope
+| Level | Semver protection | Production use |
+|-------|------------------|----------------|
+| supported | Breaking changes require MAJOR bump | ✅ Yes |
+| beta | Breaking changes allowed in MINOR; documented in CHANGELOG | ⚠️ With caution |
+| experimental | No semver guarantee; may change or be removed at any time | ❌ Not recommended |
+| deprecated | Will be removed in next MAJOR; migration note provided | ❌ Migrate away |
 
-## API Stability Badges
+**Surface count (v1.0 freeze):** 69 supported · 22 beta · 10 experimental surfaces + 2 experimental patterns · 0 deprecated
 
-Each supported surface carries a stability badge:
+> **M21.1 FREEZE:** The `supported` list is final. No new surfaces will be added to `supported` without a MAJOR version bump.
 
-| Badge | Meaning |
-|-------|---------|
-| ![stable](https://img.shields.io/badge/stability-stable-green) | Selector contract is frozen. Changes require major version bump. |
-| ![beta](https://img.shields.io/badge/stability-beta-yellow) | Surface is complete but may receive additive changes in minor versions. |
-| ![experimental](https://img.shields.io/badge/stability-experimental-orange) | API may change without deprecation notice. Not for production use. |
+---
 
-Badge key used inline below: `[stable]` · `[beta]` · `[exp]`
+## Supported Surfaces
 
-## Supported Surface (v0.5.0)
+Selector contracts are frozen. Changes require a MAJOR version bump.
 
-### Core and foundation `[stable]`
-- `button` · `input` · `textarea` · `select` · `checkbox` · `radio` · `switch`
-- `card` · `badge` · `alert` · `label` · `helper-text` · `error-text` · `field`
+### Core / Foundation
 
-### Layout primitives `[stable]`
-- `container` · `stack` · `cluster` · `sidebar` · `switcher` · `center` · `grid`
+| Surface | CSS file | Docs | Demo |
+|---------|----------|------|------|
+| `button` | `button.css` | ✅ | ✅ |
+| `icon-button` | `icon-button.css` | ✅ | ✅ |
+| `link` | `link.css` | ✅ | ✅ |
+| `badge` | `badge.css` | ✅ | ✅ |
+| `alert` | `alert.css` | ✅ | ✅ |
+| `card` | `card.css` | ✅ | ✅ |
+| `surface` | `surface.css` | ✅ | ✅ |
+| `divider` | `divider.css` | ✅ | ✅ |
+| `skeleton` | `skeleton.css` | ✅ | ✅ |
+| `spinner` | `spinner.css` | ✅ | ✅ |
+| `visually-hidden` | `visually-hidden.css` | ✅ | — |
 
-### Overlay (M1 baseline) `[stable]`
-- `modal` · `toast`
+### Form / Input
 
-### Navigation (M1 baseline) `[stable]`
-- `tabs` · `pagination`
+| Surface | CSS file | Docs | Demo |
+|---------|----------|------|------|
+| `field` | `field.css` | ✅ | ✅ |
+| `label` | `label.css` | ✅ | ✅ |
+| `helper-text` | `helper-text.css` | ✅ | ✅ |
+| `error-text` | `error-text.css` | ✅ | ✅ |
+| `input` | `input.css` | ✅ | ✅ |
+| `textarea` | `textarea.css` | ✅ | ✅ |
+| `select` | `select.css` | ✅ | ✅ |
+| `checkbox` | `checkbox.css` | ✅ | ✅ |
+| `radio` | `radio.css` | ✅ | ✅ |
+| `switch` | `switch.css` | ✅ | ✅ |
+| `input-group` | `input-group.css` | ✅ | ✅ |
+| `number-input` | `number-input.css` | ✅ | ✅ |
+| `range-slider` | `range-slider.css` | ✅ | ✅ |
+| `segmented-control` | `segmented-control.css` | ✅ | ✅ |
+| `otp-input` | `otp-input.css` | ✅ | ✅ |
+| `search-box` | `search-box.css` | ✅ | ✅ |
 
-### Data/display (M1 baseline) `[stable]`
-- `table` · `empty-state`
+### Overlay / Feedback
 
-### Foundation extensions (Wave 1 — 2026-04-12) `[stable]`
-- `icon-button` · `link` · `divider` · `surface` · `visually-hidden` · `skeleton` · `spinner`
+| Surface | CSS file | Docs | Demo |
+|---------|----------|------|------|
+| `modal` | `modal.css` | ✅ | ✅ |
+| `drawer` | `drawer.css` | ✅ | ✅ |
+| `popover` | `popover.css` | ✅ | ✅ |
+| `tooltip` | `tooltip.css` | ✅ | ✅ |
+| `dropdown-menu` | `dropdown-menu.css` | ✅ | ✅ |
+| `toast` | `toast.css` | ✅ | ✅ |
+| `progress` | `progress.css` | ✅ | ✅ |
+| `loading-overlay` | `loading-overlay.css` | ✅ | ✅ |
+| `hover-card` | `hover-card.css` | ✅ | ✅ |
+| `result` | `result.css` | ✅ | ✅ |
 
-### Overlay slice (Wave 2 — 2026-04-12) `[stable]`
-- `tooltip` · `popover` · `dropdown-menu`
+### Navigation
 
-### Navigation slice (Wave 3 — 2026-04-12) `[stable]`
-- `accordion` · `breadcrumb` · `navbar` · `menu-bar` · `sidebar-nav`
+| Surface | CSS file | Docs | Demo |
+|---------|----------|------|------|
+| `tabs` | `tabs.css` | ✅ | ✅ |
+| `accordion` | `accordion.css` | ✅ | ✅ |
+| `breadcrumb` | `breadcrumb.css` | ✅ | ✅ |
+| `pagination` | `pagination.css` | ✅ | ✅ |
+| `navbar` | `navbar.css` | ✅ | ✅ |
+| `menu-bar` | `menu-bar.css` | ✅ | ✅ |
+| `sidebar-nav` | `sidebar-nav.css` | ✅ | ✅ |
+| `stepper` | `stepper.css` | ✅ | ✅ |
+| `command-palette` | `command-palette.css` | ✅ | ✅ |
+| `tree-view` | `tree-view.css` | ✅ | ✅ |
 
-### Shell and layout slice (Wave 4 — 2026-04-12) `[stable]`
-- `stepper` · `page-header` · `section-block` · `app-shell` · `split-pane`
+### Data / Display
 
-### Data and display slice (Wave 5 — 2026-04-12) `[stable]`
-- `data-grid` · `result` · `stat` · `list` · `description-list`
+| Surface | CSS file | Docs | Demo |
+|---------|----------|------|------|
+| `table` | `table.css` | ✅ | ✅ |
+| `data-grid` | `data-grid.css` | ✅ | ✅ |
+| `list` | `list.css` | ✅ | ✅ |
+| `description-list` | `description-list.css` | ✅ | ✅ |
+| `avatar` | `avatar.css` | ✅ | ✅ |
+| `avatar-group` | `avatar-group.css` | ✅ | ✅ |
+| `stat` | `stat.css` | ✅ | ✅ |
+| `kpi-card` | `kpi-card.css` | ✅ | ✅ |
+| `empty-state` | `empty-state.css` | ✅ | ✅ |
+| `timeline` | `timeline.css` | ✅ | ✅ |
+| `tag-chip` | `tag-chip.css` | ✅ | ✅ |
 
-### Input augmentation slice (Wave 6 — 2026-04-12) `[beta]`
-- `combobox` · `search-box` · `autocomplete` · `command-palette`
+### Layout / Shell
 
-> Wave 6 surfaces are `[beta]`: selector contracts are locked but keyboard interaction helpers may be additive in the next minor.
+| Surface | CSS file | Docs | Demo |
+|---------|----------|------|------|
+| `stack` | _(layout primitives)_ | ✅ | ✅ |
+| `cluster` | _(layout primitives)_ | ✅ | ✅ |
+| `container` | _(layout primitives)_ | ✅ | ✅ |
+| `center` | _(layout primitives)_ | ✅ | ✅ |
+| `grid` | _(layout primitives)_ | ✅ | ✅ |
+| `switcher` | _(layout primitives)_ | ✅ | ✅ |
+| `sidebar` | _(layout primitives)_ | ✅ | ✅ |
+| `page-header` | `page-header.css` | ✅ | ✅ |
+| `section-block` | `section-block.css` | ✅ | ✅ |
+| `app-shell` | `app-shell.css` | ✅ | ✅ |
+| `split-pane` | `split-pane.css` | ✅ | ✅ |
 
-## Experimental Surface (Implemented)
+---
 
-### Forms and input extensions
-- `range-slider`
-- `number-input`
-- `rating`
-- `tags-input`
-- `otp-input`
-- `input-group`
+## Beta Surfaces
 
-### Overlay and interaction (extended)
-- `context-menu`
-- `progress`
-- `loading-overlay`
-- `drawer`
-- `hover-card`
+Implemented and usable. Selector contracts are mostly stable but additive changes may occur in MINOR releases. Documented in CHANGELOG when changed.
 
-### Navigation (extended)
-- `tree-view`
+| Surface | CSS file | Reason for beta |
+|---------|----------|-----------------|
+| `autocomplete` | `autocomplete.css` | Keyboard interaction API may be extended |
+| `combobox` | `combobox.css` | Keyboard interaction API may be extended |
+| `context-menu` | `context-menu.css` | Trigger/positioning contract still evolving |
+| `date-picker` | `date-picker.css` | Locale and format contract not yet frozen |
+| `date-range-picker` | `date-range-picker.css` | Locale and format contract not yet frozen |
+| `date-time-picker` | `date-time-picker.css` | Combined date+time contract; locale not frozen |
+| `time-picker` | `time-picker.css` | Format/step contract not yet frozen |
+| `calendar` | `calendar.css` | Navigation/selection API may be extended |
+| `editable-field` | `editable-field.css` | Save/cancel/edit state names may change |
+| `file-upload` | `file-upload.css` | Drag state and progress integration pending |
+| `dropzone` | `dropzone.css` | Active/reject state names may change |
+| `tags-input` | `tags-input.css` | Tag management interaction API evolving |
+| `rating` | `rating.css` | Half-star and keyboard contract pending |
+| `settings-panel` | `settings-panel.css` | Layout contract may be extended |
+| `split-button` | `split-button.css` | Button recipe + dropdown disclosure composition; keyboard/menu contract may expand |
+| `inline-notice` | `inline-notice.css` | Semantic distinction from alert/callout not fully resolved |
+| `command-bar` | `command-bar.css` | Slot contract and action grouping API may evolve |
+| `tree-table` | `tree-table.css` | Row expand/collapse and keyboard contract pending |
+| `copy-button` | `copy-button.css` | Clipboard API integration pattern may be extended |
+| `password-input` | `password-input.css` | Reveal/hide toggle and validation state pending |
+| `stat-group` | `stat-group.css` | Layout and responsive contract not frozen |
+| `empty-search-state` | `empty-search-state.css` | Pattern-based (data-pattern attr); variant contract may grow |
 
-### Data and display (extended)
-- `avatar`
-- `avatar-group`
-- `tag-chip`
-- `timeline`
-- `kpi-card`
+---
 
-### Search/productivity and advanced surfaces
-- `date-picker`
-- `date-range-picker`
-- `calendar`
-- `file-upload`
-- `dropzone`
-- `editable-field`
+## Experimental Surfaces
 
-### Content/rich UI
-- `text`
-- `heading`
-- `code`
-- `code-block`
-- `callout`
-- `quote`
-- `kbd`
-- `markdown-surface`
+No semver guarantee. May change or be removed without notice. Not recommended for production use.
 
-### Product patterns (implemented as pattern compositions)
-- `command-bar` pattern (`data-pattern="command-bar"`)
-- `filter-bar` pattern (`data-pattern="filter-bar"`)
-- `data-table-toolbar` pattern (`data-pattern="data-table-toolbar"`)
-- `settings-panel` pattern (`data-pattern="settings-panel"`) `[exp]`
+| Surface | CSS file | Notes |
+|---------|----------|-------|
+| `heading` | `heading.css` | Single `.heading` class; size/weight variants not normalized yet |
+| `text` | `text.css` | Utility text surface; contract not finalized |
+| `callout` | `callout.css` | Semantic distinction from `alert` not resolved |
+| `code` | `code.css` | Inline code only; theming contract pending |
+| `code-block` | `code-block.css` | Syntax highlight integration not defined |
+| `quote` | `quote.css` | Typographic surface; not in product-ready state |
+| `kbd` | `kbd.css` | Utility surface; token mapping minimal |
+| `markdown-surface` | `markdown-surface.css` | Opinionated reset; may conflict with custom prose |
+| `coachmark` | `coachmark.css` | Tour/step sequencing API not defined; positioning JS-dependent |
+| `auth-screen` | `auth-screen.css` | Opinionated full-page layout; token/slot contract not frozen |
 
-## RFC-only Surface
+### Experimental Patterns
 
-> No surfaces are currently rfc-only. `settings-panel` was promoted to experimental (see below).
+| Pattern | Selector | Notes |
+|---------|----------|-------|
+| `filter-bar` | `data-pattern="filter-bar"` | Attribute-styled pattern with documented data-slot contract for search / filters / reset / chips workflows (M16.4) |
+| `data-table-toolbar` | `data-pattern="data-table-toolbar"` | Attribute-styled pattern with column-visibility, density, export, summary, and controlled-surface slots (M16.5) |
 
-## Planned Surface
+---
 
-- No additional public component surface is declared as planned-only in the current baseline.
-- Roadmap future scope is tracked in `docs/roadmap/plan.md` and `docs/roadmap/tasklist.md`.
+## Deprecated Surfaces
 
-## Evidence Sources
+None at v0.6.0.
 
-- Implementation surface: `packages/components/*.css`
-- RFC surface: `docs/rfcs/components/*.md`
-- Demo/public exposure: `playground/index.html`, `README.md`
-- Build/test coverage: `tests/build/*.test.mjs`, `.github/workflows/ci.yml`
+---
+
+## Docs coverage
+
+As of v1.0 freeze, supported surface docs are **69 / 69**.
+
+All supported surfaces listed in the matrix above have a corresponding document under `docs/components/`. Beta surfaces have implementation docs; experimental surfaces have stub docs only.
+
+All previously "not yet implemented" surfaces (M16.2–M16.11) are now implemented and classified as beta or experimental above.
+
+## Evidence sources
+
+- Implementation: `packages/components/*.css`
+- Demo coverage: `playground/index.html`, `site/index.html`
+- Test coverage: `tests/source/*.test.mjs`, `tests/build/*.test.mjs`
+- Semver rules: `docs/governance/semver-policy.md`
+- Roadmap: `docs/roadmap/plan.md §6`, `docs/roadmap/tasklist.md §M13–M15`

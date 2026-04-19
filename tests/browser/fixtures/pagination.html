@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Pagination fixture</title>
+  <link rel="stylesheet" href="../../../dist/fikir.css" />
+</head>
+<body style="padding: 2rem">
+  <nav class="pagination" aria-label="Search results pages" id="pagination">
+    <a id="prev-btn" class="pagination-item" href="#" aria-label="Previous page" rel="prev">‹</a>
+    <a id="page-1" class="pagination-item" href="#" aria-label="Page 1" aria-current="page">1</a>
+    <a id="page-2" class="pagination-item" href="#" aria-label="Page 2">2</a>
+    <a id="page-3" class="pagination-item" href="#" aria-label="Page 3">3</a>
+    <span class="pagination-item" aria-hidden="true">…</span>
+    <a id="page-10" class="pagination-item" href="#" aria-label="Page 10">10</a>
+    <a id="next-btn" class="pagination-item" href="#" aria-label="Next page" rel="next">›</a>
+  </nav>
+
+  <script>
+    document.querySelectorAll('.pagination-item[href]').forEach((item) => {
+      item.addEventListener('click', (e) => {
+        e.preventDefault();
+        const label = item.getAttribute('aria-label') ?? '';
+        if (!label.startsWith('Page')) return;
+        document.querySelectorAll('.pagination-item[aria-current]')
+          .forEach(el => el.removeAttribute('aria-current'));
+        item.setAttribute('aria-current', 'page');
+      });
+    });
+  </script>
+</body>
+</html>

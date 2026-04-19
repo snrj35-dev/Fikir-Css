@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Loading overlay fixture</title>
+  <link rel="stylesheet" href="../../../dist/fikir.css" />
+</head>
+<body style="padding: 2rem">
+  <div id="content-region" class="loading-overlay" aria-busy="false">
+    <div class="loading-overlay-backdrop" aria-hidden="true"></div>
+    <div class="loading-overlay-content" role="status" aria-live="polite" aria-label="Loading">
+      <span class="sr-only">Loading, please wait…</span>
+    </div>
+    <div id="main-content">
+      <h1>Page content</h1>
+      <p>This content is behind the overlay when loading.</p>
+      <button id="action-btn" class="btn btn-outline" type="button">Do something</button>
+    </div>
+  </div>
+
+  <button id="start-loading" class="btn btn-solid btn-primary" type="button">Start loading</button>
+  <button id="stop-loading"  class="btn btn-ghost" type="button">Stop loading</button>
+
+  <script>
+    const overlay = document.getElementById('content-region');
+
+    document.getElementById('start-loading').addEventListener('click', () => {
+      overlay.dataset.loading = 'true';
+      overlay.setAttribute('aria-busy', 'true');
+    });
+
+    document.getElementById('stop-loading').addEventListener('click', () => {
+      delete overlay.dataset.loading;
+      overlay.setAttribute('aria-busy', 'false');
+    });
+  </script>
+</body>
+</html>

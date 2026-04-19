@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fikir CSS — Variant Showcase</title>
+  <link rel="stylesheet" href="./demo.css">
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--color-bg-default);
+      color: var(--color-fg-default);
+      padding: 2rem;
+    }
+    .variant-section {
+      margin-bottom: 3rem;
+      padding: 1.5rem;
+      background: var(--color-bg-surface);
+      border: 1px solid var(--color-border-subtle);
+      border-radius: 0.5rem;
+    }
+    .variant-section h2 {
+      margin-top: 0;
+      font-size: 1.25rem;
+      font-weight: 600;
+    }
+    .variant-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1.5rem;
+      margin-top: 1rem;
+    }
+    .variant-item {
+      padding: 1rem;
+      border: 1px dashed var(--color-border-subtle);
+      border-radius: 0.5rem;
+      background: var(--color-bg-default);
+    }
+    .variant-item label {
+      display: block;
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--color-fg-muted);
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+  </style>
+</head>
+<body>
+
+<h1>Fikir CSS — Variant Showcase</h1>
+<p style="color: var(--color-fg-muted); margin-bottom: 2rem;">Comprehensive showcase of missing component variants for demo coverage.</p>
+
+<!-- Alert Variants -->
+<div class="variant-section">
+  <h2>Alert Variants</h2>
+  <div class="variant-grid">
+    <div class="variant-item">
+      <label>alert-neutral</label>
+      <div class="alert alert-neutral">
+        <div class="alert-title">Neutral Alert</div>
+        <div class="alert-description">This is a neutral alert message.</div>
+      </div>
+    </div>
+    <div class="variant-item">
+      <label>alert-warning</label>
+      <div class="alert alert-warning">
+        <div class="alert-title">Warning Alert</div>
+        <div class="alert-description">This is a warning alert message.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Badge Variants -->
+<div class="variant-section">
+  <h2>Badge Variants</h2>
+  <div class="variant-grid">
+    <div class="variant-item">
+      <label>badge-info</label>
+      <span class="badge badge-info">Info Badge</span>
+    </div>
+    <div class="variant-item">
+      <label>badge-outline</label>
+      <span class="badge badge-outline">Outline Badge</span>
+    </div>
+    <div class="variant-item">
+      <label>badge-plain</label>
+      <span class="badge badge-plain">Plain Badge</span>
+    </div>
+    <div class="variant-item">
+      <label>badge-soft</label>
+      <span class="badge badge-soft">Soft Badge</span>
+    </div>
+    <div class="variant-item">
+      <label>badge-solid</label>
+      <span class="badge badge-solid">Solid Badge</span>
+    </div>
+  </div>
+</div>
+
+<!-- Button Variants -->
+<div class="variant-section">
+  <h2>Button Size & Style Variants</h2>
+  <div class="variant-grid">
+    <div class="variant-item">
+      <label>btn-lg</label>
+      <button class="btn btn-lg">Large Button</button>
+    </div>
+    <div class="variant-item">
+      <label>btn-ghost</label>
+      <button class="btn btn-ghost">Ghost Button</button>
+    </div>
+    <div class="variant-item">
+      <label>btn-plain</label>
+      <button class="btn btn-plain">Plain Button</button>
+    </div>
+    <div class="variant-item">
+      <label>btn-soft</label>
+      <button class="btn btn-soft">Soft Button</button>
+    </div>
+    <div class="variant-item">
+      <label>btn-solid</label>
+      <button class="btn btn-solid">Solid Button</button>
+    </div>
+  </div>
+</div>
+
+<!-- Card Variants -->
+<div class="variant-section">
+  <h2>Card / Surface Variants</h2>
+  <div class="variant-grid">
+    <div class="variant-item">
+      <label>card-flat</label>
+      <div class="card card-flat" style="padding: 1rem; text-align: center;">
+        Flat Card
+      </div>
+    </div>
+    <div class="variant-item">
+      <label>card-subtle</label>
+      <div class="card card-subtle" style="padding: 1rem; text-align: center;">
+        Subtle Card
+      </div>
+    </div>
+    <div class="variant-item">
+      <label>card-interactive</label>
+      <div class="card card-interactive" style="padding: 1rem; text-align: center; cursor: pointer;">
+        Interactive Card
+      </div>
+    </div>
+    <div class="variant-item">
+      <label>card-p-lg</label>
+      <div class="card card-p-lg" style="text-align: center;">
+        Large Padding Card
+      </div>
+    </div>
+    <div class="variant-item">
+      <label>surface-flat</label>
+      <div class="surface surface-flat" style="padding: 1rem; text-align: center;">
+        Flat Surface
+      </div>
+    </div>
+    <div class="variant-item">
+      <label>surface-interactive</label>
+      <div class="surface surface-interactive" style="padding: 1rem; text-align: center; cursor: pointer;">
+        Interactive Surface
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Skeleton Variants -->
+<div class="variant-section">
+  <h2>Skeleton Variants</h2>
+  <div class="variant-grid">
+    <div class="variant-item">
+      <label>skeleton-content</label>
+      <div class="skeleton skeleton-content" style="height: 2rem;"></div>
+    </div>
+    <div class="variant-item">
+      <label>skeleton-circle</label>
+      <div style="text-align: center;">
+        <div class="skeleton skeleton-circle" style="width: 3rem; height: 3rem; margin: 0 auto;"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Menu Bar Variants -->
+<div class="variant-section">
+  <h2>Menu Bar Advanced Patterns</h2>
+  <div style="margin-top: 1rem;">
+    <div class="menu-bar" style="border-bottom: 1px solid var(--color-border-subtle); padding-bottom: 0;">
+      <button class="menu-bar-trigger">File</button>
+      <button class="menu-bar-trigger">Edit</button>
+      <button class="menu-bar-subtrigger">Tools</button>
+      <div class="menu-bar-submenu" style="display: none; position: absolute; background: var(--color-bg-surface); border: 1px solid var(--color-border-subtle); border-radius: 0.5rem; z-index: 10;">
+        <div class="menu-bar-submenu-content">
+          <button class="menu-bar-item">Option 1</button>
+          <button class="menu-bar-item">Option 2</button>
+          <div class="menu-bar-divider" style="height: 1px; background: var(--color-border-subtle); margin: 0.5rem 0;"></div>
+          <button class="menu-bar-item">Option 3</button>
+        </div>
+      </div>
+      <button class="menu-bar-trigger">Help</button>
+    </div>
+  </div>
+</div>
+
+<!-- Layout Utilities Showcase -->
+<div class="variant-section">
+  <h2>Layout & Typography Utilities</h2>
+  <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+    <div>
+      <label style="display: block; font-size: 0.75rem; font-weight: 600; color: var(--color-fg-muted); margin-bottom: 0.5rem; text-transform: uppercase;">flex, gap-2, items-center</label>
+      <div class="flex gap-2 items-center">
+        <div style="width: 2rem; height: 2rem; background: var(--color-accent); border-radius: 0.25rem;"></div>
+        <span>Flex Item 1</span>
+        <span>Flex Item 2</span>
+      </div>
+    </div>
+    <div>
+      <label style="display: block; font-size: 0.75rem; font-weight: 600; color: var(--color-fg-muted); margin-bottom: 0.5rem; text-transform: uppercase;">inline-flex, gap-4, justify-between</label>
+      <div class="inline-flex gap-4 justify-between" style="width: 100%;">
+        <span>Start</span>
+        <span>Middle</span>
+        <span>End</span>
+      </div>
+    </div>
+    <div>
+      <label style="display: block; font-size: 0.75rem; font-weight: 600; color: var(--color-fg-muted); margin-bottom: 0.5rem; text-transform: uppercase;">text-xs, text-md, text-lg, font-medium, font-semibold</label>
+      <div style="display: flex; flex-direction: column; gap: 0.5rem;">
+        <span class="text-xs">Extra Small Text (12px)</span>
+        <span class="text-md font-medium">Medium Text - Font Medium</span>
+        <span class="text-lg font-semibold">Large Text - Font Semibold</span>
+      </div>
+    </div>
+    <div>
+      <label style="display: block; font-size: 0.75rem; font-weight: 600; color: var(--color-fg-muted); margin-bottom: 0.5rem; text-transform: uppercase;">shadow-sm, shadow-md, px-4, py-2, p-0, p-2</label>
+      <div class="flex gap-4" style="display: flex; flex-direction: column; gap: 1rem;">
+        <div class="shadow-sm" style="padding: 1rem; background: var(--color-bg-default); border-radius: 0.5rem;">
+          Small Shadow
+        </div>
+        <div class="shadow-md" style="padding: 1rem; background: var(--color-bg-default); border-radius: 0.5rem;">
+          Medium Shadow
+        </div>
+        <button class="btn" style="padding: 0.5rem 1rem;">Button (px-4, py-2)</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Color Utilities -->
+<div class="variant-section">
+  <h2>Color Utilities</h2>
+  <div class="variant-grid">
+    <div class="variant-item">
+      <label>bg-primary-500</label>
+      <div class="bg-primary-500" style="height: 3rem; border-radius: 0.5rem;"></div>
+    </div>
+    <div class="variant-item">
+      <label>bg-primary-600</label>
+      <div class="bg-primary-600" style="height: 3rem; border-radius: 0.5rem;"></div>
+    </div>
+    <div class="variant-item">
+      <label>bg-surface</label>
+      <div class="bg-surface" style="height: 3rem; border-radius: 0.5rem; border: 1px solid var(--color-border-subtle);"></div>
+    </div>
+    <div class="variant-item">
+      <label>text-white, text-fg-default</label>
+      <div class="bg-primary-500" style="padding: 1rem; border-radius: 0.5rem;">
+        <span class="text-white">White Text</span>
+      </div>
+    </div>
+    <div class="variant-item">
+      <label>border-subtle</label>
+      <div style="height: 3rem; border: 2px solid var(--color-border-subtle); border-radius: 0.5rem;"></div>
+    </div>
+    <div class="variant-item">
+      <label>rounded-md</label>
+      <div class="rounded-md" style="height: 3rem; background: var(--color-accent); border-radius: 0.5rem;"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Spacing Utilities -->
+<div class="variant-section">
+  <h2>Spacing & Margin Utilities</h2>
+  <div style="display: flex; flex-direction: column; gap: 1rem;">
+    <div>
+      <label style="display: block; font-size: 0.75rem; font-weight: 600; color: var(--color-fg-muted); margin-bottom: 0.5rem; text-transform: uppercase;">mt-0 (no top margin)</label>
+      <div class="mt-0" style="padding: 1rem; background: var(--color-bg-default); border: 1px solid var(--color-border-subtle); border-radius: 0.5rem;">
+        No top margin applied
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Remaining Utilities for 100% Coverage -->
+<div class="variant-section">
+  <h2>Remaining Utility Classes</h2>
+  <div style="display: flex; flex-direction: column; gap: 1.5rem;">
+    
+    <div>
+      <label style="display: block; font-size: 0.75rem; font-weight: 600; color: var(--color-fg-muted); margin-bottom: 0.5rem; text-transform: uppercase;">p-0, p-2, px-4, py-2</label>
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem;">
+        <div class="p-0" style="border: 1px solid var(--color-border-subtle); border-radius: 0.5rem; background: var(--color-bg-default);">p-0</div>
+        <div class="p-2" style="border: 1px solid var(--color-border-subtle); border-radius: 0.5rem; background: var(--color-bg-default);">p-2</div>
+        <div class="px-4" style="border: 1px solid var(--color-border-subtle); border-radius: 0.5rem; background: var(--color-bg-default); padding-top: 0.5rem; padding-bottom: 0.5rem;">px-4</div>
+        <div class="py-2" style="border: 1px solid var(--color-border-subtle); border-radius: 0.5rem; background: var(--color-bg-default);">py-2</div>
+      </div>
+    </div>
+
+    <div>
+      <label style="display: block; font-size: 0.75rem; font-weight: 600; color: var(--color-fg-muted); margin-bottom: 0.5rem; text-transform: uppercase;">border-subtle, text-fg-default</label>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+        <div class="border-subtle" style="border: 2px solid var(--color-border-subtle); height: 3rem; border-radius: 0.5rem; display: flex; align-items: center; justify-content: center;">border-subtle</div>
+        <div class="text-fg-default" style="padding: 1rem; background: var(--color-bg-default); border: 1px solid var(--color-border-subtle); border-radius: 0.5rem; color: var(--color-fg-default);">text-fg-default</div>
+      </div>
+    </div>
+
+    <div>
+      <label style="display: block; font-size: 0.75rem; font-weight: 600; color: var(--color-fg-muted); margin-bottom: 0.5rem; text-transform: uppercase;">Force Colors (Testing)</label>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+        <div class="force-bg-red-500" style="height: 3rem; border-radius: 0.5rem;"></div>
+        <div class="force-mt-0" style="border: 1px solid var(--color-border-subtle); border-radius: 0.5rem; padding: 1rem; background: var(--color-bg-default);">force-mt-0</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="./demo.js"></script>
+</body>
+</html>

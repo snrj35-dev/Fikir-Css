@@ -1,0 +1,184 @@
+@layer components {
+  {{component.dateTimePicker}} {
+    inline-size: 100%;
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  {{component.dateTimePickerInput}} {
+    inline-size: 100%;
+    min-block-size: 2.5rem;
+    padding-inline: var(--space-3);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border-subtle);
+    background: var(--color-bg-surface);
+    color: var(--color-fg-default);
+    font-size: var(--font-size-sm);
+    font-family: monospace;
+  }
+
+  {{component.dateTimePickerInput}}:focus-visible {
+    border-color: var(--color-accent);
+  }
+
+  {{component.dateTimePickerTrigger}} {
+    min-block-size: 2.5rem;
+    padding-inline: var(--space-3);
+    border-radius: var(--radius-md);
+    border: 1px solid var(--color-border-subtle);
+    background: var(--color-bg-surface);
+    color: var(--color-fg-default);
+    cursor: pointer;
+  }
+
+  {{component.dateTimePickerPanel}} {
+    display: none;
+    padding: var(--space-3);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-md);
+    background: var(--color-bg-surface);
+    color: var(--color-fg-default);
+    box-shadow: var(--shadow-sm);
+  }
+
+  {{component.datePicker}}[data-open="true"] {{component.dateTimePickerPanel}} {
+    display: grid;
+    gap: var(--space-3);
+  }
+
+  {{component.dateTimePickerDateSection}} {
+    display: grid;
+    gap: var(--space-2);
+  }
+
+  {{component.dateTimePickerCalendar}} {
+    display: grid;
+    grid-template-columns: repeat(7, minmax(0, 1fr));
+    gap: var(--space-1);
+  }
+
+  {{component.dateTimePickerDay}} {
+    min-block-size: 2rem;
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-sm);
+    background: var(--color-bg-surface);
+    color: var(--color-fg-default);
+    font-size: var(--font-size-sm);
+    line-height: 1.2;
+    cursor: pointer;
+  }
+
+  {{component.dateTimePickerDay}}[data-today="true"] {
+    border-color: var(--color-accent);
+  }
+
+  {{component.dateTimePickerDay}}[data-selected="true"] {
+    background: var(--color-primary-500);
+    color: var(--color-gray-50);
+    border-color: var(--color-primary-500);
+  }
+
+  {{component.dateTimePickerDay}}[data-outside="true"] {
+    color: var(--color-fg-muted);
+    background: var(--color-bg-default);
+  }
+
+  {{component.dateTimePickerDay}}[disabled] {
+    color: var(--color-fg-muted);
+    background: var(--color-bg-default);
+    cursor: not-allowed;
+  }
+
+  {{component.dateTimePickerTimeSection}} {
+    display: grid;
+    gap: var(--space-2);
+    padding-block-start: var(--space-2);
+    border-block-start: 1px solid var(--color-border-subtle);
+  }
+
+  {{component.dateTimePickerFields}} {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(4rem, 1fr));
+    gap: var(--space-2);
+  }
+
+  {{component.dateTimePickerField}} {
+    display: grid;
+    gap: var(--space-1);
+  }
+
+  {{component.dateTimePickerFieldLabel}} {
+    font-size: var(--font-size-xs);
+    color: var(--color-fg-muted);
+    font-weight: 500;
+  }
+
+  {{component.dateTimePickerFieldInput}} {
+    inline-size: 100%;
+    min-block-size: 2rem;
+    padding: var(--space-1) var(--space-2);
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-sm);
+    background: var(--color-bg-default);
+    color: var(--color-fg-default);
+    text-align: center;
+    font-size: var(--font-size-sm);
+    font-family: monospace;
+  }
+
+  {{component.dateTimePickerFieldInput}}:focus-visible {
+    border-color: var(--color-accent);
+  }
+
+  {{component.dateTimePickerFieldSpinner}} {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-1);
+  }
+
+  {{component.dateTimePickerIncrement}} {
+    min-block-size: 1.5rem;
+    padding: 0;
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-sm);
+    background: var(--color-bg-default);
+    color: var(--color-fg-default);
+    cursor: pointer;
+    font-size: var(--font-size-xs);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  {{component.dateTimePickerIncrement}}:hover {
+    background: var(--color-bg-surface);
+  }
+
+  {{component.dateTimePickerIncrement}}:active {
+    background: var(--color-accent);
+    color: var(--color-gray-50);
+  }
+
+  {{component.dateTimePickerDecrement}} {
+    min-block-size: 1.5rem;
+    padding: 0;
+    border: 1px solid var(--color-border-subtle);
+    border-radius: var(--radius-sm);
+    background: var(--color-bg-default);
+    color: var(--color-fg-default);
+    cursor: pointer;
+    font-size: var(--font-size-xs);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  {{component.dateTimePickerDecrement}}:hover {
+    background: var(--color-bg-surface);
+  }
+
+  {{component.dateTimePickerDecrement}}:active {
+    background: var(--color-accent);
+    color: var(--color-gray-50);
+  }
+}

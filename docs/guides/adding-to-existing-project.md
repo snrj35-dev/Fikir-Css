@@ -1,5 +1,7 @@
 # Adding Fikir CSS to an Existing Project
 
+> Updated: M18 — v0.6.0
+
 This guide helps you integrate Fikir CSS into a project that already has its own styles, without breaking anything.
 
 ---
@@ -115,6 +117,41 @@ Fikir CSS component classes (`.btn`, `.card`) and Tailwind utilities are used on
 
 ---
 
+## Opt-in Themes (Density, Shape)
+
+Fikir CSS ships opt-in theme files that are **not** included in the main bundle.
+
+### Compact density
+
+```js
+import "fikir-css/css";
+import "fikir-css/themes/compact"; // adds support for data-density="compact"
+```
+
+Or via `<link>` for plain HTML:
+
+```html
+<link rel="stylesheet" href="./node_modules/fikir-css/dist/fikir.css" />
+<link rel="stylesheet" href="./node_modules/fikir-css/dist/themes/compact.css" />
+```
+
+Toggle at runtime:
+
+```js
+// Enable compact density
+document.documentElement.setAttribute("data-density", "compact");
+// Disable
+document.documentElement.removeAttribute("data-density");
+```
+
+### Shape tokens
+
+```js
+import "fikir-css/themes/shape"; // adds data-shape="rounded" | "sharp"
+```
+
+---
+
 ## Incremental Adoption
 
 You do not have to migrate your entire UI at once. Adopt Fikir CSS surface-by-surface:
@@ -131,6 +168,11 @@ You do not have to migrate your entire UI at once. Adopt Fikir CSS surface-by-su
 - [ ] Import order or `@layer` strategy chosen
 - [ ] No visual regressions in existing components (run visual diff or manual review)
 - [ ] `data-theme="light"` (or `"dark"`) set on `<html>` so Fikir CSS tokens resolve
+- [ ] If compact density is needed: `fikir-css/themes/compact` imported and `data-density` toggle wired up
 - [ ] If using prefixed mode: all class references updated to `fk-` prefix
+- [ ] `fikir-css/helpers` imported where overlays (modal, drawer, dropdown) are used
 
-See `docs/guides/collision-prevention.md` for a per-class conflict risk table.
+See also:
+- `docs/guides/collision-prevention.md` — per-class conflict risk table
+- `docs/guides/overlay-js-helpers.md` — focus trap, keyboard dismiss helpers
+- `docs/guides/react-adapter.md`, `vue-adapter.md`, `svelte-adapter.md` — framework patterns

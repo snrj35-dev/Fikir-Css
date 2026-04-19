@@ -1,7 +1,6 @@
 # Anti-patterns and Troubleshooting Handbook
 
-> Created: 2026-04-12
-> Scope: M3 — common mistakes and how to fix them
+> Updated: M18 — v0.6.0
 
 ---
 
@@ -31,9 +30,14 @@ modal.classList.add("modal-open");
 
 **Fix:** Use the `data-open` attribute contract:
 ```js
-// ✅ Correct
-modal.dataset.open = "true";
+// ✅ Open
+modal.setAttribute("data-open", "true");
+
+// ✅ Close — removeAttribute, not dataset.open = "false"
+modal.removeAttribute("data-open");
 ```
+
+CSS checks `[data-open="true"]`. Setting `data-open="false"` leaves the attribute set and the overlay remains visible.
 
 ---
 
@@ -65,7 +69,42 @@ modal.dataset.open = "true";
 
 ---
 
-### 5. Relying on `!important` instead of force utilities
+### 5. Using compact density without importing the theme file
+
+**Problem:**
+```js
+// ❌ Imported only the base stylesheet
+import "fikir-css/css";
+
+// Then toggling density in JS — but nothing changes
+document.documentElement.setAttribute("data-density", "compact");
+```
+
+**Fix:** The compact density overrides live in a separate opt-in stylesheet:
+```js
+import "fikir-css/css";
+import "fikir-css/themes/compact"; // ✅ required for data-density="compact" to work
+```
+
+---
+
+### 6. Wrong `resolveBtn` signature
+
+**Problem:**
+```ts
+// ❌ variant is the visual style (solid/outline/ghost), not the color tone
+resolveBtn({ variant: "primary" });
+```
+
+**Fix:**
+```ts
+// ✅ tone = color, variant = visual style
+resolveBtn({ tone: "primary", variant: "solid", size: "md" });
+```
+
+---
+
+### 7. Relying on `!important` instead of force utilities
 
 **Problem:**
 ```css
@@ -81,7 +120,7 @@ modal.dataset.open = "true";
 
 ---
 
-### 6. Creating component-specific utility classes outside of the layers
+### 8. Creating component-specific utility classes outside of the layers
 
 **Problem:** Adding styles outside `@layer` — they have higher specificity than layered rules and cause unexpected overrides.
 

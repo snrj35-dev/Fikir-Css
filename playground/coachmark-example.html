@@ -1,0 +1,416 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Coachmark Pattern — Fikir CSS Playground</title>
+    <link rel="stylesheet" href="../dist/fikir.css" />
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: system-ui, -apple-system, sans-serif;
+        background: var(--color-bg-default);
+        color: var(--color-fg-default);
+        padding: var(--space-6);
+      }
+
+      .header {
+        margin-bottom: var(--space-8);
+      }
+
+      .header h1 {
+        font-size: var(--font-size-3xl);
+        font-weight: var(--font-weight-bold);
+        margin-bottom: var(--space-2);
+      }
+
+      .header p {
+        font-size: var(--font-size-lg);
+        color: var(--color-fg-muted);
+      }
+
+      .demo-section {
+        margin-bottom: var(--space-8);
+        padding: var(--space-4);
+        border: 1px solid var(--color-border-default);
+        border-radius: var(--radius-md);
+        background: var(--color-bg-surface);
+      }
+
+      .demo-section h2 {
+        font-size: var(--font-size-xl);
+        font-weight: var(--font-weight-semibold);
+        margin-bottom: var(--space-3);
+        padding-bottom: var(--space-2);
+        border-bottom: 2px solid var(--color-border-subtle);
+      }
+
+      .demo-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: var(--space-4);
+      }
+
+      .demo-item {
+        position: relative;
+        padding: var(--space-4);
+        border: 1px solid var(--color-border-subtle);
+        border-radius: var(--radius-md);
+        background: var(--color-bg-default);
+        min-height: 300px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .demo-item button {
+        margin-top: var(--space-3);
+      }
+
+      /* Coachmark positioned absolutely in demo item */
+      .demo-item [data-pattern="coachmark"] {
+        position: relative;
+        inset: auto !important;
+        transform: none !important;
+        margin-top: auto;
+      }
+
+      .reset-button {
+        margin-top: var(--space-4);
+        padding: var(--space-2) var(--space-3);
+      }
+
+      code {
+        background: var(--color-bg-muted);
+        padding: 0.25em 0.5em;
+        border-radius: var(--radius-sm);
+        font-family: monospace;
+        font-size: var(--font-size-sm);
+      }
+
+      .info-box {
+        padding: var(--space-3);
+        border-left: 4px solid var(--color-tone-info);
+        background: var(--color-bg-muted);
+        border-radius: var(--radius-md);
+        margin-bottom: var(--space-4);
+      }
+
+      .info-box p {
+        font-size: var(--font-size-sm);
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>Coachmark Pattern</h1>
+      <p>Single-annotation popover for user guidance and onboarding</p>
+    </div>
+
+    <div class="info-box">
+      <p>
+        <strong>Coachmark</strong> is a lightweight pattern for providing contextual guidance.
+        Click the "Show tip" button to toggle each coachmark. This example shows how to manage visibility with
+        <code>data-active</code> attribute and position variants.
+      </p>
+    </div>
+
+    <!-- Info variant section -->
+    <section class="demo-section">
+      <h2>Info Coachmark (Default)</h2>
+      <div class="demo-grid">
+        <div class="demo-item">
+          <span style="font-size: 3rem; color: var(--color-tone-info)">💡</span>
+          <button class="toggle-coach toggle-coach-1 btn btn-solid btn-primary btn-sm" type="button">
+            Show tip
+          </button>
+
+          <div
+            id="coach-info-top"
+            class="coach-demo coach-demo-1"
+            data-pattern="coachmark"
+            data-variant="info"
+            data-active="false"
+            data-position="top"
+            role="tooltip"
+            aria-label="Quick start tip"
+          >
+            <div data-slot="icon" aria-hidden="true">💡</div>
+            <div data-slot="title">Pro tip</div>
+            <div data-slot="description">
+              Use keyboard shortcuts like Cmd+K to navigate quickly through the interface.
+            </div>
+            <button data-slot="action" type="button" class="btn btn-sm btn-solid btn-primary">
+              Got it
+            </button>
+          </div>
+        </div>
+
+        <div class="demo-item">
+          <span style="font-size: 3rem; color: var(--color-tone-info)">✨</span>
+          <button class="toggle-coach toggle-coach-2 btn btn-solid btn-primary btn-sm" type="button">
+            Show feature
+          </button>
+
+          <div
+            id="coach-tip"
+            class="coach-demo coach-demo-2"
+            data-pattern="coachmark"
+            data-variant="tip"
+            data-active="false"
+            data-position="bottom"
+            role="tooltip"
+            aria-label="Feature tip"
+          >
+            <div data-slot="icon" aria-hidden="true">✨</div>
+            <div data-slot="title">New feature</div>
+            <div data-slot="description">
+              Drag and drop to reorder items, or use arrow keys for finer control.
+            </div>
+            <button data-slot="action" type="button" class="btn btn-sm btn-solid btn-primary">
+              Thanks
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Warning variant section -->
+    <section class="demo-section">
+      <h2>Warning Coachmark</h2>
+      <div class="demo-grid">
+        <div class="demo-item">
+          <span style="font-size: 3rem; color: var(--color-tone-warning)">⚠️</span>
+          <button class="toggle-coach toggle-coach-3 btn btn-solid btn-warning btn-sm" type="button">
+            Show warning
+          </button>
+
+          <div
+            id="coach-warning"
+            class="coach-demo coach-demo-3"
+            data-pattern="coachmark"
+            data-variant="warning"
+            data-active="false"
+            data-position="top"
+            role="dialog"
+            aria-label="Important warning"
+          >
+            <div data-slot="icon" aria-hidden="true">⚠️</div>
+            <div data-slot="title">Careful</div>
+            <div data-slot="description">
+              This action modifies your settings. Review the changes before saving.
+            </div>
+            <button data-slot="action" type="button" class="btn btn-sm btn-solid btn-warning">
+              I understand
+            </button>
+          </div>
+        </div>
+
+        <div class="demo-item">
+          <span style="font-size: 3rem; color: var(--color-tone-danger)">🛑</span>
+          <button class="toggle-coach toggle-coach-4 btn btn-solid btn-danger btn-sm" type="button">
+            Show danger
+          </button>
+
+          <div
+            id="coach-danger"
+            class="coach-demo coach-demo-4"
+            data-pattern="coachmark"
+            data-variant="danger"
+            data-active="false"
+            data-position="top"
+            role="dialog"
+            aria-label="Destructive action warning"
+          >
+            <div data-slot="icon" aria-hidden="true">🛑</div>
+            <div data-slot="title">Critical</div>
+            <div data-slot="description">
+              Deleting this record is permanent and cannot be undone.
+            </div>
+            <button data-slot="action" type="button" class="btn btn-sm btn-solid btn-danger">
+              I understand
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Success & neutral variants -->
+    <section class="demo-section">
+      <h2>Success & Neutral Coachmarks</h2>
+      <div class="demo-grid">
+        <div class="demo-item">
+          <span style="font-size: 3rem; color: var(--color-tone-success)">🎉</span>
+          <button class="toggle-coach toggle-coach-5 btn btn-solid btn-success btn-sm" type="button">
+            Show success
+          </button>
+
+          <div
+            id="coach-success"
+            class="coach-demo coach-demo-5"
+            data-pattern="coachmark"
+            data-variant="success"
+            data-active="false"
+            data-position="bottom"
+            role="tooltip"
+            aria-label="Achievement milestone"
+          >
+            <div data-slot="icon" aria-hidden="true">🎉</div>
+            <div data-slot="title">Milestone!</div>
+            <div data-slot="description">
+              You've completed your first workflow. Explore the guide to learn more.
+            </div>
+            <button data-slot="action" type="button" class="btn btn-sm btn-solid btn-success">
+              Awesome!
+            </button>
+          </div>
+        </div>
+
+        <div class="demo-item">
+          <span style="font-size: 3rem; color: var(--color-fg-muted)">ℹ️</span>
+          <button class="toggle-coach toggle-coach-6 btn btn-solid btn-neutral btn-sm" type="button">
+            Show neutral
+          </button>
+
+          <div
+            id="coach-neutral"
+            class="coach-demo coach-demo-6"
+            data-pattern="coachmark"
+            data-variant="neutral"
+            data-active="false"
+            data-position="start"
+            role="tooltip"
+            aria-label="Additional context"
+          >
+            <div data-slot="icon" aria-hidden="true">ℹ️</div>
+            <div data-slot="title">Pro option</div>
+            <div data-slot="description">
+              Advanced users often use custom filters for faster queries.
+            </div>
+            <button data-slot="action" type="button" class="btn btn-sm btn-ghost btn-neutral">
+              Learn more
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Density variants -->
+    <section class="demo-section">
+      <h2>Density Variants</h2>
+      <div class="demo-grid">
+        <div class="demo-item">
+          <span style="font-size: 2rem">📦</span>
+          <button class="toggle-coach toggle-coach-7 btn btn-outline btn-neutral btn-sm" type="button">
+            Compact
+          </button>
+
+          <div
+            id="coach-compact"
+            class="coach-demo coach-demo-7"
+            data-pattern="coachmark"
+            data-variant="info"
+            data-density="compact"
+            data-active="false"
+            data-position="top"
+            role="tooltip"
+          >
+            <div data-slot="icon" aria-hidden="true">📦</div>
+            <div data-slot="title">Compact mode</div>
+            <div data-slot="description">
+              Minimal spacing for dense interfaces.
+            </div>
+            <button data-slot="action" type="button" class="btn btn-xs btn-solid btn-primary">
+              OK
+            </button>
+          </div>
+        </div>
+
+        <div class="demo-item">
+          <span style="font-size: 2rem">🎁</span>
+          <button class="toggle-coach toggle-coach-8 btn btn-outline btn-neutral btn-sm" type="button">
+            Comfortable
+          </button>
+
+          <div
+            id="coach-comfortable"
+            class="coach-demo coach-demo-8"
+            data-pattern="coachmark"
+            data-variant="info"
+            data-density="comfortable"
+            data-active="false"
+            data-position="top"
+            role="tooltip"
+          >
+            <div data-slot="icon" aria-hidden="true">🎁</div>
+            <div data-slot="title">Comfortable mode</div>
+            <div data-slot="description">
+              Relaxed spacing for readability and touch comfort.
+            </div>
+            <button data-slot="action" type="button" class="btn btn-lg btn-solid btn-primary">
+              Perfect
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script>
+      // Simple toggle behavior for demo
+      document.querySelectorAll('.toggle-coach').forEach((btn) => {
+        btn.addEventListener('click', () => {
+          const className = btn.className.match(/toggle-coach-\d+/)[0];
+          const coachElement = document.querySelector(`.${className.replace('toggle', 'coach')}`);
+
+          if (coachElement) {
+            const isActive = coachElement.getAttribute('data-active') === 'true';
+            coachElement.setAttribute('data-active', isActive ? 'false' : 'true');
+
+            // Update button text
+            btn.textContent = isActive ? btn.textContent.replace('Hide', 'Show') : btn.textContent.replace('Show', 'Hide');
+          }
+        });
+      });
+
+      // Dismiss coachmark when action button is clicked
+      document.querySelectorAll('[data-pattern="coachmark"]').forEach((coach) => {
+        const actionBtn = coach.querySelector('[data-slot="action"]');
+        if (actionBtn) {
+          actionBtn.addEventListener('click', () => {
+            coach.setAttribute('data-active', 'false');
+
+            // Reset toggle button
+            const toggleClass = coach.className.match(/coach-demo-\d+/)[0];
+            const toggleBtn = document.querySelector(`.toggle-${toggleClass}`);
+            if (toggleBtn) {
+              toggleBtn.textContent = toggleBtn.textContent.replace('Hide', 'Show');
+            }
+          });
+        }
+      });
+
+      // Keyboard dismiss (Escape key)
+      document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+          document.querySelectorAll('[data-pattern="coachmark"][data-active="true"]').forEach((coach) => {
+            coach.setAttribute('data-active', 'false');
+
+            // Reset toggle button
+            const toggleClass = coach.className.match(/coach-demo-\d+/)[0];
+            const toggleBtn = document.querySelector(`.toggle-${toggleClass}`);
+            if (toggleBtn) {
+              toggleBtn.textContent = toggleBtn.textContent.replace('Hide', 'Show');
+            }
+          });
+        }
+      });
+    </script>
+  </body>
+</html>

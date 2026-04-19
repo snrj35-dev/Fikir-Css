@@ -14,6 +14,8 @@
   const popoverCloseButtons = document.querySelectorAll("[data-popover-close]");
   const dropdownToggleButtons = document.querySelectorAll("[data-dropdown-toggle]");
   const dropdownCloseButtons = document.querySelectorAll("[data-dropdown-close]");
+  const splitButtonToggles = document.querySelectorAll("[data-split-button-toggle]");
+  const splitButtonMenus = document.querySelectorAll("[data-split-button-menu]");
   const drawerOpenButtons = document.querySelectorAll("[data-drawer-open]");
   const drawerCloseButtons = document.querySelectorAll("[data-drawer-close]");
   const tabsRoots = document.querySelectorAll("[data-tabs-root]");
@@ -64,6 +66,34 @@
     });
   }
 
+  const densityToggle = document.getElementById("density-toggle");
+  if (densityToggle) {
+    densityToggle.addEventListener("click", function () {
+      const compact = html.hasAttribute("data-density") && html.getAttribute("data-density") === "compact";
+      if (compact) {
+        html.removeAttribute("data-density");
+        densityToggle.textContent = "Density: default";
+      } else {
+        html.setAttribute("data-density", "compact");
+        densityToggle.textContent = "Density: compact";
+      }
+    });
+  }
+
+  const motionToggle = document.getElementById("motion-toggle");
+  if (motionToggle) {
+    motionToggle.addEventListener("click", function () {
+      const reduced = html.hasAttribute("data-reduced-motion");
+      if (reduced) {
+        html.removeAttribute("data-reduced-motion");
+        motionToggle.textContent = "Motion: on";
+      } else {
+        html.setAttribute("data-reduced-motion", "");
+        motionToggle.textContent = "Motion: reduced";
+      }
+    });
+  }
+
   const sidebarLinks = document.querySelectorAll(".demo-sidebar-link[href^='#']");
   if (sidebarLinks.length > 0 && "IntersectionObserver" in window) {
     const sectionMap = new Map();
@@ -92,6 +122,7 @@
   }
 
   const supportedSectionNumbers = new Set(["6", "7", "10", "11", "16", "18", "26"]);
+  const betaSectionNumbers = new Set(["14.2", "30", "31", "34", "35", "36", "37", "38", "39", "43", "46"]);
   const showcaseSectionNumbers = new Set([
     "0",
     "1",
@@ -124,6 +155,8 @@
 
     if (supportedSectionNumbers.has(sectionNumber)) {
       supportLevel = "supported";
+    } else if (betaSectionNumbers.has(sectionNumber)) {
+      supportLevel = "beta";
     } else if (showcaseSectionNumbers.has(sectionNumber)) {
       supportLevel = "showcase";
     }
@@ -277,7 +310,29 @@
     });
   }
 
-  function setDropdownOpen(dropdownId, isOpen) {
+  function getDropdownItems(dropdown) {
+    if (!dropdown) return [];
+
+    return Array.from(
+      dropdown.querySelectorAll(
+        '.dropdown-menu-content [role="menuitem"]:not([disabled]), .dropdown-menu-content a[href], .dropdown-menu-content button:not([disabled])'
+      )
+    );
+  }
+
+  function focusDropdownBoundaryItem(dropdownId, position) {
+    const dropdown = document.getElementById(dropdownId);
+    const items = getDropdownItems(dropdown);
+    const target = position === "last" ? items[items.length - 1] : items[0];
+
+    if (!target || typeof target.focus !== "function") return;
+
+    window.requestAnimationFrame(function () {
+      target.focus();
+    });
+  }
+
+  function setDropdownOpen(dropdownId, isOpen, options) {
     const dropdown = document.getElementById(dropdownId);
     if (!dropdown) return;
 
@@ -286,6 +341,17 @@
     const trigger = document.querySelector(`[data-dropdown-toggle="${dropdownId}"]`);
     if (trigger) {
       trigger.setAttribute("aria-expanded", isOpen ? "true" : "false");
+    }
+
+    if (isOpen && options?.focusItem) {
+      focusDropdownBoundaryItem(dropdownId, options.focusItem);
+      return;
+    }
+
+    if (!isOpen && options?.restoreFocus && trigger && typeof trigger.focus === "function") {
+      window.requestAnimationFrame(function () {
+        trigger.focus();
+      });
     }
   }
 
@@ -304,7 +370,66 @@
     button.addEventListener("click", function () {
       const dropdownId = button.getAttribute("data-dropdown-close");
       if (!dropdownId) return;
-      setDropdownOpen(dropdownId, false);
+      setDropdownOpen(dropdownId, false, {
+        restoreFocus: Boolean(button.closest(".split-button"))
+      });
+    });
+  }
+
+  for (const button of splitButtonToggles) {
+    button.addEventListener("keydown", function (event) {
+      if (event.key !== "ArrowDown" && event.key !== "ArrowUp") return;
+
+      const dropdownId = button.getAttribute("data-dropdown-toggle");
+      if (!dropdownId) return;
+
+      event.preventDefault();
+      setDropdownOpen(dropdownId, true, {
+        focusItem: event.key === "ArrowUp" ? "last" : "first"
+      });
+    });
+  }
+
+  for (const menu of splitButtonMenus) {
+    menu.addEventListener("keydown", function (event) {
+      const dropdown = menu.closest(".split-button");
+      if (!dropdown || !dropdown.id) return;
+
+      const items = getDropdownItems(dropdown);
+      if (items.length === 0) return;
+
+      if (event.key === "Escape") {
+        event.preventDefault();
+        setDropdownOpen(dropdown.id, false, { restoreFocus: true });
+        return;
+      }
+
+      if (event.key === "Home") {
+        event.preventDefault();
+        items[0].focus();
+        return;
+      }
+
+      if (event.key === "End") {
+        event.preventDefault();
+        items[items.length - 1].focus();
+        return;
+      }
+
+      if (event.key !== "ArrowDown" && event.key !== "ArrowUp") return;
+
+      event.preventDefault();
+
+      const currentIndex = items.indexOf(document.activeElement);
+      const delta = event.key === "ArrowDown" ? 1 : -1;
+      const nextIndex =
+        currentIndex === -1
+          ? delta === 1
+            ? 0
+            : items.length - 1
+          : (currentIndex + delta + items.length) % items.length;
+
+      items[nextIndex].focus();
     });
   }
 
@@ -395,7 +520,9 @@
 
     for (const dropdown of document.querySelectorAll(".dropdown-menu[data-open=\"true\"]")) {
       if (dropdown.id) {
-        setDropdownOpen(dropdown.id, false);
+        setDropdownOpen(dropdown.id, false, {
+          restoreFocus: dropdown.matches(".split-button")
+        });
       }
     }
 

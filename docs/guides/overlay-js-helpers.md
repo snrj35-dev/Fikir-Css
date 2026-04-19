@@ -1,5 +1,7 @@
 # Overlay JS Helpers
 
+> Updated: M18 — v0.6.0
+
 `fikir-css/helpers` provides three vanilla-JS utilities for accessible overlay behavior. Zero dependencies, fully tree-shakeable.
 
 ```js
@@ -27,7 +29,7 @@ openBtn.addEventListener("click", () => {
 
 // When closing:
 function closeModal() {
-  modal.setAttribute("data-open", "false");
+  modal.removeAttribute("data-open"); // use removeAttribute — CSS checks [data-open="true"]
   trap.deactivate();
 }
 ```
@@ -146,7 +148,7 @@ function openModal() {
 }
 
 function closeModal() {
-  modalEl.setAttribute("data-open", "false");
+  modalEl.removeAttribute("data-open"); // use removeAttribute — CSS checks [data-open="true"]
   trap.deactivate();
 }
 
@@ -170,5 +172,24 @@ The helpers handle **behavioral state**: focus management, keyboard interaction,
 | Escape + backdrop dismiss | `bindOverlayKeyboard` |
 | Arrow-key navigation | `createRovingTabindex` |
 | `aria-expanded`, `aria-selected` | Your code (framework or vanilla) |
+
+## Used by these components
+
+| Component | Helper | Doc |
+|-----------|--------|-----|
+| Modal | `createFocusTrap` + `bindOverlayKeyboard` | `docs/architecture/overlay-accessibility-expectations.md` |
+| Drawer | `createFocusTrap` + `bindOverlayKeyboard` | `docs/architecture/overlay-layering-z-index-notes.md` |
+| Dropdown | `bindOverlayKeyboard` | — |
+| Command palette | `createFocusTrap` + `bindOverlayKeyboard` | — |
+| Tabs, menu-bar | `createRovingTabindex` | `docs/architecture/navigation-accessibility-notes.md` |
+| Tree view | `createRovingTabindex` | — |
+
+## Framework usage
+
+| Framework | Pattern | Guide |
+|-----------|---------|-------|
+| React | `useEffect` + `useRef` wrapping trap/kbd | `docs/guides/react-adapter.md` |
+| Vue 3 | `watch(open, ...)` + `onMounted` | `docs/guides/vue-adapter.md` |
+| Svelte | `$: { if (open) ... }` or `afterUpdate` | `docs/guides/svelte-adapter.md` |
 
 See also: `docs/architecture/headless-contract-spec.md`

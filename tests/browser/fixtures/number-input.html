@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Number input fixture</title>
+  <link rel="stylesheet" href="../../../dist/fikir.css" />
+</head>
+<body style="padding: 2rem">
+  <label class="label" for="qty-input">Quantity</label>
+  <div class="number-input" id="number-input-1">
+    <input
+      id="qty-input"
+      class="input"
+      type="number"
+      min="0"
+      max="100"
+      step="1"
+      value="5"
+      aria-label="Quantity"
+      aria-valuemin="0"
+      aria-valuemax="100"
+      aria-valuenow="5"
+    />
+    <div class="number-input-controls">
+      <button id="btn-inc" class="number-input-step" aria-label="Increment" type="button">+</button>
+      <button id="btn-dec" class="number-input-step" aria-label="Decrement" type="button">−</button>
+    </div>
+  </div>
+
+  <br />
+
+  <label class="label" for="price-input">Price (min 0, max 999, step 0.5)</label>
+  <div class="number-input" id="number-input-2">
+    <input
+      id="price-input"
+      class="input"
+      type="number"
+      min="0"
+      max="999"
+      step="0.5"
+      value="10.0"
+      aria-label="Price"
+    />
+    <div class="number-input-controls">
+      <button id="price-inc" class="number-input-step" aria-label="Increment price" type="button">+</button>
+      <button id="price-dec" class="number-input-step" aria-label="Decrement price" type="button">−</button>
+    </div>
+  </div>
+
+  <br />
+
+  <div class="number-input" id="number-input-disabled">
+    <input
+      id="disabled-input"
+      class="input"
+      type="number"
+      value="3"
+      disabled
+      aria-disabled="true"
+      aria-label="Disabled number input"
+    />
+    <div class="number-input-controls">
+      <button class="number-input-step" disabled aria-label="Increment" type="button">+</button>
+      <button class="number-input-step" disabled aria-label="Decrement" type="button">−</button>
+    </div>
+  </div>
+
+  <script>
+    function wireNumberInput(inputId, incId, decId) {
+      const input = document.getElementById(inputId);
+      const inc   = document.getElementById(incId);
+      const dec   = document.getElementById(decId);
+
+      inc.addEventListener('click', () => {
+        const max  = Number(input.max ?? Infinity);
+        const step = Number(input.step ?? 1);
+        const next = Number(input.value) + step;
+        input.value = Math.min(next, max);
+        input.setAttribute('aria-valuenow', input.value);
+        input.dispatchEvent(new Event('input'));
+      });
+
+      dec.addEventListener('click', () => {
+        const min  = Number(input.min ?? -Infinity);
+        const step = Number(input.step ?? 1);
+        const next = Number(input.value) - step;
+        input.value = Math.max(next, min);
+        input.setAttribute('aria-valuenow', input.value);
+        input.dispatchEvent(new Event('input'));
+      });
+    }
+
+    wireNumberInput('qty-input',   'btn-inc', 'btn-dec');
+    wireNumberInput('price-input', 'price-inc', 'price-dec');
+  </script>
+</body>
+</html>

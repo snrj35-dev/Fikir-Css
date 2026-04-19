@@ -6,22 +6,81 @@
     <title>Fikir CSS Starter Consumer</title>
     <link rel="stylesheet" href="./node_modules/fikir-css/dist/fikir.css" />
   </head>
-  <body class="surface p-4">
-    <main class="stack" style="gap: var(--space-4)">
-      <h1 class="heading-2">Starter Consumer</h1>
-      <p class="text-muted">This page consumes the packaged dist CSS output.</p>
+  <body class="surface" style="min-height: 100vh; padding: var(--space-6)">
+    <main class="container stack" style="--stack-gap: var(--space-6)">
 
-      <div class="field" style="max-width: 24rem">
-        <label class="label" for="starter-email">Email</label>
-        <input id="starter-email" class="input" type="email" placeholder="name@example.com" />
-        <p class="helper-text">Canonical field + input + helper-text usage.</p>
-      </div>
+      <header class="cluster" style="justify-content: space-between; align-items: center">
+        <h1 class="heading-2">Fikir CSS Starter</h1>
+        <div class="cluster" style="gap: var(--space-2)">
+          <span class="badge badge-neutral">v0.6.0</span>
+          <button class="btn btn-outline btn-neutral btn-md" id="theme-toggle" type="button">🌙 Dark</button>
+        </div>
+      </header>
 
-      <div class="cluster" style="gap: var(--space-2)">
-        <button class="btn btn-primary">Primary action</button>
-        <button class="btn btn-outline btn-neutral">Secondary</button>
-        <span class="badge badge-neutral">v0.5.0</span>
-      </div>
+      <!-- Buttons -->
+      <article class="card card-elevated card-p-md stack">
+        <h2 class="heading-3">Buttons</h2>
+        <div class="cluster" style="gap: var(--space-2); flex-wrap: wrap">
+          <button class="btn btn-solid btn-primary btn-md" type="button">Primary</button>
+          <button class="btn btn-solid btn-neutral btn-md" type="button">Neutral</button>
+          <button class="btn btn-outline btn-neutral btn-md" type="button">Outline</button>
+          <button class="btn btn-ghost btn-danger btn-md" type="button">Danger ghost</button>
+          <button class="btn btn-solid btn-primary btn-sm" type="button">Small</button>
+          <button class="btn btn-solid btn-primary btn-lg" type="button">Large</button>
+        </div>
+      </article>
+
+      <!-- Badges -->
+      <article class="card card-elevated card-p-md stack">
+        <h2 class="heading-3">Badges</h2>
+        <div class="cluster" style="gap: var(--space-2)">
+          <span class="badge badge-soft badge-neutral">Neutral</span>
+          <span class="badge badge-soft badge-primary">Primary</span>
+          <span class="badge badge-soft badge-danger">Danger</span>
+          <span class="badge badge-soft badge-success">Success</span>
+          <span class="badge badge-soft badge-warning">Warning</span>
+        </div>
+      </article>
+
+      <!-- Alerts -->
+      <article class="card card-elevated card-p-md stack">
+        <h2 class="heading-3">Alerts</h2>
+        <div class="stack">
+          <div class="alert" role="alert">
+            <p class="alert-title">Info</p>
+            <p class="alert-description">Default alert — no tone modifier.</p>
+          </div>
+          <div class="alert alert-danger" role="alert">
+            <p class="alert-title">Error</p>
+            <p class="alert-description">Something went wrong. Please try again.</p>
+          </div>
+        </div>
+      </article>
+
+      <!-- Form -->
+      <article class="card card-elevated card-p-md stack">
+        <h2 class="heading-3">Form</h2>
+        <div class="field" style="max-width: 24rem">
+          <label class="label" for="starter-email">Email</label>
+          <input id="starter-email" class="input" type="email" placeholder="name@example.com" />
+          <p class="helper-text">Canonical field + input + helper-text usage.</p>
+        </div>
+        <div class="cluster" style="gap: var(--space-2)">
+          <button class="btn btn-solid btn-primary btn-md" type="button">Subscribe</button>
+          <button class="btn btn-outline btn-neutral btn-md" type="button">Cancel</button>
+        </div>
+      </article>
+
     </main>
+
+    <script type="module">
+      const btn = document.getElementById("theme-toggle");
+      btn.addEventListener("click", () => {
+        const html = document.documentElement;
+        const next = html.getAttribute("data-theme") === "light" ? "dark" : "light";
+        html.setAttribute("data-theme", next);
+        btn.textContent = next === "light" ? "🌙 Dark" : "☀️ Light";
+      });
+    </script>
   </body>
 </html>

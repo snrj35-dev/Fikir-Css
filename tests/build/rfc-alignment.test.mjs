@@ -21,7 +21,7 @@ test("RFC guardrail: button/card default recipe values stay stable", () => {
   });
 
   assert.deepEqual(recipesContract.resolvers.card.defaults, {
-    variant: "plain",
+    variant: "flat",
     padding: "md"
   });
 });
@@ -101,15 +101,9 @@ test("RFC guardrail: forbidden class names are absent from canonical selector su
     "modal-loading",
     "toast-loading",
     "card-loading",
-    "input-sm",
-    "input-md",
-    "input-lg",
     "textarea-sm",
     "textarea-md",
     "textarea-lg",
-    "select-sm",
-    "select-md",
-    "select-lg",
     "checkbox-sm",
     "checkbox-md",
     "checkbox-lg",

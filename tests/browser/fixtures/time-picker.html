@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Time picker fixture</title>
+  <link rel="stylesheet" href="../../../dist/fikir.css" />
+</head>
+<body style="padding: 2rem">
+  <label class="label" for="time-input">Meeting time</label>
+  <div class="time-picker" id="time-picker">
+    <input
+      id="time-input"
+      class="time-picker-input input"
+      type="text"
+      placeholder="HH:MM"
+      aria-label="Meeting time"
+      aria-haspopup="dialog"
+      aria-expanded="false"
+      aria-controls="time-panel"
+      autocomplete="off"
+      readonly
+    />
+    <button
+      id="time-trigger"
+      class="time-picker-trigger btn btn-ghost btn-sm"
+      type="button"
+      aria-label="Open time picker"
+      aria-expanded="false"
+      aria-controls="time-panel"
+    >
+      🕐
+    </button>
+    <div
+      id="time-panel"
+      class="time-picker-panel"
+      role="dialog"
+      aria-label="Select time"
+      aria-modal="true"
+      hidden
+    >
+      <div class="time-picker-fields">
+        <div class="time-picker-field">
+          <label class="time-picker-field-label" for="hour-input">Hour</label>
+          <input
+            id="hour-input"
+            class="time-picker-field-input input"
+            type="number"
+            min="0"
+            max="23"
+            value="9"
+            aria-label="Hour"
+          />
+        </div>
+        <div class="time-picker-field">
+          <label class="time-picker-field-label" for="minute-input">Minute</label>
+          <input
+            id="minute-input"
+            class="time-picker-field-input input"
+            type="number"
+            min="0"
+            max="59"
+            step="5"
+            value="0"
+            aria-label="Minute"
+          />
+        </div>
+      </div>
+      <div style="margin-top: 1rem; display: flex; gap: 0.5rem">
+        <button id="time-cancel" class="btn btn-ghost btn-sm" type="button">Cancel</button>
+        <button id="time-confirm" class="btn btn-solid btn-primary btn-sm" type="button">OK</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const picker  = document.getElementById('time-picker');
+    const input   = document.getElementById('time-input');
+    const trigger = document.getElementById('time-trigger');
+    const panel   = document.getElementById('time-panel');
+    const hourIn  = document.getElementById('hour-input');
+    const minIn   = document.getElementById('minute-input');
+
+    function open() {
+      picker.dataset.open = 'true';
+      trigger.setAttribute('aria-expanded', 'true');
+      input.setAttribute('aria-expanded', 'true');
+      panel.removeAttribute('hidden');
+      hourIn.focus();
+    }
+
+    function close() {
+      delete picker.dataset.open;
+      trigger.setAttribute('aria-expanded', 'false');
+      input.setAttribute('aria-expanded', 'false');
+      panel.setAttribute('hidden', '');
+      trigger.focus();
+    }
+
+    function confirm() {
+      const h = String(hourIn.value).padStart(2, '0');
+      const m = String(minIn.value).padStart(2, '0');
+      input.value = `${h}:${m}`;
+      close();
+    }
+
+    trigger.addEventListener('click', () => {
+      panel.hasAttribute('hidden') ? open() : close();
+    });
+
+    document.getElementById('time-cancel').addEventListener('click', close);
+    document.getElementById('time-confirm').addEventListener('click', confirm);
+
+    panel.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') close();
+    });
+  </script>
+</body>
+</html>

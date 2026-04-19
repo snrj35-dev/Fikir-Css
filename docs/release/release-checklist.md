@@ -30,3 +30,5 @@ Use this checklist before creating a release tag.
 - [ ] `package.json#version` matches release target
 - [ ] git tag format is `vX.Y.Z`
 - [ ] tag and release note versions match exactly
+- [ ] prerelease suffix and npm dist-tag agree (`-beta.N` → `beta`, `-rc.N` → `rc`, stable → `latest`)
+- [ ] README / site / playground / examples use the correct install command for this channel

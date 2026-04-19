@@ -50,6 +50,7 @@ async function collectHtmlFiles() {
     "playground/index.html",
     "playground/quickstart.html",
     "playground/token-explorer.html",
+    "playground/variant-showcase.html",
   ];
   const templatesDir = resolve(rootDir, "playground/templates");
   try {

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Drawer fixture</title>
+  <link rel="stylesheet" href="../../../dist/fikir.css" />
+</head>
+<body>
+  <button id="open-btn" class="btn btn-solid btn-primary">Open drawer</button>
+
+  <div
+    id="drawer"
+    class="drawer"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="drawer-title"
+  >
+    <div class="drawer-backdrop" id="drawer-backdrop"></div>
+    <div class="drawer-panel">
+      <header class="drawer-header">
+        <h2 id="drawer-title">Test Drawer</h2>
+        <button id="drawer-close" class="btn btn-ghost btn-xs" aria-label="Close drawer">✕</button>
+      </header>
+      <div class="drawer-body">
+        <p>Drawer content.</p>
+        <input id="drawer-input" class="input" type="text" placeholder="Focusable inside drawer" />
+      </div>
+      <footer class="drawer-footer">
+        <button id="drawer-cancel" class="btn btn-ghost">Cancel</button>
+        <button id="drawer-save" class="btn btn-solid btn-primary">Save</button>
+      </footer>
+    </div>
+  </div>
+
+  <script>
+    const drawer    = document.getElementById('drawer');
+    const openBtn   = document.getElementById('open-btn');
+    const closeBtn  = document.getElementById('drawer-close');
+    const cancelBtn = document.getElementById('drawer-cancel');
+    const backdrop  = document.getElementById('drawer-backdrop');
+    let previousFocus = null;
+
+    const FOCUSABLE = 'button:not([disabled]),input:not([disabled]),a[href],[tabindex]:not([tabindex="-1"])';
+
+    function onKey(e) {
+      if (e.key === 'Escape') closeDrawer();
+    }
+
+    function openDrawer() {
+      previousFocus = document.activeElement;
+      drawer.dataset.open = 'true';
+      drawer.querySelector(FOCUSABLE)?.focus();
+      drawer.addEventListener('keydown', onKey);
+    }
+
+    function closeDrawer() {
+      delete drawer.dataset.open;
+      drawer.removeEventListener('keydown', onKey);
+      previousFocus?.focus();
+    }
+
+    openBtn.addEventListener('click', openDrawer);
+    closeBtn.addEventListener('click', closeDrawer);
+    cancelBtn.addEventListener('click', closeDrawer);
+    backdrop.addEventListener('click', closeDrawer);
+  </script>
+</body>
+</html>

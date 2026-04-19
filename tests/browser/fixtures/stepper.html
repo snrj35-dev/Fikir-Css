@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Stepper fixture</title>
+  <link rel="stylesheet" href="../../../dist/fikir.css" />
+</head>
+<body style="padding: 2rem">
+  <ol class="stepper" aria-label="Account setup steps" id="stepper">
+    <li id="step-1" class="stepper-item" data-state="complete">
+      <div class="stepper-marker" aria-hidden="true">✓</div>
+      <div class="stepper-label">
+        <span>Create account</span>
+        <span class="sr-only">(completed)</span>
+      </div>
+    </li>
+    <li id="step-2" class="stepper-item" data-state="active" aria-current="step">
+      <div class="stepper-marker" aria-hidden="true">2</div>
+      <div class="stepper-label">
+        <span>Verify email</span>
+        <span class="sr-only">(current step)</span>
+      </div>
+    </li>
+    <li id="step-3" class="stepper-item" data-state="pending">
+      <div class="stepper-marker" aria-hidden="true">3</div>
+      <div class="stepper-label">
+        <span>Set preferences</span>
+        <span class="sr-only">(not started)</span>
+      </div>
+    </li>
+    <li id="step-4" class="stepper-item" data-state="pending">
+      <div class="stepper-marker" aria-hidden="true">4</div>
+      <div class="stepper-label">
+        <span>Complete profile</span>
+        <span class="sr-only">(not started)</span>
+      </div>
+    </li>
+  </ol>
+
+  <div style="margin-top: 1.5rem; display: flex; gap: 0.5rem">
+    <button id="prev-step" class="btn btn-ghost btn-sm" type="button">Back</button>
+    <button id="next-step" class="btn btn-solid btn-primary btn-sm" type="button">Next</button>
+  </div>
+
+  <script>
+    const steps = [...document.querySelectorAll('.stepper-item')];
+
+    function getCurrentIdx() {
+      return steps.findIndex(s => s.dataset.state === 'active');
+    }
+
+    function goTo(idx) {
+      steps.forEach((step, i) => {
+        step.removeAttribute('aria-current');
+        if (i < idx)       { step.dataset.state = 'complete'; }
+        else if (i === idx) { step.dataset.state = 'active'; step.setAttribute('aria-current', 'step'); }
+        else               { step.dataset.state = 'pending'; }
+      });
+    }
+
+    document.getElementById('next-step').addEventListener('click', () => {
+      const idx = getCurrentIdx();
+      if (idx < steps.length - 1) goTo(idx + 1);
+    });
+
+    document.getElementById('prev-step').addEventListener('click', () => {
+      const idx = getCurrentIdx();
+      if (idx > 0) goTo(idx - 1);
+    });
+  </script>
+</body>
+</html>

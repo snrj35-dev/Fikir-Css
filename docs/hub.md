@@ -16,9 +16,7 @@
 | Use in Vue | [Vue adapter](./guides/vue-adapter.md) |
 | Use in Svelte | [Svelte adapter](./guides/svelte-adapter.md) |
 | SSR / hydration safety | [SSR conventions](./guides/ssr-hydration-conventions.md) |
-| Migrate from Tailwind | [Migration guide](./guides/migration-from-tailwind.md) |
-| Migrate from Bootstrap | [Migration guide](./guides/migration-from-bootstrap.md) |
-| Migrate from MUI | [Migration guide](./guides/migration-from-mui.md) |
+| Migrate from Tailwind / Bootstrap / MUI | [Migration hub](./migration/README.md) |
 | Wire JS behavior (headless) | [Headless contract](./architecture/headless-contract-spec.md) · [Examples](./architecture/headless-examples.md) |
 | Override tokens / brand | [Brand cookbook](./architecture/brand-theme-cookbook.md) |
 | Use dark/compact/high-contrast modes | [`packages/tokens/themes/`](../packages/tokens/themes/) |
@@ -60,6 +58,7 @@
 | Check theme regression | [Theme checklist](./testing/theme-regression-checklist.md) |
 | v1.0 freeze checklist | [Freeze checklist](./release/v1.0-support-freeze-checklist.md) |
 | Migration guarantee | [Guarantee policy](./release/v1.0-migration-guarantee-policy.md) |
+| Govern selector freeze | [Selector freeze](./governance/selector-contract-freeze.md) |
 | Decision log | [Roadmap decision log](./governance/roadmap-decision-log.md) |
 | External feedback | [Feedback log](./governance/external-feedback-log.md) |
 
@@ -96,18 +95,22 @@
 - [Manual a11y QA checklist](./testing/manual-accessibility-qa-checklist.md)
 - [A11y CI scope](./testing/a11y-ci-scope.md)
 
+### Migration
+- [Migration hub](./migration/README.md)
+- [Migration from Tailwind](./migration/from-tailwind.md)
+- [Migration from Bootstrap](./migration/from-bootstrap.md)
+- [Migration from MUI](./migration/from-mui.md)
+
 ### Release & Governance
-- [Versioning / semver policy](./release/versioning-semver-policy.md)
+- [Versioning / semver policy](./governance/semver-policy.md)
+- [Selector contract freeze](./governance/selector-contract-freeze.md)
 - [Performance trend dashboard](./release/performance-trend-dashboard.md)
 - [v1.0 support freeze checklist](./release/v1.0-support-freeze-checklist.md)
 - [v1.0 migration guarantee policy](./release/v1.0-migration-guarantee-policy.md)
 - [Roadmap decision log](./governance/roadmap-decision-log.md)
 - [External feedback log](./governance/external-feedback-log.md)
-
+ 
 ### Guides
-- [Migration from Tailwind](./guides/migration-from-tailwind.md)
-- [Migration from Bootstrap](./guides/migration-from-bootstrap.md)
-- [Migration from MUI](./guides/migration-from-mui.md)
 - [React adapter](./guides/react-adapter.md)
 - [Vue adapter](./guides/vue-adapter.md)
 - [Svelte adapter](./guides/svelte-adapter.md)

@@ -6,6 +6,13 @@
       "playground/index.html"
     ]
   },
+  "auth-screen": {
+    "reason": "Planned v1.0 surface tracked by roadmap artifacts until implementation and RFC land.",
+    "evidence": [
+      "docs/roadmap/plan.md",
+      "docs/roadmap/tasklist.md"
+    ]
+  },
   "badge": {
     "reason": "Dedicated RFC is not split out yet; surface is implemented and publicly exposed.",
     "evidence": [
@@ -13,38 +20,10 @@
       "playground/index.html"
     ]
   },
-  "label": {
-    "reason": "Field composition sub-surface tracked under field RFC.",
-    "evidence": [
-      "packages/components/label.css",
-      "docs/rfcs/components/field-rfc.md"
-    ]
-  },
-  "helper-text": {
-    "reason": "Field composition sub-surface tracked under field RFC.",
-    "evidence": [
-      "packages/components/helper-text.css",
-      "docs/rfcs/components/field-rfc.md"
-    ]
-  },
-  "error-text": {
-    "reason": "Field composition sub-surface tracked under field RFC.",
-    "evidence": [
-      "packages/components/error-text.css",
-      "docs/rfcs/components/field-rfc.md"
-    ]
-  },
-  "container": {
+  "center": {
     "reason": "Layout primitive tracked by implementation + support matrix baseline.",
     "evidence": [
-      "packages/layouts/container.css",
-      "docs/roadmap/support-matrix.md"
-    ]
-  },
-  "stack": {
-    "reason": "Layout primitive tracked by implementation + support matrix baseline.",
-    "evidence": [
-      "packages/layouts/stack.css",
+      "packages/layouts/center.css",
       "docs/roadmap/support-matrix.md"
     ]
   },
@@ -55,25 +34,64 @@
       "docs/roadmap/support-matrix.md"
     ]
   },
-  "sidebar": {
+  "command-bar": {
+    "reason": "Pattern composition documented as spec, not canonical component RFC.",
+    "evidence": [
+      "docs/architecture/command-bar-pattern-spec.md",
+      "playground/index.html"
+    ]
+  },
+  "container": {
     "reason": "Layout primitive tracked by implementation + support matrix baseline.",
     "evidence": [
-      "packages/layouts/sidebar.css",
+      "packages/layouts/container.css",
       "docs/roadmap/support-matrix.md"
     ]
   },
-  "switcher": {
-    "reason": "Layout primitive tracked by implementation + support matrix baseline.",
+  "copy-button": {
+    "reason": "Planned v1.0 surface tracked by roadmap artifacts until implementation and RFC land.",
     "evidence": [
-      "packages/layouts/switcher.css",
-      "docs/roadmap/support-matrix.md"
+      "docs/roadmap/plan.md",
+      "docs/roadmap/tasklist.md"
     ]
   },
-  "center": {
-    "reason": "Layout primitive tracked by implementation + support matrix baseline.",
+  "data-table-toolbar": {
+    "reason": "Pattern composition documented as spec plus pattern RFC; CSS ships via data-pattern/data-slot contract rather than canonical class RFC.",
     "evidence": [
-      "packages/layouts/center.css",
-      "docs/roadmap/support-matrix.md"
+      "packages/components/data-table-toolbar.css",
+      "docs/architecture/data-table-toolbar-pattern-spec.md",
+      "docs/rfcs/patterns/data-table-toolbar-rfc.md",
+      "playground/index.html"
+    ]
+  },
+  "date-time-picker": {
+    "reason": "Planned v1.0 surface tracked by roadmap artifacts until implementation and RFC land.",
+    "evidence": [
+      "docs/roadmap/plan.md",
+      "docs/roadmap/tasklist.md"
+    ]
+  },
+  "empty-search-state": {
+    "reason": "Planned v1.0 surface tracked by roadmap artifacts until implementation and RFC land.",
+    "evidence": [
+      "docs/roadmap/plan.md",
+      "docs/roadmap/tasklist.md"
+    ]
+  },
+  "error-text": {
+    "reason": "Field composition sub-surface tracked under field RFC.",
+    "evidence": [
+      "packages/components/error-text.css",
+      "docs/rfcs/components/field-rfc.md"
+    ]
+  },
+  "filter-bar": {
+    "reason": "Pattern composition documented as spec plus pattern RFC; CSS ships via data-pattern/data-slot contract rather than canonical class RFC.",
+    "evidence": [
+      "packages/components/filter-bar.css",
+      "docs/architecture/filter-bar-pattern-spec.md",
+      "docs/rfcs/patterns/filter-bar-rfc.md",
+      "playground/index.html"
     ]
   },
   "grid": {
@@ -83,31 +101,45 @@
       "docs/roadmap/support-matrix.md"
     ]
   },
-  "command-bar": {
-    "reason": "Pattern composition documented as spec, not canonical component RFC.",
+  "helper-text": {
+    "reason": "Field composition sub-surface tracked under field RFC.",
     "evidence": [
-      "docs/architecture/command-bar-pattern-spec.md",
-      "playground/index.html"
+      "packages/components/helper-text.css",
+      "docs/rfcs/components/field-rfc.md"
     ]
   },
-  "filter-bar": {
-    "reason": "Pattern composition documented as spec, not canonical component RFC.",
+  "inline-notice": {
+    "reason": "Planned v1.0 surface tracked by roadmap artifacts until implementation and RFC land.",
     "evidence": [
-      "docs/architecture/filter-bar-pattern-spec.md",
-      "playground/index.html"
+      "docs/roadmap/plan.md",
+      "docs/roadmap/tasklist.md"
     ]
   },
-  "data-table-toolbar": {
-    "reason": "Pattern composition documented as spec, not canonical component RFC.",
+  "label": {
+    "reason": "Field composition sub-surface tracked under field RFC.",
     "evidence": [
-      "docs/architecture/data-table-toolbar-pattern-spec.md",
-      "playground/index.html"
+      "packages/components/label.css",
+      "docs/rfcs/components/field-rfc.md"
+    ]
+  },
+  "password-input": {
+    "reason": "Planned v1.0 surface tracked by roadmap artifacts until implementation and RFC land.",
+    "evidence": [
+      "docs/roadmap/plan.md",
+      "docs/roadmap/tasklist.md"
     ]
   },
   "settings-panel": {
     "reason": "RFC-only pattern tracked as architecture spec instead of component RFC.",
     "evidence": [
       "docs/architecture/settings-panel-pattern-spec.md",
+      "docs/roadmap/support-matrix.md"
+    ]
+  },
+  "sidebar": {
+    "reason": "Layout primitive tracked by implementation + support matrix baseline.",
+    "evidence": [
+      "packages/layouts/sidebar.css",
       "docs/roadmap/support-matrix.md"
     ]
   },
@@ -123,6 +155,41 @@
     "evidence": [
       "packages/components/spinner.css",
       "playground/index.html"
+    ]
+  },
+  "stack": {
+    "reason": "Layout primitive tracked by implementation + support matrix baseline.",
+    "evidence": [
+      "packages/layouts/stack.css",
+      "docs/roadmap/support-matrix.md"
+    ]
+  },
+  "stat-group": {
+    "reason": "Planned v1.0 surface tracked by roadmap artifacts until implementation and RFC land.",
+    "evidence": [
+      "docs/roadmap/plan.md",
+      "docs/roadmap/tasklist.md"
+    ]
+  },
+  "switcher": {
+    "reason": "Layout primitive tracked by implementation + support matrix baseline.",
+    "evidence": [
+      "packages/layouts/switcher.css",
+      "docs/roadmap/support-matrix.md"
+    ]
+  },
+  "time-picker": {
+    "reason": "Planned v1.0 surface tracked by roadmap artifacts until implementation and RFC land.",
+    "evidence": [
+      "docs/roadmap/plan.md",
+      "docs/roadmap/tasklist.md"
+    ]
+  },
+  "tree-table": {
+    "reason": "Workflow/pattern tracked by architecture/demo artifacts pending dedicated RFC.",
+    "evidence": [
+      "docs/architecture/data-table-toolbar-pattern-spec.md",
+      "playground/tree-table-workflow-example.html"
     ]
   }
 }

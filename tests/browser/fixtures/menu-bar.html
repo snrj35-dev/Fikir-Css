@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Menu bar fixture</title>
+  <link rel="stylesheet" href="../../../dist/fikir.css" />
+</head>
+<body style="padding: 2rem">
+  <nav class="menu-bar" aria-label="Main navigation">
+    <ul class="menu-bar-list" role="menubar">
+      <li class="menu-bar-item" id="mb-item-1" role="none">
+        <button
+          id="mb-trigger-1"
+          class="menu-bar-trigger"
+          aria-haspopup="true"
+          aria-expanded="false"
+          aria-controls="mb-menu-1"
+          role="menuitem"
+          tabindex="0"
+          type="button"
+        >
+          File
+        </button>
+        <ul id="mb-menu-1" class="menu-bar-content" role="menu" hidden>
+          <li role="none">
+            <button id="mb-new"  class="menu-bar-link" role="menuitem" tabindex="-1" type="button">New</button>
+          </li>
+          <li role="none">
+            <button id="mb-open" class="menu-bar-link" role="menuitem" tabindex="-1" type="button">Open</button>
+          </li>
+        </ul>
+      </li>
+      <li class="menu-bar-item" id="mb-item-2" role="none">
+        <button
+          id="mb-trigger-2"
+          class="menu-bar-trigger"
+          aria-haspopup="true"
+          aria-expanded="false"
+          aria-controls="mb-menu-2"
+          role="menuitem"
+          tabindex="-1"
+          type="button"
+        >
+          Edit
+        </button>
+        <ul id="mb-menu-2" class="menu-bar-content" role="menu" hidden>
+          <li role="none">
+            <button id="mb-cut"  class="menu-bar-link" role="menuitem" tabindex="-1" type="button">Cut</button>
+          </li>
+          <li role="none">
+            <button id="mb-copy" class="menu-bar-link" role="menuitem" tabindex="-1" type="button">Copy</button>
+          </li>
+        </ul>
+      </li>
+      <li class="menu-bar-item" id="mb-item-3" role="none">
+        <button
+          id="mb-trigger-3"
+          class="menu-bar-trigger"
+          aria-haspopup="true"
+          aria-expanded="false"
+          aria-controls="mb-menu-3"
+          role="menuitem"
+          tabindex="-1"
+          type="button"
+        >
+          View
+        </button>
+        <ul id="mb-menu-3" class="menu-bar-content" role="menu" hidden>
+          <li role="none">
+            <button id="mb-zoom" class="menu-bar-link" role="menuitem" tabindex="-1" type="button">Zoom in</button>
+          </li>
+        </ul>
+      </li>
+    </ul>
+  </nav>
+
+  <script>
+    const triggers = [...document.querySelectorAll('.menu-bar-trigger')];
+
+    function openMenu(trigger) {
+      closeAll();
+      const item = trigger.closest('.menu-bar-item');
+      item.dataset.open = 'true';
+      trigger.setAttribute('aria-expanded', 'true');
+      const menu = document.getElementById(trigger.getAttribute('aria-controls'));
+      menu.removeAttribute('hidden');
+      menu.querySelector('[role="menuitem"]')?.focus();
+    }
+
+    function closeAll() {
+      triggers.forEach((t) => {
+        t.setAttribute('aria-expanded', 'false');
+        t.closest('.menu-bar-item').dataset.open = 'false';
+        const menu = document.getElementById(t.getAttribute('aria-controls'));
+        menu.setAttribute('hidden', '');
+      });
+    }
+
+    function moveTriggerFocus(delta) {
+      const idx = triggers.indexOf(document.activeElement.closest('.menu-bar-trigger') ?? document.activeElement);
+      const next = triggers[(idx + delta + triggers.length) % triggers.length];
+      next?.focus();
+      // If a menu was open, open the new menu
+      const wasOpen = triggers.some(t => t.getAttribute('aria-expanded') === 'true');
+      if (wasOpen) openMenu(next);
+    }
+
+    triggers.forEach((trigger) => {
+      trigger.addEventListener('click', () => {
+        trigger.getAttribute('aria-expanded') === 'true' ? closeAll() : openMenu(trigger);
+      });
+    });
+
+    document.addEventListener('keydown', (e) => {
+      const active = document.activeElement;
+      const inMenuBar = active.closest('.menu-bar');
+      if (!inMenuBar) return;
+
+      if (e.key === 'Escape') { closeAll(); triggers[0].focus(); }
+      else if (e.key === 'ArrowRight') { e.preventDefault(); moveTriggerFocus(1); }
+      else if (e.key === 'ArrowLeft')  { e.preventDefault(); moveTriggerFocus(-1); }
+      else if (e.key === 'ArrowDown' && active.classList.contains('menu-bar-trigger')) {
+        e.preventDefault(); openMenu(active);
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.menu-bar')) closeAll();
+    });
+  </script>
+</body>
+</html>

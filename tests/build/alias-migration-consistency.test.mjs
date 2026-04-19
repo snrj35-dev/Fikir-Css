@@ -25,7 +25,10 @@ test("alias migration consistency: mode and entry count match current naming con
   const aliasManifest = await readJson(aliasMigrationPath);
 
   assert.equal(aliasManifest.mode, config.naming.mode);
-  assert.equal(Object.keys(aliasManifest.migration).length, Object.keys(namingContract.selectors).length);
+
+  const nonPatternCount = Object.values(namingContract.selectors)
+    .filter((d) => d.domain !== "pattern").length;
+  assert.equal(Object.keys(aliasManifest.migration).length, nonPatternCount);
 
   const selectorKeys = Object.keys(selectorsManifest.selectors).sort();
   const contractKeys = Object.keys(namingContract.selectors).sort();
@@ -41,6 +44,7 @@ test("alias migration consistency: each alias points to active selector surface"
   const componentPrefix = ensureTrailingDash(config.naming.componentPrefix ?? namingContract.defaults.componentPrefix);
 
   for (const [selectorKey, descriptor] of Object.entries(namingContract.selectors)) {
+    if (descriptor.domain === "pattern") continue; // data-pattern compounds have no CSS class alias
     const prefix = descriptor.domain === "utility" ? utilityPrefix : componentPrefix;
     const aliasKey = `${prefix}${descriptor.base}`;
     const expectedValue = selectorsManifest.selectors[selectorKey];

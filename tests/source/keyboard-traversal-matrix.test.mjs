@@ -78,3 +78,19 @@ test("keyboard: segmented-control uses radio inputs for state", async () => {
     "Segmented control should use radio inputs"
   );
 });
+
+test("keyboard: split-button keeps primary/toggle buttons and menuitem actions", async () => {
+  const html = await getPlaygroundHtml();
+  if (!html.includes("split-button")) return;
+
+  assert.ok(
+    html.match(/<button[^>]+split-button-action|split-button-action[^>]*>/),
+    "Split button primary action should be a <button>"
+  );
+  assert.ok(
+    html.match(/<button[^>]+split-button-toggle|split-button-toggle[^>]*>/),
+    "Split button toggle should be a <button>"
+  );
+  assert.ok(html.includes('data-split-button-menu'), "Split button menu marker missing");
+  assert.ok(html.includes('role="menuitem"'), "Split button menu items should expose role=menuitem");
+});

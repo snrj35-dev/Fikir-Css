@@ -85,3 +85,13 @@ test("a11y: segmented-control group has accessible name", async () => {
     );
   }
 });
+
+test("a11y: split-button toggle exposes menu relationship", async () => {
+  const html = await getPlaygroundHtml();
+  if (!html.includes("split-button")) return;
+
+  assert.ok(html.includes('data-split-button-toggle'), "Split button toggle marker missing");
+  assert.ok(html.includes('aria-haspopup="menu"'), "Split button toggle missing aria-haspopup=menu");
+  assert.ok(html.includes('aria-controls="demo-split-button-menu"'), "Split button toggle missing aria-controls");
+  assert.ok(html.includes('id="demo-split-button-menu" class="dropdown-menu-content" data-split-button-menu role="menu"'));
+});

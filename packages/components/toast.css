@@ -28,7 +28,7 @@
 
   {{component.toast}}[data-tone="danger"] {
     border-color: color-mix(in oklch, var(--color-danger) 48%, var(--color-bg-surface));
-    background: color-mix(in oklch, var(--color-danger) 16%, var(--color-bg-surface));
+    background: var(--color-danger-subtle);
     color: var(--color-fg-default);
   }
 
@@ -70,25 +70,29 @@
 
   {{component.toast}}{{component.toastSuccess}},
   {{component.toast}}[data-tone="success"] {
-    border-color: color-mix(in oklch, oklch(72% 0.17 145) 48%, var(--color-bg-surface));
-    background: color-mix(in oklch, oklch(72% 0.17 145) 10%, var(--color-bg-surface));
+    border-color: color-mix(in oklch, var(--color-success) 48%, var(--color-bg-surface));
+    background: var(--color-success-subtle);
   }
 
   {{component.toast}}{{component.toastInfo}},
   {{component.toast}}[data-tone="info"] {
-    border-color: color-mix(in oklch, oklch(62% 0.14 230) 48%, var(--color-bg-surface));
-    background: color-mix(in oklch, oklch(62% 0.14 230) 10%, var(--color-bg-surface));
+    border-color: color-mix(in oklch, var(--color-info) 48%, var(--color-bg-surface));
+    background: var(--color-info-subtle);
   }
 
   {{component.toast}}{{component.toastWarn}},
   {{component.toast}}[data-tone="warn"] {
-    border-color: color-mix(in oklch, oklch(80% 0.18 75) 48%, var(--color-bg-surface));
-    background: color-mix(in oklch, oklch(80% 0.18 75) 10%, var(--color-bg-surface));
+    border-color: color-mix(in oklch, var(--color-warning) 48%, var(--color-bg-surface));
+    background: var(--color-warning-subtle);
   }
 
   {{component.toast}}{{component.toastError}},
   {{component.toast}}[data-tone="error"] {
     border-color: color-mix(in oklch, var(--color-danger) 48%, var(--color-bg-surface));
-    background: color-mix(in oklch, var(--color-danger) 10%, var(--color-bg-surface));
+    background: var(--color-danger-subtle);
+  }
+
+  {{component.toast}}[data-style="outline"] {
+    background: var(--color-bg-surface);
   }
 }

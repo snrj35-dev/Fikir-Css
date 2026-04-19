@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dropdown menu fixture</title>
+  <link rel="stylesheet" href="../../../dist/fikir.css" />
+</head>
+<body style="padding: 2rem">
+  <div class="dropdown-menu" id="dropdown">
+    <button
+      id="trigger"
+      class="btn btn-ghost"
+      aria-haspopup="true"
+      aria-expanded="false"
+      aria-controls="menu-list"
+    >
+      Options
+    </button>
+    <div
+      id="menu-list"
+      class="dropdown-menu-content"
+      role="menu"
+    >
+      <button id="item-1" class="dropdown-menu-item" role="menuitem" tabindex="-1">Edit</button>
+      <button id="item-2" class="dropdown-menu-item" role="menuitem" tabindex="-1">Duplicate</button>
+      <button id="item-3" class="dropdown-menu-item" role="menuitem" tabindex="-1">Delete</button>
+    </div>
+  </div>
+
+  <script>
+    const dropdown = document.getElementById('dropdown');
+    const trigger  = document.getElementById('trigger');
+    const menu     = document.getElementById('menu-list');
+    const items    = [...menu.querySelectorAll('[role="menuitem"]')];
+
+    function open() {
+      dropdown.dataset.open = 'true';
+      trigger.setAttribute('aria-expanded', 'true');
+      items[0].focus();
+    }
+
+    function close() {
+      delete dropdown.dataset.open;
+      trigger.setAttribute('aria-expanded', 'false');
+      trigger.focus();
+    }
+
+    trigger.addEventListener('click', () => {
+      trigger.getAttribute('aria-expanded') === 'true' ? close() : open();
+    });
+
+    menu.addEventListener('keydown', (e) => {
+      const idx = items.indexOf(document.activeElement);
+      if (e.key === 'ArrowDown') {
+        e.preventDefault();
+        items[(idx + 1) % items.length].focus();
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault();
+        items[(idx - 1 + items.length) % items.length].focus();
+      } else if (e.key === 'Escape') {
+        close();
+      } else if (e.key === 'Home') {
+        e.preventDefault(); items[0].focus();
+      } else if (e.key === 'End') {
+        e.preventDefault(); items[items.length - 1].focus();
+      }
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!dropdown.contains(e.target)) close();
+    });
+  </script>
+</body>
+</html>

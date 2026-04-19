@@ -10,6 +10,34 @@ env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
 
 jobs:
+  browser-test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Install Playwright Chromium
+        run: npx playwright install --with-deps chromium
+
+      - name: Run Playwright browser tests
+        run: npm run test:browser
+
+      - name: Upload Playwright report on failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: playwright-report
+          path: tests/browser/report/
+          retention-days: 7
+
   test:
     runs-on: ubuntu-latest
 
@@ -29,7 +57,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Run minimal foundation test suite
+      - name: Run full CI test suite
         run: npm run test:ci
 
       - name: Validate gzip size thresholds

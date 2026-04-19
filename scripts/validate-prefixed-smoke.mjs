@@ -39,6 +39,8 @@ async function main() {
     assert.equal(selectorsManifest.naming.mode, "prefixed");
 
     for (const [key, descriptor] of Object.entries(namingContract.selectors)) {
+      if (descriptor.domain === "pattern") continue; // data-pattern compounds are never prefixed — intentional
+
       const actualClass = selectorMap[key];
       assert.equal(typeof actualClass, "string", `Missing selector in prefixed smoke: ${key}`);
 
@@ -66,6 +68,9 @@ async function main() {
     console.log("prefixed naming-mode smoke passed");
   } finally {
     await runBuild();
+    // Restore the full selectors.json (schema_version, data_markers, etc.) written by generate-manifests,
+    // which build-css.mjs overwrites with its minimal class-map format.
+    await execFileAsync("node", ["scripts/generate-manifests.mjs"], { cwd: rootDir, env: process.env });
   }
 }
 

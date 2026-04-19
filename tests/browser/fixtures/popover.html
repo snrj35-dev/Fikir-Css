@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Popover fixture</title>
+  <link rel="stylesheet" href="../../../dist/fikir.css" />
+</head>
+<body style="padding: 4rem 2rem">
+  <div class="popover" id="popover">
+    <button
+      id="trigger"
+      class="btn btn-ghost btn-sm"
+      aria-expanded="false"
+      aria-controls="popover-panel"
+      aria-haspopup="true"
+      type="button"
+    >
+      More info
+    </button>
+    <div
+      id="popover-panel"
+      class="popover-content"
+      role="dialog"
+      aria-label="More information"
+    >
+      <p>Popover content here.</p>
+      <button id="popover-close" class="btn btn-ghost btn-xs" type="button" aria-label="Close">✕</button>
+      <button id="action-btn" class="btn btn-sm btn-outline" type="button">Take action</button>
+    </div>
+  </div>
+
+  <button id="outside-btn" class="btn btn-ghost btn-sm" style="margin-inline-start: 2rem" type="button">
+    Outside button
+  </button>
+
+  <script>
+    const popover   = document.getElementById('popover');
+    const trigger   = document.getElementById('trigger');
+    const panel     = document.getElementById('popover-panel');
+    const closeBtn  = document.getElementById('popover-close');
+    let previousFocus = null;
+
+    function open() {
+      previousFocus = document.activeElement;
+      popover.dataset.open = 'true';
+      trigger.setAttribute('aria-expanded', 'true');
+      panel.querySelector('button, [href], input')?.focus();
+    }
+
+    function close() {
+      delete popover.dataset.open;
+      trigger.setAttribute('aria-expanded', 'false');
+      previousFocus?.focus();
+    }
+
+    trigger.addEventListener('click', () => {
+      popover.dataset.open === 'true' ? close() : open();
+    });
+
+    closeBtn.addEventListener('click', close);
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && popover.dataset.open === 'true') close();
+    });
+
+    document.addEventListener('click', (e) => {
+      if (!popover.contains(e.target) && popover.dataset.open === 'true') close();
+    });
+  </script>
+</body>
+</html>

@@ -1,43 +1,41 @@
 # Fikir CSS × React Vite Example
 
-A minimal working fixture demonstrating Fikir CSS in a React + Vite project.
+A working React 18 + Vite example demonstrating Fikir CSS integration.
 
 ## What it shows
 
 - CSS import via `import "fikir-css/css"` (no stylesheet link needed)
-- `resolveBtn()` — typed button recipe resolver
-- `resolveCard()` — typed card recipe resolver
-- `resolveAlert()` — alert with tone variants
-- `resolveBadge()` — badge with tone variants
-- Modal driven by `data-open` attribute (no JS animation library)
-- Dark/light theme toggle via `data-theme` on `<html>`
+- `resolveBtn`, `resolveCard`, `resolveAlert`, `resolveBadge` — typed recipe resolvers
+- `createFocusTrap` + `bindOverlayKeyboard` from `fikir-css/helpers` in a modal
+- Dark/light **theme toggle** via `data-theme` on `<html>`
+- Compact/comfortable **density toggle** via `data-density` on `<html>`
+- Modal driven by `data-open` — no JS animation library needed
 
-## Run
+## Run in 30 seconds
 
 ```bash
-# From this folder — install from npm
 npm install
 npm run dev
+# → http://localhost:5173
 ```
 
 Or install from local tarball (monorepo development):
 
 ```bash
 # From repo root first:
-npm run build
-npm pack
+npm run build && npm pack
 # Then in this folder:
-npm install ../../fikir-css-0.5.0.tgz
+npm install ../../fikir-css-0.6.0.tgz
 npm run dev
 ```
 
 ## Key patterns
 
-### CSS import
+### CSS + compact density import
 
 ```js
-// src/main.jsx
 import "fikir-css/css";
+import "fikir-css/themes/compact"; // opt-in: enables data-density="compact"
 ```
 
 ### Recipe resolvers
@@ -45,27 +43,68 @@ import "fikir-css/css";
 ```js
 import { resolveBtn, resolveCard, resolveBadge, resolveAlert } from "fikir-css/tooling";
 
-// resolveBtn({ variant, tone, size }) → "btn btn-primary btn-sm"
-const classes = resolveBtn({ variant: "solid", tone: "primary", size: "sm" });
+const cls = resolveBtn({ variant: "solid", tone: "primary", size: "sm" });
+// → "btn btn-solid btn-primary btn-sm"
 ```
 
-### Theme toggle
+### Theme & density toggle hooks
 
 ```js
-document.documentElement.setAttribute("data-theme", "dark"); // or "light"
+function useTheme() {
+  const [theme, setTheme] = useState("light");
+  const toggle = () => {
+    const next = theme === "light" ? "dark" : "light";
+    document.documentElement.setAttribute("data-theme", next);
+    setTheme(next);
+  };
+  return [theme, toggle];
+}
+
+function useDensity() {
+  const [density, setDensity] = useState("comfortable");
+  const toggle = () => {
+    const next = density === "comfortable" ? "compact" : "comfortable";
+    next === "compact"
+      ? document.documentElement.setAttribute("data-density", "compact")
+      : document.documentElement.removeAttribute("data-density");
+    setDensity(next);
+  };
+  return [density, toggle];
+}
 ```
 
-### Modal (data-open driven)
+### Modal with focus trap + keyboard binding
 
 ```jsx
-<div
-  className="modal"
-  data-open={String(open)}
-  role="dialog"
-  aria-modal="true"
->
-  <div className="modal-dialog">
-    ...
-  </div>
-</div>
+import { createFocusTrap, bindOverlayKeyboard } from "fikir-css/helpers";
+
+function Modal({ open, onClose, title, children }) {
+  const modalRef = useRef(null);
+  const trapRef = useRef(null);
+  const kbdRef = useRef(null);
+
+  useEffect(() => {
+    trapRef.current = createFocusTrap(modalRef.current);
+    return () => { kbdRef.current?.destroy(); };
+  }, []);
+
+  useEffect(() => {
+    if (open) {
+      trapRef.current?.activate();
+      kbdRef.current = bindOverlayKeyboard(modalRef.current, { onClose });
+    } else {
+      trapRef.current?.deactivate();
+      kbdRef.current?.destroy();
+      kbdRef.current = null;
+    }
+  }, [open, onClose]);
+
+  // Always in DOM — CSS shows/hides via data-open
+  return (
+    <div ref={modalRef} className="modal" data-open={String(open)}
+      role="dialog" aria-modal="true" aria-labelledby="modal-title">
+      <div className="modal-dialog">…</div>
+    </div>
+  );
+}
 ```

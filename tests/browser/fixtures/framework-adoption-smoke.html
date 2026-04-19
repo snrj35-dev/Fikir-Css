@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <title>Framework Adoption Smoke Fixture</title>
+  <link rel="stylesheet" href="../../../dist/fikir.css" />
+  <link id="compact-css" rel="stylesheet" href="../../../dist/themes/compact.css" />
+</head>
+<body class="surface" style="padding: 1rem">
+
+  <!-- Theme toggle -->
+  <button id="theme-toggle" class="btn btn-outline btn-neutral btn-md" type="button">Toggle theme</button>
+
+  <!-- Density toggle -->
+  <button id="density-toggle" class="btn btn-outline btn-neutral btn-md" type="button">Toggle density</button>
+
+  <!-- Badges -->
+  <span id="badge-primary" class="badge badge-soft badge-primary">Primary</span>
+  <span id="badge-neutral" class="badge badge-soft badge-neutral">Neutral</span>
+  <span id="badge-danger"  class="badge badge-soft badge-danger">Danger</span>
+
+  <!-- Alert -->
+  <div id="alert-default" class="alert" role="alert">
+    <p class="alert-title">Info</p>
+    <p class="alert-description">Default alert.</p>
+  </div>
+  <div id="alert-danger" class="alert alert-danger" role="alert">
+    <p class="alert-title">Error</p>
+    <p class="alert-description">Danger alert.</p>
+  </div>
+
+  <!-- Card -->
+  <div id="card-sample" class="card card-elevated card-p-md">
+    <p>Card content</p>
+  </div>
+
+  <!-- Result -->
+  <div id="result-success" class="result" data-result-tone="success" data-style="soft">
+    <p class="result-title">Success</p>
+    <p class="result-description">Operation complete.</p>
+  </div>
+  <div id="result-danger" class="result" data-result-tone="danger" data-style="soft">
+    <p class="result-title">Failed</p>
+    <p class="result-description">Operation failed.</p>
+  </div>
+
+  <!-- Data grid -->
+  <div id="data-grid" class="data-grid" style="--data-grid-columns: 3">
+    <div class="data-grid-head">
+      <div class="data-grid-row">
+        <div class="data-grid-cell">Name</div>
+        <div class="data-grid-cell">Status</div>
+        <div class="data-grid-cell">Role</div>
+      </div>
+    </div>
+    <div class="data-grid-body">
+      <div id="grid-row-0" class="data-grid-row">
+        <div class="data-grid-cell">Alice</div>
+        <div class="data-grid-cell">Active</div>
+        <div class="data-grid-cell">Admin</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- App shell -->
+  <div id="app-shell" class="app-shell">
+    <header id="app-shell-topbar" class="app-shell-topbar">
+      <strong>Workspace</strong>
+    </header>
+    <div class="app-shell-content">
+      <aside id="app-shell-sidebar" class="app-shell-sidebar">Sidebar</aside>
+      <main id="app-shell-main" class="app-shell-main">Main</main>
+    </div>
+  </div>
+
+  <!-- Modal trigger -->
+  <button id="open-modal" class="btn btn-solid btn-primary btn-md" type="button">Open modal</button>
+
+  <!-- Modal -->
+  <div
+    id="modal"
+    class="modal"
+    role="dialog"
+    aria-modal="true"
+    aria-labelledby="modal-title"
+  >
+    <div class="modal-dialog">
+      <header class="modal-header">
+        <h2 id="modal-title" class="modal-title">Test Modal</h2>
+        <button id="modal-close" class="icon-button" aria-label="Close">✕</button>
+      </header>
+      <div class="modal-body">
+        <input id="modal-input" class="input" type="text" placeholder="Focus target" />
+      </div>
+      <footer class="modal-footer">
+        <button id="modal-cancel" class="btn btn-ghost btn-neutral">Cancel</button>
+        <button id="modal-confirm" class="btn btn-solid btn-primary">Confirm</button>
+      </footer>
+    </div>
+  </div>
+
+  <script>
+    // Theme toggle
+    document.getElementById('theme-toggle').addEventListener('click', () => {
+      const html = document.documentElement;
+      const next = html.getAttribute('data-theme') === 'light' ? 'dark' : 'light';
+      html.setAttribute('data-theme', next);
+    });
+
+    // Density toggle
+    document.getElementById('density-toggle').addEventListener('click', () => {
+      const html = document.documentElement;
+      if (html.hasAttribute('data-density')) {
+        html.removeAttribute('data-density');
+      } else {
+        html.setAttribute('data-density', 'compact');
+      }
+    });
+
+    // Modal
+    const modal    = document.getElementById('modal');
+    const openBtn  = document.getElementById('open-modal');
+    const closeBtn = document.getElementById('modal-close');
+    const cancel   = document.getElementById('modal-cancel');
+
+    function openModal() {
+      modal.setAttribute('data-open', 'true');
+      document.getElementById('modal-input').focus();
+    }
+    function closeModal() {
+      modal.removeAttribute('data-open');
+      openBtn.focus();
+    }
+    function trapFocus(e) {
+      const els   = [...modal.querySelectorAll('button,input,[tabindex]:not([tabindex="-1"])')];
+      const first = els[0];
+      const last  = els[els.length - 1];
+      if (e.key === 'Escape')  { e.stopPropagation(); closeModal(); return; }
+      if (e.key !== 'Tab')     return;
+      if (e.shiftKey && document.activeElement === first) { e.preventDefault(); last.focus(); }
+      else if (!e.shiftKey && document.activeElement === last) { e.preventDefault(); first.focus(); }
+    }
+
+    openBtn.addEventListener('click', openModal);
+    closeBtn.addEventListener('click', closeModal);
+    cancel.addEventListener('click',   closeModal);
+    modal.addEventListener('keydown',  trapFocus);
+  </script>
+</body>
+</html>

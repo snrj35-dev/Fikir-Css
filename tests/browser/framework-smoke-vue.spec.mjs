@@ -1,0 +1,123 @@
+/**
+ * framework-smoke-vue.spec.mjs — M18.2 (P1)
+ * Verifies the CSS patterns used in examples/vue-vite:
+ *   - theme toggle (data-theme), density toggle (data-density)
+ *   - modal with data-open, focus trap, Escape key
+ *   - result, data-grid, app-shell, badge, alert, card components
+ */
+import { test, expect } from "@playwright/test";
+import { resolve } from "node:path";
+
+const url = `file://${resolve(process.cwd(), "tests/browser/fixtures/framework-adoption-smoke.html")}`;
+
+test.beforeEach(async ({ page }) => {
+  await page.goto(url);
+});
+
+// ── Theme toggle ─────────────────────────────────────────────────────────────
+
+test("vue-smoke: initial theme is light", async ({ page }) => {
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
+});
+
+test("vue-smoke: theme toggle switches to dark", async ({ page }) => {
+  await page.click("#theme-toggle");
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "dark");
+});
+
+test("vue-smoke: theme toggle cycles back to light", async ({ page }) => {
+  await page.click("#theme-toggle");
+  await page.click("#theme-toggle");
+  await expect(page.locator("html")).toHaveAttribute("data-theme", "light");
+});
+
+// ── Density toggle ───────────────────────────────────────────────────────────
+
+test("vue-smoke: initial density has no data-density attribute", async ({ page }) => {
+  const val = await page.locator("html").getAttribute("data-density");
+  expect(val).toBeNull();
+});
+
+test("vue-smoke: density toggle sets data-density=compact", async ({ page }) => {
+  await page.click("#density-toggle");
+  await expect(page.locator("html")).toHaveAttribute("data-density", "compact");
+});
+
+test("vue-smoke: density toggle removes data-density on second click", async ({ page }) => {
+  await page.click("#density-toggle");
+  await page.click("#density-toggle");
+  const val = await page.locator("html").getAttribute("data-density");
+  expect(val).toBeNull();
+});
+
+// ── Components ────────────────────────────────────────────────────────────────
+
+test("vue-smoke: badge components are visible", async ({ page }) => {
+  await expect(page.locator("#badge-primary")).toBeVisible();
+  await expect(page.locator("#badge-neutral")).toBeVisible();
+  await expect(page.locator("#badge-danger")).toBeVisible();
+});
+
+test("vue-smoke: alert components are visible", async ({ page }) => {
+  await expect(page.locator("#alert-default")).toBeVisible();
+  await expect(page.locator("#alert-danger")).toBeVisible();
+  await expect(page.locator("#alert-danger")).toHaveClass(/alert-danger/);
+});
+
+test("vue-smoke: card is visible", async ({ page }) => {
+  await expect(page.locator("#card-sample")).toBeVisible();
+});
+
+test("vue-smoke: result components are visible with tone attributes", async ({ page }) => {
+  await expect(page.locator("#result-success")).toBeVisible();
+  await expect(page.locator("#result-success")).toHaveAttribute("data-result-tone", "success");
+  await expect(page.locator("#result-danger")).toHaveAttribute("data-result-tone", "danger");
+});
+
+test("vue-smoke: data-grid renders rows", async ({ page }) => {
+  await expect(page.locator("#data-grid")).toBeVisible();
+  await expect(page.locator("#grid-row-0")).toBeVisible();
+});
+
+test("vue-smoke: app-shell renders topbar, sidebar, main", async ({ page }) => {
+  await expect(page.locator("#app-shell-topbar")).toBeVisible();
+  await expect(page.locator("#app-shell-sidebar")).toBeVisible();
+  await expect(page.locator("#app-shell-main")).toBeVisible();
+});
+
+// ── Modal ────────────────────────────────────────────────────────────────────
+
+test("vue-smoke: modal is hidden before open", async ({ page }) => {
+  await expect(page.locator("#modal")).not.toHaveAttribute("data-open");
+});
+
+test("vue-smoke: modal opens on button click", async ({ page }) => {
+  await page.click("#open-modal");
+  await expect(page.locator("#modal")).toHaveAttribute("data-open", "true");
+  await expect(page.locator("#modal")).toBeVisible();
+});
+
+test("vue-smoke: modal has role=dialog and aria-modal=true", async ({ page }) => {
+  await expect(page.locator("#modal")).toHaveAttribute("role", "dialog");
+  await expect(page.locator("#modal")).toHaveAttribute("aria-modal", "true");
+  await expect(page.locator("#modal")).toHaveAttribute("aria-labelledby", "modal-title");
+});
+
+test("vue-smoke: Escape key closes modal", async ({ page }) => {
+  await page.click("#open-modal");
+  await expect(page.locator("#modal")).toHaveAttribute("data-open", "true");
+  await page.keyboard.press("Escape");
+  await expect(page.locator("#modal")).not.toHaveAttribute("data-open");
+});
+
+test("vue-smoke: close button closes modal", async ({ page }) => {
+  await page.click("#open-modal");
+  await page.click("#modal-close");
+  await expect(page.locator("#modal")).not.toHaveAttribute("data-open");
+});
+
+test("vue-smoke: modal receives focus on open", async ({ page }) => {
+  await page.click("#open-modal");
+  const focused = await page.evaluate(() => document.activeElement?.id);
+  expect(["modal-input", "modal-close", "modal-cancel", "modal-confirm"]).toContain(focused);
+});

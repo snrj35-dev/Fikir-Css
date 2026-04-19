@@ -1,8 +1,8 @@
-# Command Bar Pattern Spec (v0.2)
+# Command Bar Pattern Spec (v1.0)
 
 ## Durum
-- Status: Draft (pattern spec)
-- Scope: v0.2 foundation class surface
+- Status: Accepted (implemented pattern spec)
+- Scope: v1.0 foundation class surface
 - Non-goal: global hotkey manager, command routing engine, fuzzy search behavior
 
 ## Amaç
@@ -29,16 +29,49 @@ Pattern wrapper gerekiyorsa proje-yerel class veya `data-pattern="command-bar"` 
 - Sürekli override ihtiyacı varsa pattern kompozisyonu gözden geçirilmelidir.
 - `btn` axis çakışmaları aynı node üzerinde birlikte kullanılmamalıdır.
 
+## App-shell / Top Area Integration
+Command bar tipik olarak uygulamanın üst toolbar alanında yer alır:
+
+```
+┌──────────────────────────────────────────────────────┐
+│ [Logo] [search] [quick action] [badge] [user menu]   │  <- app-shell-topbar
+└──────────────────────────────────────────────────────┘
+```
+
+**Rules:**
+- `app-shell-topbar` içinde `data-pattern="command-bar"` ile işaretlenebilir
+- Layout genellikle `cluster` + `stack` kombinasyonu olur
+- Responsive davranış: narrow ekranlarda search icon-only, tablet+da search açılır
+- Diğer topbar elemanları (logo, user menu) ile aynı flex context'te yer alır
+- Focus order: search input → quick actions → user menu (soldan sağa)
+
 ## Accessibility Beklentileri
-- Arama alanı erişilebilir label taşımalıdır.
+- Arama alanı erişilebilir label taşımalıdır (`aria-label` veya `<label>`).
 - Aksiyonlar gerçek `button`/`a` elementiyle sunulmalıdır.
 - Komut paleti tetikleyicisi varsa açık/kapalı durumu erişilebilir attribute ile ifade edilmelidir.
+- Tab sırası: search input → action buttons → diğer topbar controls doğal akışta ilerlemeli.
+- Screen reader: search alanının amacı açık olmalı ("Command bar search", "Product search" vs).
 
 ## Contract İlişkisi
 - Kullanılan framework class'ları `dist/contracts/selectors.json` içinde olmalıdır.
-- Bu spec, naming/recipe contract'ta değişiklik gerektirmez.
+- BCommand Bar vs Command Palette Boundary (v1.0)
 
-## Minimal Kullanım Örneği
+**Command Bar (this pattern):**
+- Üst toolbar bölgesinde yer alan arama + quick actions kombinasyonu
+- Kullanıcı arama ve temel eylemleri hızlı erişsin diye
+- Persistent, her zaman görünür, app context'te yer alır
+
+**Command Palette (separate surface):**
+- Global keyboard shortcut (`Ctrl+K` / `⌘K`) ile modal overlay olarak açılır
+- Fuzzy search, full command discovery, keyboard-first navigation
+- `command-palette` CSS surface ile desteklenir
+- App-shell tarafından bağımsız, JavaScript hotkey manager gerektirir
+
+**Integration:**
+- Command bar search ve command palette çoğunlukla farklı amaca hizmet eder
+- Command bar: "Bu sayfada ara/filtrele"
+- Command palette: "Global komut ara, uygulamaya git"
+- Aynı `input` elemanını paylaştırılamaz; ikisi de sağlana bilebilir (örn: navbar'da search + keyboard shortcut talimatı)
 ```html
 <section class="stack gap-2" data-pattern="command-bar">
   <div class="cluster gap-2">

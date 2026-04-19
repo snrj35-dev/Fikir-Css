@@ -10,7 +10,8 @@ Use this path for release operations, support-level governance, and docs/impleme
 
 ## Step 2: Release Discipline
 - Release checklist: `docs/release/release-checklist.md`.
-- Versioning policy: `docs/release/versioning-semver-policy.md`.
+- Versioning policy: `docs/governance/semver-policy.md`.
+- Selector freeze: `docs/governance/selector-contract-freeze.md`.
 - Changelog policy: `docs/release/changelog-policy.md`.
 - Milestone release notes process: `docs/release/milestone-release-notes-process.md`.
 - Bundle size thresholds: `docs/release/bundle-size-thresholds.md`.

@@ -3,12 +3,14 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Fikir CSS Tree + Table Workflow Example</title>
+    <title>Tree + Table Workflow Example — Fikir CSS</title>
     <link rel="stylesheet" href="../dist/fikir.css" />
     <style>
       body { margin: 0; }
-      .page-shell { max-width: 88rem; margin: 0 auto; padding: 1.5rem 1rem 3rem; }
+      .page-shell { max-width: 92rem; margin: 0 auto; padding: 1.5rem 1rem 3rem; }
+      .layout-split { display: grid; grid-template-columns: 14rem 1fr; gap: var(--space-4); align-items: start; }
       .table-scroll { overflow-x: auto; }
+      @media (max-width: 48rem) { .layout-split { grid-template-columns: 1fr; } }
     </style>
   </head>
   <body>
@@ -16,92 +18,213 @@
       <header class="page-header">
         <div class="page-header-content">
           <h1 style="margin: 0">Tree + Table Workflow Example</h1>
-          <p class="text-sm" style="margin: 0">Enterprise explorer flow that combines tree navigation and table operations.</p>
+          <p class="text-sm" style="margin: 0">Regional hierarchy browser paired with an accounts table — navigate the tree to filter the table.</p>
         </div>
       </header>
 
-      <section class="split-pane" style="--split-pane-gap: var(--space-4); --split-pane-primary: 17rem" aria-label="Tree and table workflow">
+      <div class="layout-split">
+
+        <!-- Left: tree-view region navigation -->
         <aside class="card card-p-md stack" style="--stack-gap: var(--space-3)">
-          <h2 class="text-md" style="margin: 0">Collections</h2>
-          <nav class="tree-view" role="tree" aria-label="Collections tree">
-            <ul class="tree-view-group">
-              <li class="tree-view-item" data-tree-expanded="true" role="treeitem" aria-expanded="true">
-                <button class="tree-view-toggle" type="button" aria-label="Collapse Accounts">- Accounts</button>
-                <span class="tree-view-label">Accounts</span>
-                <ul class="tree-view-group">
-                  <li class="tree-view-item" data-tree-expanded="false" role="treeitem" aria-expanded="false">
-                    <button class="tree-view-toggle" type="button" aria-label="Expand Enterprise">+ Enterprise</button>
-                    <span class="tree-view-label">Enterprise</span>
-                    <ul class="tree-view-group">
-                      <li class="tree-view-item" role="treeitem">
-                        <span class="tree-view-label">Renewals</span>
-                      </li>
-                    </ul>
+          <p class="text-sm" style="margin: 0; font-weight: var(--font-weight-semibold)">Regions</p>
+          <nav aria-label="Enterprise region navigation">
+            <ul class="tree-view" role="tree" aria-label="Enterprise regions" aria-multiselectable="false">
+
+              <!-- North America — expanded -->
+              <li class="tree-view-item" role="treeitem" aria-expanded="true" data-tree-expanded="true">
+                <button class="tree-view-toggle" aria-expanded="true" type="button">▾ North America</button>
+                <ul class="tree-view-group" role="group">
+                  <li class="tree-view-item" role="treeitem" aria-selected="true">
+                    <span class="tree-view-label" style="cursor:pointer; font-weight:var(--font-weight-semibold)">Acme Corp</span>
                   </li>
                   <li class="tree-view-item" role="treeitem">
-                    <span class="tree-view-label">Mid-market</span>
+                    <span class="tree-view-label" style="cursor:pointer">TechStart Inc</span>
+                  </li>
+                  <li class="tree-view-item" role="treeitem">
+                    <span class="tree-view-label" style="cursor:pointer">Global Dynamics</span>
                   </li>
                 </ul>
               </li>
+
+              <!-- Europe — collapsed -->
+              <li class="tree-view-item" role="treeitem" aria-expanded="false" data-tree-expanded="false">
+                <button class="tree-view-toggle" aria-expanded="false" type="button">▸ Europe</button>
+                <ul class="tree-view-group" role="group">
+                  <li class="tree-view-item" role="treeitem">
+                    <span class="tree-view-label" style="cursor:pointer">EuroTech GmbH</span>
+                  </li>
+                  <li class="tree-view-item" role="treeitem">
+                    <span class="tree-view-label" style="cursor:pointer">Nordic Solutions</span>
+                  </li>
+                </ul>
+              </li>
+
+              <!-- APAC — collapsed -->
+              <li class="tree-view-item" role="treeitem" aria-expanded="false" data-tree-expanded="false">
+                <button class="tree-view-toggle" aria-expanded="false" type="button">▸ APAC</button>
+                <ul class="tree-view-group" role="group">
+                  <li class="tree-view-item" role="treeitem">
+                    <span class="tree-view-label" style="cursor:pointer">Asia Pacific Ltd</span>
+                  </li>
+                </ul>
+              </li>
+
             </ul>
           </nav>
         </aside>
 
-        <section class="stack" style="--stack-gap: var(--space-3)">
-          <article class="card card-p-md stack" style="--stack-gap: var(--space-3)" data-pattern="data-table-toolbar">
-            <div class="cluster justify-between">
-              <div class="cluster" style="--cluster-gap: var(--space-2)">
-                <form class="search-box" role="search" aria-label="Account table search">
-                  <input class="search-box-input" type="search" value="renewal" aria-label="Search accounts" />
+        <!-- Right: accounts table with toolbar, selection summary, and pagination -->
+        <article class="card card-p-md stack" style="--stack-gap: var(--space-3)">
+
+          <!-- Data table toolbar -->
+          <div data-pattern="data-table-toolbar">
+            <div data-slot="controls">
+              <div data-slot="search">
+                <form class="search-box" role="search" aria-label="Enterprise accounts search">
+                  <input class="search-box-input" type="search" placeholder="Search accounts..." aria-label="Search enterprise accounts" />
+                  <button class="search-box-action" type="submit">Search</button>
                 </form>
-                <button class="btn btn-outline btn-sm" type="button">Filters</button>
               </div>
-              <button class="btn btn-primary btn-sm" type="button" aria-controls="enterprise-accounts-table">Bulk assign owner</button>
+              <div data-slot="filters">
+                <button class="btn btn-outline btn-sm" type="button">Filter by status</button>
+              </div>
+              <div data-slot="actions">
+                <button class="btn btn-primary btn-sm" type="button">Add account</button>
+                <button class="btn btn-outline btn-sm" type="button">Export</button>
+              </div>
             </div>
 
-            <div class="table-scroll">
-              <table id="enterprise-accounts-table" class="table" aria-label="Enterprise accounts table">
-                <thead class="table-head">
-                  <tr class="table-row">
-                    <th class="table-head-cell" scope="col">Account</th>
-                    <th class="table-head-cell" scope="col">Owner</th>
-                    <th class="table-head-cell" scope="col">Renewal</th>
-                    <th class="table-head-cell" scope="col">Risk</th>
-                  </tr>
-                </thead>
-                <tbody class="table-body">
-                  <tr class="table-row" data-row-selected="true">
-                    <td class="table-cell">Atlas CRM</td>
-                    <td class="table-cell">Ada</td>
-                    <td class="table-cell">2026-05-12</td>
-                    <td class="table-cell">Low</td>
-                  </tr>
-                  <tr class="table-row">
-                    <td class="table-cell">Pulse Ops</td>
-                    <td class="table-cell">Grace</td>
-                    <td class="table-cell">2026-05-21</td>
-                    <td class="table-cell">Medium</td>
-                  </tr>
-                  <tr class="table-row">
-                    <td class="table-cell">Nova Billing</td>
-                    <td class="table-cell">Linus</td>
-                    <td class="table-cell">2026-06-02</td>
-                    <td class="table-cell">Low</td>
-                  </tr>
-                </tbody>
-              </table>
+            <!-- Selection summary -->
+            <div data-slot="selection-summary" aria-live="polite" aria-atomic="true">
+              <span class="badge badge-primary badge-sm">2 of 5 selected</span>
+              <button class="btn btn-ghost btn-sm" type="button">Clear selection</button>
+              <button class="btn btn-outline btn-sm" type="button">Bulk action</button>
             </div>
+          </div>
 
-            <nav class="pagination" aria-label="Accounts pagination">
-              <a class="pagination-item" href="#" aria-label="Previous page">Prev</a>
-              <a class="pagination-item" href="#" aria-current="page">1</a>
-              <a class="pagination-item" href="#">2</a>
-              <a class="pagination-item" href="#">3</a>
-              <a class="pagination-item" href="#" aria-label="Next page">Next</a>
-            </nav>
-          </article>
-        </section>
-      </section>
+          <!-- Accounts table -->
+          <div class="table-scroll">
+            <table class="table" aria-label="Enterprise accounts table">
+              <thead>
+                <tr>
+                  <th style="width: 2rem;"><input type="checkbox" aria-label="Select all accounts" /></th>
+                  <th>Account name</th>
+                  <th>Type</th>
+                  <th>Status</th>
+                  <th>ARR</th>
+                  <th>Owner</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr aria-selected="true">
+                  <td><input type="checkbox" checked aria-label="Select Acme Corp" /></td>
+                  <td><strong>Acme Corp</strong></td>
+                  <td>Enterprise</td>
+                  <td><span class="badge badge-success badge-sm">Active</span></td>
+                  <td>$2.4M</td>
+                  <td>Sarah Kim</td>
+                  <td>
+                    <button class="btn btn-ghost btn-sm" type="button">View</button>
+                    <button class="btn btn-ghost btn-sm" type="button">Edit</button>
+                  </td>
+                </tr>
+                <tr aria-selected="true">
+                  <td><input type="checkbox" checked aria-label="Select TechStart Inc" /></td>
+                  <td><strong>TechStart Inc</strong></td>
+                  <td>SMB</td>
+                  <td><span class="badge badge-warning badge-sm">Trial</span></td>
+                  <td>$45K</td>
+                  <td>James Park</td>
+                  <td>
+                    <button class="btn btn-ghost btn-sm" type="button">View</button>
+                    <button class="btn btn-ghost btn-sm" type="button">Edit</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" aria-label="Select Global Dynamics" /></td>
+                  <td>Global Dynamics</td>
+                  <td>Enterprise</td>
+                  <td><span class="badge badge-success badge-sm">Active</span></td>
+                  <td>$890K</td>
+                  <td>Maria Ortiz</td>
+                  <td>
+                    <button class="btn btn-ghost btn-sm" type="button">View</button>
+                    <button class="btn btn-ghost btn-sm" type="button">Edit</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" aria-label="Select Pinnacle Systems" /></td>
+                  <td>Pinnacle Systems</td>
+                  <td>Mid-market</td>
+                  <td><span class="badge badge-danger badge-sm">Churned</span></td>
+                  <td>$120K</td>
+                  <td>Lee Wang</td>
+                  <td>
+                    <button class="btn btn-ghost btn-sm" type="button">View</button>
+                    <button class="btn btn-ghost btn-sm" type="button">Edit</button>
+                  </td>
+                </tr>
+                <tr>
+                  <td><input type="checkbox" aria-label="Select Vertex Industries" /></td>
+                  <td>Vertex Industries</td>
+                  <td>Enterprise</td>
+                  <td><span class="badge badge-success badge-sm">Active</span></td>
+                  <td>$3.1M</td>
+                  <td>Sarah Kim</td>
+                  <td>
+                    <button class="btn btn-ghost btn-sm" type="button">View</button>
+                    <button class="btn btn-ghost btn-sm" type="button">Edit</button>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <!-- Pagination -->
+          <nav class="pagination" aria-label="Enterprise accounts pagination">
+            <button class="pagination-prev" type="button" aria-label="Previous page" disabled>‹</button>
+            <button class="pagination-item" type="button" aria-current="page" aria-label="Page 1">1</button>
+            <button class="pagination-item" type="button" aria-label="Page 2">2</button>
+            <button class="pagination-item" type="button" aria-label="Page 3">3</button>
+            <span class="pagination-ellipsis" aria-hidden="true">…</span>
+            <button class="pagination-item" type="button" aria-label="Page 12">12</button>
+            <button class="pagination-next" type="button" aria-label="Next page">›</button>
+          </nav>
+
+        </article>
+      </div>
     </main>
+
+    <script>
+      // Tree-view expand/collapse
+      document.querySelectorAll('.tree-view-toggle').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const item = btn.closest('.tree-view-item')
+          if (!item) return
+          const expanded = item.getAttribute('aria-expanded') === 'true'
+          item.setAttribute('aria-expanded', String(!expanded))
+          item.dataset.treeExpanded = String(!expanded)
+          btn.setAttribute('aria-expanded', String(!expanded))
+          btn.textContent = (!expanded ? '▾ ' : '▸ ') + btn.textContent.slice(2)
+        })
+      })
+
+      // Row selection (checkbox + aria-selected)
+      document.querySelectorAll('[aria-label="Enterprise accounts table"] tbody input[type="checkbox"]').forEach(cb => {
+        cb.addEventListener('change', () => {
+          const row = cb.closest('tr')
+          if (row) row.setAttribute('aria-selected', cb.checked ? 'true' : 'false')
+          updateSelectionSummary()
+        })
+      })
+
+      function updateSelectionSummary() {
+        const total = document.querySelectorAll('[aria-label="Enterprise accounts table"] tbody tr').length
+        const selected = document.querySelectorAll('[aria-label="Enterprise accounts table"] tbody tr[aria-selected="true"]').length
+        const badge = document.querySelector('[data-slot="selection-summary"] .badge')
+        if (badge) badge.textContent = `${selected} of ${total} selected`
+      }
+    </script>
   </body>
 </html>

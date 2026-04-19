@@ -1,12 +1,14 @@
 # Performance Benchmark & Comparison
 
-> Updated: M12 | Methodology: static analysis + Chrome DevTools
+> Updated: M19 — v0.6.0 | Methodology: static analysis + Chrome DevTools
+>
+> Bundle sizes sourced from `npm run validate:size` (gzip) and `npm run report:size` (raw). Rendering benchmarks are approximate — measured on M1 MacBook Air, Chrome 124, 50 button + 1 modal page.
 
 ## Bundle size
 
 | Library | CSS bundle | Gzip | JS required |
 |---------|------------|------|-------------|
-| **Fikir CSS v0.6.0-beta** | 92 KB raw | **10.5 KB** | None |
+| **Fikir CSS v0.6.0** | 92 KB raw | **10.5 KB** | None |
 | Bootstrap 5.3 | 194 KB raw | ~22 KB | Optional (~16 KB gzip) |
 | Tailwind CSS 3 (purged, typical app) | ~8–30 KB | ~3–12 KB | None (build step required) |
 | Tailwind CSS 4 (new engine) | ~15 KB | ~5 KB | None |
@@ -14,7 +16,8 @@
 | Pico CSS 2 | 86 KB raw | ~11 KB | None |
 | Water.css | 5 KB raw | 2 KB | None |
 
-> Fikir CSS ships **82 surfaces** (components + utilities) in 10.5 KB gzip. No purge step needed.
+> Fikir CSS ships **82 surfaces** (components + utilities + layout primitives) in 10.5 KB gzip. No purge step needed.
+> Opt-in theme files: compact density (+0.8 KB), shape tokens (+0.4 KB).
 
 ## Runtime performance
 
@@ -61,15 +64,17 @@ Measured with Chrome DevTools Performance panel on a page with 50 button instanc
 | Style recalc (theme toggle) | 0.4 ms | 1.1 ms |
 | Layout after theme toggle | 0 ms (no layout shift) | 0.2 ms |
 
-> *Measurements are approximate and device-dependent. Benchmarks run on M1 MacBook Air, Chrome 124.*
+> *Measurements are approximate and device-dependent. Re-run with `npm run capture:playground` and Chrome DevTools for your specific hardware.*
 
 ## When to choose Fikir CSS
 
 - You want a **component-complete** system without writing component CSS from scratch
 - You need **dark/compact/high-contrast** themes without a build step
 - You want **zero-JS state** management (CSS-native `data-*` selectors)
-- You are building with **Vue, React, Svelte, or plain HTML** and want typed class resolvers
+- You are building with **Vue, React, Svelte, or plain HTML** and want typed class resolvers (`fikir-css/tooling`)
+- You need overlay accessibility helpers without a third-party library (`fikir-css/helpers`)
 - Bundle size and zero runtime are hard requirements
+- You want W3C DTCG token export for Figma sync out of the box (`dist/tokens.json`)
 
 ## When to choose alternatives
 

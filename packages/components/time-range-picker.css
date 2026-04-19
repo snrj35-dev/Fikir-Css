@@ -1,0 +1,51 @@
+@layer components {
+  [data-pattern="time-range-picker"] {
+    --time-range-gap: var(--space-2);
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: var(--time-range-gap);
+  }
+
+  [data-pattern="time-range-picker"] [data-slot="from"],
+  [data-pattern="time-range-picker"] [data-slot="to"] {
+    flex: 1 1 auto;
+    min-inline-size: 8rem;
+  }
+
+  [data-pattern="time-range-picker"] [data-slot="separator"] {
+    flex-shrink: 0;
+    color: var(--color-fg-muted);
+    font-size: var(--font-size-sm);
+    user-select: none;
+  }
+
+  /* Full-width block variant */
+  [data-pattern="time-range-picker"][data-variant="block"] {
+    display: flex;
+    inline-size: 100%;
+  }
+
+  [data-pattern="time-range-picker"][data-variant="block"] [data-slot="from"],
+  [data-pattern="time-range-picker"][data-variant="block"] [data-slot="to"] {
+    flex: 1 1 0;
+  }
+
+  /* Invalid state */
+  [data-pattern="time-range-picker"][data-invalid="true"] [data-slot="from"],
+  [data-pattern="time-range-picker"][data-invalid="true"] [data-slot="to"] {
+    --input-border-color: var(--color-danger);
+  }
+
+  /* Responsive: stack vertically on small viewports */
+  @media (max-width: 30rem) {
+    [data-pattern="time-range-picker"] {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    [data-pattern="time-range-picker"] [data-slot="separator"] {
+      align-self: center;
+    }
+  }
+}

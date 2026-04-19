@@ -22,7 +22,7 @@ Fikir CSS components carry CSS styles only. Behavior (open/close, focus manageme
 
 | Value | Meaning | Used by |
 |-------|---------|---------|
-| `"true"` | Component is open/visible/expanded | `modal`, `popover`, `tooltip`, `dropdown-menu`, `accordion`, `menu-bar-item`, `menu-bar-submenu` |
+| `"true"` | Component is open/visible/expanded | `modal`, `popover`, `tooltip`, `dropdown-menu`, `split-button`, `accordion`, `menu-bar-item`, `menu-bar-submenu` |
 | `"false"` (or absent) | Closed/hidden | (default state) |
 
 ### `data-active`
@@ -66,6 +66,27 @@ Fikir CSS components carry CSS styles only. Behavior (open/close, focus manageme
 | `"command-bar"` | Marks a command bar composition | Pattern surfaces |
 | `"filter-bar"` | Marks a filter bar composition | Pattern surfaces |
 | `"data-table-toolbar"` | Marks a data table toolbar | Pattern surfaces |
+
+### `data-slot`
+
+Structural `data-slot` values are used only inside pattern wrappers. They are not state markers.
+
+| Value | Meaning | Used by |
+|-------|---------|---------|
+| `"controls"` | Primary controls row | `filter-bar`, `data-table-toolbar` |
+| `"search"` | Search area | `filter-bar`, `data-table-toolbar` |
+| `"filters"` | Filter control group | `filter-bar`, `data-table-toolbar` |
+| `"reset"` | Clear/reset action group | `filter-bar` |
+| `"actions"` | Non-reset action group | `filter-bar`, `data-table-toolbar` |
+| `"summary"` | Secondary summary row | `filter-bar`, `data-table-toolbar` |
+| `"chips"` | Active filter chip group | `filter-bar` |
+| `"meta"` | Result/meta summary text | `filter-bar` |
+| `"column-visibility"` | Column visibility controls | `data-table-toolbar` |
+| `"density"` | Density controls | `data-table-toolbar` |
+| `"export"` | Export controls | `data-table-toolbar` |
+| `"active-filters"` | Active filter summary group | `data-table-toolbar` |
+| `"selection-summary"` | Selected row count/meta | `data-table-toolbar` |
+| `"surface"` | Controlled table or data-grid area | `data-table-toolbar` |
 
 ---
 

@@ -34,10 +34,10 @@ test("contract key integrity: recipe keys exist in naming contract", () => {
 });
 
 test("contract key integrity: naming selector descriptors keep expected schema", () => {
-  const allowedDomains = new Set(["component", "utility"]);
+  const allowedDomains = new Set(["component", "utility", "pattern"]);
 
   for (const [key, descriptor] of Object.entries(namingContract.selectors)) {
-    assert.match(key, /^(component|utility)\./);
+    assert.match(key, /^(component|utility|pattern)\./);
     assert.ok(allowedDomains.has(descriptor.domain), `Invalid domain in ${key}`);
     assert.equal(typeof descriptor.base, "string", `Missing base string in ${key}`);
     assert.ok(descriptor.base.length > 0, `Empty base class in ${key}`);

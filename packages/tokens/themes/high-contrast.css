@@ -3,11 +3,25 @@
   .theme-high-contrast {
     --color-bg-default: oklch(0% 0 0);
     --color-bg-surface: oklch(4% 0 0);
+    --color-bg-elevated: oklch(8% 0 0);
     --color-fg-default: oklch(100% 0 0);
     --color-fg-muted: oklch(80% 0 0);
     --color-border-subtle: oklch(60% 0 0);
     --color-accent: oklch(68% 0.2 250);
+    --color-neutral: var(--color-fg-default);
+    --color-primary: var(--color-accent);
+    --color-success: var(--color-accent);
+    --color-warning: var(--color-accent);
     --color-danger: oklch(62% 0.25 25);
+    --color-info: var(--color-accent);
+
+    /* Keep destructive feedback distinct, collapse other tones onto a single emphasis channel. */
+    --color-neutral-subtle: var(--color-bg-surface);
+    --color-primary-subtle: color-mix(in oklch, var(--color-primary) 22%, var(--color-bg-surface));
+    --color-success-subtle: var(--color-primary-subtle);
+    --color-warning-subtle: var(--color-primary-subtle);
+    --color-danger-subtle: color-mix(in oklch, var(--color-danger) 22%, var(--color-bg-surface));
+    --color-info-subtle: var(--color-primary-subtle);
   }
 }
 
@@ -16,11 +30,24 @@
     :root {
       --color-bg-default: Canvas;
       --color-bg-surface: Canvas;
+      --color-bg-elevated: Canvas;
       --color-fg-default: CanvasText;
       --color-fg-muted: GrayText;
       --color-border-subtle: ButtonBorder;
       --color-accent: Highlight;
+      --color-neutral: CanvasText;
+      --color-primary: Highlight;
+      --color-success: Highlight;
+      --color-warning: Highlight;
       --color-danger: LinkText;
+      --color-info: Highlight;
+
+      --color-neutral-subtle: Canvas;
+      --color-primary-subtle: Canvas;
+      --color-success-subtle: Canvas;
+      --color-warning-subtle: Canvas;
+      --color-danger-subtle: Canvas;
+      --color-info-subtle: Canvas;
     }
   }
 }

@@ -47,12 +47,29 @@ UI-intent tokens. Reference core tokens; never hard-code raw values.
 | Foreground | `--color-fg-` | `packages/tokens/semantic.css` | `--color-fg-default`, `--color-fg-muted` |
 | Border | `--color-border-` | `packages/tokens/semantic.css` | `--color-border-subtle`, `--color-border-strong` |
 | Accent | `--color-accent` | `packages/tokens/semantic.css` | `--color-accent` |
-| Status | `--color-{status}` | `packages/tokens/semantic.css` | `--color-danger` |
+| Tone | `--color-{tone}`, `--color-{tone}-subtle` | `packages/tokens/semantic.css` | `--color-primary`, `--color-success-subtle` |
 
 **Rules:**
-- Semantic tokens must reference a core token via `var(--core-token)`.
+- Semantic tokens must resolve through core tokens and/or previously declared semantic tokens; raw literals are not allowed in `packages/tokens/semantic.css`.
 - Semantic tokens are the only tokens components and utilities should directly consume.
 - Semantic tokens define the public theming contract; changing a semantic token's value is a theming operation, not a breaking change.
+
+### Semantic Tone Contract
+
+The official tone surface for the v1.0 track is frozen to:
+
+- `neutral`
+- `primary`
+- `success`
+- `warning`
+- `danger`
+- `info`
+
+Rules:
+- Every official tone exposes a base token (`--color-{tone}`).
+- Every official tone may expose a subtle surface token (`--color-{tone}-subtle`).
+- `--color-primary` follows `--color-accent`; consumers should use `--color-primary` for tone semantics and keep `--color-accent` as the brand hook.
+- High-contrast mode may collapse non-destructive feedback tones (`success`, `warning`, `info`) onto the primary emphasis channel when that improves legibility.
 
 ---
 
@@ -66,7 +83,7 @@ Context-specific overrides of semantic tokens. Applied via `[data-theme]` or `@m
 |------|-----------------|-------------|
 | Light (default) | `:root, [data-theme="light"]` | `packages/tokens/semantic.css` |
 | Dark | `[data-theme="dark"]` | `packages/tokens/themes/dark.css` |
-| High contrast | `[data-theme="high-contrast"]` | `packages/tokens/themes/high-contrast.css` *(M2)* |
+| High contrast | `[data-theme="high-contrast"]` | `packages/tokens/themes/high-contrast.css` |
 | Reduced motion | `@media (prefers-reduced-motion: reduce)` | inline in component CSS *(M2)* |
 | Compact density | `[data-density="compact"]` | `packages/tokens/themes/compact.css` *(M2)* |
 | Comfortable density | `[data-density="comfortable"]` | `packages/tokens/themes/comfortable.css` *(M2)* |
@@ -119,12 +136,12 @@ The following are frozen as of v1.0 track start:
 
 - Token naming grammar (above)
 - Core token families: spacing, font-size, radius, shadow, color palette, container
-- Semantic token families: bg, fg, border, accent, danger
-- Mode token selectors: light, dark
+- Semantic token families: bg, fg, border, accent, tone (`neutral`, `primary`, `success`, `warning`, `danger`, `info`)
+- Mode token selectors: light, dark, high-contrast
 
 **Not yet frozen (M2 additions):**
-- high-contrast, compact, comfortable, rounded, sharp modes
-- Additional semantic token families (e.g., `--color-success`, `--color-warning`, `--color-info`)
+- compact, comfortable, rounded, sharp modes
+- Additional semantic tone families beyond the official six-tone contract
 
 ---
 

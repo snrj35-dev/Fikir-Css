@@ -1,7 +1,6 @@
 # From Tailwind CSS to Fikir CSS
 
-> Created: 2026-04-12
-> Scope: M3 migration quickstart
+> Updated: M18 — v0.6.0
 
 ## Key Differences
 
@@ -65,8 +64,8 @@ Instead of composing Tailwind utilities for every component, use Fikir CSS seman
 </div>
 
 <!-- Fikir CSS -->
-<div class="card">
-  <div class="card-header"><h3>Card title</h3></div>
+<div class="card card-elevated card-p-md">
+  <h3>Card title</h3>
 </div>
 ```
 

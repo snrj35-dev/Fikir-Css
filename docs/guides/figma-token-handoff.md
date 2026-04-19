@@ -1,7 +1,8 @@
 # Figma Token Handoff Guidance
 
-> Created: 2026-04-12
-> Scope: M3 — workflow for synchronizing Fikir CSS tokens with Figma
+> Updated: M18 — v0.6.0
+
+For automated import and CDN usage, see `docs/guides/figma-token-export.md`.
 
 ## Recommended Workflow
 
@@ -11,9 +12,12 @@ Use the **Tokens Studio for Figma** plugin (formerly Figma Tokens) to sync token
 
 ### 2. Import JSON Token File
 
-Use the DTCG-format token file from `docs/guides/design-token-export.md` as the source.
+Use the DTCG-format token file — `dist/tokens.json` ships with every release.
 
-Configure Tokens Studio with the GitHub sync to pull from `dist/tokens.json` after each release.
+Configure Tokens Studio with the GitHub sync to pull from:
+```
+https://cdn.jsdelivr.net/npm/fikir-css@0.6.0/dist/tokens.json
+```
 
 ### 3. Token Collection Structure
 

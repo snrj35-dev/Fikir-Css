@@ -24,6 +24,8 @@ test("playground examples: app-shell refinement page includes shell + toolbar pa
   assert.ok(html.includes('class="app-shell"'));
   assert.ok(html.includes('class="breadcrumb"'));
   assert.ok(html.includes('data-pattern="data-table-toolbar"'));
+  assert.ok(html.includes('data-slot="search"'));
+  assert.ok(html.includes('data-slot="actions"'));
 });
 
 test("playground examples: data display page includes table, empty-state, and data-grid", async () => {
@@ -31,6 +33,8 @@ test("playground examples: data display page includes table, empty-state, and da
 
   assert.ok(html.includes('class="table"'));
   assert.ok(html.includes('class="empty-state"'));
+  assert.ok(html.includes('data-pattern="filter-bar"'));
+  assert.ok(html.includes('data-slot="chips"'));
   assert.ok(html.includes('class="data-grid"'));
 });
 
@@ -60,6 +64,10 @@ test("playground examples: data table workflow page includes toolbar-to-table re
 
   assert.ok(html.includes("Data Table Workflow Example"));
   assert.ok(html.includes('data-pattern="data-table-toolbar"'));
+  assert.ok(html.includes('data-slot="column-visibility"'));
+  assert.ok(html.includes('data-slot="density"'));
+  assert.ok(html.includes('data-slot="export"'));
+  assert.ok(html.includes('data-slot="surface"'));
   assert.ok(html.includes('aria-controls="issues-table"'));
   assert.ok(html.includes('id="issues-table"'));
 });
@@ -79,6 +87,7 @@ test("playground examples: tree-table workflow page includes tree, table, and pa
 
   assert.ok(html.includes("Tree + Table Workflow Example"));
   assert.ok(html.includes('class="tree-view"'));
+  assert.ok(html.includes('data-slot="selection-summary"'));
   assert.ok(html.includes('class="table"'));
   assert.ok(html.includes('class="pagination"'));
 });

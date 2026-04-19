@@ -5,6 +5,73 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [1.0.0] — 2026-04-19
+
+### Focus: Stable Release — AI Adoption, Framework Support, Quality Gates (M14–M21)
+
+This is the first stable release of Fikir CSS. The `supported` surface list is now **frozen** under semver: breaking changes to any supported surface require a MAJOR version bump.
+
+**Surface counts at v1.0.0:** 69 supported · 22 beta · 10 experimental + 2 experimental patterns · 0 deprecated
+
+### Added
+
+#### Machine-Readable Artifacts for AI (M20)
+- **`dist/contracts/anatomy.json`** — Minimal HTML structure for 60 components with sub-element roles and `data-*` attribute documentation
+- **`dist/contracts/capabilities.json`** — Per-component "does / does not / requires_app_css" capability matrix
+- **`dist/contracts/variants.json`** — Canonical global axes (6 tones, 5 styles, 4 sizes) and per-recipe variant registry
+- **`dist/contracts/primitives.json`** — 7 layout primitive defaults, CSS custom properties, and examples
+- **`dist/contracts/selectors.json`** expanded — Now includes global and per-component `data-*` markers alongside 417 selector entries
+- **`contracts/anatomy.contract.mjs`** + **`contracts/capabilities.contract.mjs`** — Source-of-truth contract files for anatomy and capabilities
+- **`scripts/generate-manifests.mjs`** — Single script that generates all 6 JSON manifests; integrated into `npm run build`
+- **`scripts/validate-manifests.mjs`** — CI validation for all manifests (0 errors, 0 warnings)
+- **`npm run build:manifests`** + **`npm run validate:manifests`** scripts
+- 4 new `package.json` subpath exports: `fikir-css/contracts/anatomy`, `/capabilities`, `/variants`, `/primitives`
+- **`docs/guides/machine-readable-contracts.md`** — Full guide including AI system prompt example and CDN URLs
+
+#### Framework & Adoption (M18)
+- **`examples/react-vite`** — Full runnable starter with density, helpers, result/data-grid/settings/app-shell flows
+- **`examples/vue-vite`** — Full Vue 3 example with theme/density toggle and overlay demo
+- **`examples/svelte-vite`** — Full SvelteKit example with writable store theme management and modal demo
+- **`examples/starter-consumer`** — Updated to `fikir-css: ^0.6.0`; npm/bundler/plain HTML instructions
+- Playwright smoke tests for Vue and Svelte examples
+- **`docs/guides/ssr-hydration-conventions.md`** — SSR/hydration guide for React, Vue, Svelte
+- **`docs/guides/adding-to-existing-project.md`**, `anti-patterns.md`, `overlay-js-helpers.md`, `design-token-export.md`
+- **`docs/guides/plain-html-quickstart.md`** — Zero-toolchain quickstart
+- **`docs/guides/why-fikir-css-vs-utility-first.md`** — Positioning comparison
+
+#### Quality Gates & CI (M19)
+- **`tests/build/subpath-exports.test.mjs`** — 26 subpath export smoke tests
+- **`tests/build/typescript-types-surface.test.mjs`** — 8 TypeScript types surface tests
+- **`scripts/validate-example-structure.mjs`** — Example structure validation (CI gate)
+- `docs:quality:strict` and `validate:examples` added to `test:ci` chain
+- **`docs/governance/semver-policy.md`**, `deprecation-policy.md`, `support-policy.md`
+- **`docs/release/release-checklist-v1.md`**, `rc-burn-in-plan.md`
+- **344 docs files**, 0 broken links
+- RC score: 9.57 / 10
+
+#### Surfaces (M14–M16)
+- 236+ Playwright browser tests across components (M17 cross-theme, density, shape, reduced-motion smoke)
+- All M16 target surfaces now implemented: `time-picker`, `date-time-picker`, `empty-search-state`, `inline-notice`, `command-bar`, `tree-table`, `coachmark`, `copy-button`, `password-input`, `stat-group`, `auth-screen`
+- `filter-bar` and `data-table-toolbar` experimental patterns with `data-pattern` / `data-slot` contracts
+
+#### v1.0 Freeze (M21.1)
+- `docs/roadmap/support-matrix.md` — Final freeze applied; stale "not yet implemented" section removed; all surfaces properly classified
+- `docs/release/v1.0-support-freeze-checklist.md` — Freeze gates verified
+
+### Changed
+- `build` script now includes `generate-manifests.mjs` and runs `validate:manifests` in `test:ci`
+- Support matrix: **"not yet implemented" section removed** — all 11 pending M16 surfaces are now classified as beta or experimental
+- `docs/guides/machine-readable-contracts.md` — Status updated from "Planned" to "Stable"
+
+### Fixed
+- No breaking changes to any `supported` surface since v0.6.0 baseline.
+
+### Migration from v0.6.0
+
+No selector renames in the `supported` surface tier. See `docs/migration/v0.6-to-v1.0-migration-note.md` for full details.
+
+---
+
 ## [0.6.0] — 2026-04-13
 
 ### Focus: Stability & Distribution (M9), Theme System (M10), Framework Examples (M11), Component Showcase (M12), Site Redesign & CI Hardening (M13)

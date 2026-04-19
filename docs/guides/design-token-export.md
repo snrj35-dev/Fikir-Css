@@ -1,7 +1,6 @@
 # Design Token Export Format Mapping
 
-> Created: 2026-04-12
-> Scope: M3 — CSS vars → JSON / Style Dictionary / Figma Token formats
+> Updated: M18 — v0.6.0
 
 ## Overview
 
@@ -82,14 +81,51 @@ In Figma, create a variable collection named `Fikir Tokens`:
 | `radius/sm` | Number | 4 | 4 |
 | `radius/md` | Number | 6 | 6 |
 
-## Automated Token Export Script (Planned)
+## Using `dist/tokens.json` in Practice
 
-A `scripts/export-tokens.mjs` script is planned for M4 that will:
-1. Parse `packages/tokens/core.css` and `packages/tokens/semantic.css`
-2. Output DTCG-format `dist/tokens.json`
-3. Output Style Dictionary-format `dist/tokens-sd.json`
+`dist/tokens.json` ships with every release and contains W3C DTCG-format core tokens.
 
-Track this task in `docs/roadmap/tasklist.md`.
+### Import in JavaScript / Node
+
+```js
+// ESM import assertion (Node 18+)
+import tokens from "fikir-css/tokens" assert { type: "json" };
+console.log(tokens.color.accent.$value); // oklch(58% 0.22 250)
+
+// Or via require / readFile
+import { readFile } from "node:fs/promises";
+const tokens = JSON.parse(await readFile("node_modules/fikir-css/dist/tokens.json", "utf8"));
+```
+
+### CDN URL (jsDelivr)
+
+```
+https://cdn.jsdelivr.net/npm/fikir-css@0.6.0/dist/tokens.json
+```
+
+### Build-time token extraction
+
+For semantic tokens that change with theme, extract computed values at build time using Playwright:
+
+```js
+// scripts/extract-semantic-tokens.mjs
+import { chromium } from "@playwright/test";
+
+const browser = await chromium.launch();
+const page = await browser.newPage();
+await page.goto(`file://${process.cwd()}/dist/fikir.css`);
+
+const light = await page.evaluate(() => {
+  const s = getComputedStyle(document.documentElement);
+  return {
+    bgDefault:  s.getPropertyValue("--color-bg-default").trim(),
+    fgDefault:  s.getPropertyValue("--color-fg-default").trim(),
+    accent:     s.getPropertyValue("--color-accent").trim(),
+  };
+});
+await browser.close();
+console.log(light);
+```
 
 ## Figma Token Handoff
 

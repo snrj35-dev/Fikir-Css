@@ -141,13 +141,53 @@ html[data-theme="dark"] .build-warning {
 }
 
 .demo-sidebar-link {
-  display: block;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-2);
   padding: var(--space-1) var(--space-2);
   border-radius: var(--radius-sm);
   font-size: var(--font-size-sm);
   color: var(--color-fg-muted);
   text-decoration: none;
   transition: color 120ms, background 120ms;
+}
+.demo-sidebar-link[data-support-level]::after {
+  content: attr(data-support-level);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--color-border-subtle);
+  border-radius: 999px;
+  padding: 0.1rem 0.45rem;
+  font-size: 0.62rem;
+  font-weight: 700;
+  text-transform: lowercase;
+  background: color-mix(in oklch, var(--color-border-subtle) 30%, var(--color-bg-surface));
+  color: var(--color-fg-muted);
+  flex-shrink: 0;
+}
+.demo-sidebar-link[data-support-level="supported"]::after {
+  color: var(--color-accent);
+  border-color: color-mix(in oklch, var(--color-accent) 30%, transparent);
+  background: color-mix(in oklch, var(--color-accent) 10%, var(--color-bg-surface));
+}
+.demo-sidebar-link[data-support-level="beta"]::after,
+.support-pill[data-support-level="beta"] {
+  background: color-mix(in oklch, var(--color-warning, oklch(70% 0.15 80)) 15%, var(--color-bg-surface));
+  border-color: color-mix(in oklch, var(--color-warning, oklch(70% 0.15 80)) 40%, transparent);
+  color: var(--color-fg-default);
+}
+.demo-sidebar-link[data-support-level="experimental"]::after {
+  background: color-mix(in oklch, var(--color-danger, oklch(62% 0.23 25)) 10%, var(--color-bg-surface));
+  border-color: color-mix(in oklch, var(--color-danger, oklch(62% 0.23 25)) 25%, transparent);
+  color: var(--color-fg-default);
+}
+.demo-sidebar-link[data-support-level="mixed"]::after,
+.support-pill[data-support-level="mixed"] {
+  background: color-mix(in oklch, var(--color-border-subtle) 35%, var(--color-bg-surface));
+  border-color: var(--color-border-subtle);
+  color: var(--color-fg-default);
 }
 .demo-sidebar-link:hover {
   color: var(--color-fg-default);
@@ -235,8 +275,8 @@ html[data-theme="dark"] .build-warning {
   color: #fff;
 }
 .support-pill[data-support-level="experimental"] {
-  background: color-mix(in oklch, var(--color-warning, oklch(70% 0.15 80)) 15%, var(--color-bg-surface));
-  border-color: color-mix(in oklch, var(--color-warning, oklch(70% 0.15 80)) 40%, transparent);
+  background: color-mix(in oklch, var(--color-danger, oklch(62% 0.23 25)) 10%, var(--color-bg-surface));
+  border-color: color-mix(in oklch, var(--color-danger, oklch(62% 0.23 25)) 25%, transparent);
   color: var(--color-fg-default);
 }
 

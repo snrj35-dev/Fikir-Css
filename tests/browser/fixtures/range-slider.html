@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Range slider fixture</title>
+  <link rel="stylesheet" href="../../../dist/fikir.css" />
+</head>
+<body style="padding: 2rem">
+  <label class="label" for="slider-1">Volume</label>
+  <input
+    id="slider-1"
+    class="range-slider"
+    type="range"
+    min="0"
+    max="100"
+    step="10"
+    value="50"
+    aria-valuemin="0"
+    aria-valuemax="100"
+    aria-valuenow="50"
+    aria-label="Volume"
+  />
+  <output id="slider-1-output" for="slider-1">50</output>
+
+  <br /><br />
+
+  <label class="label" for="slider-disabled">Disabled</label>
+  <input
+    id="slider-disabled"
+    class="range-slider"
+    type="range"
+    min="0"
+    max="100"
+    value="30"
+    disabled
+    aria-disabled="true"
+    aria-label="Disabled slider"
+  />
+
+  <script>
+    const slider = document.getElementById('slider-1');
+    const output = document.getElementById('slider-1-output');
+    slider.addEventListener('input', () => {
+      output.textContent = slider.value;
+      slider.setAttribute('aria-valuenow', slider.value);
+    });
+  </script>
+</body>
+</html>

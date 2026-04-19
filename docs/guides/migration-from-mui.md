@@ -1,7 +1,8 @@
 # From MUI (Material UI) to Fikir CSS
 
-> Created: 2026-04-12
-> Scope: M3 migration quickstart
+> Updated: M18 — v0.6.0
+
+> **Scope note:** MUI is a React component library; Fikir CSS is a framework-agnostic stylesheet. This guide covers the CSS and pattern equivalences. For the React-specific integration layer, see `docs/guides/react-adapter.md`.
 
 ## Key Differences
 
@@ -76,10 +77,10 @@ MUI requires `ServerStyleSheet` or Emotion SSR setup. Fikir CSS is plain CSS —
 MUI provides prop types on each component. Fikir CSS provides recipe resolver types:
 
 ```ts
-import { resolveBtn } from "fikir-css/resolvers";
+import { resolveBtn } from "fikir-css/tooling";
 
-const classes = resolveBtn({ variant: "primary", size: "sm" });
-// → "btn btn-primary btn-sm"
+const classes = resolveBtn({ variant: "solid", tone: "primary", size: "sm" });
+// → "btn btn-solid btn-primary btn-sm"
 ```
 
 ## Recipe vs Prop API
@@ -90,6 +91,6 @@ Fikir CSS's recipe system is the counterpart to MUI's `sx` prop and variant syst
 // MUI sx prop
 <Box sx={{ p: 2, bgcolor: "primary.main", borderRadius: 1 }}>
 
-// Fikir CSS — use utility classes directly
-<div class="p-2 bg-primary-500 rounded-sm">
+// Fikir CSS — compose with layout helpers + semantic components
+<div class="card card-p-md" style="background: var(--color-accent-subtle)">
 ```

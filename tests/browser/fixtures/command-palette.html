@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Command palette fixture</title>
+  <link rel="stylesheet" href="../../../dist/fikir.css" />
+</head>
+<body style="padding: 2rem">
+  <button id="open-btn" class="btn btn-ghost btn-sm">
+    Search <kbd class="kbd">⌘K</kbd>
+  </button>
+
+  <div
+    id="palette"
+    class="command-palette"
+    role="dialog"
+    aria-modal="true"
+    aria-label="Command palette"
+    hidden
+  >
+    <div class="command-palette-overlay" id="overlay"></div>
+    <div class="command-palette-panel">
+      <div class="command-palette-search">
+        <input
+          id="palette-input"
+          class="command-palette-input input"
+          type="text"
+          role="combobox"
+          aria-expanded="true"
+          aria-haspopup="listbox"
+          aria-controls="palette-results"
+          aria-autocomplete="list"
+          placeholder="Search commands..."
+        />
+      </div>
+      <ul
+        id="palette-results"
+        class="command-palette-results"
+        role="listbox"
+        aria-label="Results"
+      >
+        <li id="result-1" class="command-palette-item command-palette-item-active" role="option" aria-selected="true" tabindex="-1">Go to dashboard</li>
+        <li id="result-2" class="command-palette-item" role="option" aria-selected="false" tabindex="-1">Open settings</li>
+        <li id="result-3" class="command-palette-item" role="option" aria-selected="false" tabindex="-1">New document</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    const palette = document.getElementById('palette');
+    const openBtn = document.getElementById('open-btn');
+    const overlay = document.getElementById('overlay');
+    const input   = document.getElementById('palette-input');
+    const results = [...document.querySelectorAll('[role="option"]')];
+    let activeIdx = 0;
+
+    function setActive(idx) {
+      results.forEach((r, i) => {
+        r.setAttribute('aria-selected', i === idx ? 'true' : 'false');
+        r.classList.toggle('command-palette-item-active', i === idx);
+      });
+      input.setAttribute('aria-activedescendant', results[idx].id);
+      activeIdx = idx;
+    }
+
+    function open() {
+      palette.removeAttribute('hidden');
+      input.focus();
+      setActive(0);
+    }
+
+    function close() {
+      palette.setAttribute('hidden', '');
+      openBtn.focus();
+    }
+
+    openBtn.addEventListener('click', open);
+    overlay.addEventListener('click', close);
+
+    document.addEventListener('keydown', (e) => {
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') { e.preventDefault(); open(); }
+    });
+
+    palette.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') { close(); }
+      else if (e.key === 'ArrowDown') { e.preventDefault(); setActive((activeIdx + 1) % results.length); }
+      else if (e.key === 'ArrowUp')   { e.preventDefault(); setActive((activeIdx - 1 + results.length) % results.length); }
+      else if (e.key === 'Enter')     { close(); }
+    });
+  </script>
+</body>
+</html>

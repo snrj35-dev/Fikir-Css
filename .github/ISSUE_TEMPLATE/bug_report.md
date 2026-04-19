@@ -1,15 +1,20 @@
 ---
 name: Bug report
-about: Report a reproducible problem in the v0.3 foundation
+about: Report a reproducible problem in a supported or beta surface
 labels: bug
 ---
 
 ## Summary
 
+## Affected surface
+- Surface name:
+- Support tier: `supported` / `beta` / `experimental` (check [support matrix](../../docs/roadmap/support-matrix.md))
+- Version: `fikir-css@`
+
 ## Environment
 - OS:
 - Node version:
-- Browser (if playground-related):
+- Browser (if applicable):
 
 ## Steps to Reproduce
 1.
@@ -22,6 +27,7 @@ labels: bug
 
 ## Reproduction Notes
 - Does `npm run build` pass?
-- Is this related to contracts (`contracts/*.mjs`) or generated outputs (`dist/contracts/*`)?
+- Is the surface `supported`? (Bugs on `experimental` surfaces may not be prioritised.)
+- Is this a visual bug, a selector contract break, or an accessibility issue?
 
 ## Additional Context

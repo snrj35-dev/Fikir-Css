@@ -1,0 +1,131 @@
+@layer components {
+  [data-pattern="tree-table"] {
+    --tree-table-indent-size: var(--space-4);
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  [data-pattern="tree-table"] {{component.tableRow}} {
+    border-bottom: 1px solid var(--color-border-subtle);
+  }
+
+  [data-pattern="tree-table"] {{component.tableRow}}:hover {
+    background-color: var(--color-bg-subtle);
+  }
+
+  [data-pattern="tree-table"] {{component.tableRow}}[aria-expanded] {
+    cursor: pointer;
+  }
+
+  /* Indent based on tree-level data attribute */
+  [data-pattern="tree-table"] {{component.tableRow}}[data-tree-level="0"] {{component.tableCell}}:first-child {
+    padding-inline-start: 0;
+  }
+
+  [data-pattern="tree-table"] {{component.tableRow}}[data-tree-level="1"] {{component.tableCell}}:first-child {
+    padding-inline-start: var(--tree-table-indent-size);
+  }
+
+  [data-pattern="tree-table"] {{component.tableRow}}[data-tree-level="2"] {{component.tableCell}}:first-child {
+    padding-inline-start: calc(var(--tree-table-indent-size) * 2);
+  }
+
+  [data-pattern="tree-table"] {{component.tableRow}}[data-tree-level="3"] {{component.tableCell}}:first-child {
+    padding-inline-start: calc(var(--tree-table-indent-size) * 3);
+  }
+
+  [data-pattern="tree-table"] {{component.tableRow}}[data-tree-level="4"] {{component.tableCell}}:first-child {
+    padding-inline-start: calc(var(--tree-table-indent-size) * 4);
+  }
+
+  [data-pattern="tree-table"] {{component.tableRow}}[data-tree-level="5"] {{component.tableCell}}:first-child {
+    padding-inline-start: calc(var(--tree-table-indent-size) * 5);
+  }
+
+  /* Toggle column cell */
+  [data-pattern="tree-table"] .tree-table-cell-toggle {
+    width: 2rem;
+    padding: var(--space-2);
+    text-align: center;
+    flex-shrink: 0;
+  }
+
+  /* Toggle button styling */
+  [data-pattern="tree-table"] {{component.treeViewToggle}} {
+    width: 100%;
+    height: auto;
+    padding: 0;
+    background: none;
+    border: none;
+    font-size: inherit;
+    color: var(--color-fg-default);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  [data-pattern="tree-table"] {{component.treeViewToggle}}:hover {
+    opacity: 0.7;
+  }
+
+  [data-pattern="tree-table"] {{component.treeViewToggle}}:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: -2px;
+    border-radius: var(--radius-sm);
+  }
+
+  /* Placeholder for leaf nodes (no children) */
+  [data-pattern="tree-table"] .tree-table-cell-toggle-placeholder {
+    display: inline-block;
+    width: 1rem;
+    height: 1rem;
+  }
+
+  /* Table cell padding (general) */
+  [data-pattern="tree-table"] {{component.tableCell}} {
+    padding: var(--space-2);
+    text-align: left;
+  }
+
+  /* Alternating row backgrounds (optional, for readability) */
+  [data-pattern="tree-table"] {{component.tableBody}} {{component.tableRow}}:nth-child(odd) {
+    background-color: var(--color-bg-default);
+  }
+
+  [data-pattern="tree-table"] {{component.tableBody}} {{component.tableRow}}:nth-child(even) {
+    background-color: color-mix(in oklch, var(--color-bg-surface) 50%, var(--color-bg-default));
+  }
+
+  /* Selected row state (if applicable) */
+  [data-pattern="tree-table"] {{component.tableRow}}[aria-selected="true"] {
+    background-color: color-mix(in oklch, var(--color-primary) 12%, transparent);
+  }
+
+  /* Collapsed/hidden rows */
+  [data-pattern="tree-table"] {{component.tableRow}}[data-hidden="true"] {
+    display: none;
+  }
+
+  /* Focus state on row */
+  [data-pattern="tree-table"] {{component.tableRow}}:focus-visible {
+    outline: 2px solid var(--color-focus);
+    outline-offset: -2px;
+  }
+
+  /* Responsive: stack on narrow viewports */
+  @media (max-width: 48rem) {
+    [data-pattern="tree-table"] {
+      font-size: var(--font-size-sm);
+    }
+
+    [data-pattern="tree-table"] {{component.tableCell}} {
+      padding: var(--space-1);
+    }
+
+    [data-pattern="tree-table"] .tree-table-cell-toggle {
+      width: 1.5rem;
+      padding: var(--space-1);
+    }
+  }
+}

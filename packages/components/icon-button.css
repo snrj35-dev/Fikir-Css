@@ -33,6 +33,13 @@
     fill: currentcolor;
   }
 
+  /* Size contract: xs / sm / md / lg */
+  {{component.iconButtonXs}} {
+    inline-size: 1.75rem;
+    block-size: 1.75rem;
+    font-size: var(--font-size-xs);
+  }
+
   {{component.iconButtonSm}} {
     inline-size: 2rem;
     block-size: 2rem;
@@ -49,5 +56,12 @@
     inline-size: 2.75rem;
     block-size: 2.75rem;
     font-size: var(--font-size-lg);
+  }
+
+  /* Default icon button size (md) */
+  {{component.iconButton}}:not({{component.iconButtonXs}}):not({{component.iconButtonSm}}):not({{component.iconButtonMd}}):not({{component.iconButtonLg}}) {
+    inline-size: 2.25rem;
+    block-size: 2.25rem;
+    font-size: var(--font-size-md);
   }
 }

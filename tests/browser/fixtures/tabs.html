@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Tabs fixture</title>
+  <link rel="stylesheet" href="../../../dist/fikir.css" />
+</head>
+<body style="padding: 2rem">
+  <div class="tabs" role="tablist" aria-label="Sample tabs">
+    <button
+      id="tab-1"
+      class="tab tab-active"
+      role="tab"
+      aria-selected="true"
+      aria-controls="panel-1"
+      tabindex="0"
+    >Overview</button>
+    <button
+      id="tab-2"
+      class="tab"
+      role="tab"
+      aria-selected="false"
+      aria-controls="panel-2"
+      tabindex="-1"
+    >Details</button>
+    <button
+      id="tab-3"
+      class="tab"
+      role="tab"
+      aria-selected="false"
+      aria-controls="panel-3"
+      tabindex="-1"
+    >Settings</button>
+  </div>
+
+  <div id="panel-1" role="tabpanel" aria-labelledby="tab-1">
+    <p>Overview content.</p>
+  </div>
+  <div id="panel-2" role="tabpanel" aria-labelledby="tab-2" hidden>
+    <p>Details content.</p>
+  </div>
+  <div id="panel-3" role="tabpanel" aria-labelledby="tab-3" hidden>
+    <p>Settings content.</p>
+  </div>
+
+  <script>
+    const tabs = [...document.querySelectorAll('[role="tab"]')];
+
+    function activate(tab) {
+      tabs.forEach((t) => {
+        const panel = document.getElementById(t.getAttribute('aria-controls'));
+        t.setAttribute('aria-selected', 'false');
+        t.setAttribute('tabindex', '-1');
+        t.classList.remove('tab-active');
+        panel.hidden = true;
+      });
+      tab.setAttribute('aria-selected', 'true');
+      tab.setAttribute('tabindex', '0');
+      tab.classList.add('tab-active');
+      document.getElementById(tab.getAttribute('aria-controls')).hidden = false;
+      tab.focus();
+    }
+
+    tabs.forEach((tab) => {
+      tab.addEventListener('click', () => activate(tab));
+      tab.addEventListener('keydown', (e) => {
+        const idx = tabs.indexOf(e.currentTarget);
+        if (e.key === 'ArrowRight') {
+          e.preventDefault(); activate(tabs[(idx + 1) % tabs.length]);
+        } else if (e.key === 'ArrowLeft') {
+          e.preventDefault(); activate(tabs[(idx - 1 + tabs.length) % tabs.length]);
+        } else if (e.key === 'Home') {
+          e.preventDefault(); activate(tabs[0]);
+        } else if (e.key === 'End') {
+          e.preventDefault(); activate(tabs[tabs.length - 1]);
+        }
+      });
+    });
+  </script>
+</body>
+</html>

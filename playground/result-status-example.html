@@ -23,6 +23,52 @@
         </div>
       </header>
 
+      <!-- Inline notice examples -->
+      <section class="stack" style="--stack-gap: var(--space-3)" aria-label="Inline notice variants">
+        <h2 style="margin: 0; font-size: var(--font-size-lg)">Inline Notices</h2>
+        
+        <!-- Success notice -->
+        <div class="inline-notice" data-tone="success" role="status" aria-live="polite">
+          <div class="inline-notice-icon" aria-hidden="true">✓</div>
+          <div class="inline-notice-content">
+            <h3 class="inline-notice-title">Export completed</h3>
+            <p class="inline-notice-body">Your data has been exported to CSV and the download will start automatically.</p>
+          </div>
+          <button class="inline-notice-close" aria-label="Dismiss success notice" type="button">×</button>
+        </div>
+
+        <!-- Warning notice -->
+        <div class="inline-notice" data-tone="warning" role="alert" aria-live="assertive">
+          <div class="inline-notice-icon" aria-hidden="true">!</div>
+          <div class="inline-notice-content">
+            <h3 class="inline-notice-title">Deprecated API in use</h3>
+            <p class="inline-notice-body">The <code>legacyAPI.fetch()</code> method will be removed in v2.0. Plan your migration today.</p>
+            <div class="inline-notice-actions">
+              <a href="/docs/migration" class="btn btn-sm btn-outline">Migration guide</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- Danger notice -->
+        <div class="inline-notice" data-tone="danger" role="alert" aria-live="assertive">
+          <div class="inline-notice-icon" aria-hidden="true">⚠️</div>
+          <div class="inline-notice-content">
+            <h3 class="inline-notice-title">Form validation failed</h3>
+            <p class="inline-notice-body">Please correct the highlighted fields below before submitting.</p>
+          </div>
+        </div>
+
+        <!-- Info notice -->
+        <div class="inline-notice" data-tone="info" role="status" aria-live="polite">
+          <div class="inline-notice-icon" aria-hidden="true">ℹ️</div>
+          <div class="inline-notice-content">
+            <h3 class="inline-notice-title">Tip: Keyboard shortcuts available</h3>
+            <p class="inline-notice-body">Press <kbd>Ctrl</kbd> + <kbd>S</kbd> to save, or <kbd>Ctrl</kbd> + <kbd>Z</kbd> to undo.</p>
+          </div>
+          <button class="inline-notice-close" aria-label="Dismiss info notice" type="button">×</button>
+        </div>
+      </section>
+
       <section class="result-grid" aria-label="Result status states">
         <article class="result" data-result-tone="success" aria-label="Payment success result">
           <span class="result-media" aria-hidden="true">OK</span>

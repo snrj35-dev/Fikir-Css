@@ -8,12 +8,17 @@
   { "name": "workstream:playground", "color": "BFD4F2", "description": "Playground and example strategy" },
   { "name": "workstream:governance", "color": "D93F0B", "description": "Governance and external adoption work" },
 
-  { "name": "support:supported", "color": "0B5FFF", "description": "Surface committed in support baseline" },
-  { "name": "support:experimental", "color": "FBCA04", "description": "Implemented but outside supported commitment" },
-  { "name": "support:rfc-only", "color": "EDEDED", "description": "Specified but not canonical implemented surface" },
-  { "name": "support:planned", "color": "BFDADC", "description": "Planned/deferred roadmap scope" },
+  { "name": "support:supported", "color": "0B5FFF", "description": "Surface committed in v1.0 support baseline" },
+  { "name": "support:beta", "color": "F9D0C4", "description": "Surface in beta tier — functional but not stability-guaranteed" },
+  { "name": "support:experimental", "color": "FBCA04", "description": "Surface in experimental tier — outside support commitment" },
+  { "name": "support:rfc-only", "color": "EDEDED", "description": "Specified but not yet implemented surface" },
+  { "name": "support:planned", "color": "BFDADC", "description": "Planned/deferred post-1.0 roadmap scope" },
 
+  { "name": "type:bug", "color": "D73A4A", "description": "Confirmed bug in a supported or beta surface" },
+  { "name": "type:a11y", "color": "C2E0C6", "description": "Accessibility regression or missing a11y attribute" },
+  { "name": "type:release-blocker", "color": "B60205", "description": "Must be resolved before the next release ships" },
+  { "name": "type:docs", "color": "0075CA", "description": "Documentation gap, error, or improvement" },
   { "name": "type:governance", "color": "5319E7", "description": "Project process and governance tasks" },
-  { "name": "type:community", "color": "C5DEF5", "description": "Community and feedback tasks" },
-  { "name": "type:docs", "color": "0075CA", "description": "Documentation tasks" }
+  { "name": "type:community", "color": "C5DEF5", "description": "Community feedback or external contributor task" },
+  { "name": "type:enhancement", "color": "A2EEEF", "description": "New feature or improvement to an existing surface" }
 ]

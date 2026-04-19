@@ -1,5 +1,7 @@
 # Figma Token Export
 
+> Updated: M18 — v0.6.0
+
 Fikir CSS ships a W3C DTCG-compatible `tokens.json` at `dist/tokens.json`. This file can be imported into Figma Variables using **Token Studio** (formerly Figma Tokens) or the native Figma Variables REST API.
 
 ---
@@ -30,12 +32,18 @@ import tokens from "fikir-css/tokens" assert { type: "json" };
 2. Open the plugin → **Sync** → **File / URL**
 3. Paste the URL to your hosted `tokens.json` (e.g. from your CDN or GitHub raw URL):
    ```
-   https://cdn.jsdelivr.net/npm/fikir-css@0.5.0/dist/tokens.json
+   https://cdn.jsdelivr.net/npm/fikir-css@0.6.0/dist/tokens.json
    ```
 4. Click **Load** — tokens appear as Token Sets
 5. Map token sets to Figma Variables via **Variables** tab → **Apply**
 
 Token Studio preserves the DTCG `$type` and `$value` fields and creates Figma variable collections per group.
+
+Create two collections aligned with Fikir CSS's token architecture:
+- **Fikir Core** — raw values (`--space-*`, `--radius-*`, `--font-size-*`)
+- **Fikir Semantic** — semantic aliases (`--color-fg-default`, `--color-accent`, etc.) with Light and Dark modes
+
+See `docs/guides/figma-token-handoff.md` for the variable binding table and dark mode configuration.
 
 ---
 

@@ -66,6 +66,7 @@ function resolveClassName({ domain, base }, namingConfig, defaults) {
     return `${prefix}${base}`;
   }
 
+  // pattern domain uses [data-pattern="..."] selectors — never prefixed
   return base;
 }
 
@@ -115,7 +116,8 @@ function collectRecipeSelectorReferences(contract) {
     }
   }
 
-  return refs;
+  // data-pattern compounds use [data-pattern="..."] selectors, not CSS classes
+  return refs.filter((key) => !key.startsWith("pattern."));
 }
 
 function validateContractReferences(naming, recipes) {
@@ -142,7 +144,9 @@ function validateSingleClassSurface(recipes) {
     }
   }
 
-  const notInLayer = resolverRefs.filter((key) => !layerSelectors.has(key));
+  const notInLayer = resolverRefs.filter(
+    (key) => !layerSelectors.has(key) && !key.startsWith("pattern.")
+  );
 
   if (notInLayer.length > 0) {
     const unique = [...new Set(notInLayer)].sort();
@@ -315,6 +319,7 @@ async function writeFileEnsured(path, content) {
 
 async function buildCss() {
   const effectiveNaming = resolveNamingConfig(config.naming);
+  const includeSourceComments = process.env.FIKIR_INCLUDE_SOURCE_COMMENTS === "true";
   const previousSize = (await pathExists(outFile))
     ? Buffer.byteLength(await readFile(outFile, "utf8"), "utf8")
     : 0;
@@ -344,7 +349,9 @@ async function buildCss() {
     const absolutePath = resolve(rootDir, relativePath);
     const content = await readFile(absolutePath, "utf8");
     const processed = replaceSelectorPlaceholders(content, selectorMap, relativePath);
-    parts.push(`/* Source: ${relativePath} */`);
+    if (includeSourceComments) {
+      parts.push(`/* Source: ${relativePath} */`);
+    }
     parts.push(processed.trim());
     parts.push("");
   }

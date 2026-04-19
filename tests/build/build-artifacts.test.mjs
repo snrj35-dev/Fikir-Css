@@ -14,7 +14,9 @@ const requiredArtifacts = [
   "packages/recipes/generated/resolvers.ts",
   "dist/contracts/selectors.json",
   "dist/contracts/alias-migration.json",
-  config.build.sizeReportOutFile
+  config.build.sizeReportOutFile,
+  "dist/tokens.json",
+  "dist/themes/high-contrast.css"
 ];
 
 test("build success: required generated artifacts exist and are non-empty", async () => {

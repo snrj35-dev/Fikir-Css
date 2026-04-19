@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Tooltip fixture</title>
+  <link rel="stylesheet" href="../../../dist/fikir.css" />
+</head>
+<body style="padding: 4rem 2rem">
+  <!-- Tooltip via aria-describedby (recommended pattern) -->
+  <div class="tooltip" id="tooltip-1">
+    <button
+      id="delete-btn"
+      class="btn btn-danger btn-sm"
+      type="button"
+      aria-describedby="tooltip-1-content"
+    >
+      Delete
+    </button>
+    <div
+      id="tooltip-1-content"
+      class="tooltip-content"
+      role="tooltip"
+    >
+      Permanently delete this item
+    </div>
+  </div>
+
+  <br /><br />
+
+  <!-- Icon button with tooltip -->
+  <div class="tooltip" id="tooltip-2">
+    <button
+      id="info-btn"
+      class="btn btn-ghost btn-icon btn-sm"
+      type="button"
+      aria-describedby="tooltip-2-content"
+      aria-label="More information"
+    >
+      ℹ
+    </button>
+    <div
+      id="tooltip-2-content"
+      class="tooltip-content"
+      role="tooltip"
+    >
+      Shows additional context for this field
+    </div>
+  </div>
+
+  <br /><br />
+
+  <!-- Disabled element tooltip (wraps in span for pointer events) -->
+  <div class="tooltip" id="tooltip-3">
+    <span
+      id="disabled-wrapper"
+      tabindex="0"
+      aria-describedby="tooltip-3-content"
+    >
+      <button
+        id="disabled-btn"
+        class="btn btn-solid btn-primary btn-sm"
+        type="button"
+        disabled
+        aria-disabled="true"
+      >
+        Submit
+      </button>
+    </span>
+    <div
+      id="tooltip-3-content"
+      class="tooltip-content"
+      role="tooltip"
+    >
+      Complete all required fields first
+    </div>
+  </div>
+
+  <script>
+    document.querySelectorAll('.tooltip').forEach((tooltip) => {
+      const trigger = tooltip.querySelector('[aria-describedby]');
+      if (!trigger) return;
+
+      trigger.addEventListener('mouseenter', () => { tooltip.dataset.open = 'true'; });
+      trigger.addEventListener('mouseleave', () => { delete tooltip.dataset.open; });
+      trigger.addEventListener('focus',      () => { tooltip.dataset.open = 'true'; });
+      trigger.addEventListener('blur',       () => { delete tooltip.dataset.open; });
+    });
+  </script>
+</body>
+</html>

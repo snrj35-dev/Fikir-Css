@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Switch fixture</title>
+  <link rel="stylesheet" href="../../../dist/fikir.css" />
+</head>
+<body style="padding: 2rem">
+  <label class="label" for="sw-1">Notifications</label>
+  <input
+    id="sw-1"
+    class="switch"
+    type="checkbox"
+    role="switch"
+    aria-checked="false"
+  />
+
+  <br /><br />
+
+  <label class="label" for="sw-2">Dark mode</label>
+  <input
+    id="sw-2"
+    class="switch"
+    type="checkbox"
+    role="switch"
+    aria-checked="true"
+    checked
+  />
+
+  <br /><br />
+
+  <label class="label" for="sw-disabled">Disabled</label>
+  <input
+    id="sw-disabled"
+    class="switch"
+    type="checkbox"
+    role="switch"
+    disabled
+    aria-disabled="true"
+  />
+
+  <script>
+    document.querySelectorAll('.switch:not([disabled])').forEach((sw) => {
+      sw.addEventListener('change', () => {
+        sw.setAttribute('aria-checked', sw.checked ? 'true' : 'false');
+      });
+    });
+  </script>
+</body>
+</html>

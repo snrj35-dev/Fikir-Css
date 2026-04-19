@@ -3,7 +3,7 @@ name: publish-npm
 on:
   push:
     tags:
-      - "v*.*.*"
+      - "v*"
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
@@ -34,10 +34,35 @@ jobs:
       - name: Run CI test suite
         run: npm run test:ci
 
+      - name: Determine release channel
+        id: release
+        run: |
+          VERSION=$(node -p "JSON.parse(require('node:fs').readFileSync('package.json', 'utf8')).version")
+          if [[ "$VERSION" == *"-beta."* ]]; then
+            echo "channel=beta" >> "$GITHUB_OUTPUT"
+          elif [[ "$VERSION" == *"-rc."* ]]; then
+            echo "channel=rc" >> "$GITHUB_OUTPUT"
+          else
+            echo "channel=latest" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Verify publish (dry run)
-        run: npm publish --dry-run --access public
+        env:
+          RELEASE_CHANNEL: ${{ steps.release.outputs.channel }}
+        run: |
+          if [ "$RELEASE_CHANNEL" = "latest" ]; then
+            npm publish --dry-run --access public
+          else
+            npm publish --dry-run --access public --tag "$RELEASE_CHANNEL"
+          fi
 
       - name: Publish to npm
-        run: npm publish --provenance --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+          RELEASE_CHANNEL: ${{ steps.release.outputs.channel }}
+        run: |
+          if [ "$RELEASE_CHANNEL" = "latest" ]; then
+            npm publish --provenance --access public
+          else
+            npm publish --provenance --access public --tag "$RELEASE_CHANNEL"
+          fi

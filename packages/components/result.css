@@ -32,20 +32,34 @@
   }
 
   {{component.result}}[data-result-tone="success"] {
-    border-color: color-mix(in oklch, var(--color-accent) 42%, var(--color-bg-surface));
+    border-color: color-mix(in oklch, var(--color-success) 42%, var(--color-bg-surface));
   }
 
   {{component.result}}[data-result-tone="info"] {
-    border-color: color-mix(in oklch, var(--color-primary-500) 42%, var(--color-bg-surface));
+    border-color: color-mix(in oklch, var(--color-info) 42%, var(--color-bg-surface));
   }
 
   {{component.result}}[data-result-tone="warning"] {
-    border-color: color-mix(in oklch, var(--color-danger) 32%, var(--color-bg-surface));
-    background: color-mix(in oklch, var(--color-danger) 8%, var(--color-bg-surface));
+    border-color: color-mix(in oklch, var(--color-warning) 40%, var(--color-bg-surface));
   }
 
   {{component.result}}[data-result-tone="danger"] {
     border-color: color-mix(in oklch, var(--color-danger) 52%, var(--color-bg-surface));
-    background: color-mix(in oklch, var(--color-danger) 12%, var(--color-bg-surface));
+  }
+
+  {{component.result}}[data-style="soft"][data-result-tone="success"] {
+    background: var(--color-success-subtle);
+  }
+
+  {{component.result}}[data-style="soft"][data-result-tone="info"] {
+    background: var(--color-info-subtle);
+  }
+
+  {{component.result}}[data-style="soft"][data-result-tone="warning"] {
+    background: var(--color-warning-subtle);
+  }
+
+  {{component.result}}[data-style="soft"][data-result-tone="danger"] {
+    background: var(--color-danger-subtle);
   }
 }

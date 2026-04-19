@@ -6,24 +6,23 @@
 
 | Class | Role |
 |-------|------|
-| `card` | Container — border, radius, background |
-| `card-header` | Top section (title + actions) |
-| `card-title` | Heading inside header |
-| `card-body` | Main content area |
-| `card-footer` | Bottom section (metadata, actions) |
+| `card` | Base container |
+| `card-flat` | Default flat surface |
+| `card-subtle` | Lower-emphasis container on the default background |
+| `card-elevated` | Elevated container with shadow |
+| `card-interactive` | Hover/focus-responsive container |
+| `card-p-sm` | Small padding |
+| `card-p-md` | Medium padding |
+| `card-p-lg` | Large padding |
 
 ## Basic usage
 
 ```html
-<div class="card">
-  <div class="card-header">
-    <h3 class="card-title">Project overview</h3>
-  </div>
-  <div class="card-body">
-    <p>Deploy target: production. Last deploy: 2 hours ago.</p>
-  </div>
-  <div class="card-footer">
-    <button class="btn btn-primary btn-sm">View details</button>
+<div class="card card-flat card-p-md" data-card-layout="stack">
+  <h3 style="margin:0">Project overview</h3>
+  <p style="margin:0">Deploy target: production. Last deploy: 2 hours ago.</p>
+  <div data-card-slot="footer" class="cluster">
+    <button class="btn btn-solid btn-primary btn-sm">View details</button>
     <button class="btn btn-outline btn-neutral btn-sm">Archive</button>
   </div>
 </div>
@@ -31,24 +30,20 @@
 
 ## Variants
 
-### Minimal (body only)
+### Subtle
 
 ```html
-<div class="card">
-  <div class="card-body">
-    <p>Simple content card without header or footer.</p>
-  </div>
+<div class="card card-subtle card-p-md">
+  <p style="margin:0">Simple content card without strong elevation.</p>
 </div>
 ```
 
 ### Interactive / clickable card
 
 ```html
-<a href="/projects/42" class="card" style="text-decoration:none;display:block">
-  <div class="card-body">
-    <h3 class="card-title">My Project</h3>
-    <p class="text-muted">Click to open</p>
-  </div>
+<a href="/projects/42" class="card card-interactive card-p-md" style="text-decoration:none;display:block">
+  <h3 style="margin:0">My Project</h3>
+  <p style="margin:.5rem 0 0;color:var(--color-fg-muted)">Click to open</p>
 </a>
 ```
 
@@ -56,4 +51,4 @@
 
 - Cards are not interactive by default — no `role` needed
 - For clickable cards, use `<a>` or `<button>` as the root element
-- `card-title` heading level should follow document hierarchy
+- Use `data-card-slot="footer"` instead of legacy `card-footer`-style wrapper classes

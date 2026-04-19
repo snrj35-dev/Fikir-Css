@@ -33,8 +33,8 @@ test("segmented-control: checked state selector exists", async () => {
 
 test("segmented-control: size variant selectors exist", async () => {
   const css = await readDistCss();
-  assert.ok(css.includes(".segmented-control--sm"), "Missing --sm variant");
-  assert.ok(css.includes(".segmented-control--lg"), "Missing --lg variant");
+  assert.ok(css.includes(".segmented-control-sm"), "Missing sm variant");
+  assert.ok(css.includes(".segmented-control-lg"), "Missing lg variant");
 });
 
 test("segmented-control: disabled state selector exists", async () => {
