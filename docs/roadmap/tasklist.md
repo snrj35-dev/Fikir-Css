@@ -1,7 +1,7 @@
 # Fikir CSS — Post-1.0 Open Tasks
 
 > Son güncelleme: 2026-04-20 · **v1.0.0 yayınlandı** ✅  
-> Tamamlanan tüm milestone'lar → [`tasklist-archive.md`](./tasklist-archive.md)  
+> Tamamlanan tüm milestone'lar → [`docs/archive/tasklist-2026-04-20-v1.0-released.md`](../archive/tasklist-2026-04-20-v1.0-released.md)  
 > Geniş backlog → [`post-1.0-backlog.md`](./post-1.0-backlog.md)
 
 ---
