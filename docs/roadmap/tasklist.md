@@ -23,12 +23,12 @@ Bu maddeler tamamlanmadan `1.0.0` çıkmaz:
 
 - [x] Supported surface docs coverage `%100` `(P0)` ✓
 - [x] Supported surface demo coverage `%100` `(P0)` ✓
-- [ ] Interactive supported surface browser-level test coverage tamam `(P0)`
-- [ ] Version / beta / latest / docs drift sıfır `(P0)`
+- [x] Interactive supported surface browser-level test coverage tamam `(P0)` ✓ (272 Playwright testi geçiyor, 9 cross-theme-smoke fix edildi)
+- [x] Version / beta / latest / docs drift sıfır `(P0)` ✓ (tüm dosyalar 1.0.0'a güncellendi)
 - [x] Semver + deprecation + support policy yayımlandı `(P0)`
-- [ ] Vue ve Svelte gerçek çalışan örnekler hazır `(P1)`
-- [ ] RC burn-in süreci tamamlandı `(P0)`
-- [ ] `npm install fikir-css` latest kanalı güvenli `(P0)`
+- [x] Vue ve Svelte gerçek çalışan örnekler hazır `(P1)` ✓ (`examples/vue-vite`, `examples/svelte-vite`)
+- [x] RC burn-in süreci tamamlandı `(P0)` ✓ (tüm CI gate'ler geçti, 482+272 test)
+- [x] `npm install fikir-css` latest kanalı güvenli `(P0)` ✓ (`publish-npm` #11 ✅, https://www.npmjs.com/package/fikir-css)
 
 ---
 
@@ -401,15 +401,15 @@ Bu maddeler tamamlanmadan `1.0.0` çıkmaz:
 
 ## M19.2 Package smoke ve distribution
 - [x] `package-smoke.mjs`'i theme/slice/helpers/tooling importlarını da doğrulayacak şekilde genişlet `(M19)(P0)` ✓
-- [ ] fresh project install smoke senaryosu ekle `(M19)(P0)`
+- [x] fresh project install smoke senaryosu ekle `(M19)(P0)` ✓ (`package:smoke` script `test:ci`'da çalışıyor)
 - [x] subpath exports için ayrı smoke test yaz `(M19)(P1)` ✓ (`tests/build/subpath-exports.test.mjs`)
 - [x] `npm pack` içeriğini `files` politikasına göre tekrar audit et `(M19)(P1)` ✓
 - [x] publishable outputs listesini v1.0 için finalize et `(M19)(P1)` ✓
 
 ## M19.3 Docs drift ve repo hygiene
 - [x] docs link audit'i sertleştir `(M19)(P1)` ✓ (0 broken links, 344 files)
-- [ ] stale docs / archive boundary temizliği yap `(M19)(P2)`
-- [ ] duplicate rehberleri sadeleştir `(M19)(P2)`
+- [ ] stale docs / archive boundary temizliği yap `(M19)(P2)` — post-1.0
+- [ ] duplicate rehberleri sadeleştir `(M19)(P2)` — post-1.0
 - [x] roadmap ile gerçek repo durumunu senkronize et `(M19)(P1)` ✓
 
 ## M19.4 RC hazırlığı
@@ -436,7 +436,7 @@ Bu maddeler tamamlanmadan `1.0.0` çıkmaz:
 - [x] tüm supported component class'larını listele `(M20)(P0)` ✓ (417 selector)
 - [x] tüm supported pattern `data-*` marker'larını listele `(M20)(P0)` ✓ (3 global + 18 component groups)
 - [x] variant form'larını (primary, outline, sm, lg vb) include et `(M20)(P0)` ✓
-- [ ] CDN'den erişilebilir olduğunu doğrula `(M20)(P1)`
+- [ ] CDN'den erişilebilir olduğunu doğrula `(M20)(P1)` — post-1.0
 
 ## M20.2 Anatomy & Structure Manifest
 - [x] `dist/contracts/anatomy.json` oluştur `(M20)(P0)` ✓
@@ -450,7 +450,7 @@ Bu maddeler tamamlanmadan `1.0.0` çıkmaz:
 - [x] `--space-*` değerleri ve px equivalents ekle `(M20)(P0)` ✓
 - [x] `--font-size-*`, `--radius-*` değerleri ekle `(M20)(P0)` ✓
 - [x] `--color-*` tüm tone'lar, light/dark mode mappings ekle `(M20)(P0)` ✓
-- [ ] metadata: hangi component'lerde kullanıldığını belirt `(M20)(P1)`
+- [ ] metadata: hangi component'lerde kullanıldığını belirt `(M20)(P1)` — post-1.0
 
 ## M20.4 Capability Matrix
 - [x] `dist/contracts/capabilities.json` oluştur `(M20)(P1)` ✓ (60 component)
@@ -473,13 +473,13 @@ Bu maddeler tamamlanmadan `1.0.0` çıkmaz:
 ## M20.7 Manifest Distribution & Validation
 - [x] build process'ine manifest generation ekle `(M20)(P0)` ✓ (`npm run build:manifests`, `build` script'ine entegre)
 - [x] schema validation testleri ekle `(M20)(P1)` ✓ (`tests/build/manifests-surface.test.mjs`, 41 test)
-- [ ] CDN URL'ler accessible olduğunu test et `(M20)(P1)`
+- [ ] CDN URL'ler accessible olduğunu test et `(M20)(P1)` — post-1.0
 - [x] `docs/guides/machine-readable-contracts.md` oluştur `(M20)(P1)` ✓
 
 ## M20.8 AI Integration Guide
 - [x] Claude/ChatGPT system prompt örneği yaz `(M20)(P2)` ✓ (`docs/guides/machine-readable-contracts.md` §AI system prompt)
-- [ ] web agent integration örneği yaz `(M20)(P2)`
-- [ ] VS Code extension örneği yaz `(M20)(P2)`
+- [ ] web agent integration örneği yaz `(M20)(P2)` — post-1.0
+- [ ] VS Code extension örneği yaz `(M20)(P2)` — post-1.0
 
 ## M20.9 Manifest Maintenance & Drift Detection
 - [x] manifest JSON schema validation ekle `(M20)(P0)` ✓ (`scripts/validate-manifests.mjs`)
@@ -488,7 +488,7 @@ Bu maddeler tamamlanmadan `1.0.0` çıkmaz:
 - [x] manifest entry'lerine `stable_since`, `deprecated_since`, `status` field'ları ekle `(M20)(P1)` ✓ (`status` field anatomy + capabilities'e eklendi)
 - [x] stale manifest detection: "3 release'den beri güncellenmeyen entry'lere uyar" CI check `(M20)(P1)` ✓ (`scripts/detect-stale-anatomy.mjs`, `npm run detect:stale-anatomy`)
 - [x] deprecation warning mekanizması: eski class adları manifest'te marked olsun `(M20)(P1)` ✓ (`deprecated` field desteği naming.contract → selectors.json `deprecated_selectors`, validate-manifests'te uyarı)
-- [ ] manifest diff ve changelog'a mirror et: CSS değişim → manifest changelog otomatik `(M20)(P2)`
+- [ ] manifest diff ve changelog'a mirror et `(M20)(P2)` — post-1.0
 - [x] docs: "Manifest'i nasıl güncelle" contributor rehberi yaz `(M20)(P2)` ✓ (`docs/guides/machine-readable-contracts.md` §Manifest maintenance)
 
 ---
@@ -509,15 +509,15 @@ Bu maddeler tamamlanmadan `1.0.0` çıkmaz:
 ## M21.3 Launch polish
 - [x] homepage hero / CTA / quickstart akışını son kez gözden geçir `(M21)(P2)` ✓ (README + site/index.html stats güncellendi: 99 surfaces, ~152 KB / ~18 KB gzip)
 - [x] playground ana sayfasını son kez sadeleştir `(M21)(P2)` ✓ (density + motion toggle eklendi)
-- [ ] screenshot/baseline görsellerini güncelle `(M21)(P3)`
+- [ ] screenshot/baseline görsellerini güncelle `(M21)(P3)` — post-1.0
 
 ## M21.4 Publish
 - [x] `1.0.0-rc` sonrası bug listesi kapat `(M21)(P0)` ✓ (tüm CI blocker'lar giderildi)
-- [ ] `1.0.0` npm publish workflow'unu çalıştır `(M21)(P0)`
-- [ ] npm dist-tag'leri doğrula `(M21)(P0)`
+- [x] `1.0.0` npm publish workflow'unu çalıştır `(M21)(P0)` ✓ (`publish-npm` #11 ✅)
+- [x] npm dist-tag'leri doğrula `(M21)(P0)` ✓ (`latest` kanal, `v1.0.0` tag)
 - [x] GitHub commit + `v1.0.0` tag push edildi `(M21)(P1)` ✓ (`git tag v1.0.0`, `git push origin v1.0.0`)
-- [ ] GitHub release sayfası oluştur `(M21)(P1)` — https://github.com/snrj35-dev/Fikir-Css/releases/new
-- [ ] Pages içeriğini final sürümle senkronize et `(M21)(P1)`
+- [x] GitHub release sayfası oluştur `(M21)(P1)` ✓ (kullanıcı tarafından oluşturuldu)
+- [x] Pages içeriğini final sürümle senkronize et `(M21)(P1)` ✓ (`deploy-pages` #34 ✅)
 
 ## M21.5 Post-launch guardrails
 - [x] `1.0.1` hotfix yolu için checklist oluştur `(M21)(P1)` ✓ (`docs/release/hotfix-checklist.md`)
