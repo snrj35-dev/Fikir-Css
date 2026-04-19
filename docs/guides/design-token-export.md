@@ -1,6 +1,6 @@
 # Design Token Export Format Mapping
 
-> Updated: M18 — v0.6.0
+> Updated: M18 — v1.0.0
 
 ## Overview
 
@@ -100,7 +100,7 @@ const tokens = JSON.parse(await readFile("node_modules/fikir-css/dist/tokens.jso
 ### CDN URL (jsDelivr)
 
 ```
-https://cdn.jsdelivr.net/npm/fikir-css@0.6.0/dist/tokens.json
+https://cdn.jsdelivr.net/npm/fikir-css@1.0.0/dist/tokens.json
 ```
 
 ### Build-time token extraction

@@ -10,7 +10,7 @@
   },
   "dependencies": {
     "vue": "^3.5.0",
-    "fikir-css": "^0.6.0"
+    "fikir-css": "^1.0.0"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^5.2.0",

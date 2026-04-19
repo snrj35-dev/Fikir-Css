@@ -1,6 +1,6 @@
 # Anti-patterns and Troubleshooting Handbook
 
-> Updated: M18 — v0.6.0
+> Updated: M18 — v1.0.0
 
 ---
 

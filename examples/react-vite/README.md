@@ -25,7 +25,7 @@ Or install from local tarball (monorepo development):
 # From repo root first:
 npm run build && npm pack
 # Then in this folder:
-npm install ../../fikir-css-0.6.0.tgz
+npm install ../../fikir-css-1.0.0.tgz
 npm run dev
 ```
 

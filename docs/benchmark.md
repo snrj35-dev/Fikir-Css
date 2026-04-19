@@ -1,6 +1,6 @@
 # Performance Benchmark & Comparison
 
-> Updated: M19 — v0.6.0 | Methodology: static analysis + Chrome DevTools
+> Updated: M19 — v1.0.0 | Methodology: static analysis + Chrome DevTools
 >
 > Bundle sizes sourced from `npm run validate:size` (gzip) and `npm run report:size` (raw). Rendering benchmarks are approximate — measured on M1 MacBook Air, Chrome 124, 50 button + 1 modal page.
 
@@ -8,7 +8,7 @@
 
 | Library | CSS bundle | Gzip | JS required |
 |---------|------------|------|-------------|
-| **Fikir CSS v0.6.0** | 92 KB raw | **10.5 KB** | None |
+| **Fikir CSS v1.0.0** | 92 KB raw | **10.5 KB** | None |
 | Bootstrap 5.3 | 194 KB raw | ~22 KB | Optional (~16 KB gzip) |
 | Tailwind CSS 3 (purged, typical app) | ~8–30 KB | ~3–12 KB | None (build step required) |
 | Tailwind CSS 4 (new engine) | ~15 KB | ~5 KB | None |

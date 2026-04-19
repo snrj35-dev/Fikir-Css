@@ -1,6 +1,6 @@
 # Figma Token Handoff Guidance
 
-> Updated: M18 — v0.6.0
+> Updated: M18 — v1.0.0
 
 For automated import and CDN usage, see `docs/guides/figma-token-export.md`.
 
@@ -16,7 +16,7 @@ Use the DTCG-format token file — `dist/tokens.json` ships with every release.
 
 Configure Tokens Studio with the GitHub sync to pull from:
 ```
-https://cdn.jsdelivr.net/npm/fikir-css@0.6.0/dist/tokens.json
+https://cdn.jsdelivr.net/npm/fikir-css@1.0.0/dist/tokens.json
 ```
 
 ### 3. Token Collection Structure

@@ -1,7 +1,7 @@
 # Fikir CSS — Versioned Compatibility Matrix
 
 > Created: 2026-04-12
-> Last updated: 2026-04-16 for the `v0.6.0` baseline.
+> Last updated: 2026-04-16 for the `v1.0.0` baseline.
 
 This matrix documents which framework adapters, bundlers, and integration patterns are validated against which Fikir CSS version.
 
@@ -11,14 +11,14 @@ This matrix documents which framework adapters, bundlers, and integration patter
 
 | Adapter | Min fikir-css version | Tested against | Status | Notes |
 |---------|----------------------|----------------|--------|-------|
-| React (JSX) | `0.4.0` | `0.6.0` | ✅ Verified | `import "fikir-css/css"` in Vite |
-| Vue 3 (SFC) | `0.4.0` | `0.6.0` | ✅ Verified | `import "fikir-css/css"` in Vite |
-| Svelte 5 | `0.4.0` | `0.6.0` | ✅ Verified | CSS import in `+layout.svelte` |
-| Next.js (App Router) | `0.5.0` | `0.6.0` | ✅ Verified | `import "fikir-css/css"` in root layout |
-| Nuxt 3 | `0.5.0` | `0.6.0` | ✅ Verified | `import "fikir-css/css"` in `nuxt.config` CSS array |
-| SvelteKit | `0.5.0` | `0.6.0` | ✅ Verified | CSS import in root layout |
-| Astro | `0.5.0` | `0.6.0` | ✅ Verified | `<link>` in `<head>` or bundler import |
-| Plain HTML (CDN) | `0.6.0` | `0.6.0` | ✅ Verified | GitHub Pages CDN `https://snrj35-dev.github.io/Fikir-Css/dist/fikir.css` |
+| React (JSX) | `0.4.0` | `1.0.0` | ✅ Verified | `import "fikir-css/css"` in Vite |
+| Vue 3 (SFC) | `0.4.0` | `1.0.0` | ✅ Verified | `import "fikir-css/css"` in Vite |
+| Svelte 5 | `0.4.0` | `1.0.0` | ✅ Verified | CSS import in `+layout.svelte` |
+| Next.js (App Router) | `0.5.0` | `1.0.0` | ✅ Verified | `import "fikir-css/css"` in root layout |
+| Nuxt 3 | `0.5.0` | `1.0.0` | ✅ Verified | `import "fikir-css/css"` in `nuxt.config` CSS array |
+| SvelteKit | `0.5.0` | `1.0.0` | ✅ Verified | CSS import in root layout |
+| Astro | `0.5.0` | `1.0.0` | ✅ Verified | `<link>` in `<head>` or bundler import |
+| Plain HTML (CDN) | `1.0.0` | `1.0.0` | ✅ Verified | GitHub Pages CDN `https://snrj35-dev.github.io/Fikir-Css/dist/fikir.css` |
 
 ---
 
@@ -26,11 +26,11 @@ This matrix documents which framework adapters, bundlers, and integration patter
 
 | Tool | Min version tested | fikir-css version | Status |
 |------|--------------------|-------------------|--------|
-| Vite | 5.x | `0.6.0` | ✅ |
-| webpack | 5.x | `0.6.0` | ✅ |
-| Parcel | 2.x | `0.6.0` | ✅ |
-| Rollup | 4.x | `0.6.0` | ✅ |
-| esbuild | 0.20+ | `0.6.0` | ✅ |
+| Vite | 5.x | `1.0.0` | ✅ |
+| webpack | 5.x | `1.0.0` | ✅ |
+| Parcel | 2.x | `1.0.0` | ✅ |
+| Rollup | 4.x | `1.0.0` | ✅ |
+| esbuild | 0.20+ | `1.0.0` | ✅ |
 
 ---
 
@@ -61,7 +61,7 @@ This matrix documents which framework adapters, bundlers, and integration patter
 
 ## Subpath Export Compatibility
 
-All exports below remain available in `fikir-css@0.6.0`:
+All exports below remain available in `fikir-css@1.0.0`:
 
 | Subpath | Type | Available since |
 |---------|------|----------------|

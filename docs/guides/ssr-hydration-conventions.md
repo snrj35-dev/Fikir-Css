@@ -1,6 +1,6 @@
 # SSR and Hydration-Safe Usage Conventions
 
-> Updated: M18 — v0.6.0, Next.js / Nuxt / SvelteKit / Astro
+> Updated: M18 — v1.0.0, Next.js / Nuxt / SvelteKit / Astro
 
 ## Core Guarantee
 

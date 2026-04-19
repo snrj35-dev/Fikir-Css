@@ -1,6 +1,6 @@
 # Overlay JS Helpers
 
-> Updated: M18 — v0.6.0
+> Updated: M18 — v1.0.0
 
 `fikir-css/helpers` provides three vanilla-JS utilities for accessible overlay behavior. Zero dependencies, fully tree-shakeable.
 

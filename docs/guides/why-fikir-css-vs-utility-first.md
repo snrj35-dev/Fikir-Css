@@ -1,6 +1,6 @@
 # Why Fikir CSS vs Utility-First
 
-> M18 — v0.6.0
+> M18 — v1.0.0
 
 This is not a "Fikir CSS is better" document. It is a decision guide for teams evaluating tradeoffs.
 

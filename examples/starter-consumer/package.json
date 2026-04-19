@@ -7,6 +7,6 @@
     "start": "npx --yes serve ."
   },
   "dependencies": {
-    "fikir-css": "^0.6.0"
+    "fikir-css": "^1.0.0"
   }
 }

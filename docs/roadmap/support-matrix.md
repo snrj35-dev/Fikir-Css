@@ -1,7 +1,7 @@
 # Fikir CSS — Support Matrix
 
 > Version: v1.0 preparation  
-> Baseline: v0.6.0  
+> Baseline: v1.0.0  
 > Last updated: 2026-04-19 (M21.1 — support matrix final freeze)
 
 Stability levels are defined in [`docs/governance/semver-policy.md`](../governance/semver-policy.md).
@@ -183,7 +183,7 @@ No semver guarantee. May change or be removed without notice. Not recommended fo
 
 ## Deprecated Surfaces
 
-None at v0.6.0.
+None at v1.0.0.
 
 ---
 

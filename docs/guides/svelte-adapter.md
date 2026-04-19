@@ -1,6 +1,6 @@
 # Svelte Adapter Guidance
 
-> Updated: M18 — v0.6.0, Svelte 4 / SvelteKit
+> Updated: M18 — v1.0.0, Svelte 4 / SvelteKit
 
 ## Installation
 

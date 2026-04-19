@@ -1,6 +1,6 @@
 # Adding Fikir CSS to an Existing Project
 
-> Updated: M18 — v0.6.0
+> Updated: M18 — v1.0.0
 
 This guide helps you integrate Fikir CSS into a project that already has its own styles, without breaking anything.
 

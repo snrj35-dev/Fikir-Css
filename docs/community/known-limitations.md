@@ -1,6 +1,6 @@
 # Known Limitations (M1 Baseline)
 
-This page tracks current limitations for the v0.6.0 productization baseline.
+This page tracks current limitations for the v1.0.0 productization baseline.
 
 ## Scope Limitations
 - Supported scope is intentionally narrow (core + selected slices). Broad implemented surface remains `experimental`.

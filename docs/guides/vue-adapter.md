@@ -1,6 +1,6 @@
 # Fikir CSS × Vue 3 Adapter Guide
 
-> Updated: M18 — v0.6.0
+> Updated: M18 — v1.0.0
 
 ## Installation
 

@@ -1,6 +1,6 @@
 # From MUI (Material UI) to Fikir CSS
 
-> Updated: M18 — v0.6.0
+> Updated: M18 — v1.0.0
 
 > **Scope note:** MUI is a React component library; Fikir CSS is a framework-agnostic stylesheet. This guide covers the CSS and pattern equivalences. For the React-specific integration layer, see `docs/guides/react-adapter.md`.
 

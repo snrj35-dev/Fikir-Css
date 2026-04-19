@@ -31,7 +31,7 @@ Generated during `npm run build` using `scripts/css-manifest.mjs`.
 ```json
 {
   "generatedAt": "2024-01-15T10:30:00.000Z",
-  "version": "0.6.0",
+  "version": "1.0.0",
   "count": 351,
   "selectors": {
     "btn": {

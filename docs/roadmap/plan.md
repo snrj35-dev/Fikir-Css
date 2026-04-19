@@ -1,7 +1,7 @@
 # Fikir CSS — v1.0 Ürünleşme Planı
 
 > Oluşturulma: 2026-04-16  
-> Baseline: `v0.6.0` repo snapshot  
+> Baseline: `v1.0.0` repo snapshot  
 > Hedef: Fikir CSS’i “güçlü prototip” seviyesinden “güvenle benimsenebilir, sürüm disiplini oturmuş, dokümante edilmiş, erişilebilir ve örneklerle doğrulanmış v1.0 ürün” seviyesine taşımak.
 
 ---
@@ -527,7 +527,7 @@ Amaç: yayınlandıktan sonra da güven kaybı yaşanmasın.
 
 ## 8. Milestone planı
 
-Aşağıdaki milestone’lar mevcut `v0.6.0` durumundan `1.0.0`’a giden önerilen sıradır.
+Aşağıdaki milestone’lar mevcut `v1.0.0` durumundan `1.0.0`’a giden önerilen sıradır.
 
 ---
 

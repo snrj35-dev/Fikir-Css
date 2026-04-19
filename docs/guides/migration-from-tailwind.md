@@ -1,6 +1,6 @@
 # From Tailwind CSS to Fikir CSS
 
-> Updated: M18 — v0.6.0
+> Updated: M18 — v1.0.0
 
 ## Key Differences
 
