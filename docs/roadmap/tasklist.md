@@ -512,10 +512,11 @@ Bu maddeler tamamlanmadan `1.0.0` çıkmaz:
 - [ ] screenshot/baseline görsellerini güncelle `(M21)(P3)`
 
 ## M21.4 Publish
-- [ ] `1.0.0-rc` sonrası bug listesi kapat `(M21)(P0)`
-- [ ] `1.0.0` publish workflow'unu çalıştır `(M21)(P0)`
+- [x] `1.0.0-rc` sonrası bug listesi kapat `(M21)(P0)` ✓ (tüm CI blocker'lar giderildi)
+- [ ] `1.0.0` npm publish workflow'unu çalıştır `(M21)(P0)`
 - [ ] npm dist-tag'leri doğrula `(M21)(P0)`
-- [ ] GitHub release oluştur `(M21)(P1)`
+- [x] GitHub commit + `v1.0.0` tag push edildi `(M21)(P1)` ✓ (`git tag v1.0.0`, `git push origin v1.0.0`)
+- [ ] GitHub release sayfası oluştur `(M21)(P1)` — https://github.com/snrj35-dev/Fikir-Css/releases/new
 - [ ] Pages içeriğini final sürümle senkronize et `(M21)(P1)`
 
 ## M21.5 Post-launch guardrails
