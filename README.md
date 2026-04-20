@@ -6,7 +6,18 @@ A single `fikir.css` file gives you 99 UI surfaces. No build step for consumers.
 
 **v1.0.0** &nbsp;·&nbsp; **~152 KB raw / ~18 KB gzip** &nbsp;·&nbsp; **99 surfaces** &nbsp;·&nbsp; [![npm](https://img.shields.io/npm/v/fikir-css)](https://www.npmjs.com/package/fikir-css)
 
-🔗 **[Live component gallery →](https://snrj35-dev.github.io/Fikir-Css/)** &nbsp;·&nbsp; [GitHub](https://github.com/snrj35-dev/Fikir-Css)
+🔗 **[Live component gallery →](https://snrj35-dev.github.io/Fikir-Css/)** &nbsp;·&nbsp; [GitHub](https://github.com/snrj35-dev/Fikir-Css) &nbsp;·&nbsp; **[Contracts](https://snrj35-dev.github.io/Fikir-Css/dist/contracts/)** &nbsp;·&nbsp; [Selectors JSON](https://snrj35-dev.github.io/Fikir-Css/dist/contracts/selectors.json)
+
+---
+
+## ⚠️ Critical: This is NOT a traditional CSS framework
+
+**If you're familiar with Bootstrap or Tailwind, read this first.**
+
+- **DO NOT** treat class names as final selectors. `class="button"` ≠ the rendered selector.
+- **Semantic class names** map to **generated selectors** via the contract system (see [contracts](./contracts/)).
+- **State lives in `data-*` attributes**, not class modifiers.
+- **Check [selectors.json](https://snrj35-dev.github.io/Fikir-Css/dist/contracts/selectors.json)** to see the actual selector contract before using a surface.
 
 ---
 
@@ -18,11 +29,53 @@ Fikir CSS is a contract-driven CSS design system for teams that want semantic se
 - Public surfaces are explicitly labeled as `supported`, `beta`, `experimental`, or `deprecated`
 - Consumers can stay in plain HTML, or opt into resolvers and helpers only when needed
 
+### Understanding the contract model
+
+Each surface has a **semantic class name** that maps to **generated selectors**:
+
+```
+semantic class → [contracts/*.mjs] → selectors.json → actual CSS selectors
+```
+
+**Example:** When you write `class="btn btn-primary"`:
+1. The contracts define what `btn` and `btn-primary` are
+2. `selectors.json` maps them to their actual generated selectors (e.g., `.btn-_x1a2b`, `.btn-primary_x3c4d`)
+3. The CSS applies the styles
+
+**Always check [selectors.json](https://snrj35-dev.github.io/Fikir-Css/dist/contracts/selectors.json)** to verify a surface's actual selector contract before using it in production code.
+
 ## Why
 
 - No mandatory consumer build step for the default path
 - Theme, density, and motion are controlled with tokens and `data-*` attributes instead of framework-specific runtime APIs
 - The product story is explicit: supported surfaces are stable, beta surfaces are opt-in, experimental surfaces are not sold as ready
+- **State is data-driven**, not class-driven — use `data-variant="primary"` and `data-open="true"`, not class modifiers
+- **Contracts are the source of truth** — every selector is verifiable and predictable (not a black box)
+
+---
+
+## AI-friendly usage
+
+When using Fikir CSS with AI assistants (Claude, ChatGPT, etc.):
+
+1. **Reference selectors.json** — Include the actual contract when asking for help: "I'm using Fikir CSS. Here's what [selectors.json](https://snrj35-dev.github.io/Fikir-Css/dist/contracts/selectors.json) shows for `btn`..."
+
+2. **Prefer data attributes for state** — Correct example:
+   ```html
+   <!-- ✅ DO -->
+   <button class="btn" data-variant="primary" data-size="sm">Click me</button>
+   ```
+   ```html
+   <!-- ❌ DON'T (won't work as expected) -->
+   <button class="btn-primary btn-sm">Click me</button>
+   ```
+
+3. **State flows through attributes** — Not class modifiers:
+   ```html
+   <!-- ✅ Toggle state with data-open -->
+   <div class="modal" data-open="true"></div>
+   <div class="toast" data-open="false"></div>
+   ```
 
 ---
 
@@ -127,6 +180,50 @@ cd Fikir-Css
 npm install && npm run build
 # open playground/index.html — no dev server needed
 ```
+
+---
+
+## Contract & Reference
+
+All contracts and manifests are published to GitHub Pages for easy AI reference.
+
+### Core Contracts
+
+| Contract | Purpose | Link |
+|----------|---------|------|
+| **selectors.json** | Runtime selector mapping (semantic → generated) | [selectors.json](https://snrj35-dev.github.io/Fikir-Css/dist/contracts/selectors.json) |
+| **primitives.json** | Base component and layout primitives | [primitives.json](https://snrj35-dev.github.io/Fikir-Css/dist/contracts/primitives.json) |
+| **capabilities.json** | Feature capability matrix | [capabilities.json](https://snrj35-dev.github.io/Fikir-Css/dist/contracts/capabilities.json) |
+| **anatomy.json** | Component structure and element contracts | [anatomy.json](https://snrj35-dev.github.io/Fikir-Css/dist/contracts/anatomy.json) |
+
+### Variants & Recipes
+
+| File | Purpose | Link |
+|------|---------|------|
+| **variants.json** | All component variants (color, size, state) | [variants.json](https://snrj35-dev.github.io/Fikir-Css/dist/contracts/variants.json) |
+| **alias-migration.json** | Class name aliases and migration paths | [alias-migration.json](https://snrj35-dev.github.io/Fikir-Css/dist/contracts/alias-migration.json) |
+
+### Design Tokens
+
+| File | Purpose | Link |
+|------|---------|------|
+| **tokens.json** | Color, spacing, typography, radius, duration tokens | [tokens.json](https://snrj35-dev.github.io/Fikir-Css/dist/contracts/tokens.json) |
+
+### Quality Reports (CI/CD)
+
+These are regenerated on each build to catch regressions:
+
+| Report | Purpose | Link |
+|--------|---------|------|
+| **bundle-layers-report.json** | CSS layer breakdown and size analysis | [bundle-layers-report.json](https://snrj35-dev.github.io/Fikir-Css/dist/contracts/bundle-layers-report.json) |
+| **component-css-map.json** | Which CSS rules apply to each component | [component-css-map.json](https://snrj35-dev.github.io/Fikir-Css/dist/contracts/component-css-map.json) |
+| **contract-drift-report.json** | Selectors that have changed since last release | [contract-drift-report.json](https://snrj35-dev.github.io/Fikir-Css/dist/contracts/contract-drift-report.json) |
+| **contrast-regression-report.json** | WCAG contrast violations | [contrast-regression-report.json](https://snrj35-dev.github.io/Fikir-Css/dist/contracts/contrast-regression-report.json) |
+| **css-anatomy-drift-report.json** | Anatomy contract changes | [css-anatomy-drift-report.json](https://snrj35-dev.github.io/Fikir-Css/dist/contracts/css-anatomy-drift-report.json) |
+| **dead-surfaces-report.json** | Unused surfaces that could be removed | [dead-surfaces-report.json](https://snrj35-dev.github.io/Fikir-Css/dist/contracts/dead-surfaces-report.json) |
+| **flaky-tests-report.json** | Inconsistent test results | [flaky-tests-report.json](https://snrj35-dev.github.io/Fikir-Css/dist/contracts/flaky-tests-report.json) |
+| **size-report.json** | Bundle size breakdown per surface | [size-report.json](https://snrj35-dev.github.io/Fikir-Css/dist/contracts/size-report.json) |
+| **stale-anatomy-report.json** | Components with outdated anatomy definitions | [stale-anatomy-report.json](https://snrj35-dev.github.io/Fikir-Css/dist/contracts/stale-anatomy-report.json) |
 
 ---
 
