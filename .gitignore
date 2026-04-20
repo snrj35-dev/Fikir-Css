@@ -31,3 +31,6 @@ tests/browser/results/
 tests/browser/report/
 playwright-report/
 test-results/
+
+# Internal issue tracking
+sorunlar.txt
