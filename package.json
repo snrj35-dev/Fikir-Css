@@ -1,6 +1,6 @@
 {
   "name": "fikir-css",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Contract-driven CSS design system. Zero-runtime, token-first, 99 surfaces in ~18KB gzip.",
   "keywords": [
     "css",
