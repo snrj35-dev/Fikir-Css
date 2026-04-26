@@ -9,31 +9,4 @@
  * @see scripts/detect-css-anatomy-drift.mjs
  */
 export const anatomyDriftBaseline = new Set([
-  "autocomplete",
-  "calendar",
-  "callout",
-  "code",
-  "code-block",
-  "combobox",
-  "context-menu",
-  "date-picker",
-  "date-range-picker",
-  "date-time-picker",
-  "dropzone",
-  "editable-field",
-  "file-upload",
-  "heading",
-  "inline-notice",
-  "kbd",
-  "markdown-surface",
-  "number-input",
-  "quote",
-  "range-slider",
-  "rating",
-  "settings-panel",
-  "split-button",
-  "tags-input",
-  "text",
-  "time-picker",
-  "tree-table"
 ]);

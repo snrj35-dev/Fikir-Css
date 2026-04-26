@@ -169,52 +169,33 @@ Use `aria-controls` on toolbar controls to associate them with the table:
 </table>
 ```
 
-## States
+## Tokens used
 
-| State | Activation | HTML pattern |
-|-------|-----------|--------------|
-| Active filter chip | Filter applied | `tag-chip` in `[data-slot="active-filters"]` |
-| Selection summary visible | Rows selected | `[data-slot="selection-summary"]` with count |
-| Density: compact | User selects compact | Apply `data-density="compact"` to table wrapper |
-| Density: comfortable | User selects comfortable | Apply `data-density="comfortable"` to table wrapper |
-| Summary row visible | Filters or selection active | `[data-slot="summary"]` row rendered |
+| Token | Role | Notes |
+|-------|------|-------|
+| `--color-border-subtle` | Toolbar border | Light separator |
+| `--color-bg-surface` | Default background | Mixed with page bg |
+| `--space-2`, `--space-3` | Internal gaps | Scales with density |
+| `--radius-lg` | Corner radius | Pattern container shape |
+| `--font-size-sm` | Selection text size | Muted metadata font |
 
-## Accessibility
+## AI / machine-readable notes
 
-- Wrap `[data-slot="search"]` in `<form role="search">` with `aria-label`
-- Use `aria-label` on every `<select>` — never rely on visual placement
-- Use `aria-controls="[table-id]"` on column-visibility and density controls
-- `[data-slot="selection-summary"]` should have `aria-live="polite"` for dynamic updates
-- Active filter chips must have `aria-label="Remove [filter] filter"` on remove buttons
-- Export and action buttons need descriptive labels (not just icons)
+- **Pattern identifier:** `data-pattern="data-table-toolbar"`
+- **Layout structure:**
+  - `[data-slot="controls"]` — main row for search, filters, and actions
+  - `[data-slot="summary"]` — optional row for active chips and selection count
+  - `[data-slot="surface"]` — required wrapper for `.table` or `.data-grid`
+- **Linking:** uses `aria-controls="[table-id]"` on toolbar control buttons to associate with table
+- **Search implementation:** must use `search-box` component inside `[data-slot="search"]`
+- **Active filters:** use `tag-chip` or `badge` inside `[data-slot="active-filters"]`
+- **Contextual actions:** primary actions (Add, Delete) should be in `[data-slot="actions"]`
+- **Card integration:** `.card[data-pattern="data-table-toolbar"]` automatically removes own border/bg
 
-## AI prompt context
+## Related
 
-```
-data-table-toolbar pattern: data-pattern="data-table-toolbar"
-Primary row: [data-slot="controls"] > search + filters + column-visibility + density + export + actions
-Summary row: [data-slot="summary"] > [data-slot="active-filters"] + [data-slot="selection-summary"]
-Surface slot: [data-slot="surface"] wraps .table or .data-grid
-Table linking: aria-controls="[table-id]" on control buttons
-Search uses: class="search-box" > search-box-input + search-box-action
-Active filters: tag-chip with tag-chip-remove in [data-slot="active-filters"]
-Selection count: [data-slot="selection-summary"] with aria-live="polite"
-Card integration: .card[data-pattern="data-table-toolbar"] removes own border/bg
-```
-
-## Anti-patterns
-
-- ❌ Omitting `aria-controls` between toolbar controls and the table
-- ❌ Using `data-table-toolbar` for page-level filtering disconnected from a table
-- ❌ Hardcoding selection summary — always update with `aria-live="polite"`
-- ❌ Placing export inside `[data-slot="actions"]` when it's always visible (use `[data-slot="export"]`)
-- ❌ Hiding entire toolbar when zero rows exist — show empty state in surface slot instead
-
-## Related patterns
-
-- **Filter Bar:** [filter-bar.md](./filter-bar.md) — standalone filter panel without table-level controls
-- **Table:** [table.md](./table.md) — the table surface placed in `[data-slot="surface"]`
-- **Data Grid:** [data-grid.md](./data-grid.md) — advanced table for the surface slot
-- **Search Box:** [search-box.md](./search-box.md) — standalone search input component
-- **Tag Chip:** [tag.md](./tag.md) — active filter chip in `[data-slot="active-filters"]`
-- **Empty Search State:** [empty-search-state.md](./empty-search-state.md) — content when table is empty after filtering
+- **`filter-bar`** — standalone filter panel without table-level controls
+- **`table`** — the standard table surface
+- **`data-grid`** — advanced table component for complex data
+- **`search-box`** — standalone search input component
+- **`tag-chip`** — used for active filter indicators

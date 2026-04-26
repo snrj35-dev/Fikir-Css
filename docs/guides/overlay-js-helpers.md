@@ -8,9 +8,26 @@
 import {
   createFocusTrap,
   bindOverlayKeyboard,
+  bindSidebarDrawer,
   createRovingTabindex,
 } from "fikir-css/helpers";
 ```
+
+### CDN (no bundler)
+
+The helpers module is a vanilla ESM file and loads directly from unpkg/jsdelivr:
+
+```html
+<script type="module">
+  import {
+    createFocusTrap,
+    bindOverlayKeyboard,
+    bindSidebarDrawer,
+  } from "https://unpkg.com/fikir-css@latest/dist/helpers/index.mjs";
+</script>
+```
+
+For a reproducible build pin the version: `fikir-css@1.1.0/dist/helpers/index.mjs`.
 
 ---
 
@@ -66,6 +83,26 @@ destroy();
 |--------|------|---------|-------------|
 | `onClose` | `() => void` | required | Called when Escape is pressed or backdrop is clicked. |
 | `closeOnBackdrop` | `boolean` | `true` | Whether clicking the wrapper (not the dialog) triggers `onClose`. |
+
+---
+
+## `bindSidebarDrawer({ trigger, drawer, breakpoint? })`
+
+High-level convenience wrapper that composes `createFocusTrap` + `bindOverlayKeyboard` with viewport awareness for a responsive sidebar/drawer pair. On viewports at or above `breakpoint` (default `60rem`) the helper becomes a no-op because the inline sidebar is expected to be visible; below it, the drawer becomes a focus-trapped overlay with Escape + backdrop-click close.
+
+```js
+import { bindSidebarDrawer } from "fikir-css/helpers";
+
+bindSidebarDrawer({
+  trigger: document.querySelector('[data-action="open-drawer"]'),
+  drawer:  document.getElementById("mobile-nav"),
+  breakpoint: "60rem",
+});
+```
+
+The `trigger` element has its `aria-expanded` kept in sync automatically. The helper listens on the matching `matchMedia` query and auto-closes the drawer if the user crosses into desktop while it's open.
+
+Full recipe: `docs/patterns/sidebar-drawer-responsive.md`.
 
 ---
 

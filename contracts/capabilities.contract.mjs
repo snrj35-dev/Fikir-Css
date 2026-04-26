@@ -181,6 +181,190 @@ export const capabilitiesContract = {
     requires_app_css: ["Wire focus traversal (left/right arrows, backspace) in app JS"]
   },
 
+  calendar: {
+    status: "beta",
+    does: [
+      "Provides month calendar layout with header, nav buttons, weekday labels, and day grid",
+      "Applies selected, today, outside-month, and disabled day states via data attributes"
+    ],
+    does_not: [
+      "Does NOT compute month data or locale labels — app must render the right days",
+      "Does NOT navigate months automatically — wire previous/next actions in app JS",
+      "Does NOT manage selected date state"
+    ],
+    requires_app_css: [
+      "Render weekday labels and day buttons from app data",
+      "Set data-selected, data-today, data-outside, and disabled on calendar-day buttons as needed"
+    ]
+  },
+
+  "date-picker": {
+    status: "beta",
+    does: [
+      "Provides composed date input, trigger button, and calendar panel",
+      "Shows panel when data-open=\"true\" is set on root",
+      "Applies selected, today, outside-month, and disabled day states inside the panel"
+    ],
+    does_not: [
+      "Does NOT parse or format date strings — app owns locale and formatting logic",
+      "Does NOT sync input value and selected day automatically",
+      "Does NOT position floating panel beyond the provided layout"
+    ],
+    requires_app_css: [
+      "Toggle data-open on the root in app JS",
+      "Sync date-picker-input value with the selected date",
+      "Render month navigation and calendar cells from app state"
+    ]
+  },
+
+  "date-range-picker": {
+    status: "beta",
+    does: [
+      "Provides paired start/end inputs with separator, trigger, and shared range panel",
+      "Shows panel when data-open=\"true\" is set on root",
+      "Applies in-range, range-start, range-end, outside-month, and disabled day states"
+    ],
+    does_not: [
+      "Does NOT compute valid range selection rules — app decides start/end behavior",
+      "Does NOT keep start and end inputs in sync automatically",
+      "Does NOT format dates for different locales"
+    ],
+    requires_app_css: [
+      "Toggle data-open on the root in app JS",
+      "Set data-in-range, data-range-start, and data-range-end on rendered day buttons",
+      "Write selected start/end values into the paired inputs"
+    ]
+  },
+
+  "date-time-picker": {
+    status: "beta",
+    does: [
+      "Provides combined date input, trigger, calendar section, and time fields section",
+      "Shows combined panel when data-open=\"true\" is set on root",
+      "Applies selected, today, outside-month, and disabled calendar-day states"
+    ],
+    does_not: [
+      "Does NOT parse or format date-time strings — app owns locale/format contract",
+      "Does NOT synchronize calendar selection and time fields automatically",
+      "Does NOT handle keyboard navigation between calendar and time controls"
+    ],
+    requires_app_css: [
+      "Toggle data-open on the root in app JS",
+      "Render calendar cells and time field values from app state",
+      "Sync date-time-picker-input value with the chosen date/time"
+    ]
+  },
+
+  "time-picker": {
+    status: "beta",
+    does: [
+      "Provides time input, trigger button, optional panel, and spinner-style time fields",
+      "Shows panel when data-open=\"true\" is set on root"
+    ],
+    does_not: [
+      "Does NOT parse or validate time strings — app owns format and step behavior",
+      "Does NOT synchronize text input and spinner fields automatically",
+      "Does NOT manage keyboard navigation or confirm/cancel behavior"
+    ],
+    requires_app_css: [
+      "Toggle data-open on the root in app JS",
+      "Sync time-picker-input value with hour/minute/second field values",
+      "Wire increment/decrement buttons in app JS"
+    ]
+  },
+
+  dropzone: {
+    status: "beta",
+    does: [
+      "Provides dashed drag-and-drop upload surface with hint, meta, and actions row",
+      "Highlights drag target via data-drag-over=\"true\"",
+      "Applies disabled styling via data-disabled=\"true\""
+    ],
+    does_not: [
+      "Does NOT read dropped files — app handles drag/drop events and file extraction",
+      "Does NOT provide reject/error states beyond the exposed root attributes",
+      "Does NOT show upload progress"
+    ],
+    requires_app_css: [
+      "Keep a native file input in the DOM and trigger it from action buttons if needed",
+      "Toggle data-drag-over and data-disabled in app JS during drag/upload lifecycle"
+    ]
+  },
+
+  "editable-field": {
+    status: "beta",
+    does: [
+      "Provides inline display/edit wrapper with separate display, editor, and actions areas",
+      "Switches visible mode when data-editing=\"true\" is set on root",
+      "Applies disabled styling via data-disabled=\"true\""
+    ],
+    does_not: [
+      "Does NOT persist values — app handles save/cancel behavior",
+      "Does NOT move focus into the editor automatically",
+      "Does NOT validate edited content"
+    ],
+    requires_app_css: [
+      "Toggle data-editing on the root in app JS",
+      "Move focus to the appropriate control when edit mode opens",
+      "Wire save and cancel actions in app JS"
+    ]
+  },
+
+  "file-upload": {
+    status: "beta",
+    does: [
+      "Provides bordered upload wrapper around native file input, metadata, and actions row",
+      "Highlights selected-file state via data-has-file=\"true\"",
+      "Applies disabled styles to the native input"
+    ],
+    does_not: [
+      "Does NOT upload files — app owns transport and progress",
+      "Does NOT render file previews or multiple-file list UI",
+      "Does NOT validate file type or size"
+    ],
+    requires_app_css: [
+      "Toggle data-has-file when a file is selected or cleared",
+      "Render selected file name/metadata into the file-upload-meta area",
+      "Wire replace/remove actions in app JS"
+    ]
+  },
+
+  autocomplete: {
+    status: "beta",
+    does: [
+      "Provides input + listbox layout for free-text autocomplete suggestions",
+      "Highlights active suggestion via data-active=\"true\" on autocomplete-option"
+    ],
+    does_not: [
+      "Does NOT filter suggestions — app supplies the result set",
+      "Does NOT manage aria-expanded, aria-controls, or aria-activedescendant wiring automatically",
+      "Does NOT commit a selected value"
+    ],
+    requires_app_css: [
+      "Wire keyboard navigation and selection in app JS",
+      "Set role=\"combobox\" on the input and role=\"listbox\"/\"option\" on the results",
+      "Toggle data-active on the currently highlighted option"
+    ]
+  },
+
+  combobox: {
+    status: "beta",
+    does: [
+      "Provides input + listbox layout for searchable single-select options",
+      "Highlights active option via data-active=\"true\" and selected option via aria-selected=\"true\""
+    ],
+    does_not: [
+      "Does NOT filter options or own the selected value state",
+      "Does NOT manage aria-expanded, aria-controls, or aria-activedescendant wiring automatically",
+      "Does NOT fetch async options"
+    ],
+    requires_app_css: [
+      "Wire filtering, keyboard navigation, and selection in app JS",
+      "Set role=\"combobox\" on the input and role=\"listbox\"/\"option\" on the list",
+      "Keep aria-selected and data-active in sync with app state"
+    ]
+  },
+
   "hover-card": {
     status: "stable",
     does: [
@@ -238,6 +422,14 @@ export const capabilitiesContract = {
       "Connect label to input via for/id",
       "Toggle error-text/helper-text visibility via hidden attribute or JS",
       "Add aria-describedby on input to reference helper-text or error-text id"
+    ],
+    states: [
+      {
+        name: "invalid",
+        trigger: 'data-invalid="true"',
+        selector: '.field[data-invalid="true"]',
+        notes: "Wrapper-level field state. Pair with aria-invalid=\"true\" on the actual control and show error-text."
+      }
     ]
   },
 
@@ -254,30 +446,106 @@ export const capabilitiesContract = {
       "Does not validate — app is responsible",
       "Does not add clear/search icons — compose manually"
     ],
-    requires_app_css: []
+    requires_app_css: [],
+    states: [
+      {
+        name: "invalid",
+        trigger: 'aria-invalid="true"',
+        selector: '.input[aria-invalid="true"]',
+        notes: "Use on the input element. For full field state also set field[data-invalid=\"true\"]."
+      },
+      {
+        name: "disabled",
+        trigger: "disabled attribute",
+        selector: ".input[disabled]",
+        notes: "Native disabled state."
+      },
+      {
+        name: "readonly",
+        trigger: "readonly attribute",
+        selector: ".input[readonly]:not([disabled])",
+        notes: "Read-only but still focusable and submittable."
+      },
+      {
+        name: "required",
+        trigger: "required attribute",
+        selector: ".input[required]",
+        notes: "Semantic required state. Browser/app handles validation messaging."
+      }
+    ]
   },
 
   textarea: {
     status: "stable",
-    does: ["Applies styled textarea with border, radius, padding"],
+    does: [
+      "Applies styled textarea with border, radius, padding",
+      "Applies :disabled and :read-only states"
+    ],
     does_not: [
       "Does not auto-resize — add resize logic in app JS if needed",
       "Does not add character counter — add separately"
     ],
-    requires_app_css: []
+    requires_app_css: [],
+    states: [
+      {
+        name: "invalid",
+        trigger: 'aria-invalid="true"',
+        selector: '.textarea[aria-invalid="true"]',
+        notes: "Use on the textarea element. Pair with field[data-invalid=\"true\"] when wrapped."
+      },
+      {
+        name: "disabled",
+        trigger: "disabled attribute",
+        selector: ".textarea[disabled]",
+        notes: "Native disabled state."
+      },
+      {
+        name: "readonly",
+        trigger: "readonly attribute",
+        selector: ".textarea[readonly]:not([disabled])",
+        notes: "Read-only but still selectable."
+      },
+      {
+        name: "required",
+        trigger: "required attribute",
+        selector: ".textarea[required]",
+        notes: "Semantic required state."
+      }
+    ]
   },
 
   select: {
     status: "stable",
     does: [
       "Applies styled native select with border, radius, padding",
-      "Applies size variants: sm, md, lg"
+      "Applies size variants: sm, md, lg",
+      "Applies :disabled state"
     ],
     does_not: [
       "Does not provide custom dropdown UI — use combobox for that",
       "Does not add search filtering"
     ],
-    requires_app_css: []
+    requires_app_css: [],
+    states: [
+      {
+        name: "invalid",
+        trigger: 'aria-invalid="true"',
+        selector: '.select[aria-invalid="true"]',
+        notes: "Use on the select element. Pair with field[data-invalid=\"true\"] when wrapped."
+      },
+      {
+        name: "disabled",
+        trigger: "disabled attribute",
+        selector: ".select[disabled]",
+        notes: "Native disabled state."
+      },
+      {
+        name: "required",
+        trigger: "required attribute",
+        selector: ".select[required]",
+        notes: "Semantic required state."
+      }
+    ]
   },
 
   checkbox: {
@@ -285,9 +553,30 @@ export const capabilitiesContract = {
     does: ["Styles native checkbox with accent color and sizing"],
     does_not: [
       "Does not provide indeterminate visual — set via JS input.indeterminate",
-      "Does not manage group state"
+      "Does not manage group state",
+      "Does not support readonly — checkbox uses checked/disabled/required semantics instead"
     ],
-    requires_app_css: []
+    requires_app_css: [],
+    states: [
+      {
+        name: "invalid",
+        trigger: 'aria-invalid="true"',
+        selector: '.checkbox[aria-invalid="true"]',
+        notes: "Use for required consent/group validation errors."
+      },
+      {
+        name: "disabled",
+        trigger: "disabled attribute",
+        selector: ".checkbox[disabled]",
+        notes: "Native disabled state."
+      },
+      {
+        name: "required",
+        trigger: "required attribute",
+        selector: ".checkbox[required]",
+        notes: "Supported by native forms; especially useful for single required consent checkboxes."
+      }
+    ]
   },
 
   radio: {
@@ -458,6 +747,42 @@ export const capabilitiesContract = {
       "Position via JS",
       "Set data-open=\"true\" to show; removeAttribute to hide",
       "Add role=\"menu\" on content, role=\"menuitem\" on items"
+    ]
+  },
+
+  "context-menu": {
+    status: "beta",
+    does: [
+      "Provides context menu wrapper, floating menu panel, and menu item styling",
+      "Shows panel when data-open=\"true\" is set on root"
+    ],
+    does_not: [
+      "Does NOT position itself relative to pointer or trigger — app must supply positioning",
+      "Does NOT listen for right-click, long-press, or outside-click events",
+      "Does NOT manage roving focus or keyboard dismissal"
+    ],
+    requires_app_css: [
+      "Toggle data-open and compute menu position in app JS",
+      "Add role=\"menu\" on context-menu-content and role=\"menuitem\" on each action",
+      "Close on Escape and outside click in app JS"
+    ]
+  },
+
+  "inline-notice": {
+    status: "beta",
+    does: [
+      "Provides in-flow notice layout with icon, content, actions, and dismiss button areas",
+      "Applies tone variants via data-tone: success, warning, danger, info",
+      "Hides the notice visually when data-hidden=\"true\" is set"
+    ],
+    does_not: [
+      "Does NOT auto-dismiss or remember dismissal state",
+      "Does NOT choose semantic role automatically based on message urgency",
+      "Does NOT fetch status content from the app"
+    ],
+    requires_app_css: [
+      "Set role=\"status\" aria-live=\"polite\" or role=\"alert\" depending on urgency",
+      "Toggle data-hidden or remove the element when dismissed in app JS"
     ]
   },
 
@@ -652,6 +977,42 @@ export const capabilitiesContract = {
     ]
   },
 
+  "split-button": {
+    status: "beta",
+    does: [
+      "Provides joined primary action and secondary toggle button layout",
+      "Applies open-state styling via data-open on the root",
+      "Integrates with dropdown-menu-content and dropdown-menu-item for secondary actions"
+    ],
+    does_not: [
+      "Does NOT open or close the secondary menu automatically",
+      "Does NOT handle keyboard navigation inside the attached menu",
+      "Does NOT execute primary or secondary actions"
+    ],
+    requires_app_css: [
+      "Toggle data-open on the root in app JS",
+      "Keep aria-expanded and aria-controls on split-button-toggle in sync with menu visibility",
+      "Wire primary action, secondary menu open/close, and Escape behavior in app JS"
+    ]
+  },
+
+  "settings-panel": {
+    status: "beta",
+    does: [
+      "Provides two-column settings layout with sidebar nav, content area, sections, and rows",
+      "Applies active nav item styling via aria-current=\"page\" or data-active=\"true\""
+    ],
+    does_not: [
+      "Does NOT provide routing between settings sections",
+      "Does NOT make the nav responsive/collapsible on small screens",
+      "Does NOT persist form state inside rows"
+    ],
+    requires_app_css: [
+      "Set aria-current or data-active on the current settings-panel-nav-item",
+      "Provide responsive navigation behavior in app CSS/JS when needed"
+    ]
+  },
+
   /* ─── Data / Display ────────────────────────────────────────────────────── */
 
   table: {
@@ -738,6 +1099,207 @@ export const capabilitiesContract = {
     does: ["Provides vertical event list with marker, title, and meta"],
     does_not: ["Does NOT fetch events — app provides items"],
     requires_app_css: []
+  },
+
+  "tree-table": {
+    status: "beta",
+    does: [
+      "Provides hierarchical table styling on top of table rows/cells with indentation by data-tree-level",
+      "Styles expand/collapse toggle cells and leaf placeholders",
+      "Hides collapsed descendants via data-hidden=\"true\""
+    ],
+    does_not: [
+      "Does NOT compute tree relationships between rows",
+      "Does NOT toggle descendants automatically when a parent row changes state",
+      "Does NOT provide full keyboard treegrid behavior"
+    ],
+    requires_app_css: [
+      "Render rows in parent/child order with data-tree-level on each row",
+      "Sync aria-expanded on expandable rows and toggle data-hidden on descendants in app JS",
+      "Use table semantics plus treeitem/treegrid ARIA only if the interaction model requires it"
+    ]
+  },
+
+  "chart-frame": {
+    status: "stable",
+    does: [
+      "Provides chart wrapper layout with title, aspect-ratio body, and optional legend row",
+      "Exposes a consistent surface for embedded SVG, canvas, or chart-library mounts"
+    ],
+    does_not: [
+      "Does NOT render charts or axes",
+      "Does NOT generate legend content automatically",
+      "Does NOT format chart data"
+    ],
+    requires_app_css: [
+      "Mount the actual chart markup/library inside chart-frame-body",
+      "Populate legend items from app data if a legend is needed"
+    ]
+  },
+
+  heading: {
+    status: "experimental",
+    does: [
+      "Applies normalized heading typography and spacing"
+    ],
+    does_not: [
+      "Does NOT choose semantic heading level — app must pick h1-h6 appropriately",
+      "Does NOT create section hierarchy automatically"
+    ],
+    requires_app_css: []
+  },
+
+  text: {
+    status: "experimental",
+    does: [
+      "Applies normalized body-copy typography and readable line-height"
+    ],
+    does_not: [
+      "Does NOT create semantic emphasis or hierarchy on its own"
+    ],
+    requires_app_css: []
+  },
+
+  quote: {
+    status: "experimental",
+    does: [
+      "Applies quotation styling with accent border and spacing"
+    ],
+    does_not: [
+      "Does NOT add citation or attribution markup",
+      "Does NOT choose semantic quote context"
+    ],
+    requires_app_css: []
+  },
+
+  kbd: {
+    status: "experimental",
+    does: [
+      "Applies keyboard-key chip styling for inline shortcut notation"
+    ],
+    does_not: [
+      "Does NOT describe shortcut behavior — app/docs must explain meaning"
+    ],
+    requires_app_css: []
+  },
+
+  code: {
+    status: "experimental",
+    does: [
+      "Applies inline code typography and background treatment"
+    ],
+    does_not: [
+      "Does NOT syntax-highlight code",
+      "Does NOT preserve multiline formatting — use code-block for that"
+    ],
+    requires_app_css: []
+  },
+
+  "code-block": {
+    status: "experimental",
+    does: [
+      "Applies block code container styling with scrolling surface for multiline snippets"
+    ],
+    does_not: [
+      "Does NOT syntax-highlight code",
+      "Does NOT add copy-to-clipboard behavior"
+    ],
+    requires_app_css: [
+      "Wrap inner source in a <code> element for semantic markup"
+    ]
+  },
+
+  callout: {
+    status: "experimental",
+    does: [
+      "Provides emphasized informational container styling for inline prose or guidance blocks"
+    ],
+    does_not: [
+      "Does NOT map to status semantics like alert or inline-notice",
+      "Does NOT manage dismiss or action behavior"
+    ],
+    requires_app_css: []
+  },
+
+  "markdown-surface": {
+    status: "experimental",
+    does: [
+      "Provides readable typography, spacing, and element defaults for rendered markdown content"
+    ],
+    does_not: [
+      "Does NOT parse markdown — app must render HTML first",
+      "Does NOT sanitize unsafe markdown HTML"
+    ],
+    requires_app_css: [
+      "Render trusted/sanitized HTML inside the markdown-surface container"
+    ]
+  },
+
+  "number-input": {
+    status: "stable",
+    does: [
+      "Provides number input wrapper with increment/decrement step controls",
+      "Applies consistent layout for numeric field and step buttons"
+    ],
+    does_not: [
+      "Does NOT enforce min/max/step rules in JavaScript — rely on native input attributes or app logic",
+      "Does NOT localize decimal separators",
+      "Does NOT format displayed numbers"
+    ],
+    requires_app_css: [
+      "Set min, max, and step attributes on the native input as needed",
+      "Wire increment/decrement button behavior in app JS if not relying solely on native controls"
+    ]
+  },
+
+  "range-slider": {
+    status: "stable",
+    does: [
+      "Provides styled range input track and thumb surface",
+      "Supports native min/max/step semantics from the underlying input element"
+    ],
+    does_not: [
+      "Does NOT render value labels or dual-thumb ranges",
+      "Does NOT sync displayed value text elsewhere in the UI"
+    ],
+    requires_app_css: [
+      "Use a native input[type=\"range\"] element with aria-label or associated label",
+      "Render current numeric value separately if the UI needs visible feedback"
+    ]
+  },
+
+  rating: {
+    status: "beta",
+    does: [
+      "Provides visual rating control surface for discrete score selection",
+      "Applies selected-state styling based on the rendered active item(s)"
+    ],
+    does_not: [
+      "Does NOT define half-step semantics or exact keyboard contract yet",
+      "Does NOT persist the chosen rating",
+      "Does NOT announce score changes automatically"
+    ],
+    requires_app_css: [
+      "Wire pointer and keyboard selection behavior in app JS",
+      "Expose accessible name/value semantics appropriate to the chosen markup pattern"
+    ]
+  },
+
+  "tags-input": {
+    status: "beta",
+    does: [
+      "Provides container styling for tokenized tag input with removable tags",
+      "Supports composition of tag-chip-like items with an inline text field"
+    ],
+    does_not: [
+      "Does NOT tokenize user input into tags automatically",
+      "Does NOT validate duplicates or max tag count",
+      "Does NOT manage keyboard deletion/backspace behavior"
+    ],
+    requires_app_css: [
+      "Create/remove tag items in app JS",
+      "Wire Enter, comma, backspace, and paste behavior according to app needs"
+    ]
   },
 
   "tag-chip": {

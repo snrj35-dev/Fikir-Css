@@ -75,6 +75,17 @@ Small floating label that appears on hover/focus. Provides brief context or clar
 - **Left** (left of element)
 - **Right** (right of element)
 
+## Tokens used
+
+| Token | Role | Notes |
+|-------|------|-------|
+| `--color-bg-inverse` (or `--color-bg-default`) | Tooltip background | High-contrast against page |
+| `--color-fg-on-inverse` | Tooltip text color | Pairs with bg-inverse |
+| `--space-2`, `--space-3` | Padding | Scales with density |
+| `--radius-sm` | Border radius | Scales with shape |
+| `--font-size-xs` | Tooltip text size | Brief, secondary |
+| `--transition-duration-fast` | Fade-in/out | Respects reduced-motion |
+
 ## AI / machine-readable notes
 
 - **Selector pattern:** `tooltip` container
@@ -83,7 +94,9 @@ Small floating label that appears on hover/focus. Provides brief context or clar
 - **Content:** Keep text brief (2–4 words)
 - **Copy-paste use:** Update trigger button label and tooltip text
 
-## Related patterns
+## Related
 
-- **Popover:** Larger, interactive floating panel
-- **Helper-text:** Form field guidance (permanent, not hover)
+- **`popover`** — larger, interactive floating panel
+- **`hover-card`** — richer hover-triggered preview
+- **`helper-text`** — permanent form field guidance (non-hover)
+- **`icon-button`** — common tooltip trigger surface

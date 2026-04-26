@@ -1,6 +1,6 @@
-# Utility Surface Budget Policy (v0.4)
+# Utility Surface Budget Policy (v0.5)
 
-> Last reviewed: 2026-04-11
+> Last reviewed: 2026-04-20
 
 This policy controls utility-class growth so the framework does not expand without clear product value.
 
@@ -20,9 +20,13 @@ This policy controls utility-class growth so the framework does not expand witho
 4. No utility addition without documenting why semantic or token-first usage is insufficient.
 
 ## P1/P2 Budget Targets
-- P1 target: keep utility selector count under `40`.
+- P1 target: keep utility selector count under `45`.
 - P2 target: increase only with milestone evidence and release-note justification.
 - Single change guardrail: avoid adding more than `6` utility selectors in one PR unless approved in release-impact review.
+
+### Budget revision history
+- v0.4 (2026-04-11): target under `40`.
+- v0.5 (2026-04-20): raised to under `45` to accommodate M22 "Dashboard Dogfooding" additions — `gap-6`, `flex-1`, `min-w-0`, `overflow-auto`. Rationale: each addresses a documented composition gap surfaced by real dashboard consumption that cannot be covered by an existing layout primitive or component slot. See `docs/roadmap/plan.md` §14 and `docs/guides/layout-composition.md`.
 
 ## Change Process
 When adding/changing utility selectors:

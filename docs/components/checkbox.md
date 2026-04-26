@@ -1,190 +1,102 @@
 # Checkbox
 
-> Support level: **Supported** | Surface key: `component.checkbox` | Canonical: `.comp-checkbox`
+> Support level: **Supported** | Surface key: `component.checkbox` | Canonical root: `.checkbox`
 
-## When to use
+## Status
 
-Single selection from multiple independent options. User can select zero, one, or more items.
+Supported. Use for independent yes/no choices or multi-select lists.
 
-- ✓ Enable/disable features
-- ✓ Accept terms or conditions
-- ✓ Multiple selections from a list
-- ✓ Toggle preferences or settings
-- ✗ Single selection from mutually exclusive options (use `radio` instead)
-- ✗ On/off toggle (use `switch` instead)
-- ✗ List of related items (use checkboxes in `input-group` instead)
+## Canonical anatomy
 
-## Classes
+| Class | Role | Element |
+|-------|------|---------|
+| `checkbox` | Native checkbox control | `input[type="checkbox"]` |
 
-| Class | Role | Modifiers |
-|-------|------|-----------|
-| `comp-checkbox` | Checkbox input wrapper | n/a |
+## Form state contract
 
-## States
+| State | Trigger | CSS selector |
+|-------|---------|--------------|
+| Invalid | `aria-invalid="true"` | `.checkbox[aria-invalid="true"]` |
+| Disabled | `disabled` | `.checkbox[disabled]` |
+| Required | `required` | semantic/native form state |
 
-| State | Activation | HTML pattern |
-|-------|-----------|--------------|
-| Unchecked | Default | `<input type="checkbox" class="comp-checkbox">` |
-| Checked | `:checked` or `checked` attribute | Visual checkmark shown |
-| Indeterminate | `indeterminate` property (JS) | Dash shown (parent group state) |
-| Disabled | `disabled` attribute | Grayed, not interactive |
-| Focus | `:focus-visible` (automatic) | Outline ring visible |
-| Hover | `:hover` (automatic) | Background highlight |
+`readonly` is not part of the checkbox contract. Use `disabled` when the control must not change.
 
 ## Basic usage
 
 ```html
-<!-- Simple checkbox with label -->
-<label>
-  <input type="checkbox" class="comp-checkbox">
-  Subscribe to newsletter
-</label>
-
-<!-- Checkbox in field (standalone) -->
-<div class="comp-field">
-  <label>
-    <input type="checkbox" id="agree" class="comp-checkbox">
-    I agree to the terms
+<div class="field">
+  <label class="cluster" for="newsletter" style="--cluster-gap: var(--space-2)">
+    <input class="checkbox" id="newsletter" type="checkbox" />
+    <span>Subscribe to release updates</span>
   </label>
+  <p class="helper-text">We send a maximum of two emails per month.</p>
 </div>
-
-<!-- Multiple checkboxes (in input-group) -->
-<fieldset>
-  <legend>Select interests:</legend>
-  <div class="comp-input-group">
-    <label>
-      <input type="checkbox" name="interests" value="music" class="comp-checkbox">
-      Music
-    </label>
-    <label>
-      <input type="checkbox" name="interests" value="sports" class="comp-checkbox">
-      Sports
-    </label>
-    <label>
-      <input type="checkbox" name="interests" value="tech" class="comp-checkbox">
-      Technology
-    </label>
-  </div>
-</fieldset>
-
-<!-- Checkbox with helper text -->
-<label style="display: flex; flex-direction: column; gap: 0.5rem;">
-  <span>
-    <input type="checkbox" id="backup" class="comp-checkbox">
-    <span>Enable daily backups</span>
-  </span>
-  <span style="font-size: 0.75rem; color: var(--color-fg-muted); margin-left: 1.5rem;">
-    Automatic backup runs at 2:00 AM
-  </span>
-</label>
 ```
 
-## Indeterminate state (parent checkbox)
+## Required consent state
 
 ```html
-<!-- Parent checkbox (indeterminate when some children checked) -->
-<fieldset>
-  <legend>Permissions</legend>
-  <label>
-    <input 
-      type="checkbox" 
-      id="all-perms" 
-      class="comp-checkbox"
-      aria-controls="perm-group"
-    >
-    All permissions
+<div class="field" data-invalid="true">
+  <label class="cluster" for="terms" style="--cluster-gap: var(--space-2)">
+    <input class="checkbox"
+           id="terms"
+           type="checkbox"
+           required
+           aria-invalid="true"
+           aria-describedby="terms-error" />
+    <span>I agree to the terms of service</span>
   </label>
-  
-  <div id="perm-group" style="margin-left: 1.5rem; margin-top: 0.5rem;">
-    <label>
-      <input type="checkbox" name="permissions" value="read" class="comp-checkbox">
-      Read
-    </label>
-    <label>
-      <input type="checkbox" name="permissions" value="write" class="comp-checkbox">
-      Write
-    </label>
-    <label>
-      <input type="checkbox" name="permissions" value="admin" class="comp-checkbox">
-      Admin
-    </label>
-  </div>
-</fieldset>
+  <p class="error-text" id="terms-error" role="alert">You must accept the terms to continue.</p>
+</div>
 ```
 
-## Accessibility checklist
-
-- [x] **Semantic HTML:** Uses native `<input type="checkbox">` element
-- [x] **Label association:** Each checkbox has associated `<label>` (implicit or explicit `for="id"`)
-- [x] **Keyboard:** Tab/Shift+Tab to navigate, Space to toggle
-- [x] **Focus visible:** `:focus-visible` outline visible
-- [x] **Indeterminate:** Dash shows partial selection state (parent checkbox)
-- [x] **Disabled:** Visually and functionally disabled; excluded from tab order
-- [x] **Color not only signal:** Checkmark + border color change, not just color
-
-## Keyboard behavior
-
-| Key | Action |
-|-----|--------|
-| Tab | Navigate to checkbox |
-| Shift+Tab | Navigate to previous element |
-| Space | Toggle checkbox state |
-
-## ARIA requirements
-
-| ARIA | When | Value |
-|------|------|-------|
-| `aria-checked` | Indeterminate state (rare) | `"mixed"` (usually automatic with `:indeterminate`) |
-| `aria-controls` | Parent checkbox controls children | ID of child group |
-
-## Grouping checkboxes
-
-Use `<fieldset>` + `<legend>` to group related checkboxes:
+## Disabled and grouped usage
 
 ```html
-<fieldset>
-  <legend>Which features would you like?</legend>
-  <label>
-    <input type="checkbox" name="features" class="comp-checkbox">
-    Feature A
+<fieldset class="field">
+  <legend class="label">Notifications</legend>
+
+  <label class="cluster" style="--cluster-gap: var(--space-2)">
+    <input class="checkbox" type="checkbox" checked />
+    <span>Product updates</span>
   </label>
-  <label>
-    <input type="checkbox" name="features" class="comp-checkbox">
-    Feature B
+
+  <label class="cluster" style="--cluster-gap: var(--space-2)">
+    <input class="checkbox" type="checkbox" disabled />
+    <span>Security alerts (managed by admin)</span>
   </label>
 </fieldset>
 ```
 
-## Density modes
+## CSS custom properties
 
-Checkbox size and label font scale with `[data-density]`:
-
-| Density | Checkbox size | Label font |
-|---------|---------------|-----------|
-| `compact` | 16px × 16px | 0.875rem |
-| `default` | 20px × 20px | 0.875rem |
-| `comfortable` | 24px × 24px | 0.9375rem |
+Checkbox does not expose dedicated component variables.
 
 ## Tokens used
 
-| Token | Role | Notes |
-|-------|------|-------|
-| `--color-bg-surface` | Checkbox background | Light surface |
-| `--color-border-default` | Border | Subtle border |
-| `--color-accent` | Checkmark & focus | Brand color |
-| `--space-*` | Gap between checkbox and label | Scales with density |
+| Token | Role |
+|-------|------|
+| `--color-accent` | Native accent color |
+| `--color-primary-500` | Focus ring mix |
+| `--color-danger` | Invalid outline |
 
-## AI / machine-readable notes
+## Accessibility checklist
 
-- **Selector pattern:** `comp-checkbox` on input element
-- **State:** `:checked` pseudo-class, `checked` HTML attribute, or JavaScript `indeterminate` property
-- **Grouping:** Use `<fieldset>` + `<legend>` for multiple checkboxes
-- **Label:** Always include label text; wrap checkbox in `<label>` for implicit association
-- **Name attribute:** Use `name` for form submission grouping
-- **Copy-paste use:** Adjust `name`, `value`, and label text; structure unchanged
+- Pair each checkbox with visible text.
+- Use `<fieldset>` and `<legend>` for related groups.
+- Use `aria-invalid="true"` only for validation failures.
+- Use `required` for consent-style mandatory checkboxes.
 
-## Related patterns
+## AI notes
 
-- **Radio:** Single selection from mutually exclusive options
-- **Switch:** On/off toggle (binary choice)
-- **Input-group:** Group of related inputs with shared layout
+- Canonical selector is `.checkbox` on a native checkbox input.
+- Invalid state is `aria-invalid="true"`, not a custom invalid class.
+- Checkbox does not support `readonly`.
+- Indeterminate remains a JS property (`input.indeterminate = true`), not a class or attribute contract.
+
+## Related components
+
+- `field`
+- `radio`
+- `switch`

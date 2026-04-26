@@ -12,7 +12,7 @@ Primary action immediately visible olsun ama yanında related secondary actions 
 - ✗ Tek aksiyon varsa normal `button`
 - ✗ Menü tek etkileşim yüzeyse doğrudan `dropdown-menu`
 
-## Classes
+## Canonical anatomy
 
 | Class | Role | Modifiers |
 |-------|------|-----------|
@@ -84,6 +84,12 @@ Action ve toggle aynı button recipe kombinasyonunu taşımalıdır.
 </div>
 ```
 
+## CSS custom properties
+
+`split-button` does not introduce a component-specific custom-property surface. Spacing, radius, color, and focus treatments come from the reused `btn` and `dropdown-menu` surfaces.
+
+If you need to tune the visual weight, do it through the shared button/dropdown tokens rather than by inventing `split-button-*` variables.
+
 ## Accessibility checklist
 
 - [x] Primary action and toggle are separate native `<button>` elements
@@ -111,6 +117,16 @@ Action ve toggle aynı button recipe kombinasyonunu taşımalıdır.
 | `role="menu"` | Secondary panel | On `dropdown-menu-content` |
 | `role="menuitem"` | Secondary actions | On each `dropdown-menu-item` |
 
+## Tokens used
+
+| Token | Role |
+|-------|------|
+| `--color-border-subtle` | Joined trigger border and menu panel border |
+| `--color-bg-surface` | Trigger and menu backgrounds |
+| `--color-fg-default` | Trigger and menu item text |
+| `--space-1`, `--space-2`, `--space-3` | Menu gap and item padding |
+| `--radius-sm` | Inner trigger and menu item corners |
+
 ## AI / machine-readable notes
 
 - **Composition rule:** `split-button` only owns the joined triggers; menu panel/items reuse `dropdown-menu-content` and `dropdown-menu-item`
@@ -118,7 +134,7 @@ Action ve toggle aynı button recipe kombinasyonunu taşımalıdır.
 - **State rule:** open/closed state is attribute-driven with `data-open` on root
 - **Keyboard rule:** if behavior is wired, focus should return to `split-button-toggle` when the menu closes
 
-## Related patterns
+## Related
 
 - `button`
 - `dropdown-menu`

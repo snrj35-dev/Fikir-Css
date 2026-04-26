@@ -134,4 +134,10 @@ No CSS changes needed — tokens handle it.
 - **CSS selector surface:** canonical class is `[base]`, modifiers are additive
 - **State indicators:** prefer ARIA/data-* attributes over CSS classes
 - **Responsive behavior:** uses CSS variables for theme/density/shape — supports dark mode, high-contrast, reduced-motion out of box
-- **Compound components:** if multi-part (e.g. accordion-item + accordion-trigger), describe sub-selectors
+- **Compound components:** if multi-part (e.g. owl-carousel), describe sub-selectors
+- **Copy-paste use:** ensure ID and aria-controls attributes are unique
+
+## Related
+
+- **`component-a`** — brief description of relationship
+- **`component-b`** — brief description of relationship

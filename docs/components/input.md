@@ -1,6 +1,6 @@
 # Input
 
-> Support level: **Supported** | Surface key: `component.input` | Canonical: `.input`
+> Support level: **Supported** | Surface key: `component.input` | Canonical root: `.input`
 
 ## When to use
 
@@ -13,33 +13,32 @@ Single-line text input for collecting user data in forms.
 - ✗ Time/date picking — use `time-picker` or `date-picker`
 - ✗ Option selection — use `select`, `radio`, or `checkbox`
 
-## Classes
+## Canonical anatomy
 
-| Class | Role | Modifiers |
-|-------|------|-----------|
-| `input` | Text input field — applies to `<input>` element | n/a |
-| `label` | Form label — applies to `<label>` element | n/a |
-| `helper-text` | Hint text below the input | n/a |
-| `error-text` | Error message below the input | n/a |
+| Class | Role | Element |
+|-------|------|---------|
+| `input` | Text input field | `input` |
+| `input-sm` | Small size modifier | `input` |
+| `input-md` | Medium size modifier | `input` |
+| `input-lg` | Large size modifier | `input` |
 
-> **Note:** `label`, `helper-text`, and `error-text` are companion classes used alongside `input`. For the full field wrapper pattern see the `field` component.
+## Form state contract
 
-## States
+| State | Trigger | CSS selector |
+|-------|---------|--------------|
+| Invalid | `aria-invalid="true"` | `.input[aria-invalid="true"]` |
+| Disabled | `disabled` | `.input[disabled]` |
+| Read-only | `readonly` | `.input[readonly]:not([disabled])` |
+| Required | `required` | semantic/native form state |
 
-| State | Activation | HTML pattern |
-|-------|-----------|--------------|
-| Default | — | `<input class="input">` |
-| Invalid | `aria-invalid="true"` | `<input class="input" aria-invalid="true">` |
-| Disabled | `disabled` attribute | `<input class="input" disabled>` |
-| Read-only | `readonly` attribute | `<input class="input" readonly>` |
-| Focus | `:focus-visible` (automatic) | Outline ring visible |
+For a full field-level error state, pair the control with `.field[data-invalid="true"]` and visible `.error-text`.
 
 ## Basic usage
 
 ```html
 <div class="field">
   <label class="label" for="email">Email address</label>
-  <input class="input" type="email" id="email"
+  <input class="input input-md" type="email" id="email"
          placeholder="you@example.com"
          aria-describedby="email-hint" />
   <p class="helper-text" id="email-hint">We'll never share your email.</p>
@@ -49,10 +48,11 @@ Single-line text input for collecting user data in forms.
 ## With error state
 
 ```html
-<div class="field">
+<div class="field" data-invalid="true">
   <label class="label" for="username">Username</label>
-  <input class="input" type="text" id="username"
+  <input class="input input-md" type="text" id="username"
          aria-invalid="true"
+         required
          aria-describedby="username-error"
          value="x" />
   <p class="error-text" id="username-error" role="alert">
@@ -61,30 +61,40 @@ Single-line text input for collecting user data in forms.
 </div>
 ```
 
-## Disabled state
+## Read-only and disabled states
 
 ```html
 <div class="field">
-  <label class="label" for="readonly-field">Account ID</label>
-  <input class="input" type="text" id="readonly-field"
+  <label class="label" for="account-id">Account ID</label>
+  <input class="input input-md" type="text" id="account-id"
          value="ACC-00142" readonly />
   <p class="helper-text">Account ID cannot be changed.</p>
+</div>
+
+<div class="field">
+  <label class="label" for="team-name">Team name</label>
+  <input class="input input-md" type="text" id="team-name"
+         value="Northwind Ops" disabled />
 </div>
 ```
 
 ## Size variants
 
-Input height scales via density — no size modifier classes. Use density tokens for compacted layouts.
+```html
+<input class="input input-sm" aria-label="Small input" />
+<input class="input input-md" aria-label="Medium input" />
+<input class="input input-lg" aria-label="Large input" />
+```
 
 ## Accessibility checklist
 
 - [x] **Label pairing:** every `input` must have a `<label>` linked via `for`/`id`
-- [x] **Invalid state:** use `aria-invalid="true"` on the `input` — not a CSS-only class
+- [x] **Invalid state:** use `aria-invalid="true"` on the `input`
 - [x] **Error linkage:** `aria-describedby` links the input to its `error-text` element's `id`
 - [x] **Helper text linkage:** `aria-describedby` should also reference `helper-text` `id` when present
 - [x] **Focus visible:** `:focus-visible` ring visible in high-contrast and keyboard navigation
 - [x] **Read-only:** use `readonly` attribute — not `disabled` — when value is viewable but not editable
-- [x] **Touch targets:** at least 40px height in default density (32px compact, 44px+ comfortable)
+- [x] **Wrapper state:** use `.field[data-invalid="true"]` when the full field should read as invalid
 
 ## Keyboard behavior
 
@@ -103,23 +113,6 @@ Input height scales via density — no size modifier classes. Use density tokens
 | `aria-required` | Field is required | `"true"` (or use `required` attribute) |
 | `aria-label` | No visible `<label>` (avoid if possible) | Descriptive label text |
 
-## Density modes
-
-Input height and padding scale with `[data-density]`:
-
-| Density | Height |
-|---------|--------|
-| `compact` | ~32px |
-| `default` | ~40px |
-| `comfortable` | ~48px |
-
-No CSS changes needed — tokens handle it automatically.
-
-## Shape and motion
-
-- **Shape:** `[data-shape="sharp" | "default" | "rounded"]` — border-radius scales automatically
-- **Motion:** Focus transition respects `prefers-reduced-motion`
-
 ## Tokens used
 
 | Token | Role | Notes |
@@ -128,8 +121,8 @@ No CSS changes needed — tokens handle it automatically.
 | `--color-accent` | Focus outline color | Brand color |
 | `--color-danger` | Invalid border color | Error state |
 | `--color-bg-input` | Input background | Token from surface palette |
-| `--space-2`, `--space-3` | Padding | Scales with density |
-| `--font-size-sm` | Input text size | Scales with density |
+| `--space-2`, `--space-3`, `--space-4` | Padding | Depends on size modifier |
+| `--font-size-sm`, `--font-size-md`, `--font-size-lg` | Input text size | Depends on size modifier |
 | `--radius-md` | Border radius | Scales with shape |
 
 ## Anti-patterns
@@ -152,8 +145,18 @@ No CSS changes needed — tokens handle it automatically.
 
 ## AI / machine-readable notes
 
-- **Selector pattern:** `input` class on native `<input>` element; always paired with `label` class on `<label>`
-- **Companion classes:** `helper-text` and `error-text` are adjacent siblings, not nested inside `input`
-- **State indicators:** `aria-invalid="true"` for error, `disabled` for disabled, `readonly` for read-only
-- **Field wrapper:** for full field layout (label + input + helper/error), use the `field` component
+- **Selector pattern:** `input` + optional size modifier on native `<input>`
+- **Companion classes:** `label`, `helper-text`, and `error-text` live outside the control
+- **State indicators:** `aria-invalid="true"`, `disabled`, `readonly`, `required`
+- **Field wrapper:** use `.field[data-invalid="true"]` when the entire field should read as invalid
 - **Copy-paste use:** substitute `id`/`for` values and placeholder text; class structure is stable
+
+## Related
+
+- **`field`** — wrapping container that owns invalid/disabled state and groups label + control + help/error
+- **`label`** — paired text label for the input
+- **`helper-text`** — non-error guidance under the input
+- **`error-text`** — validation error message linked via `aria-describedby`
+- **`textarea`** — multi-line variant
+- **`number-input`** — numeric stepper variant
+- **`select`** — option-pick variant

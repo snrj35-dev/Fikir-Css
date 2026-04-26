@@ -1,159 +1,148 @@
 # App Shell
 
-> Support level: **Supported** | Surface key: `component.appShell` | Canonical: `.comp-app-shell`
+> Support level: **Supported** | Surface key: `component.appShell` | Canonical root: `.app-shell`
 
 ## When to use
 
-Root layout container for application. Header, sidebar, main content, footer.
+Full-application layout wrapper. Provides a built-in CSS Grid that arranges a topbar, a sidebar, and a main content area with sensible responsive behavior out of the box.
 
-- ✓ Application-level layout
-- ✓ Header + sidebar + main + footer structure
-- ✓ Responsive shell adapting to screen size
-- ✗ Single page component layouts (use stack/grid)
-- ✗ Card-level layouts (use grid)
+- ✓ Admin / dashboard / product shell
+- ✓ Sidebar + topbar + main content skeleton
+- ✓ Needs to adapt between mobile (stacked) and desktop (sidebar + main)
+- ✗ Single-page marketing layouts (use `container` / `stack`)
+- ✗ Card-level composition (use `grid`, `cluster`)
 
-## Classes
+## Canonical anatomy
 
-| Class | Role | Modifiers |
-|-------|------|-----------|
-| `comp-app-shell` | Root shell container | n/a |
-| `comp-app-shell-header` | Top header section | n/a |
-| `comp-app-shell-sidebar` | Left sidebar navigation | n/a |
-| `comp-app-shell-main` | Main content area | n/a |
-| `comp-app-shell-footer` | Bottom footer section | n/a |
+| Class | Role | Element |
+|-------|------|---------|
+| `app-shell` | Root grid container | `div` |
+| `app-shell-topbar` | Top navigation row | `header` |
+| `app-shell-sidebar` | Side navigation area | `aside` |
+| `app-shell-main` | Primary content area | `main` |
+| `app-shell-content` | Inner grid that holds `app-shell-sidebar + app-shell-main` | `div` |
 
-## States
+> `app-shell-main` is the page body region.
+> `app-shell-content` is the 2-column grid **inside** the shell that places the sidebar next to the main area (at `>= 64rem`) and stacks them on narrow viewports.
 
-| State | Activation | HTML pattern |
-|-------|-----------|--------------|
-| Default | — | Full layout shown |
-| Sidebar collapsed | Mobile/toggle | Sidebar hidden, main expands |
+The CSS ships responsive defaults:
+
+- below `64rem`: single column, sidebar stacks above main
+- at `>= 64rem`: `15rem` sidebar column + main content column
+
+You do **not** need inline `grid-template-areas` or media queries for this basic layout.
 
 ## Basic usage
 
 ```html
-<!-- Full app shell -->
-<div class="comp-app-shell" style="display: grid; grid-template-columns: 250px 1fr; grid-template-rows: auto 1fr auto; min-height: 100vh; grid-template-areas: 'header header' 'sidebar main' 'footer footer';">
-  
-  <!-- Header -->
-  <header class="comp-app-shell-header" style="grid-area: header; padding: 1rem 2rem; background: var(--color-bg-surface); border-bottom: 1px solid var(--color-border-subtle); display: flex; align-items: center; justify-content: space-between;">
-    <h1 style="margin: 0; font-size: 1.25rem;">My App</h1>
-    <div style="display: flex; gap: 1rem; align-items: center;">
-      <button class="comp-button-text">Help</button>
-      <button class="comp-button-text">Profile</button>
-    </div>
-  </header>
-  
-  <!-- Sidebar -->
-  <aside class="comp-app-shell-sidebar" style="grid-area: sidebar; padding: 1rem; background: var(--color-bg-subtle); border-right: 1px solid var(--color-border-subtle); overflow-y: auto;">
-    <nav style="display: flex; flex-direction: column; gap: 0.5rem;">
-      <a href="/" style="padding: 0.75rem; border-radius: 0.5rem; color: var(--color-accent); text-decoration: none; background: var(--color-bg-default); display: block;">Dashboard</a>
-      <a href="/users" style="padding: 0.75rem; border-radius: 0.5rem; color: var(--color-fg-base); text-decoration: none; display: block;">Users</a>
-      <a href="/settings" style="padding: 0.75rem; border-radius: 0.5rem; color: var(--color-fg-base); text-decoration: none; display: block;">Settings</a>
+<div class="app-shell">
+  <header class="app-shell-topbar">
+    <strong>My App</strong>
+    <nav class="cluster" aria-label="Topbar actions">
+      <button class="btn btn-ghost btn-sm">Help</button>
+      <button class="btn btn-ghost btn-sm">Profile</button>
     </nav>
-  </aside>
-  
-  <!-- Main content -->
-  <main class="comp-app-shell-main" style="grid-area: main; padding: 2rem; overflow-y: auto; background: var(--color-bg-default);">
-    <h2>Welcome back!</h2>
-    <p>Your main content goes here.</p>
-  </main>
-  
-  <!-- Footer -->
-  <footer class="comp-app-shell-footer" style="grid-area: footer; padding: 1rem 2rem; background: var(--color-bg-surface); border-top: 1px solid var(--color-border-subtle); text-align: center; color: var(--color-fg-muted); font-size: 0.875rem;">
-    © 2026 My App. All rights reserved.
-  </footer>
-</div>
-```
+  </header>
 
-## Responsive (mobile sidebar hidden)
+  <div class="app-shell-content">
+    <aside class="app-shell-sidebar">
+      <nav class="sidebar-nav" aria-label="Main">
+        <a class="sidebar-nav-item" href="/" aria-current="page">Dashboard</a>
+        <a class="sidebar-nav-item" href="/users">Users</a>
+        <a class="sidebar-nav-item" href="/settings">Settings</a>
+      </nav>
+    </aside>
 
-```html
-<div class="comp-app-shell" style="display: grid; grid-template-columns: 1fr; grid-template-rows: auto 1fr auto; min-height: 100vh; grid-template-areas: 'header' 'main' 'footer';">
-  <header class="comp-app-shell-header"><!-- header --></header>
-  <main class="comp-app-shell-main"><!-- main --></main>
-  <footer class="comp-app-shell-footer"><!-- footer --></footer>
-</div>
-
-<!-- Sidebar toggle button in header for mobile -->
-<button class="comp-icon-button" aria-label="Toggle sidebar" onclick="toggleSidebar()" style="display: none; /* show on mobile */"></button>
-```
-
-## Without footer
-
-```html
-<div class="comp-app-shell" style="display: grid; grid-template-columns: 250px 1fr; grid-template-rows: auto 1fr; min-height: 100vh; grid-template-areas: 'header header' 'sidebar main';">
-  <!-- header, sidebar, main only -->
+    <main class="app-shell-main">
+      <!-- page body -->
+    </main>
+  </div>
 </div>
 ```
 
 ## Without sidebar
 
+Drop `app-shell-sidebar` and keep only `app-shell-main` inside `app-shell-content`.
+
 ```html
-<div class="comp-app-shell" style="display: grid; grid-template-columns: 1fr; grid-template-rows: auto 1fr auto; min-height: 100vh; grid-template-areas: 'header' 'main' 'footer';">
-  <!-- header, main, footer only -->
+<div class="app-shell">
+  <header class="app-shell-topbar">Brand</header>
+  <div class="app-shell-content">
+    <main class="app-shell-main"><!-- content --></main>
+  </div>
 </div>
 ```
 
+## Mobile drawer (hamburger) pattern
+
+`app-shell` itself stacks sidebar above main below `64rem`. If you want a true slide-in drawer on mobile, pair `app-shell` with the `drawer` component and hide `app-shell-sidebar` on narrow viewports.
+
+```html
+<div class="app-shell">
+  <header class="app-shell-topbar">
+    <button class="icon-button icon-button-md" aria-label="Open menu"
+            aria-controls="mobile-nav" aria-expanded="false"
+            data-action="open-drawer">☰</button>
+    <strong>My App</strong>
+  </header>
+
+  <div class="app-shell-content">
+    <aside class="app-shell-sidebar" data-desktop-only>
+      <!-- desktop sidebar -->
+    </aside>
+
+    <main class="app-shell-main"><!-- content --></main>
+  </div>
+
+  <!-- mobile drawer mirrors the sidebar nav -->
+  <div class="drawer" id="mobile-nav">
+    <div class="drawer-backdrop"></div>
+    <div class="drawer-panel">
+      <div class="drawer-header">Menu</div>
+      <div class="drawer-body">
+        <nav class="sidebar-nav" aria-label="Main">
+          <!-- same links -->
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>
+```
+
+Wire the open/close logic with `fikir-css/helpers` (`bindOverlayKeyboard`, `createFocusTrap`) — see `docs/guides/overlay-js-helpers.md`.
+
 ## Accessibility checklist
 
-- [x] **Semantic:** Uses `<header>`, `<aside>`, `<main>`, `<footer>` appropriately
-- [x] **Skip navigation:** Skip link to main content (hidden, visible on focus)
-- [x] **Landmark:** Proper landmark roles for screen readers
-- [x] **Keyboard:** Tab navigates all interactive elements
-- [x] **Focus trap:** None (sidebar can be closed)
-
-## Keyboard behavior
-
-| Key | Action |
-|-----|--------|
-| `Tab` | Navigate header, sidebar, main, footer |
-| `Escape` (on mobile) | Close sidebar |
-
-## ARIA requirements
-
-| Role/Attribute | Purpose | Notes |
-|---|---|---|
-| `<header>` | Top banner | Role `banner` implicit |
-| `<aside>` | Sidebar navigation | Role `complementary` or `navigation` |
-| `<main>` | Main content | Role `main` implicit |
-| `<footer>` | Footer section | Role `contentinfo` implicit |
-| Skip link | Jump to main | Hidden, focusable |
+- Use the semantic landmarks: `<header>` for topbar, `<aside>` for sidebar, `<main>` for main content.
+- Include a skip link before `app-shell-topbar` that jumps to `app-shell-main`:
+  ```html
+  <a class="visually-hidden" href="#main-content">Skip to main content</a>
+  ```
+  and add `id="main-content"` on `app-shell-main`.
+- Mobile drawer trigger must have `aria-controls` + `aria-expanded` wired to the drawer.
 
 ## Tokens used
 
-| Token | Role | Notes |
-|-------|------|-------|
-| `--color-bg-surface` | Header/footer bg | Surface color |
-| `--color-bg-subtle` | Sidebar bg | Subtle background |
-| `--color-border-subtle` | Borders | Divider color |
-| `--space-*` | Padding | Scales with density |
-
-## Responsive breakpoints
-
-- **Desktop:** Header, full-width sidebar, main, footer
-- **Tablet:** Header, narrower sidebar, main, footer
-- **Mobile:** Header (sidebar toggle), main, footer (sidebar hidden)
-
-## Variants
-
-- **With sidebar:** Full layout with navigation
-- **Without sidebar:** Header + main + footer only
-- **With footer:** Include bottom footer
-- **Sticky header:** Header stays on scroll
-- **Collapsible sidebar:** Toggle sidebar on mobile
+| Token | Role |
+|-------|------|
+| `--color-bg-surface` | Topbar + sidebar surface |
+| `--color-bg-default` | Main content surface |
+| `--color-border-subtle` | Dividers between regions |
+| `--space-2` / `--space-3` | Padding inside shell regions |
+| `--radius-md` | Inner region corners |
 
 ## AI / machine-readable notes
 
-- **Selector pattern:** `comp-app-shell` grid wrapper with `comp-app-shell-header`, `comp-app-shell-sidebar`, `comp-app-shell-main`, `comp-app-shell-footer` areas
-- **Grid layout:** Use CSS Grid with named template areas (header, sidebar, main, footer)
-- **Responsive:** Adjust grid columns on mobile (hide sidebar or reduce width)
-- **Skip link:** Include hidden skip link to main content
-- **Copy-paste use:** Update header title, sidebar navigation, main content, footer text
+- Canonical structure:
+  `app-shell > app-shell-topbar + app-shell-content(app-shell-sidebar + app-shell-main)`
+- **Do not** invent `app-shell-footer` or `app-shell-header` — those selectors are not in the surface. Use `app-shell-topbar` for the top row and a plain `<footer>` inside `app-shell-main` if needed.
+- The responsive 2-column grid is built in (`@media (min-width: 64rem)`). Do not add inline `grid-template-columns` unless you are overriding the default.
+- Canonical active nav marker is `aria-current="page"` on `sidebar-nav-item`, not `data-active`.
+- See `dist/contracts/anatomy.json` → `components.app-shell.minimal_html` for the canonical skeleton.
 
-## Related patterns
+## Related
 
-- **Stack:** Vertical layout primitive
-- **Cluster:** Horizontal layout primitive
-- **Grid:** 2D grid layouts
-- **Page-header:** Page-level header with title + actions
+- **`sidebar-nav`** — navigation list that lives inside `app-shell-sidebar`
+- **`page-header`** — title + actions block at the top of `app-shell-main`
+- **`drawer`** — mobile-drawer companion for narrow viewports
+- **`cluster`** / **`stack`** — layout primitives for content inside `app-shell-main`

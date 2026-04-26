@@ -183,3 +183,9 @@ No CSS changes needed — tokens handle it automatically.
 - **Navigation:** `<a class="btn ...">` renders as link visually but does not submit forms
 - **Responsive behavior:** height/padding scale via density tokens; no breakpoint-based resizing needed
 - **Copy-paste use:** substitute tone and label; class structure remains stable across versions
+
+## Related
+
+- **`icon-button`** — compact action for known icons
+- **`split-button`** — main action with secondary menu
+- **`link`** — navigation and secondary actions

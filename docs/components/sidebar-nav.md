@@ -1,144 +1,93 @@
 # Sidebar Nav
 
-> Support level: **Supported** | Surface key: `component.sidebarNav` | Canonical: `.comp-sidebar-nav`
+> Support level: **Supported** | Surface key: `component.sidebarNav` | Canonical root: `.sidebar-nav`
 
-## When to use
+## Status
 
-Vertical navigation sidebar showing app sections or pages. Primary navigation for desktop apps and some websites.
+Supported. Use for vertical product navigation, settings navigation, or left-rail dashboard menus.
 
-- ✓ Application/product sidebar navigation
-- ✓ Documentation left sidebar (TOC)
-- ✓ Settings/account navigation panel
-- ✓ Multi-section dashboard
-- ✗ Mobile primary nav (use drawer instead)
-- ✗ Flat site with few pages (use navbar instead)
+## Canonical anatomy
 
-## Classes
-
-| Class | Role | Modifiers |
-|-------|------|-----------|
-| `comp-sidebar-nav` | Sidebar navigation container | n/a |
-| `comp-sidebar-nav-item` | Navigation item (link) | n/a |
-| `comp-sidebar-nav-section` | Section/group heading | n/a |
-| `comp-sidebar-nav-submenu` | Nested items (collapsed/expanded) | n/a |
-
-## States
-
-| State | Activation | HTML pattern |
-|-------|-----------|--------------|
-| Collapsed | Submenu hidden | Section shows no items |
-| Expanded | Submenu visible | Section shows nested items |
-| Current | Current page | Link highlighted/active |
-| Hover | Mouse over | Link background highlighted |
+| Class | Role | Element |
+|-------|------|---------|
+| `sidebar-nav` | Root navigation container | `nav` |
+| `sidebar-nav-section` | Optional link group | `div` |
+| `sidebar-nav-item` | Navigation link | `a` |
 
 ## Basic usage
 
 ```html
-<!-- Sidebar navigation -->
-<aside class="comp-sidebar-nav" style="width: 250px; background: var(--color-bg-surface); border-right: 1px solid var(--color-border-subtle); padding: 1rem 0;">
-  <nav aria-label="Main navigation">
-    <ul style="list-style: none; padding: 0; margin: 0;">
-      <li>
-        <a href="/dashboard" class="comp-sidebar-nav-item" style="display: block; padding: 0.75rem 1rem; text-decoration: none; color: var(--color-primary);">
-          Dashboard
-        </a>
-      </li>
-      <li>
-        <a href="/projects" class="comp-sidebar-nav-item" style="display: block; padding: 0.75rem 1rem;">
-          Projects
-        </a>
-      </li>
-      
-      <!-- Section heading -->
-      <li class="comp-sidebar-nav-section" style="padding: 1rem 1rem 0.5rem; font-size: 0.75rem; font-weight: bold; text-transform: uppercase; color: var(--color-fg-muted);">
-        Tools
-      </li>
-      
-      <li>
-        <a href="/analytics" class="comp-sidebar-nav-item" style="display: block; padding: 0.75rem 1rem;">
-          Analytics
-        </a>
-      </li>
-      <li>
-        <a href="/settings" class="comp-sidebar-nav-item" style="display: block; padding: 0.75rem 1rem;">
-          Settings
-        </a>
-      </li>
-    </ul>
-  </nav>
-</aside>
+<nav class="sidebar-nav" aria-label="Sidebar navigation">
+  <div class="sidebar-nav-section">
+    <a class="sidebar-nav-item" href="/" aria-current="page">Dashboard</a>
+    <a class="sidebar-nav-item" href="/orders">Orders</a>
+    <a class="sidebar-nav-item" href="/customers">Customers</a>
+  </div>
 
-<!-- Collapsible sidebar section -->
-<div class="comp-sidebar-nav-item">
-  <button 
-    type="button" 
-    style="width: 100%; padding: 0.75rem 1rem; background: none; border: none; text-align: left; cursor: pointer; color: var(--color-fg-default);"
-    aria-expanded="false"
-    aria-controls="submenu-1"
-  >
-    Resources ▼
-  </button>
-  <ul id="submenu-1" class="comp-sidebar-nav-submenu" style="list-style: none; padding: 0; margin: 0; display: none; padding-left: 1rem;">
-    <li><a href="/docs" class="comp-sidebar-nav-item" style="display: block; padding: 0.5rem 1rem;">Documentation</a></li>
-    <li><a href="/api" class="comp-sidebar-nav-item" style="display: block; padding: 0.5rem 1rem;">API</a></li>
-    <li><a href="/support" class="comp-sidebar-nav-item" style="display: block; padding: 0.5rem 1rem;">Support</a></li>
-  </ul>
-</div>
+  <div class="sidebar-nav-section">
+    <a class="sidebar-nav-item" href="/settings">Settings</a>
+    <a class="sidebar-nav-item" href="/billing">Billing</a>
+  </div>
+</nav>
 ```
 
-## With icons
+## In `app-shell-sidebar`
 
 ```html
-<a href="/dashboard" class="comp-sidebar-nav-item" style="display: flex; align-items: center; gap: 0.75rem; padding: 0.75rem 1rem;">
-  <svg width="1em" height="1em" viewBox="0 0 24 24"><!-- dashboard icon --></svg>
-  <span>Dashboard</span>
-</a>
+<aside class="app-shell-sidebar">
+  <nav class="sidebar-nav" aria-label="Main">
+    <div class="sidebar-nav-section">
+      <a class="sidebar-nav-item" href="/" aria-current="page">Overview</a>
+      <a class="sidebar-nav-item" href="/analytics">Analytics</a>
+      <a class="sidebar-nav-item" href="/reports">Reports</a>
+    </div>
+
+    <div class="sidebar-nav-section">
+      <a class="sidebar-nav-item" href="/team">Team</a>
+      <a class="sidebar-nav-item" href="/settings">Settings</a>
+    </div>
+  </nav>
+</aside>
 ```
 
-## Accessibility checklist
+## Variants and states
 
-- [x] **Semantic:** Uses `<nav>` with `aria-label`
-- [x] **Links:** Each item is clickable link or button
-- [x] **Current page:** Uses `aria-current="page"` on current item
-- [x] **Expandable:** Collapsible sections use `aria-expanded` and `aria-controls`
-- [x] **Keyboard:** Tab navigates through items
-- [x] **Screen reader:** Navigation section announced as `<nav>`
+- Active item: set `aria-current="page"` on the current `sidebar-nav-item`
+- Section grouping: use multiple `sidebar-nav-section` wrappers to separate link clusters
+- Mobile pattern: use `drawer` to present the same nav on narrow screens
 
-## ARIA requirements
+## CSS custom properties
 
-| ARIA | When | Value |
-|------|------|-------|
-| `aria-label` | On nav | e.g., "Main navigation", "Product navigation" |
-| `aria-current` | Current item | `"page"` |
-| `aria-expanded` | Collapsible item | `"true"` or `"false"` |
-| `aria-controls` | Collapsible item | ID of submenu |
-
-## Sidebar layouts
-
-- **Fixed:** Always visible (desktop)
-- **Collapsible:** Hide/show via button (responsive)
-- **Floating:** Overlay on mobile
-- **Sticky:** Scrolls with content but stays visible
+Sidebar Nav does not expose component-specific custom properties.
 
 ## Tokens used
 
-| Token | Role | Notes |
-|-------|------|-------|
-| `--color-bg-surface` | Sidebar background | Surface color |
-| `--color-primary` | Current item | Highlight color |
-| `--color-border-subtle` | Divider line | Subtle border |
-| `--space-*` | Padding | Item padding/spacing |
+| Token | Role |
+|-------|------|
+| `--color-bg-surface` | Nav background |
+| `--color-fg-default` | Default item color |
+| `--color-border-subtle` | Borders |
+| `--color-primary-500` | Active item background |
+| `--color-gray-50` | Active item text |
+| `--radius-md` | Rounded corners |
+| `--space-2` / `--space-3` | Item spacing |
 
-## AI / machine-readable notes
+## Accessibility checklist
 
-- **Selector pattern:** `comp-sidebar-nav` with `comp-sidebar-nav-item`, `comp-sidebar-nav-section`, `comp-sidebar-nav-submenu` children
-- **Collapsible:** Use `aria-expanded` on button and `aria-controls` to link submenu
-- **Current:** Mark with `aria-current="page"`
-- **Responsive:** Use CSS media queries to hide/show sidebar on mobile
-- **Copy-paste use:** Update link href and labels, adjust nesting as needed
+- Use `<nav>` with a clear accessible name.
+- Mark the active destination with `aria-current="page"`.
+- Keep link text specific enough to stand alone.
+- If you mirror the nav inside a drawer, keep link order consistent between desktop and mobile.
 
-## Related patterns
+## AI notes
 
-- **Navbar:** Horizontal navigation (different layout)
-- **Drawer:** Mobile/hidden navigation drawer
-- **Breadcrumb:** Hierarchical trail (different purpose)
+- Canonical selectors are `sidebar-nav`, `sidebar-nav-section`, and `sidebar-nav-item`.
+- Do not invent `sidebar-nav-submenu`, `sidebar-item-active`, or `data-active`.
+- `sidebar-nav-item` is the clickable link itself, not a list wrapper.
+- Grouping is optional; when not needed, links can live directly under `sidebar-nav`.
+
+## Related components
+
+- `app-shell`
+- `drawer`
+- `navbar`

@@ -1,6 +1,6 @@
 # Link
 
-> Support level: **Supported** | Surface key: `component.link` | Canonical: `.comp-link`
+> Support level: **Supported** | Surface key: `component.link` | Canonical: `.link`
 
 ## When to use
 
@@ -18,14 +18,14 @@ Semantic navigation links to other pages, sections, or resources. Not for action
 
 | Class | Role | Modifiers |
 |-------|------|-----------|
-| `comp-link` | Base link styling | n/a |
-| `comp-link-muted` | De-emphasized link (muted foreground) | Composable |
+| `link` | Base link styling | n/a |
+| `link-muted` | De-emphasized link (muted foreground) | Composable |
 
 ## States
 
 | State | Activation | HTML pattern |
 |-------|-----------|--------------|
-| Default | — | `<a href="/path" class="comp-link">Link text</a>` |
+| Default | — | `<a href="/path" class="link">Link text</a>` |
 | Visited | `:visited` pseudo (browser-managed) | Color change (lighter text) |
 | Hover | `:hover` pseudo (automatic) | Underline appears + text color shifts |
 | Focus | `:focus-visible` (automatic) | Outline ring visible |
@@ -35,15 +35,15 @@ Semantic navigation links to other pages, sections, or resources. Not for action
 
 ```html
 <!-- Simple navigation link -->
-<a href="/dashboard" class="comp-link">Go to dashboard</a>
+<a href="/dashboard" class="link">Go to dashboard</a>
 
 <!-- Link in sentence (within prose) -->
 <p>
-  Learn more in our <a href="/docs/guides" class="comp-link">documentation</a>.
+  Learn more in our <a href="/docs/guides" class="link">documentation</a>.
 </p>
 
 <!-- External link with icon (common pattern) -->
-<a href="https://example.com" class="comp-link" target="_blank" rel="noopener">
+<a href="https://example.com" class="link" target="_blank" rel="noopener">
   Visit external site
   <svg width="1em" height="1em" viewBox="0 0 16 16">
     <path d="M8.5 1.5H3a1.5 1.5 0 0 0-1.5 1.5v10A1.5 1.5 0 0 0 3 14.5h10a1.5 1.5 0 0 0 1.5-1.5V7.5"/>
@@ -55,13 +55,13 @@ Semantic navigation links to other pages, sections, or resources. Not for action
 
 ```html
 <!-- De-emphasized link for secondary navigation -->
-<a href="/about" class="comp-link comp-link-muted">About us</a>
+<a href="/about" class="link link-muted">About us</a>
 
 <!-- Multiple muted links in footer -->
 <footer>
-  <a href="/privacy" class="comp-link comp-link-muted">Privacy</a>
-  <a href="/terms" class="comp-link comp-link-muted">Terms</a>
-  <a href="/contact" class="comp-link comp-link-muted">Contact</a>
+  <a href="/privacy" class="link link-muted">Privacy</a>
+  <a href="/terms" class="link link-muted">Terms</a>
+  <a href="/contact" class="link link-muted">Contact</a>
 </footer>
 ```
 
@@ -128,9 +128,15 @@ No CSS changes needed — font-size scales via tokens.
 
 ## AI / machine-readable notes
 
-- **Selector pattern:** `comp-link` base, `comp-link-muted` for secondary links
+- **Selector pattern:** `link` base, `link-muted` for secondary links
 - **State indicator:** Uses native `:visited`, `:hover`, `:focus-visible` pseudo-classes
 - **External links:** Convention is `target="_blank" rel="noopener"` with optional icon
 - **Current page:** Use `aria-current="page"` in navigation menus
 - **Responsive:** Text size scales with density; underline thickness constant
 - **Copy-paste use:** Replace `href` and text content; class structure unchanged
+
+## Related
+
+- **`button`** — semantic action with background/border
+- **`breadcrumb`** — hierarchical navigation links
+- **`nav-bar`** — navigation container

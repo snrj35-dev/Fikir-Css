@@ -99,3 +99,9 @@ Use hover card for lightweight, non-modal previews that appear on hover or focus
 - **State model:** open state is attribute-driven on the wrapper via `data-open="true"`
 - **Interaction boundary:** Fikir CSS styles the pattern; host app decides hover/focus/blur timing
 - **Accessibility:** do not hide essential information exclusively inside the panel
+
+## Related
+
+- **`popover`** — click-triggered interactive floating panel
+- **`tooltip`** — hover-only non-interactive text hint
+- **`card`** — the base visual container

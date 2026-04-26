@@ -1,0 +1,71 @@
+/**
+ * chart-frame.css — Minimal layout wrapper for embedded charts (M22)
+ *
+ * Fikir CSS does not render charts itself (see docs/architecture/chart-embedding-pattern.md).
+ * chart-frame only owns responsive sizing, aspect ratio, padding and an optional
+ * title + legend row. The actual drawing (SVG, Canvas, chart lib) goes inside
+ * chart-frame-body.
+ *
+ * CSS custom properties:
+ *   --chart-frame-ratio   : aspect-ratio of the chart body. Default 16 / 9.
+ *   --chart-frame-min-h   : min block-size of the body. Default 0.
+ *   --chart-frame-gap     : vertical gap between title, body, legend. Default var(--space-3).
+ */
+
+@layer components {
+  {{component.chartFrame}} {
+    --chart-frame-ratio: 16 / 9;
+    --chart-frame-min-h: 0;
+    --chart-frame-gap: var(--space-3);
+
+    display: grid;
+    gap: var(--chart-frame-gap);
+    min-inline-size: 0;
+  }
+
+  {{component.chartFrameTitle}} {
+    margin: 0;
+    font-size: var(--font-size-md);
+    font-weight: 600;
+    color: var(--color-fg-default);
+  }
+
+  {{component.chartFrameBody}} {
+    position: relative;
+    inline-size: 100%;
+    aspect-ratio: var(--chart-frame-ratio);
+    min-block-size: var(--chart-frame-min-h);
+    min-inline-size: 0;
+  }
+
+  /* Make direct SVG/canvas children fill the body by default */
+  {{component.chartFrameBody}} > svg,
+  {{component.chartFrameBody}} > canvas {
+    inline-size: 100%;
+    block-size: 100%;
+    display: block;
+  }
+
+  {{component.chartFrameLegend}} {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-4);
+    font-size: var(--font-size-sm);
+    color: var(--color-fg-muted);
+  }
+
+  {{component.chartFrameLegendItem}} {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+  }
+
+  {{component.chartFrameLegendItem}}::before {
+    content: "";
+    inline-size: 0.625rem;
+    block-size: 0.625rem;
+    border-radius: 999px;
+    background: var(--legend-color, var(--color-accent));
+    flex: none;
+  }
+}

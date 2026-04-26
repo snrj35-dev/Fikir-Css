@@ -26,6 +26,12 @@ test("textarea surface: invalid/readonly/disabled selectors exist", async () => 
   assert.ok(distCss.includes(".textarea[disabled] {"));
 });
 
+test("textarea surface: invalid focus selector exists", async () => {
+  const distCss = await readDistCss();
+
+  assert.ok(distCss.includes('.textarea[aria-invalid="true"]:focus-visible {'));
+});
+
 test("textarea surface: no alias class leakage", async () => {
   const distCss = await readDistCss();
   const forbidden = [".text-area", ".textarea-disabled", ".textarea-invalid", ".textarea-readonly"];

@@ -125,51 +125,32 @@ Use `fieldset` + `legend` for semantically grouped filter controls:
 </fieldset>
 ```
 
-## States
+## Tokens used
 
-| State | Activation | HTML pattern |
-|-------|-----------|--------------|
-| Active filter chip | Filter is applied | `tag-chip` in `[data-slot="chips"]` |
-| Empty chips | No filters active | `[data-slot="summary"]` hidden or empty |
-| Search has value | User typed | `search-box-input[value]` |
-| Reset visible | At least one filter active | Show `[data-slot="reset"]` button |
+| Token | Role | Notes |
+|-------|------|-------|
+| `--color-border-subtle` | Toolbar border | Light separator |
+| `--color-bg-surface` | Default background | Mixed with page bg |
+| `--space-2`, `--space-3` | Internal gaps | Scales with density |
+| `--radius-lg` | Corner radius | Pattern container shape |
+| `--font-size-sm` | Meta text size | Muted results count font |
 
-## Accessibility
+## AI / machine-readable notes
 
-- Wrap `data-slot="search"` in a `<form role="search">` with `aria-label`
-- Use `aria-label` on each `<select>` — do not rely on visual proximity alone
-- `fieldset` + `legend` groups related filter controls for screen readers
-- Active filter chips must have accessible remove buttons: `aria-label="Remove [filter name] filter"`
-- `data-slot="meta"` should be wrapped in `aria-live="polite"` if result count updates dynamically
+- **Pattern identifier:** `data-pattern="filter-bar"`
+- **Layout structure:**
+  - `[data-slot="controls"]` — primary row for search and filter inputs
+  - `[data-slot="summary"]` — optional row for active chips and result meta
+  - `[data-slot="chips"]` — container for `tag-chip` or `badge` indicators
+  - `[data-slot="reset"]` — dedicated area for "Clear all" button
+- **Search implementation:** must use `search-box` component inside `[data-slot="search"]`
+- **Filter implementation:** use `select`, `segmented-control`, or `fieldset` inside `[data-slot="filters"]`
+- **Live updates:** `[data-slot="meta"]` should use `aria-live="polite"` if count updates dynamically
+- **Card integration:** `.card[data-pattern="filter-bar"]` automatically removes own border/bg
 
-```html
-<span data-slot="meta" aria-live="polite" aria-atomic="true">12 results</span>
-```
+## Related
 
-## AI prompt context
-
-```
-filter-bar pattern: data-pattern="filter-bar"
-Required slots: [data-slot="controls"] > [data-slot="search"] + [data-slot="filters"]
-Optional slots: [data-slot="chips"], [data-slot="actions"], [data-slot="reset"], [data-slot="summary"], [data-slot="meta"]
-Summary row: [data-slot="summary"] > [data-slot="chips"] + [data-slot="meta"]
-Search uses: class="search-box" > search-box-input + search-box-action
-Filter uses: select.select, segmented-control, or fieldset grouping
-Active filters: tag-chip with tag-chip-remove inside [data-slot="chips"]
-Card integration: .card[data-pattern="filter-bar"] removes own border/bg
-```
-
-## Anti-patterns
-
-- ❌ Using `filter-bar` for a single search box — use `search-box` directly
-- ❌ Omitting `aria-label` on filter selects
-- ❌ Placing active chip count in `meta` without `aria-live` on dynamic updates
-- ❌ Hard-coding reset button visibility — show/hide based on filter state
-- ❌ Using `filter-bar` without a corresponding data surface beneath it
-
-## Related patterns
-
-- **Data Table Toolbar:** [data-table-toolbar.md](./data-table-toolbar.md) — toolbar integrated with table surface (column visibility, density, export)
-- **Search Box:** [search-box.md](./search-box.md) — standalone search input
-- **Tag Chip:** [tag.md](./tag.md) — removable chip for active filter display
-- **Empty Search State:** [empty-search-state.md](./empty-search-state.md) — content when filters yield no results
+- **`data-table-toolbar`** — toolbar integrated with table-specific controls (columns, density)
+- **`search-box`** — standalone search input component
+- **`tag-chip`** — used for active filter indicators
+- **`empty-search-state`** — content when filters yield no results

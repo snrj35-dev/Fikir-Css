@@ -1,129 +1,132 @@
 # KPI Card
 
-> Support level: **Supported** | Surface key: `component.kpiCard` | Canonical: `.comp-kpi-card`
+> Support level: **Supported** | Surface key: `component.kpiCard` | Canonical root: `.kpi-card`
 
 ## When to use
 
-Larger, richer stat display. Card container with metric, trend, and optional icon/chart.
+Dashboard metric widget with value, context label, and optional trend indicator. Richer than `stat` — adds slots for header, meta and trend; includes its own card chrome (background, border, padding).
 
 - ✓ Dashboard metrics with trend visualization
 - ✓ Business KPI presentation
-- ✓ Metric card with context
-- ✓ Responsive card layout
-- ✗ Simple single metric (use stat instead)
-- ✗ Detailed data (use data-grid or table)
+- ✓ Metric card with supporting context (period, delta)
+- ✗ Simple inline metric (use `stat`)
+- ✗ Tabular data (use `table` or `data-grid`)
 
-## Classes
+## Canonical anatomy
 
-| Class | Role | Modifiers |
-|-------|------|-----------|
-| `comp-kpi-card` | KPI card container | n/a |
-| `comp-kpi-card-header` | Card title/header | n/a |
-| `comp-kpi-card-metric` | Main metric value | n/a |
-| `comp-kpi-card-chart` | Mini chart area | n/a |
+| Class | Role | Element |
+|-------|------|---------|
+| `kpi-card` | Root container | `article` or `div` |
+| `kpi-card-header` | Heading / label row | `div` or `h3` |
+| `kpi-card-value` | Main metric value | `p` or `strong` |
+| `kpi-card-meta` | Secondary label (period, comparison) | `p` |
+| `kpi-card-trend` | Trend pill (↑/↓ + %) | `span` |
 
-## States
-
-| State | Activation | HTML pattern |
-|-------|-----------|--------------|
-| Default | — | Card displays metric + trend |
-| Loading | Data fetching | Skeleton or spinner |
+The root provides card chrome (`background`, `border`, `border-radius`, `padding`, `gap`) — **do not re-add inline styles for those**.
 
 ## Basic usage
 
 ```html
-<!-- KPI card with trend and icon -->
-<div class="comp-kpi-card" style="background: var(--color-bg-surface); border: 1px solid var(--color-border-subtle); border-radius: 0.5rem; padding: 1.5rem;">
-  <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 1rem;">
-    <div class="comp-kpi-card-header">
-      <h3 style="margin: 0; font-size: 0.875rem; color: var(--color-fg-muted); text-transform: uppercase;">
-        Monthly Revenue
-      </h3>
-    </div>
-    <div style="font-size: 1.5rem;">💰</div>
-  </div>
-  
-  <div style="display: flex; align-items: baseline; gap: 1rem; margin-bottom: 1rem;">
-    <div class="comp-kpi-card-metric" style="font-size: 2rem; font-weight: bold;">
-      $45,231
-    </div>
-    <div style="color: #10b981; font-size: 0.875rem;">
-      ↑ 12% from last month
-    </div>
-  </div>
-  
-  <div style="font-size: 0.75rem; color: var(--color-fg-muted);">
-    Updated just now
-  </div>
-</div>
+<article class="kpi-card">
+  <div class="kpi-card-header">Monthly Revenue</div>
+  <p class="kpi-card-value">$45,231</p>
+  <p class="kpi-card-meta">vs last month</p>
+  <span class="kpi-card-trend" data-trend="up">↑ 12%</span>
+</article>
+```
 
-<!-- KPI card with mini chart -->
-<div class="comp-kpi-card" style="padding: 1.5rem; background: var(--color-bg-surface); border-radius: 0.5rem;">
-  <div style="display: flex; justify-content: space-between; align-items: start;">
-    <div>
-      <h3 style="margin: 0; font-size: 0.875rem; color: var(--color-fg-muted); text-transform: uppercase; margin-bottom: 0.5rem;">
-        Active Users
-      </h3>
-      <div class="comp-kpi-card-metric" style="font-size: 2rem; font-weight: bold; margin-bottom: 0.5rem;">
-        3,482
-      </div>
-      <div style="color: #10b981; font-size: 0.875rem;">
-        ↑ 8% this week
-      </div>
-    </div>
-    
-    <div class="comp-kpi-card-chart" style="width: 80px; height: 60px; background: var(--color-bg-default); border-radius: 0.25rem;">
-      <!-- Mini chart visualization (SVG) -->
-      <svg viewBox="0 0 80 60" style="width: 100%; height: 100%;">
-        <polyline points="0,50 20,40 40,30 60,45 80,20" fill="none" stroke="var(--color-accent)" stroke-width="2"/>
-      </svg>
-    </div>
-  </div>
-</div>
+## KPI grid (4-up dashboard row)
 
-<!-- KPI card grid -->
-<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1rem;">
-  <div class="comp-kpi-card"><!-- Card 1 --></div>
-  <div class="comp-kpi-card"><!-- Card 2 --></div>
-  <div class="comp-kpi-card"><!-- Card 3 --></div>
+Use the `grid` layout primitive — it auto-fits cards into columns and collapses responsively. No inline grid styles needed.
+
+```html
+<div class="grid" style="--grid-min: 14rem">
+  <article class="kpi-card">
+    <div class="kpi-card-header">Revenue</div>
+    <p class="kpi-card-value">$45,231</p>
+    <p class="kpi-card-meta">vs last month</p>
+    <span class="kpi-card-trend">↑ 12%</span>
+  </article>
+  <article class="kpi-card">
+    <div class="kpi-card-header">Active Users</div>
+    <p class="kpi-card-value">3,482</p>
+    <p class="kpi-card-meta">last 7 days</p>
+    <span class="kpi-card-trend">↑ 8%</span>
+  </article>
+  <article class="kpi-card">
+    <div class="kpi-card-header">Churn</div>
+    <p class="kpi-card-value">1.8%</p>
+    <p class="kpi-card-meta">monthly</p>
+    <span class="kpi-card-trend">↓ 0.3%</span>
+  </article>
+  <article class="kpi-card">
+    <div class="kpi-card-header">NPS</div>
+    <p class="kpi-card-value">72</p>
+    <p class="kpi-card-meta">Q2 survey</p>
+    <span class="kpi-card-trend">↑ 6</span>
+  </article>
 </div>
+```
+
+## With trailing chart
+
+Embed a small SVG (or canvas) after the meta row. Use the `--color-accent` token for the stroke so it reacts to theme overrides.
+
+```html
+<article class="kpi-card">
+  <div class="kpi-card-header">Active Users</div>
+  <p class="kpi-card-value">3,482</p>
+  <p class="kpi-card-meta">last 7 days</p>
+  <svg viewBox="0 0 80 24" width="100%" height="24" aria-hidden="true">
+    <polyline points="0,20 20,16 40,12 60,17 80,8"
+              fill="none" stroke="var(--color-accent)" stroke-width="2" />
+  </svg>
+  <span class="kpi-card-trend">↑ 8%</span>
+</article>
+```
+
+For non-decorative charts, provide a text summary in `kpi-card-meta` or a visually-hidden paragraph.
+
+## Loading state
+
+```html
+<article class="kpi-card" aria-busy="true">
+  <div class="kpi-card-header">
+    <span class="skeleton skeleton-text" style="inline-size: 8rem"></span>
+  </div>
+  <p class="kpi-card-value">
+    <span class="skeleton skeleton-text" style="inline-size: 6rem; block-size: 1.5rem"></span>
+  </p>
+</article>
 ```
 
 ## Accessibility checklist
 
-- [x] **Semantic:** Uses `<h3>` for metric title
-- [x] **Label:** Metric purpose clear from heading
-- [x] **Trend:** Shown via color + symbol, not color alone
-- [x] **Chart alt:** If chart present, provide text summary
-- [x] **Contrast:** Good color contrast for readability
+- Use a `<p>`/`<strong>` or appropriate heading for the value so assistive tech reads it as emphasized content.
+- If using `<h3>` in `kpi-card-header`, keep heading order consistent with the page outline.
+- Trend direction must not rely on color alone — ship a glyph (↑/↓) or text ("up 12%").
+- For charts, provide a text summary (in `kpi-card-meta` or visually-hidden text).
 
 ## Tokens used
 
-| Token | Role | Notes |
-|-------|------|-------|
-| `--color-bg-surface` | Card background | Surface color |
-| `--color-accent` | Metric color | Highlight |
-| `--color-success` | Positive trend | Green |
-| `--color-danger` | Negative trend | Red |
-| `--space-*` | Padding | Card spacing |
-
-## Mini chart options
-
-- **Line chart:** Trend over time
-- **Bar chart:** Category comparison
-- **Sparkline:** Simple inline trend
-- **Progress:** Percentage to goal
+| Token | Role |
+|-------|------|
+| `--color-bg-surface` | Card background |
+| `--color-border-subtle` | Card border |
+| `--color-fg-default` | Value color |
+| `--color-fg-muted` | Header & meta color |
+| `--space-2` / `--space-3` | Internal gap & padding |
+| `--radius-md` | Card corners |
 
 ## AI / machine-readable notes
 
-- **Selector pattern:** `comp-kpi-card` with `comp-kpi-card-header`, `comp-kpi-card-metric`, `comp-kpi-card-chart` children
-- **Metric:** Display formatted value (1,234 not 1234)
-- **Trend:** Show direction (↑/↓) and percentage
-- **Chart:** Include text summary for accessibility
-- **Copy-paste use:** Update title, value, trend, and chart data
+- Canonical slots: `kpi-card-header`, `kpi-card-value`, `kpi-card-meta`, `kpi-card-trend`.
+- **Do not** invent `kpi-card-metric` or `kpi-card-chart` — those class names are not in the surface.
+- Root already has grid layout + padding + border; do not override with inline styles.
+- See `dist/contracts/anatomy.json` → `components.kpi-card.minimal_html` for the canonical skeleton.
 
-## Related patterns
+## Related
 
-- **Stat:** Simple single metric
-- **Data-grid:** Multiple metrics/rows
-- **Dashboard:** Collection of KPI cards
+- **`stat`** — single inline metric without card chrome
+- **`stat-group`** pattern — responsive grid wrapper for multiple stats
+- **`grid`** layout primitive — use for 2/3/4-up KPI rows (see `dist/contracts/primitives.json`)

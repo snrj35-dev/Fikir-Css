@@ -1,6 +1,6 @@
 # Skeleton
 
-> Support level: **Supported** | Surface key: `component.skeleton` | Canonical: `.comp-skeleton`
+> Support level: **Supported** | Surface key: `component.skeleton` | Canonical: `.skeleton`
 
 ## When to use
 
@@ -17,36 +17,36 @@ Placeholder shimmer animation while content is loading. Shows users that content
 
 | Class | Role | Modifiers |
 |-------|------|-----------|
-| `comp-skeleton` | Base placeholder with shimmer animation | n/a |
+| `skeleton` | Base placeholder with shimmer animation | n/a |
 
 ## States
 
 | State | Activation | HTML pattern |
 |-------|-----------|--------------|
-| Loading | Default | `<div class="comp-skeleton"></div>` |
+| Loading | Default | `<div class="skeleton"></div>` |
 | Done | Replace element | Remove skeleton, insert real content |
 
 ## Basic usage
 
 ```html
 <!-- Simple text skeleton -->
-<div class="comp-skeleton" style="width: 100%; height: 1rem; margin-bottom: 0.5rem;"></div>
+<div class="skeleton" style="width: 100%; height: 1rem; margin-bottom: 0.5rem;"></div>
 
 <!-- Skeleton for heading -->
-<div class="comp-skeleton" style="width: 60%; height: 1.5rem; margin-bottom: 1rem;"></div>
+<div class="skeleton" style="width: 60%; height: 1.5rem; margin-bottom: 1rem;"></div>
 
 <!-- Skeleton for card content -->
-<div class="comp-surface">
-  <div class="comp-skeleton" style="width: 100%; height: 200px; margin-bottom: 1rem;"></div>
-  <div class="comp-skeleton" style="width: 80%; height: 1rem; margin-bottom: 0.5rem;"></div>
-  <div class="comp-skeleton" style="width: 100%; height: 1rem;"></div>
+<div class="surface">
+  <div class="skeleton" style="width: 100%; height: 200px; margin-bottom: 1rem;"></div>
+  <div class="skeleton" style="width: 80%; height: 1rem; margin-bottom: 0.5rem;"></div>
+  <div class="skeleton" style="width: 100%; height: 1rem;"></div>
 </div>
 
 <!-- Skeleton list (3 rows) -->
 <div style="display: grid; gap: 1rem;">
-  <div class="comp-skeleton" style="height: 4rem;"></div>
-  <div class="comp-skeleton" style="height: 4rem;"></div>
-  <div class="comp-skeleton" style="height: 4rem;"></div>
+  <div class="skeleton" style="height: 4rem;"></div>
+  <div class="skeleton" style="height: 4rem;"></div>
+  <div class="skeleton" style="height: 4rem;"></div>
 </div>
 ```
 
@@ -84,8 +84,14 @@ Under `@media (prefers-reduced-motion: reduce)`:
 
 ## AI / machine-readable notes
 
-- **Selector pattern:** `comp-skeleton` base, no modifiers
+- **Selector pattern:** `skeleton` base, no modifiers
 - **Size:** Use inline `style="width: ... height: ..."` to match expected content dimensions
 - **Timing:** Replace skeleton when real content ready, not on timer
 - **Screen reader:** Wrap in `<div aria-busy="true">...</div>` during load
 - **Copy-paste use:** Duplicate skeleton div structure to match expected layout depth; replace once content loads
+
+## Related
+
+- **`spinner`** — simple circular loading indicator
+- **`loading-overlay`** — full-container blocking load state
+- **`progress`** — deterministic loading bar

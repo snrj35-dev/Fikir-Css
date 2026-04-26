@@ -29,6 +29,12 @@ test("choice controls: disabled selectors exist", async () => {
   assert.ok(distCss.includes(".switch[disabled] {"));
 });
 
+test("choice controls: checkbox invalid selector exists", async () => {
+  const distCss = await readDistCss();
+
+  assert.ok(distCss.includes('.checkbox[aria-invalid="true"] {'));
+});
+
 test("choice controls: alias leakage is blocked", async () => {
   const distCss = await readDistCss();
   const forbidden = [

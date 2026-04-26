@@ -147,3 +147,11 @@ No CSS changes needed — tokens handle it automatically.
 - **Selector anatomy:** `modal-backdrop > modal > (modal-header + modal-body + modal-footer)`
 - **Heading inside modal-header:** use semantic `<h2>` or `<h3>` with `id`; no dedicated class needed
 - **Copy-paste use:** substitute dialog title, body content, and footer button actions
+
+## Related
+
+- **`drawer`** — non-blocking side panel alternative
+- **`popover`** — anchored, non-modal floating panel
+- **`toast`** — transient, non-blocking notification
+- **`alert`** — inline, non-blocking message
+- **`createFocusTrap` / `bindOverlayKeyboard`** — overlay JS helpers from `fikir-css/helpers`

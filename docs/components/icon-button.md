@@ -1,6 +1,6 @@
 # Icon Button
 
-> Support level: **Supported** | Surface key: `component.iconButton` | Canonical: `.comp-icon-button`
+> Support level: **Supported** | Surface key: `component.iconButton` | Canonical: `.icon-button`
 
 ## When to use
 
@@ -18,18 +18,18 @@ Icon-only buttons for compact toolbars, headers, and action areas where space is
 
 | Class | Role | Modifiers |
 |-------|------|-----------|
-| `comp-icon-button` | Base container — required | n/a |
-| `comp-icon-button-xs` | Extra-small size (1.75rem) | Composable with sizes |
-| `comp-icon-button-sm` | Small size (2rem) | Composable with sizes |
-| `comp-icon-button-md` | Medium size (2.25rem, default) | Composable with sizes |
-| `comp-icon-button-lg` | Large size (2.75rem) | Composable with sizes |
+| `icon-button` | Base container — required | n/a |
+| `icon-button-xs` | Extra-small size (1.75rem) | Composable with sizes |
+| `icon-button-sm` | Small size (2rem) | Composable with sizes |
+| `icon-button-md` | Medium size (2.25rem, default) | Composable with sizes |
+| `icon-button-lg` | Large size (2.75rem) | Composable with sizes |
 
 ## States
 
 | State | Activation | HTML pattern |
 |-------|-----------|--------------|
-| Default | — | `<button class="comp-icon-button">` |
-| Disabled | `disabled` attribute | `<button class="comp-icon-button" disabled>` |
+| Default | — | `<button class="icon-button">` |
+| Disabled | `disabled` attribute | `<button class="icon-button" disabled>` |
 | Hover | `:hover` pseudo (automatic) | Visual background change |
 | Focus | `:focus-visible` (automatic) | Outline ring visible |
 | Active/pressed | `:active` pseudo or `aria-pressed="true"` | Darkened background |
@@ -38,7 +38,7 @@ Icon-only buttons for compact toolbars, headers, and action areas where space is
 
 ```html
 <!-- Icon-only button with SVG -->
-<button type="button" class="comp-icon-button" aria-label="Edit item">
+<button type="button" class="icon-button" aria-label="Edit item">
   <svg width="1em" height="1em" viewBox="0 0 24 24">
     <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25z"/>
   </svg>
@@ -46,13 +46,13 @@ Icon-only buttons for compact toolbars, headers, and action areas where space is
 
 <!-- Icon button in toolbar -->
 <div style="display: flex; gap: 0.25rem;">
-  <button type="button" class="comp-icon-button" aria-label="Edit">
+  <button type="button" class="icon-button" aria-label="Edit">
     <svg><!-- pencil icon --></svg>
   </button>
-  <button type="button" class="comp-icon-button" aria-label="Delete">
+  <button type="button" class="icon-button" aria-label="Delete">
     <svg><!-- trash icon --></svg>
   </button>
-  <button type="button" class="comp-icon-button" aria-label="Share">
+  <button type="button" class="icon-button" aria-label="Share">
     <svg><!-- share icon --></svg>
   </button>
 </div>
@@ -62,22 +62,22 @@ Icon-only buttons for compact toolbars, headers, and action areas where space is
 
 ```html
 <!-- Extra-small: 1.75rem -->
-<button type="button" class="comp-icon-button comp-icon-button-xs" aria-label="Close">
+<button type="button" class="icon-button icon-button-xs" aria-label="Close">
   <svg><!-- icon --></svg>
 </button>
 
 <!-- Small: 2rem -->
-<button type="button" class="comp-icon-button comp-icon-button-sm" aria-label="Delete">
+<button type="button" class="icon-button icon-button-sm" aria-label="Delete">
   <svg><!-- icon --></svg>
 </button>
 
 <!-- Medium: 2.25rem (default) -->
-<button type="button" class="comp-icon-button comp-icon-button-md" aria-label="Edit">
+<button type="button" class="icon-button icon-button-md" aria-label="Edit">
   <svg><!-- icon --></svg>
 </button>
 
 <!-- Large: 2.75rem -->
-<button type="button" class="comp-icon-button comp-icon-button-lg" aria-label="Settings">
+<button type="button" class="icon-button icon-button-lg" aria-label="Settings">
   <svg><!-- icon --></svg>
 </button>
 ```
@@ -85,7 +85,7 @@ Icon-only buttons for compact toolbars, headers, and action areas where space is
 ## Disabled state
 
 ```html
-<button type="button" class="comp-icon-button" aria-label="Delete" disabled>
+<button type="button" class="icon-button" aria-label="Delete" disabled>
   <svg><!-- icon --></svg>
 </button>
 ```
@@ -148,9 +148,15 @@ No CSS changes needed — icon size scales with `font-size`, padding adapts via 
 
 ## AI / machine-readable notes
 
-- **Selector pattern:** `comp-icon-button` + size modifier (xs, sm, md, lg)
+- **Selector pattern:** `icon-button` base + size modifier (xs, sm, md, lg)
 - **State indicators:** Use `disabled` attribute and `aria-pressed` for toggle states, not CSS classes
 - **Icon pattern:** SVG as direct child, size controlled by `font-size` and `1em` units
 - **Label requirement:** Always include `aria-label` or `aria-labelledby`; icon alone is never sufficient
 - **Responsive:** Sizes scale with density tokens; no breakpoint-based resizing needed
 - **Copy-paste use:** Substitute your icon SVG and label text; class structure remains stable
+
+## Related
+
+- **`button`** — standard action with text label
+- **`link`** — semantic navigation action
+- **`tooltip`** — recommended for all icon-only buttons

@@ -309,39 +309,32 @@ Coachmark automatically adapts to dark/light themes:
 4. **Verify contrast in all themes**
    - Test light, dark, and high-contrast modes
 
-## AI context
+## Tokens used
 
-Coachmark pattern is a single-annotation popover for user guidance and onboarding. Use when:
+| Token | Role | Notes |
+|-------|------|-------|
+| `--color-bg-surface` | Background color | Popup surface |
+| `--color-tone-info` | Border & icon color | Info/Tip variant |
+| `--color-tone-warning` | Border & icon color | Warning variant |
+| `--color-tone-success` | Border & icon color | Success variant |
+| `--color-tone-danger` | Border & icon color | Danger variant |
+| `--space-3` | Internal padding | Scales with density |
+| `--radius-md` | Corner radius | Scales with shape |
+| `--shadow-md` | Popover shadow | Depth indicator |
 
-- Introducing a new UI element or feature to first-time users
-- Providing just-in-time tips or keyboard shortcuts
-- Warning about destructive actions or prerequisites
+## AI / machine-readable notes
 
-HTML structure:
-```html
-<div
-  data-pattern="coachmark"
-  data-variant="[info|tip|warning|success|danger|neutral]"
-  data-active="[true|false]"
-  role="[tooltip|dialog]"
-  aria-label="..."
->
-  <div data-slot="icon">icon_emoji</div>
-  <div data-slot="title">Short heading</div>
-  <div data-slot="description">Main guidance text.</div>
-  <button data-slot="action" class="btn btn-sm btn-outline">Action label</button>
-</div>
-```
+- **Pattern identifier:** `data-pattern="coachmark"` — used instead of a CSS class
+- **State model:** visibility controlled by `data-active="true/false"`
+- **Semantic variants:** uses `data-variant` for tone (info, tip, warning, success, danger, neutral)
+- **Positioning:** uses `data-position` (top, bottom, start, end) as a layout hint
+- **Arrow pointer:** toggle via `data-arrow="true"`; uses `[data-coachmark-arrow]` internal element
+- **Slots:** `icon`, `title`, `description`, `action`, `secondary-action`
+- **Application responsibilities:** Manage `data-active`, focus trap (if dialog), and collision detection
 
-**Key attributes:**
-- `data-pattern="coachmark"` — Pattern identifier
-- `data-variant` — Semantic tone (info, warning, success, etc.)
-- `data-active` — Toggle visibility
-- `data-position` — Popover anchor (top, bottom, start, end)
-- `role` — Either "tooltip" (lightweight) or "dialog" (modal-like)
+## Related
 
-**Application responsibilities:**
-- Update `data-active` on user action
-- Implement Escape key and click-outside dismissal
-- Manage focus (set focus on first button on show, restore on dismiss)
-- Handle positioning and collision detection (JavaScript library recommended)
+- **`popover`** — generic interactive floating panel
+- **`tooltip`** — hover-triggered non-interactive hint
+- **`onboarding-checklist`** — persistent guide for multiple steps
+- **`modal`** — center-aligned blocking dialog

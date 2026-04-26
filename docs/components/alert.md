@@ -132,6 +132,12 @@ No CSS changes needed — tokens handle it automatically.
   <p class="alert-title">Error</p>
 </div>
 
+## Related
+
+- **`inline-notice`** — non-disruptive semantic feedback
+- **`callout`** — contextual documentation notes
+- **`toast`** — transient global notifications
+
 <!-- ✓ Always include role -->
 <div class="alert alert-danger" role="alert">
   <p class="alert-title">Error</p>

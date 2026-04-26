@@ -58,6 +58,44 @@ export function bindOverlayKeyboard(
   options: OverlayKeyboardOptions
 ): OverlayKeyboardBinding;
 
+// ─── bindSidebarDrawer ────────────────────────────────────────────────────────
+
+export interface SidebarDrawerOptions {
+  /** Button/icon-button that toggles the drawer. aria-expanded is kept in sync. */
+  trigger: HTMLElement;
+  /** The drawer component root. Must contain a `.drawer-backdrop` child. */
+  drawer: HTMLElement;
+  /**
+   * Viewport width at/above which the drawer stays closed (desktop sidebar takes over).
+   * Accepts any CSS length (`60rem`, `960px`). Defaults to `60rem`.
+   */
+  breakpoint?: string;
+}
+
+export interface SidebarDrawerBinding {
+  /** Programmatically open the drawer (no-op on desktop). */
+  open(): void;
+  /** Close the drawer and release focus-trap + listeners. */
+  close(): void;
+  /** Remove all listeners created by bindSidebarDrawer. */
+  destroy(): void;
+}
+
+/**
+ * Wire a responsive sidebar/drawer pair to a single trigger button.
+ * Below the breakpoint the drawer behaves as a focus-trapped overlay with
+ * Escape/backdrop-click close. Above the breakpoint the helper is a no-op
+ * because the inline sidebar is expected to be visible.
+ *
+ * @example
+ * import { bindSidebarDrawer } from "fikir-css/helpers";
+ * bindSidebarDrawer({
+ *   trigger: document.querySelector('[data-action="open-drawer"]')!,
+ *   drawer:  document.getElementById('mobile-nav')!,
+ * });
+ */
+export function bindSidebarDrawer(options: SidebarDrawerOptions): SidebarDrawerBinding;
+
 // ─── createRovingTabindex ─────────────────────────────────────────────────────
 
 export type RovingOrientation = 'vertical' | 'horizontal' | 'both';

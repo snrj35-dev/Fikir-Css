@@ -37,6 +37,8 @@
     "./contracts/capabilities": "./dist/contracts/capabilities.json",
     "./contracts/variants": "./dist/contracts/variants.json",
     "./contracts/primitives": "./dist/contracts/primitives.json",
+    "./vscode/html-custom-data": "./dist/vscode/html-custom-data.json",
+    "./vscode/css-custom-data": "./dist/vscode/css-custom-data.json",
     "./tooling": {
       "types": "./dist/tooling/resolve-classes.d.ts",
       "default": "./dist/tooling/resolve-classes.mjs"
@@ -94,12 +96,13 @@
     "report:dead-surfaces": "node scripts/report-dead-surfaces.mjs",
     "validate:manifests": "node scripts/validate-manifests.mjs",
     "detect:anatomy-drift": "node scripts/detect-css-anatomy-drift.mjs",
-    "detect:stale-anatomy": "node scripts/detect-stale-anatomy.mjs",
+    "detect:stale-anatomy": "node scripts/detect-stale-anatomy.mjs --strict",
     "validate:recipe-strict": "node scripts/validate-recipe-strict.mjs",
     "detect:flaky-tests": "node scripts/detect-flaky-tests.mjs",
     "validate:playground-baseline": "node scripts/validate-playground-baseline.mjs",
     "validate:publish": "node scripts/validate-publishable-outputs.mjs",
     "validate:version": "node scripts/validate-version-tag-consistency.mjs",
+    "validate:cdn": "node scripts/validate-cdn-urls.mjs",
     "package:smoke": "node scripts/package-smoke.mjs",
     "github:bootstrap": "node scripts/bootstrap-github-roadmap.mjs",
     "test:source": "node --test tests/source/*.test.mjs",
@@ -108,7 +111,7 @@
     "test:browser:headed": "playwright test --headed",
     "test:browser:ui": "playwright test --ui",
     "validate:examples": "node scripts/validate-example-structure.mjs",
-    "test:ci": "npm run build && npm run test:source && npm run docs:validate && npm run docs:examples && npm run docs:quality:strict && npm run validate:size && npm run validate:prefixed && npm run validate:playground-baseline && npm run validate:publish && npm run validate:version && npm run package:smoke && npm run test:build && npm run validate:examples && npm run validate:manifests && npm run validate:recipe-strict && npm run detect:anatomy-drift && npm run detect:stale-anatomy",
+    "test:ci": "npm run build && npm run test:source && npm run docs:validate && npm run docs:examples && npm run docs:quality:strict && npm run validate:size && npm run validate:prefixed && npm run validate:playground-baseline && npm run validate:publish && npm run validate:version && npm run validate:cdn && npm run package:smoke && npm run test:build && npm run validate:examples && npm run validate:manifests && npm run validate:recipe-strict && npm run detect:anatomy-drift && npm run detect:stale-anatomy",
     "test": "npm run test:ci"
   },
   "devDependencies": {

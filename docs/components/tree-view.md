@@ -164,3 +164,9 @@ No CSS changes needed — tokens handle it automatically.
 - **Leaf vs branch:** branch nodes have `tree-view-toggle` + child `tree-view-group`; leaf nodes have only `tree-view-label`
 - **Collapse via hidden:** use `hidden` attribute on child `tree-view-group` (not CSS `display:none`)
 - **Copy-paste use:** nest `tree-view-item` blocks recursively; update all `id`/`aria-labelledby` pairs
+
+## Related
+
+- **`accordion`** — flat list of collapsible items
+- **`tree-table`** — hierarchical data with tabular columns
+- **`sidebar-nav`** — vertical navigation pattern

@@ -62,6 +62,12 @@ Vertically stacked collapsible sections for FAQ, settings groups, or progressive
 
 ## JS toggle (minimal)
 
+## Related
+
+- **`inline-notice`** — non-disruptive semantic feedback
+- **`callout`** — contextual documentation notes
+- **`toast`** — transient global notifications
+
 ```js
 document.querySelectorAll('.accordion-trigger').forEach(btn => {
   btn.addEventListener('click', () => {
@@ -151,3 +157,9 @@ No CSS changes needed — tokens handle it automatically.
 - **Heading:** no dedicated class — use semantic `<h2>` / `<h3>` element as trigger wrapper
 - **Multiple open:** by default, multiple items can be open simultaneously; implement single-open behavior in JS if required
 - **Copy-paste use:** duplicate `accordion-item` blocks; update `aria-controls`/`id` pairs
+
+## Related
+
+- **`tabs`** — horizontal section switching
+- **`stepper`** — sequential multi-step flows
+- **`tree-view`** — hierarchical data exploration

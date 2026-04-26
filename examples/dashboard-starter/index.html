@@ -1,0 +1,403 @@
+<!doctype html>
+<html lang="en" data-theme="light" data-density="comfortable">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Fikir CSS — Dashboard Starter</title>
+  <link id="dashboard-theme-css" rel="stylesheet" href="" disabled />
+
+  <!--
+    Canonical Fikir CSS dashboard composition. Demonstrates:
+      - app-shell + app-shell-content responsive grid (built-in at >=64rem)
+      - KPI row via `grid` layout primitive (no inline grid-template-columns)
+      - Toolbar via cluster[data-cluster-justify="between"]
+      - Table wrapped in `overflow-auto` utility
+      - Timeline, inline-notice, progress with canonical markup
+      - Modal + toast with helpers binding
+      - Sidebar active item marked with aria-current="page"
+
+    Source of truth for every class & data-attribute used here:
+      - dist/contracts/selectors.json
+      - dist/contracts/anatomy.json
+      - dist/contracts/primitives.json
+
+    See docs/guides/dashboard-composition.md for the written walkthrough.
+  -->
+
+  <!-- CDN (latest). For pinned version use: fikir-css@1.x.x -->
+  <link rel="stylesheet" href="https://unpkg.com/fikir-css@latest/dist/fikir.css" />
+
+  <style>
+    /* Only extend Fikir tokens — never create a parallel style system. */
+    :root { --color-accent: #6d28d9; }
+
+    /* Sidebar-only: visually hide on <960px and rely on a drawer if you add one.
+       Production note: pair with `drawer` component for mobile. */
+    @media (max-width: 60rem) {
+      [data-desktop-only] { display: none; }
+    }
+
+    /* Small brand mark, decorative */
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      font-weight: 700;
+    }
+    .brand-mark {
+      inline-size: 1.75rem;
+      block-size: 1.75rem;
+      border-radius: var(--radius-md);
+      background: linear-gradient(135deg, var(--color-accent), var(--color-success-500));
+    }
+  </style>
+</head>
+
+<body>
+
+<a class="visually-hidden" href="#main-content">Skip to main content</a>
+
+<div class="app-shell" style="min-block-size: 100vh">
+
+  <!-- ────────── Topbar ────────── -->
+  <header class="app-shell-topbar">
+    <span class="brand">
+      <span class="brand-mark" aria-hidden="true"></span>
+      Fikir Admin
+    </span>
+
+    <div class="cluster" style="--cluster-gap: var(--space-2)">
+      <div class="search-box" style="max-inline-size: 18rem">
+        <input class="search-box-input" type="search" placeholder="Search…" aria-label="Search" />
+        <button class="search-box-action">Go</button>
+      </div>
+      <button class="btn btn-outline btn-sm"
+              type="button"
+              data-action="toggle-theme"
+              aria-pressed="false">
+        Toggle dark mode
+      </button>
+      <button class="icon-button icon-button-md" aria-label="Notifications">🔔</button>
+      <button class="icon-button icon-button-md" aria-label="Open settings">⚙️</button>
+    </div>
+  </header>
+
+  <!-- ────────── Content (sidebar + main) ────────── -->
+  <div class="app-shell-content">
+
+    <!-- Sidebar: built-in desktop/mobile behavior via app-shell-content grid -->
+    <aside class="app-shell-sidebar" data-desktop-only>
+      <nav class="sidebar-nav" aria-label="Main">
+        <div class="sidebar-nav-section">
+          <a class="sidebar-nav-item" href="#" aria-current="page">📊 Dashboard</a>
+          <a class="sidebar-nav-item" href="#">🧾 Orders <span class="badge badge-soft badge-primary badge-sm" style="margin-inline-start:auto">24</span></a>
+          <a class="sidebar-nav-item" href="#">👥 Customers</a>
+          <a class="sidebar-nav-item" href="#">📦 Products</a>
+        </div>
+        <hr class="divider" />
+        <div class="sidebar-nav-section">
+          <a class="sidebar-nav-item" href="#">📈 Reports</a>
+          <a class="sidebar-nav-item" href="#">🧪 Experiments</a>
+        </div>
+      </nav>
+    </aside>
+
+    <!-- Main column -->
+    <main class="app-shell-main" id="main-content">
+      <div class="stack" style="--stack-gap: var(--space-6)">
+
+        <!-- Page header -->
+        <div class="page-header">
+          <div class="page-header-content">
+            <h1 style="margin:0">Overview</h1>
+            <p class="helper-text" style="margin:0">Last 30 days</p>
+          </div>
+          <div class="page-header-actions cluster">
+            <button class="btn btn-outline btn-md">Export</button>
+            <button class="btn btn-primary btn-md" data-action="open-modal">New order</button>
+          </div>
+        </div>
+
+        <!-- Persistent status message -->
+        <div class="inline-notice" data-tone="info" role="status" aria-live="polite">
+          <span class="inline-notice-icon" aria-hidden="true">ℹ</span>
+          <div class="inline-notice-content">
+            <p class="inline-notice-title">New analytics v2 is live</p>
+            <p class="inline-notice-body">Numbers below include v2 signal cleanup from April 18.</p>
+          </div>
+          <div class="inline-notice-actions">
+            <button class="btn btn-ghost btn-sm">Learn more</button>
+          </div>
+        </div>
+
+        <!-- KPI row — `grid` primitive handles 4-up → 2-up → 1-up -->
+        <div class="grid" style="--grid-min: 14rem">
+          <article class="kpi-card">
+            <div class="kpi-card-header">Monthly Revenue</div>
+            <p class="kpi-card-value">$45,231</p>
+            <p class="kpi-card-meta">vs last month</p>
+            <span class="kpi-card-trend">↑ 12%</span>
+          </article>
+          <article class="kpi-card">
+            <div class="kpi-card-header">Active Users</div>
+            <p class="kpi-card-value">3,482</p>
+            <p class="kpi-card-meta">last 7 days</p>
+            <span class="kpi-card-trend">↑ 8%</span>
+          </article>
+          <article class="kpi-card">
+            <div class="kpi-card-header">Churn</div>
+            <p class="kpi-card-value">1.8%</p>
+            <p class="kpi-card-meta">monthly</p>
+            <span class="kpi-card-trend">↓ 0.3%</span>
+          </article>
+          <article class="kpi-card">
+            <div class="kpi-card-header">NPS</div>
+            <p class="kpi-card-value">72</p>
+            <p class="kpi-card-meta">Q2 survey</p>
+            <span class="kpi-card-trend">↑ 6</span>
+          </article>
+        </div>
+
+        <!-- Split: 2-col via switcher primitive (stacks at <20rem per item) -->
+        <div class="switcher" style="--switcher-min: 22rem; --switcher-gap: var(--space-4)">
+
+          <!-- Chart card -->
+          <section class="card card-flat card-p-md" style="flex: 1 1 0%; min-inline-size: 0">
+            <div class="stack" style="--stack-gap: var(--space-3)">
+              <div class="cluster" data-cluster-justify="between">
+                <h2 style="margin:0; font-size: var(--font-size-lg)">Revenue</h2>
+                <div class="segmented-control segmented-control-sm" role="group" aria-label="Time range">
+                  <label class="segmented-control-item">
+                    <input class="segmented-control-input" type="radio" name="range" checked />
+                    <span class="segmented-control-label">7d</span>
+                  </label>
+                  <label class="segmented-control-item">
+                    <input class="segmented-control-input" type="radio" name="range" />
+                    <span class="segmented-control-label">30d</span>
+                  </label>
+                  <label class="segmented-control-item">
+                    <input class="segmented-control-input" type="radio" name="range" />
+                    <span class="segmented-control-label">90d</span>
+                  </label>
+                </div>
+              </div>
+
+              <svg viewBox="0 0 400 160" width="100%" height="160" role="img" aria-label="Revenue trend, up 12%">
+                <polyline fill="none" stroke="var(--color-chart-1)" stroke-width="2"
+                          points="0,120 40,100 80,110 120,80 160,70 200,60 240,75 280,55 320,40 360,35 400,20" />
+              </svg>
+
+              <div class="progress" role="progressbar"
+                   aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"
+                   aria-label="Goal progress">
+                <span class="progress-label">Monthly goal · 72%</span>
+                <div class="progress-track">
+                  <div class="progress-indicator" style="width: 72%"></div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Timeline card -->
+          <section class="card card-flat card-p-md" style="flex: 1 1 0%; min-inline-size: 0">
+            <h2 style="margin:0 0 var(--space-3); font-size: var(--font-size-lg)">Activity</h2>
+            <div class="timeline">
+              <div class="timeline-item">
+                <div class="timeline-marker" aria-hidden="true"></div>
+                <div class="timeline-content">
+                  <p class="timeline-title">New order #1284 paid</p>
+                  <p class="timeline-meta">2 hours ago</p>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-marker" aria-hidden="true"></div>
+                <div class="timeline-content">
+                  <p class="timeline-title">Refund approved</p>
+                  <p class="timeline-meta">Yesterday</p>
+                </div>
+              </div>
+              <div class="timeline-item">
+                <div class="timeline-marker" aria-hidden="true"></div>
+                <div class="timeline-content">
+                  <p class="timeline-title">Customer Alice upgraded to Pro</p>
+                  <p class="timeline-meta">Apr 18</p>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+
+        <!-- Table region -->
+        <section class="stack" style="--stack-gap: var(--space-3)">
+          <div class="cluster" data-cluster-justify="between">
+            <h2 style="margin:0; font-size: var(--font-size-lg)">Latest orders</h2>
+            <div class="cluster">
+              <button class="btn btn-outline btn-sm">Filter</button>
+              <button class="btn btn-outline btn-sm">Columns</button>
+            </div>
+          </div>
+
+          <div class="overflow-auto">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">#</th>
+                  <th scope="col">Customer</th>
+                  <th scope="col">Amount</th>
+                  <th scope="col">Status</th>
+                  <th scope="col">Date</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1284</td>
+                  <td>Alice Cooper</td>
+                  <td>$312.00</td>
+                  <td><span class="badge badge-soft badge-success badge-sm">paid</span></td>
+                  <td>Apr 20, 2026</td>
+                </tr>
+                <tr>
+                  <td>1283</td>
+                  <td>Bruno Martin</td>
+                  <td>$89.50</td>
+                  <td><span class="badge badge-soft badge-warning badge-sm">pending</span></td>
+                  <td>Apr 20, 2026</td>
+                </tr>
+                <tr>
+                  <td>1282</td>
+                  <td>Chen Wei</td>
+                  <td>$1,204.00</td>
+                  <td><span class="badge badge-soft badge-primary badge-sm">shipped</span></td>
+                  <td>Apr 19, 2026</td>
+                </tr>
+                <tr>
+                  <td>1281</td>
+                  <td>Deniz Yılmaz</td>
+                  <td>$47.90</td>
+                  <td><span class="badge badge-soft badge-danger badge-sm">refunded</span></td>
+                  <td>Apr 19, 2026</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <nav class="pagination pagination-md" aria-label="Pagination">
+            <button class="pagination-item" aria-label="Previous page">‹</button>
+            <button class="pagination-item">1</button>
+            <button class="pagination-item" aria-current="page">2</button>
+            <button class="pagination-item">3</button>
+            <button class="pagination-item" aria-label="Next page">›</button>
+          </nav>
+        </section>
+
+      </div>
+    </main>
+  </div>
+</div>
+
+<!-- ────────── Modal (opened from "New order") ────────── -->
+<div class="modal" id="new-order-modal" role="dialog" aria-modal="true" aria-labelledby="new-order-title">
+  <div class="modal-backdrop" data-action="close-modal"></div>
+  <div class="modal-dialog">
+    <div class="modal-header">
+      <h2 id="new-order-title" style="margin:0">New order</h2>
+    </div>
+    <div class="modal-body">
+      <div class="stack">
+        <div class="field">
+          <label class="label" for="order-customer">Customer</label>
+          <input class="input input-md" id="order-customer" type="text" placeholder="Search customer…" />
+          <p class="helper-text">Start typing to search existing customers.</p>
+        </div>
+        <div class="field">
+          <label class="label" for="order-amount">Amount (USD)</label>
+          <input class="input input-md" id="order-amount" type="number" inputmode="decimal" />
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-outline btn-md" data-action="close-modal">Cancel</button>
+      <button class="btn btn-primary btn-md" data-action="save-order">Create</button>
+    </div>
+  </div>
+</div>
+
+<!-- ────────── Toast viewport (positioned by CSS, do not override) ────────── -->
+<div class="toast-viewport" aria-live="polite" role="region" aria-label="Notifications">
+  <div class="toast" id="order-created-toast" data-tone="success" role="status">
+    <p class="toast-title">Order created</p>
+    <p class="toast-description">Order #1285 was saved as draft.</p>
+    <button class="toast-close" aria-label="Dismiss" data-action="dismiss-toast">×</button>
+  </div>
+</div>
+
+<!-- ────────── Canonical helper-based glue ──────────
+     Uses fikir-css/helpers directly from CDN. ESM, zero bundler, zero deps.
+     Helpers used here:
+       - createFocusTrap   : traps Tab inside the modal dialog while open
+       - bindOverlayKeyboard: Escape + backdrop click -> close
+     For mobile drawer patterns, also see bindSidebarDrawer in the same module.
+     Full recipes: docs/patterns/sidebar-drawer-responsive.md -->
+<script type="module">
+  import {
+    createFocusTrap,
+    bindOverlayKeyboard,
+  } from "https://unpkg.com/fikir-css@latest/dist/helpers/index.mjs";
+
+  const modal = document.getElementById("new-order-modal");
+  const openBtn = document.querySelector('[data-action="open-modal"]');
+  const closers = document.querySelectorAll('[data-action="close-modal"]');
+  const saveBtn = document.querySelector('[data-action="save-order"]');
+  const toast = document.getElementById("order-created-toast");
+  const toastDismiss = document.querySelector('[data-action="dismiss-toast"]');
+  const themeToggle = document.querySelector('[data-action="toggle-theme"]');
+  const themeCss = document.getElementById("dashboard-theme-css");
+
+  const darkThemeHref = "https://unpkg.com/fikir-css@latest/dist/themes/dark.css";
+
+  const trap = createFocusTrap(modal);
+  let keyboardBinding = null;
+
+  function openModal(e) {
+    modal.setAttribute("data-open", "true");
+    trap.activate(e?.currentTarget ?? null);
+    keyboardBinding = bindOverlayKeyboard(modal, { onClose: closeModal });
+  }
+  function closeModal() {
+    modal.removeAttribute("data-open");
+    trap.deactivate();
+    keyboardBinding?.destroy();
+    keyboardBinding = null;
+  }
+  function showToast() {
+    toast.setAttribute("data-open", "true");
+    setTimeout(() => toast.removeAttribute("data-open"), 3500);
+  }
+  function syncThemeButton(isDark) {
+    themeToggle?.setAttribute("aria-pressed", String(isDark));
+    if (themeToggle) {
+      themeToggle.textContent = isDark ? "Use light mode" : "Toggle dark mode";
+    }
+  }
+  function setDarkTheme(isDark) {
+    document.documentElement.setAttribute("data-theme", isDark ? "dark" : "light");
+    if (themeCss) {
+      themeCss.href = isDark ? darkThemeHref : "";
+      themeCss.disabled = !isDark;
+    }
+    syncThemeButton(isDark);
+  }
+  function toggleTheme() {
+    setDarkTheme(document.documentElement.getAttribute("data-theme") !== "dark");
+  }
+
+  openBtn?.addEventListener("click", openModal);
+  closers.forEach(el => el.addEventListener("click", closeModal));
+  saveBtn?.addEventListener("click", () => { closeModal(); showToast(); });
+  toastDismiss?.addEventListener("click", () => toast.removeAttribute("data-open"));
+  themeToggle?.addEventListener("click", toggleTheme);
+  syncThemeButton(false);
+</script>
+
+</body>
+</html>

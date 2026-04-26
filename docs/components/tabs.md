@@ -161,3 +161,9 @@ No CSS changes needed — tokens handle it automatically.
 - **Roving tabindex:** JS required for keyboard arrow navigation (see JS toggle example above)
 - **No size modifiers:** tab size is controlled by density tokens only
 - **Copy-paste use:** duplicate tab triggers and panels; update `id`/`for` relationships
+
+## Related
+
+- **`accordion`** — vertical collapsible disclosure
+- **`stepper`** — sequential non-interactive flow indicator
+- **`nav-bar`** — page-level navigation

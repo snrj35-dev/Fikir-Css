@@ -1,0 +1,10 @@
+{
+  // Fikir CSS — VS Code class / data-* / token autocomplete.
+  // Setup guide: https://github.com/snrj35-dev/Fikir-Css/blob/main/docs/guides/vscode-autocomplete.md
+  "html.customData": [
+    "./node_modules/fikir-css/dist/vscode/html-custom-data.json"
+  ],
+  "css.customData": [
+    "./node_modules/fikir-css/dist/vscode/css-custom-data.json"
+  ]
+}

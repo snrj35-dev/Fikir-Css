@@ -11,6 +11,10 @@
     cursor: pointer;
   }
 
+  {{component.field}}[data-invalid="true"] {{component.label}} {
+    color: var(--color-danger);
+  }
+
   {{component.field}}[data-field-invalid="true"] {{component.label}} {
     color: var(--color-danger);
   }

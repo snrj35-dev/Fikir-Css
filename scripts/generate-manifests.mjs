@@ -33,10 +33,73 @@ async function write(filename, data) {
   console.log(`  ✓ dist/contracts/${filename}`);
 }
 
+async function writeRelative(filename, data) {
+  const path = resolve(rootDir, filename);
+  await mkdir(dirname(path), { recursive: true });
+  await writeFile(path, `${JSON.stringify(data, null, 2)}\n`, "utf8");
+  console.log(`  ✓ ${filename}`);
+}
+
 function remToPx(value) {
   const m = String(value).match(/^([\d.]+)rem$/);
   if (m) return Math.round(parseFloat(m[1]) * 16);
   return null;
+}
+
+async function inferDensityEffect(componentName) {
+  const cssPath = resolve(rootDir, "packages/components", `${componentName}.css`);
+
+  try {
+    const css = await readFile(cssPath, "utf8");
+    if (css.includes("var(--space-")) return "tangible";
+    if (css.includes("var(--font-size-")) return "subtle";
+    return "no-op";
+  } catch {
+    return "no-op";
+  }
+}
+
+async function collectTokenUsageByComponent(validTokens) {
+  const componentsDir = resolve(rootDir, "packages/components");
+  const usage = new Map();
+
+  let files = [];
+  try {
+    files = await readdir(componentsDir);
+  } catch {
+    return usage;
+  }
+
+  for (const file of files) {
+    if (!file.endsWith(".css")) continue;
+
+    const componentName = file.replace(/\.css$/u, "");
+    const cssPath = resolve(componentsDir, file);
+
+    let css;
+    try {
+      css = await readFile(cssPath, "utf8");
+    } catch {
+      continue;
+    }
+
+    const referencedTokens = new Set(
+      [...css.matchAll(/var\((--[\w-]+)/gu)]
+        .map((match) => match[1])
+        .filter((tokenName) => validTokens.has(tokenName))
+    );
+
+    for (const tokenName of referencedTokens) {
+      if (!usage.has(tokenName)) usage.set(tokenName, []);
+      usage.get(tokenName).push(componentName);
+    }
+  }
+
+  for (const components of usage.values()) {
+    components.sort((a, b) => a.localeCompare(b));
+  }
+
+  return usage;
 }
 
 /* ─── 1. selectors.json ───────────────────────────────────────────────────── */
@@ -164,6 +227,8 @@ async function buildTokensManifest() {
     return "string";
   };
 
+  const tokenUsageByComponent = await collectTokenUsageByComponent(new Set(Object.keys(rawTokens)));
+
   // Group by first segment after --
   const groups = {};
   for (const [name, value] of Object.entries(rawTokens)) {
@@ -172,13 +237,15 @@ async function buildTokensManifest() {
     const entry = { $value: value, $type: inferType(name) };
     const px = remToPx(value);
     if (px !== null) entry.px = px;
+    const usedBy = tokenUsageByComponent.get(name) || [];
+    entry.used_by = usedBy;
     groups[seg][name] = entry;
   }
 
   return {
     schema_version: SCHEMA_VERSION,
     generated: GENERATED,
-    note: "Tokens extracted from packages/tokens/core.css and semantic.css. px values computed from rem at base 16.",
+    note: "Tokens extracted from packages/tokens/core.css and semantic.css. px values computed from rem at base 16. used_by lists components that directly reference each token.",
     groups
   };
 }
@@ -188,11 +255,14 @@ async function buildTokensManifest() {
 async function buildCapabilitiesManifest() {
   const components = {};
   for (const [name, entry] of Object.entries(capabilitiesContract)) {
+    const density_effect = await inferDensityEffect(name);
     components[name] = {
       status: entry.status,
       does: entry.does || [],
       does_not: entry.does_not || [],
-      requires_app_css: entry.requires_app_css || []
+      requires_app_css: entry.requires_app_css || [],
+      states: entry.states || [],
+      density_effect
     };
   }
 
@@ -414,6 +484,123 @@ async function buildPrimitivesManifest() {
   };
 }
 
+/* ─── 7. VS Code custom data ─────────────────────────────────────────────── */
+
+function selectorKeyDescription(selectorKey) {
+  if (!selectorKey) return "Fikir CSS class.";
+  const [scope, ...rest] = selectorKey.split(".");
+  const leaf = rest.join(".");
+
+  if (scope === "component") return `Fikir CSS component selector: ${leaf}.`;
+  if (scope === "layout") return `Fikir CSS layout primitive selector: ${leaf}.`;
+  if (scope === "utility") return `Fikir CSS utility selector: ${leaf}.`;
+  if (scope === "pattern") return `Fikir CSS pattern selector: ${leaf}.`;
+  return `Fikir CSS selector key: ${selectorKey}.`;
+}
+
+function formatDataAttrValue(value) {
+  if (value === "present") return "(boolean attribute)";
+  return value;
+}
+
+async function buildVscodeHtmlCustomData(selectors) {
+  const classValues = Object.entries(selectors.selectors || {})
+    .sort((a, b) => a[1].localeCompare(b[1]))
+    .map(([selectorKey, className]) => ({
+      name: className,
+      description: selectorKeyDescription(selectorKey)
+    }));
+
+  const globalAttributeEntries = [];
+  const seenAttributes = new Set();
+  const allDataMarkers = [
+    ...(selectors.data_markers?.global || []),
+    ...Object.entries(selectors.data_markers?.components || {}).flatMap(([componentName, attrs]) =>
+      attrs.map((attr) => ({ ...attr, componentName }))
+    )
+  ];
+
+  for (const marker of allDataMarkers) {
+    if (!marker.attr || seenAttributes.has(marker.attr)) continue;
+    seenAttributes.add(marker.attr);
+
+    const matchingMarkers = allDataMarkers.filter((entry) => entry.attr === marker.attr);
+    const values = [...new Set(matchingMarkers.flatMap((entry) => entry.values || []))]
+      .map((value) => ({
+        name: formatDataAttrValue(value),
+        description: matchingMarkers
+          .find((entry) => (entry.values || []).includes(value))
+          ?.description || "Fikir CSS data attribute value."
+      }));
+
+    const usedBy = [...new Set(matchingMarkers.map((entry) => entry.componentName).filter(Boolean))];
+    const descriptionLines = [
+      marker.description || "Fikir CSS data attribute.",
+      usedBy.length > 0 ? `Used by: ${usedBy.join(", ")}.` : null
+    ].filter(Boolean);
+
+    globalAttributeEntries.push({
+      name: marker.attr,
+      description: descriptionLines.join("\n\n"),
+      ...(values.length > 0 ? { values } : {})
+    });
+  }
+
+  return {
+    version: 1.1,
+    tags: [],
+    globalAttributes: [
+      {
+        name: "class",
+        description: "Fikir CSS class autocomplete surface.",
+        valueSet: "fikir-css-classes"
+      },
+      ...globalAttributeEntries
+    ],
+    valueSets: [
+      {
+        name: "fikir-css-classes",
+        values: classValues
+      }
+    ]
+  };
+}
+
+function tokenSyntax(tokenName, tokenEntry) {
+  if (tokenName.startsWith("--color-")) return "<color>";
+  if (tokenEntry?.$type === "dimension") return "<length>";
+  if (tokenEntry?.$type === "shadow") return "<shadow>";
+  return "*";
+}
+
+async function buildVscodeCssCustomData(tokens) {
+  const properties = Object.entries(tokens.groups || {})
+    .flatMap(([groupName, groupEntries]) =>
+      Object.entries(groupEntries).map(([tokenName, tokenEntry]) => {
+        const details = [
+          `Group: ${groupName}`,
+          `Value: ${tokenEntry.$value}`,
+          tokenEntry.px !== undefined ? `Px: ${tokenEntry.px}` : null
+        ].filter(Boolean);
+
+        return {
+          name: tokenName,
+          description: details.join("\n"),
+          syntax: tokenSyntax(tokenName, tokenEntry)
+        };
+      })
+    )
+    .sort((a, b) => a.name.localeCompare(b.name));
+
+  return {
+    version: 1.1,
+    properties,
+    atDirectives: [],
+    pseudoClasses: [],
+    pseudoElements: []
+  };
+}
+
 /* ─── main ────────────────────────────────────────────────────────────────── */
 
 async function main() {
@@ -429,13 +616,20 @@ async function main() {
       buildPrimitivesManifest()
     ]);
 
+  const [htmlCustomData, cssCustomData] = await Promise.all([
+    buildVscodeHtmlCustomData(selectors),
+    buildVscodeCssCustomData(tokens)
+  ]);
+
   await Promise.all([
     write("selectors.json", selectors),
     write("anatomy.json", anatomy),
     write("tokens.json", tokens),
     write("capabilities.json", capabilities),
     write("variants.json", variants),
-    write("primitives.json", primitives)
+    write("primitives.json", primitives),
+    writeRelative("dist/vscode/html-custom-data.json", htmlCustomData),
+    writeRelative("dist/vscode/css-custom-data.json", cssCustomData)
   ]);
 
   console.log("All manifests generated.");

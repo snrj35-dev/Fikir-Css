@@ -17,6 +17,7 @@ import { resolve } from "node:path";
 
 const rootDir = resolve(process.cwd());
 const contractsDir = resolve(rootDir, "dist/contracts");
+const vscodeDir = resolve(rootDir, "dist/vscode");
 
 let errors = 0;
 let warnings = 0;
@@ -38,6 +39,16 @@ function ok(msg) {
 async function readJSON(filename) {
   try {
     const raw = await readFile(resolve(contractsDir, filename), "utf8");
+    return JSON.parse(raw);
+  } catch (e) {
+    error(`Cannot read ${filename}: ${e.message}`);
+    return null;
+  }
+}
+
+async function readJSONFrom(dir, filename) {
+  try {
+    const raw = await readFile(resolve(dir, filename), "utf8");
     return JSON.parse(raw);
   } catch (e) {
     error(`Cannot read ${filename}: ${e.message}`);
@@ -133,12 +144,15 @@ function validateCapabilities(capabilities) {
   validateTopLevel(capabilities, "capabilities.json", ["schema_version", "generated", "components"]);
 
   const { components = {} } = capabilities;
+  const allowedDensityEffects = new Set(["tangible", "subtle", "no-op"]);
   let count = 0;
 
   for (const [name, entry] of Object.entries(components)) {
     if (!Array.isArray(entry.does)) error(`capabilities.json: "${name}" missing "does" array`);
     if (!Array.isArray(entry.does_not)) error(`capabilities.json: "${name}" missing "does_not" array`);
     if (!Array.isArray(entry.requires_app_css)) error(`capabilities.json: "${name}" missing "requires_app_css" array`);
+    if (!Array.isArray(entry.states)) error(`capabilities.json: "${name}" missing "states" array`);
+    if (!allowedDensityEffects.has(entry.density_effect)) error(`capabilities.json: "${name}" invalid "density_effect" value`);
     validateStatus(name, entry.status, "capabilities.json");
     count++;
   }
@@ -176,12 +190,23 @@ function validateTokens(tokens) {
 
   const { groups = {} } = tokens;
   let tokenCount = 0;
+  let tokenUsageMetadataCount = 0;
   for (const group of Object.values(groups)) {
-    tokenCount += Object.keys(group).length;
+    for (const entry of Object.values(group)) {
+      tokenCount++;
+      if (entry.used_by !== undefined) {
+        if (!Array.isArray(entry.used_by)) {
+          error('tokens.json: token "used_by" metadata must be an array when present');
+        } else {
+          tokenUsageMetadataCount++;
+        }
+      }
+    }
   }
 
   const groupNames = Object.keys(groups);
   ok(`tokens.json: ${tokenCount} tokens across groups: ${groupNames.join(", ")}`);
+  ok(`tokens.json: ${tokenUsageMetadataCount} token entries include component usage metadata`);
 }
 
 function validatePrimitives(primitives) {
@@ -196,6 +221,38 @@ function validatePrimitives(primitives) {
   }
 
   ok(`primitives.json: ${Object.keys(prims).length} layout primitives validated`);
+}
+
+function validateVscodeHtmlCustomData(data) {
+  if (!data) return;
+  if (data.version !== 1.1) warn(`html-custom-data.json: unexpected version "${data.version}" (expected 1.1)`);
+  if (!Array.isArray(data.globalAttributes)) error('html-custom-data.json: missing "globalAttributes" array');
+  if (!Array.isArray(data.valueSets)) error('html-custom-data.json: missing "valueSets" array');
+
+  const classAttribute = (data.globalAttributes || []).find((entry) => entry.name === "class");
+  if (!classAttribute) error('html-custom-data.json: missing global "class" attribute entry');
+
+  const classValueSet = (data.valueSets || []).find((entry) => entry.name === "fikir-css-classes");
+  if (!classValueSet) {
+    error('html-custom-data.json: missing "fikir-css-classes" value set');
+  } else {
+    if (!Array.isArray(classValueSet.values) || classValueSet.values.length === 0) {
+      error('html-custom-data.json: "fikir-css-classes" must contain values');
+    } else {
+      ok(`html-custom-data.json: ${classValueSet.values.length} class autocomplete values`);
+    }
+  }
+}
+
+function validateVscodeCssCustomData(data) {
+  if (!data) return;
+  if (data.version !== 1.1) warn(`css-custom-data.json: unexpected version "${data.version}" (expected 1.1)`);
+  if (!Array.isArray(data.properties)) error('css-custom-data.json: missing "properties" array');
+  if (Array.isArray(data.properties) && data.properties.length > 0) {
+    ok(`css-custom-data.json: ${data.properties.length} token property entries`);
+  } else {
+    error("css-custom-data.json: expected at least one property entry");
+  }
 }
 
 /* ─── cross-manifest checks ─────────────────────────────────────────────── */
@@ -225,14 +282,16 @@ function crossCheck(anatomy, capabilities) {
 async function main() {
   console.log("Validating dist/contracts/ manifests...\n");
 
-  const [selectors, anatomy, tokens, capabilities, variants, primitives] =
+  const [selectors, anatomy, tokens, capabilities, variants, primitives, htmlCustomData, cssCustomData] =
     await Promise.all([
       readJSON("selectors.json"),
       readJSON("anatomy.json"),
       readJSON("tokens.json"),
       readJSON("capabilities.json"),
       readJSON("variants.json"),
-      readJSON("primitives.json")
+      readJSON("primitives.json"),
+      readJSONFrom(vscodeDir, "html-custom-data.json"),
+      readJSONFrom(vscodeDir, "css-custom-data.json")
     ]);
 
   console.log("selectors.json:");
@@ -252,6 +311,12 @@ async function main() {
 
   console.log("\nprimitives.json:");
   validatePrimitives(primitives);
+
+  console.log("\nhtml-custom-data.json:");
+  validateVscodeHtmlCustomData(htmlCustomData);
+
+  console.log("\ncss-custom-data.json:");
+  validateVscodeCssCustomData(cssCustomData);
 
   console.log("\nCross-manifest checks:");
   crossCheck(anatomy, capabilities);

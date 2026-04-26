@@ -27,6 +27,10 @@
     gap: var(--space-4);
   }
 
+  {{utility.gap6}} {
+    gap: var(--space-6);
+  }
+
   {{utility.mt0}} {
     margin-block-start: 0;
   }

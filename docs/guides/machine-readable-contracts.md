@@ -10,7 +10,7 @@ Fikir CSS provides six JSON manifests in `dist/contracts/` for AI assistants, we
 |----------|------|---------|
 | Selectors | `dist/contracts/selectors.json` | All CSS class names + global `data-*` markers |
 | Anatomy | `dist/contracts/anatomy.json` | Minimal HTML per component + sub-element roles |
-| Tokens | `dist/contracts/tokens.json` | Design token values with px equivalents |
+| Tokens | `dist/contracts/tokens.json` | Design token values with px equivalents and `used_by` component metadata |
 | Capabilities | `dist/contracts/capabilities.json` | What each component does / does not do |
 | Variants | `dist/contracts/variants.json` | Canonical tones, styles, sizes per component |
 | Primitives | `dist/contracts/primitives.json` | Layout primitive defaults and CSS custom properties |
@@ -181,17 +181,17 @@ What each component does and does not do — critical for AI code generation.
 
 ### tokens.json
 
-All design tokens grouped by category with px equivalents.
+All design tokens grouped by category with px equivalents and direct component usage metadata.
 
 ```json
 {
   "groups": {
     "space": {
-      "--space-4": { "$value": "1rem", "$type": "dimension", "px": 16 },
-      "--space-2": { "$value": "0.5rem", "$type": "dimension", "px": 8 }
+      "--space-4": { "$value": "1rem", "$type": "dimension", "px": 16, "used_by": ["drawer", "input", "modal"] },
+      "--space-2": { "$value": "0.5rem", "$type": "dimension", "px": 8, "used_by": ["badge", "button", "card"] }
     },
     "color": {
-      "--color-primary": { "$value": "var(--color-primary-500)", "$type": "color" }
+      "--color-primary": { "$value": "var(--color-primary-500)", "$type": "color", "used_by": ["button", "link", "tabs"] }
     }
   }
 }
@@ -234,6 +234,8 @@ ANATOMY: <paste anatomy.json content>
 CAPABILITIES: <paste capabilities.json content>
 
 Rules:
+- Read selectors.json before writing markup. If a class is not listed there, do not invent it.
+- Prefer contract selectors and layout primitives over ad hoc inline layout styles.
 - Use class names exactly as listed in selectors.json (mode: plain)
 - Toggle overlays (modal, drawer) with data-open="true" on root. Remove attribute to hide.
 - Never use data-open="false" — remove the attribute instead.

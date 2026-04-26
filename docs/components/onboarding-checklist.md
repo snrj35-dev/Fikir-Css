@@ -1,13 +1,32 @@
 # Onboarding Checklist
 
-Kullanıcı onboarding sürecini adım adım takip etmek için tasarlanmış CSS pattern'i. İlerleme çubuğu ve "done / current / upcoming" durum göstergeleri içerir.
+> Support level: **Supported** | Pattern key: `pattern.onboardingChecklist` | Canonical: `data-pattern="onboarding-checklist"`
 
 ## When to use
 
-- SaaS ürün onboarding akışları
-- Kurulum wizard'ları
-- Getting started kontrol listeleri
-- Profile tamamlama rehberleri
+Guided checklist for user onboarding, setup wizards, or profile completion flows. Includes a progress bar and status indicators for each step.
+
+- ✓ SaaS product onboarding flows
+- ✓ Setup wizards for complex configurations
+- ✓ "Getting started" checklists
+- ✓ Profile completion guides
+- ✗ Simple vertical navigation (use `sidebar-nav`)
+- ✗ Chronological logs (use `timeline`)
+- ✗ Linear form wizards (use `stepper`)
+
+## Canonical anatomy
+
+| Slot / Attribute | Role | Element |
+|------------------|------|---------|
+| `data-pattern` | Root container | `div` (often inside `.card`) |
+| `data-slot="progress"` | Progress indicator area | `div` |
+| `data-slot="progress-bar"` | Background track | `div` |
+| `data-slot="progress-fill"` | Completion indicator | `div` (uses `inline-size`) |
+| `data-slot="item"` | Individual task row | `div` or `button` |
+| `data-status` | `"done" \| "current" \| "upcoming"` | Step state |
+| `data-slot="status-icon"`| Visual marker (check/number) | `div` |
+| `data-slot="content"` | Title and description wrapper | `div` |
+| `data-slot="detail"` | Expandable guidance panel | `div` |
 
 ## Basic usage
 
@@ -28,13 +47,19 @@ Kullanıcı onboarding sürecini adım adım takip etmek için tasarlanmış CSS
     </div>
   </div>
 
-  <div data-slot="item" data-status="current">
+  <div data-slot="item" data-status="current" data-expanded="true">
     <div data-slot="status-icon" aria-hidden="true">2</div>
     <div data-slot="content">
       <p data-slot="item-title">Set up your workspace</p>
       <p data-slot="item-description">Add your team and configure settings.</p>
     </div>
     <span data-slot="chevron" aria-hidden="true">›</span>
+  </div>
+  <div data-slot="detail">
+    <p style="font-size: var(--font-size-sm); color: var(--color-fg-muted); margin: 0 0 var(--space-3)">
+      Invite your colleagues to start collaborating.
+    </p>
+    <button class="btn btn-sm btn-solid btn-primary">Invite team</button>
   </div>
 
   <div data-slot="item" data-status="upcoming">
@@ -47,91 +72,36 @@ Kullanıcı onboarding sürecini adım adım takip etmek için tasarlanmış CSS
 </div>
 ```
 
-## With expandable detail panels
+## Accessibility checklist
 
-```html
-<div data-pattern="onboarding-checklist" class="card">
-  <div data-slot="progress">
-    <div data-slot="progress-bar">
-      <div data-slot="progress-fill" style="inline-size: 50%"></div>
-    </div>
-    <span data-slot="progress-label">2 of 4 done</span>
-  </div>
+- [x] **State mapping:** `data-status="upcoming"` items should have `aria-disabled="true"`
+- [x] **Completion:** `data-status="done"` items should be marked with `aria-checked="true"` (if using checkbox role)
+- [x] **Expansion:** Expandable items must use `aria-expanded="true/false"` on the trigger
+- [x] **Live regions:** `data-slot="progress-label"` should have `aria-live="polite"` for dynamic updates
+- [x] **Semantic markers:** status icons (checkmarks, numbers) marked with `aria-hidden="true"`
 
-  <div data-slot="item" data-status="done">
-    <div data-slot="status-icon" aria-hidden="true">✓</div>
-    <div data-slot="content">
-      <p data-slot="item-title">Install Fikir CSS</p>
-    </div>
-  </div>
+## Tokens used
 
-  <div data-slot="item" data-status="done">
-    <div data-slot="status-icon" aria-hidden="true">✓</div>
-    <div data-slot="content">
-      <p data-slot="item-title">Add your first component</p>
-    </div>
-  </div>
+| Token | Role | Notes |
+|-------|------|-------|
+| `--color-bg-surface` | Item background | Card surface color |
+| `--color-tone-success` | "Done" status color | For completed checks |
+| `--color-tone-info` | "Current" status color | Highlight for active step |
+| `--space-3`, `--space-4` | Padding and gaps | Scales with density |
+| `--radius-sm` | Status icon shape | Small circular radius |
 
-  <div data-slot="item" data-status="current" data-expanded="true">
-    <div data-slot="status-icon" aria-hidden="true">3</div>
-    <div data-slot="content">
-      <p data-slot="item-title">Customize your theme</p>
-      <p data-slot="item-description">Override design tokens for your brand.</p>
-    </div>
-    <span data-slot="chevron" aria-hidden="true">›</span>
-  </div>
-  <div data-slot="detail">
-    <p style="font-size: var(--font-size-sm); color: var(--color-fg-muted); margin: 0 0 var(--space-3)">
-      Set your primary brand color in your CSS:
-    </p>
-    <pre style="font-size: var(--font-size-xs)"><code>:root { --color-primary: #6366f1; }</code></pre>
-    <button class="btn btn-sm btn-solid btn-primary" style="margin-block-start: var(--space-3)">
-      Mark as done
-    </button>
-  </div>
+## AI / machine-readable notes
 
-  <div data-slot="item" data-status="upcoming">
-    <div data-slot="status-icon" aria-hidden="true">4</div>
-    <div data-slot="content">
-      <p data-slot="item-title">Deploy to production</p>
-    </div>
-  </div>
-</div>
-```
+- **Pattern identifier:** `data-pattern="onboarding-checklist"`
+- **State indicators:** `data-status="done | current | upcoming"` determines styling
+- **Expansion:** `data-expanded="true"` on `[data-slot="item"]` reveals the next sibling `[data-slot="detail"]`
+- **Progress tracking:** update `[data-slot="progress-fill"]` using `inline-size: N%`
+- **Slots:** `progress`, `item`, `status-icon`, `content`, `detail`, `chevron`
+- **Responsibility:** Application manages `data-status`, `data-expanded`, and progress percentage
 
-## Item statuses
+## Related
 
-| `data-status` | Visual | Interaction |
-|---|---|---|
-| `done` | Green filled circle, strikethrough title | Click to expand detail |
-| `current` | Primary ring indicator | Highlighted row, expandable |
-| `upcoming` | Muted circle, dimmed | Non-interactive (cursor: not-allowed) |
-
-## Progress fill
-
-`[data-slot="progress-fill"]` üzerine `inline-size: N%` inline style ile ilerleme yüzdesi ayarlanır. JS ile dinamik olarak güncellenmelidir.
-
-## Accessibility
-
-- `data-status="upcoming"` olan item'lar `aria-disabled="true"` almalı.
-- `data-status="done"` item'lar `aria-checked="true"` (role="checkbox" ile) veya `aria-label="Completed: ..."` alabilir.
-- Expand/collapse button'una `aria-expanded="true/false"` eklenmeli.
-
-## JavaScript scaffold
-
-```js
-document.querySelectorAll('[data-pattern="onboarding-checklist"] [data-slot="item"]').forEach((item) => {
-  if (item.dataset.status === 'upcoming') return;
-
-  item.addEventListener('click', () => {
-    const isExpanded = item.dataset.expanded === 'true';
-    item.dataset.expanded = isExpanded ? 'false' : 'true';
-  });
-});
-```
-
-## Related components
-
-- **Stepper** — multi-step form wizard
-- **Progress** — linear progress bar
-- **Timeline** — chronological event display
+- **`stepper`** — linear multi-step form wizard
+- **`progress`** — standard linear progress bar
+- **`timeline`** — chronological event display
+- **`accordion`** — for general expandable list patterns

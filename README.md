@@ -72,9 +72,10 @@ When using Fikir CSS with AI assistants (Claude, ChatGPT, etc.):
 
 3. **State flows through attributes** — Not class modifiers:
    ```html
-   <!-- ✅ Toggle state with data-open -->
+   <!-- ✅ Toggle overlays with data-open -->
    <div class="modal" data-open="true"></div>
-   <div class="toast" data-open="false"></div>
+   <!-- Hide by removing the attribute, not by setting "false" -->
+   <div class="toast"></div>
    ```
 
 ---
@@ -207,7 +208,7 @@ All contracts and manifests are published to GitHub Pages for easy AI reference.
 
 | File | Purpose | Link |
 |------|---------|------|
-| **tokens.json** | Color, spacing, typography, radius, duration tokens | [tokens.json](https://snrj35-dev.github.io/Fikir-Css/dist/contracts/tokens.json) |
+| **tokens.json** | Color, spacing, typography, radius, duration tokens + `used_by` component metadata | [tokens.json](https://snrj35-dev.github.io/Fikir-Css/dist/contracts/tokens.json) |
 
 ### Quality Reports (CI/CD)
 
@@ -307,7 +308,24 @@ document.documentElement.setAttribute("data-theme", "dark"); // or "light"
 
 ---
 
+## IDE autocomplete (VS Code)
+
+Fikir CSS ships VS Code [custom data](https://code.visualstudio.com/api/extension-guides/custom-data-extension) for class names, `data-*` attributes, and design tokens — no extension required. Add to your project's `.vscode/settings.json`:
+
+```json
+{
+  "html.customData": ["./node_modules/fikir-css/dist/vscode/html-custom-data.json"],
+  "css.customData":  ["./node_modules/fikir-css/dist/vscode/css-custom-data.json"]
+}
+```
+
+Reload the window and you'll get completions for `class="btn btn-…"`, `data-theme="…"`, `data-density="…"`, and `var(--color-…)` everywhere. CDN / no-build setup and verification steps: see **[docs/guides/vscode-autocomplete.md](./docs/guides/vscode-autocomplete.md)**.
+
+---
+
 ## For AI Assistants (Copilot / Claude / Cursor)
+
+> **📘 Quick context for AI agents & vibe coders:** Drop [`SKILL.md`](./SKILL.md) into your assistant's context window. It is a single-file, machine-readable skill description covering the contract model, `data-*` state rules, token cheat sheet, surface catalog, and copy-paste templates — purpose-built for Claude / ChatGPT / Cursor / Copilot.
 
 Fikir CSS ships a machine-readable selector manifest at `dist/contracts/selectors.json`. Drop it into your AI context to get accurate class-name completions:
 
@@ -418,6 +436,7 @@ For the full list of beta and experimental surfaces with rationale and upgrade g
 
 | Role | First path |
 |------|------------|
+| AI / Agent / Vibe coder | **[SKILL.md](./SKILL.md)** · [selectors.json](https://snrj35-dev.github.io/Fikir-Css/dist/contracts/selectors.json) · [For AI Assistants](#for-ai-assistants-copilot--claude--cursor) |
 | Consumer | [User path](./docs/paths/user-path.md) · [Quick Start](#quick-start) · [Site gallery](https://snrj35-dev.github.io/Fikir-Css/) · [Playground](./playground/index.html) |
 | Contributor | [Contributor path](./docs/paths/contributor-path.md) · [Support matrix](./docs/roadmap/support-matrix.md) · [RFC guide](./docs/contributor/how-to-add-component-rfc.md) |
 | Maintainer | [Maintainer path](./docs/paths/maintainer-path.md) · [Release flow](./docs/release/release-promotion-flow.md) · [Semver policy](./docs/governance/semver-policy.md) |

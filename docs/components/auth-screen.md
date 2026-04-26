@@ -1,31 +1,47 @@
 # Auth Screen
 
-Giriş, kayıt ve parola sıfırlama ekranları için sayfa düzeyi CSS layout pattern'i. Ortalanmış kart ve iki sütunlu split varyantlarını destekler.
+> Support level: **Supported** | Pattern key: `pattern.authScreen` | Canonical: `data-pattern="auth-screen"`
 
 ## When to use
 
-- Login / sign-in sayfası
-- Register / sign-up sayfası
-- Forgot password / reset password sayfası
-- Email verification sayfası
+Page-level layout pattern for authentication flows (login, registration, password recovery). Supports both centered card and split-screen variants.
 
-## Basic (centered card)
+- ✓ Login / sign-in pages
+- ✓ Register / sign-up pages
+- ✓ Forgot password / reset password flows
+- ✓ Email verification screens
+- ✗ Simple contact forms (use `field` and `stack`)
+- ✗ Multimodal walkthroughs (use `modal` or `onboarding-checklist`)
+
+## Canonical anatomy
+
+| Attribute | Values | Role |
+|-----------|--------|------|
+| `data-pattern` | `"auth-screen"` | Root container — required |
+| `data-variant` | `"split"` | Two-column layout (brand panel + form) |
+| `data-slot="brand"` | — | Brand identity area (logo, tagline) |
+| `data-slot="card"` | — | The main interaction container (uses `.card`) |
+| `data-slot="title"` | — | Page-level heading |
+| `data-slot="subtitle"` | — | Supporting text / secondary label |
+| `data-slot="footer"` | — | Legal links and footer navigation |
+
+## Basic usage (Centered card)
 
 ```html
 <div data-pattern="auth-screen">
   <header data-slot="brand">
     <img data-slot="logo" src="/logo.svg" alt="Fikir" width="120" height="32" />
-    <p data-slot="tagline">Design system for modern products</p>
+    <p data-slot="tagline">The CSS framework for building great UIs</p>
   </header>
 
-  <main data-slot="card" class="card card-elevated">
+  <main data-slot="card" class="card card-elevated card-p-lg">
     <h1 data-slot="title">Sign in</h1>
     <p data-slot="subtitle">Welcome back! Please enter your details.</p>
 
-    <form class="stack">
+    <form class="stack" style="--stack-gap: var(--space-4)">
       <div class="field">
-        <label class="label" for="email">Email</label>
-        <input id="email" class="input" type="email" autocomplete="email" />
+        <label class="label" for="email">Email address</label>
+        <input id="email" class="input" type="email" autocomplete="email" required />
       </div>
       <div class="field">
         <label class="label" for="password">Password</label>
@@ -36,6 +52,7 @@ Giriş, kayıt ve parola sıfırlama ekranları için sayfa düzeyi CSS layout p
             data-slot="input"
             type="password"
             autocomplete="current-password"
+            required
           />
           <button data-slot="toggle" type="button" aria-label="Show password">
             <span data-icon="show" aria-hidden="true">👁</span>
@@ -48,7 +65,9 @@ Giriş, kayıt ve parola sıfırlama ekranları için sayfa düzeyi CSS layout p
 
     <div data-slot="divider">or</div>
 
-    <button class="btn btn-outline" type="button">Continue with Google</button>
+    <button class="btn btn-outline btn-neutral" type="button">
+      Continue with Google
+    </button>
 
     <p style="text-align: center; font-size: var(--font-size-sm); margin-block-start: var(--space-4)">
       Don't have an account?
@@ -57,13 +76,14 @@ Giriş, kayıt ve parola sıfırlama ekranları için sayfa düzeyi CSS layout p
   </main>
 
   <footer data-slot="footer">
-    <a href="/privacy" class="link">Privacy</a> ·
-    <a href="/terms" class="link">Terms</a>
+    <a href="/privacy" class="link">Privacy Policy</a>
+    <span aria-hidden="true">·</span>
+    <a href="/terms" class="link">Terms of Service</a>
   </footer>
 </div>
 ```
 
-## Split variant (brand panel + form)
+## Split variant
 
 ```html
 <div data-pattern="auth-screen" data-variant="split">
@@ -78,75 +98,46 @@ Giriş, kayıt ve parola sıfırlama ekranları için sayfa düzeyi CSS layout p
   <section data-slot="form">
     <div data-slot="card" style="inline-size: min(28rem, 100%)">
       <h1 data-slot="title">Create account</h1>
-      <p data-slot="subtitle">Start your free trial today.</p>
+      <p data-slot="subtitle">Start your 14-day free trial today.</p>
 
       <form class="stack">
-        <div class="field">
-          <label class="label" for="name">Full name</label>
-          <input id="name" class="input" type="text" autocomplete="name" />
-        </div>
-        <div class="field">
-          <label class="label" for="reg-email">Work email</label>
-          <input id="reg-email" class="input" type="email" autocomplete="email" />
-        </div>
-        <div class="field">
-          <label class="label" for="reg-pwd">Password</label>
-          <div data-pattern="password-input">
-            <input
-              id="reg-pwd"
-              class="input"
-              data-slot="input"
-              type="password"
-              autocomplete="new-password"
-            />
-            <button data-slot="toggle" type="button" aria-label="Show password">
-              <span data-icon="show" aria-hidden="true">👁</span>
-              <span data-icon="hide" aria-hidden="true">🙈</span>
-            </button>
-          </div>
-        </div>
+        <!-- form fields -->
         <button class="btn btn-solid btn-primary" type="submit">Get started</button>
       </form>
-
-      <p style="text-align: center; font-size: var(--font-size-sm); margin-block-start: var(--space-4)">
-        Already have an account?
-        <a href="/login" class="link">Sign in</a>
-      </p>
     </div>
   </section>
 </div>
 ```
 
-## Variants
+## Accessibility checklist
 
-| `data-variant` | Description |
-|---|---|
-| *(default)* | Ortalanmış kart, tam sayfa yüksekliği |
-| `split` | Sol marka paneli + sağ form alanı |
+- [x] **Semantic HTML:** uses `<main>` or `<section>` for the primary interaction area
+- [x] **Landmarks:** header, main, and footer are appropriately tagged
+- [x] **Form labels:** all inputs have associated `<label>` elements
+- [x] **Autocomplete:** fields use standard `autocomplete` tokens (`email`, `current-password`, `new-password`)
+- [x] **Dynamic feedback:** Use `aria-live="polite"` for login error messages
+- [x] **Focus management:** Autofocus first input if appropriate for the flow
 
-## Slots
+## Tokens used
 
-| Slot | Variant | Description |
-|---|---|---|
-| `brand` | Her ikisi | Logo ve tagline alanı |
-| `logo` | Her ikisi | Logo görüntüsü |
-| `tagline` | Default | Kısa slogan metni |
-| `card` | Default | Form kart alanı |
-| `form` | Split | Form bölümü (split) |
-| `title` | Her ikisi | Ekran başlığı |
-| `subtitle` | Her ikisi | Yardımcı metin |
-| `divider` | Her ikisi | "or" ayırıcısı |
-| `footer` | Default | Gizlilik/yasal bağlantılar |
+| Token | Role | Notes |
+|-------|------|-------|
+| `--color-bg-default` | Page background | Mixed for split variant |
+| `--color-fg-muted` | Tagline/Subtitle color | Reduced emphasis |
+| `--space-8`, `--space-12` | Layout padding | Generous spacing |
+| `--font-size-2xl` | Brand heading size | For split variant |
 
-## Accessibility
+## AI / machine-readable notes
 
-- `<main>` veya `<section>` ile anlamlı landmark kullanın.
-- Form submit hataları için `aria-live="polite"` bölgesi ekleyin.
-- Otomatik odak için `autofocus` ilk input'a eklenebilir.
+- **Pattern identifier:** `data-pattern="auth-screen"`
+- **Variant:** `data-variant="split"` for side-by-side brand/form
+- **Slots:** `brand`, `logo`, `tagline`, `card`, `title`, `subtitle`, `footer`
+- **Component integration:** heavily relies on `card`, `stack`, `field`, `btn`, and `link`
+- **Responsive:** layout shifts from column (mobile) to grid/split (desktop) automatically
 
-## Related components
+## Related
 
-- **Password Input** — şifre alanı toggle'ı
-- **Field** — form alanı wrapper'ı
-- **Card** — kart bileşeni
-- **Stack** — dikey yığın layout'u
+- **`password-input`** — secure password field with visibility toggle
+- **`field`** — standard form field container
+- **`card`** — the base container for the auth form
+- **`stack`** — used for vertical form layout

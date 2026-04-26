@@ -15,7 +15,7 @@ Date-time picker enables users to select or enter a specific date and time in a 
 - ✗ Don't use for timezone selection (separate component)
 - ✗ Don't use for duration selection (use range-slider or duration picker)
 
-## Classes
+## Canonical anatomy
 
 | Class | Role | Modifiers |
 |-------|------|-----------|
@@ -181,6 +181,12 @@ Date-time picker does not define custom tone or style variants. Input and trigge
 <button class="date-time-picker-trigger btn btn-sm btn-solid btn-primary">Open</button>
 ```
 
+## CSS custom properties
+
+`date-time-picker` does not expose component-specific custom properties. Calendar sizing, panel spacing, field rhythm, color, and radius all inherit from the shared token surface.
+
+Use density modes and global tokens first; only reach for local overrides when the product has a real layout requirement.
+
 ## Disabled state
 
 ```html
@@ -284,7 +290,7 @@ Density is applied via `[data-density]` on parent or `--space-*` tokens.
 ## AI / machine-readable notes
 
 - **CSS selector surface:** canonical class is `.date-time-picker`, sub-classes are `.date-time-picker-input`, `.date-time-picker-panel`, `.date-time-picker-date-section`, `.date-time-picker-time-section`, etc.
-- **State indicators:** use `data-open="true|false"`, `data-selected="true"`, `data-today="true"`, `aria-invalid="true|false"`, `aria-expanded="true|false"` attributes
+- **State indicators:** use `data-open="true"` to show the panel; remove the attribute to hide. Calendar cells use `data-selected`, `data-today`, and `data-outside`. Validation uses `aria-invalid="true"` on the input.
 - **DateTime format:** default is ISO 8601 (YYYY-MM-DD HH:MM); can be localized
 - **Panel composition:** date section above, time section below, separated by border
 - **Calendar grid:** 7-column layout for week days; 6 rows for calendar grid

@@ -111,6 +111,7 @@ export const cssManifest = [
   "packages/components/search-result-item.css",
   "packages/components/auth-screen.css",
   "packages/components/onboarding-checklist.css",
+  "packages/components/chart-frame.css",
   "packages/utilities/spacing.css",
   "packages/utilities/typography.css",
   "packages/utilities/color.css",

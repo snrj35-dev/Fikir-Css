@@ -18,4 +18,17 @@
   {{utility.wFull}} {
     inline-size: 100%;
   }
+
+  {{utility.flex1}} {
+    flex: 1 1 0%;
+    min-inline-size: 0;
+  }
+
+  {{utility.minW0}} {
+    min-inline-size: 0;
+  }
+
+  {{utility.overflowAuto}} {
+    overflow: auto;
+  }
 }

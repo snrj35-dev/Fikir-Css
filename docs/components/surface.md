@@ -1,6 +1,6 @@
 # Surface
 
-> Support level: **Supported** | Surface key: `component.surface` | Canonical: `.comp-surface`
+> Support level: **Supported** | Surface key: `component.surface` | Canonical: `.surface`
 
 ## When to use
 
@@ -18,13 +18,13 @@ Neutral container element for grouping related content. Foundation for cards, pa
 
 | Class | Role | Modifiers |
 |-------|------|-----------|
-| `comp-surface` | Base container — creates elevation or separation | n/a |
+| `surface` | Base container — creates elevation or separation | n/a |
 
 ## States
 
 | State | Activation | HTML pattern |
 |-------|-----------|--------------|
-| Default | — | `<div class="comp-surface">Content</div>` |
+| Default | — | `<div class="surface">Content</div>` |
 
 > Surface itself is stateless. State is applied to child interactive elements within it.
 
@@ -32,13 +32,13 @@ Neutral container element for grouping related content. Foundation for cards, pa
 
 ```html
 <!-- Simple surface container -->
-<div class="comp-surface">
+<div class="surface">
   <h3>Section heading</h3>
   <p>Content goes here.</p>
 </div>
 
 <!-- Surface as panel in layout -->
-<div class="comp-surface">
+<div class="surface">
   <header>
     <h2>Panel title</h2>
   </header>
@@ -49,9 +49,9 @@ Neutral container element for grouping related content. Foundation for cards, pa
 
 <!-- Multiple surfaces for grouped layout -->
 <div style="display: grid; gap: 1rem;">
-  <div class="comp-surface">Item 1</div>
-  <div class="comp-surface">Item 2</div>
-  <div class="comp-surface">Item 3</div>
+  <div class="surface">Item 1</div>
+  <div class="surface">Item 2</div>
+  <div class="surface">Item 3</div>
 </div>
 ```
 
@@ -101,17 +101,23 @@ No CSS changes needed — padding scales via tokens.
 
 ## AI / machine-readable notes
 
-- **Selector pattern:** `comp-surface` base, no modifiers
+- **Selector pattern:** `surface` base, no modifiers
 - **Content agnostic:** Surface is a neutral container; no assumptions about children
 - **Elevation signal:** Visual surface change (via shadow or color shift) indicates grouping, not importance
 - **Responsive:** Padding and border-radius scale with tokens; no breakpoints needed
-- **Copy-paste use:** Wrap content in `<div class="comp-surface">...</div>` and adjust heading levels inside
+- **Copy-paste use:** Wrap content in `<div class="surface">...</div>` and adjust heading levels inside
+
+## Related
+
+- **`card`** — actionable container with border and hover states
+- **`modal`** — center-aligned blocking overlay surface
+- **`section-block`** — higher-level content grouping with header
 
 ## Composition examples
 
 ```html
 <!-- Surface with card-like content -->
-<div class="comp-surface">
+<div class="surface">
   <img src="image.jpg" alt="Description" style="width: 100%; margin-bottom: 1rem;">
   <h3>Title</h3>
   <p>Description text.</p>
@@ -119,13 +125,13 @@ No CSS changes needed — padding scales via tokens.
 
 <!-- Surface as section in form -->
 <form>
-  <div class="comp-surface">
+  <div class="surface">
     <h3>Personal information</h3>
-    <input type="text" placeholder="Name" class="comp-input">
+    <input type="text" placeholder="Name" class="input">
   </div>
-  <div class="comp-surface">
+  <div class="surface">
     <h3>Contact information</h3>
-    <input type="email" placeholder="Email" class="comp-input">
+    <input type="email" placeholder="Email" class="input">
   </div>
 </form>
 ```

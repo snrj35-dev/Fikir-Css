@@ -1,0 +1,11 @@
+{
+  // Fikir CSS dogfood — load our own VS Code custom data so contributors get
+  // class / data-* / token autocomplete while editing the source repo.
+  // For consumers see: docs/guides/vscode-autocomplete.md
+  "html.customData": [
+    "./dist/vscode/html-custom-data.json"
+  ],
+  "css.customData": [
+    "./dist/vscode/css-custom-data.json"
+  ]
+}

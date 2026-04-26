@@ -126,3 +126,9 @@ No CSS changes needed — tokens handle it automatically.
 - **Not interactive:** badges have no click/keyboard behavior; use `tag-chip` for interactive labels
 - **State indicator:** use alongside interactive components to convey semantic state
 - **Copy-paste use:** substitute tone class and text label; class structure is stable
+
+## Related
+
+- **`tag-chip`** — categorized labels with close actions
+- **`kpi-card-trend`** — metric delta indicators
+- **`avatar`** — can be decorated with badges

@@ -1,6 +1,6 @@
 # Dropdown Menu
 
-> Support level: **Supported** | Surface key: `component.dropdownMenu` | Canonical: `.comp-dropdown-menu`
+> Support level: **Supported** | Surface key: `component.dropdownMenu` | Canonical: `.dropdown-menu`
 
 ## When to use
 
@@ -17,8 +17,8 @@ Menu list that drops down from button. Similar to popover but optimized for menu
 
 | Class | Role | Modifiers |
 |-------|------|-----------|
-| `comp-dropdown-menu` | Menu container | n/a |
-| `comp-dropdown-menu-item` | Menu item | n/a |
+| `dropdown-menu` | Menu container | n/a |
+| `dropdown-menu-item` | Menu item | n/a |
 
 ## States
 
@@ -33,29 +33,29 @@ Menu list that drops down from button. Similar to popover but optimized for menu
 ```html
 <!-- Dropdown menu -->
 <div style="position: relative; display: inline-block;">
-  <button type="button" class="comp-button" id="menu-trigger" aria-haspopup="true" aria-expanded="false">
+  <button type="button" class="btn" id="menu-trigger" aria-haspopup="true" aria-expanded="false">
     Actions ▼
   </button>
   
   <ul 
-    class="comp-dropdown-menu" 
+    class="dropdown-menu" 
     role="menu" 
     aria-labelledby="menu-trigger"
     style="position: absolute; top: 100%; left: 0; background: var(--color-bg-surface); border: 1px solid var(--color-border-subtle); border-radius: 0.5rem; min-width: 180px; padding: 0.5rem; display: none; list-style: none;"
   >
     <li role="none">
-      <button type="button" class="comp-dropdown-menu-item" role="menuitem">
+      <button type="button" class="dropdown-menu-item" role="menuitem">
         Edit
       </button>
     </li>
     <li role="none">
-      <button type="button" class="comp-dropdown-menu-item" role="menuitem">
+      <button type="button" class="dropdown-menu-item" role="menuitem">
         Duplicate
       </button>
     </li>
     <li role="separator" style="height: 1px; background: var(--color-border-subtle); margin: 0.5rem 0;"></li>
     <li role="none">
-      <button type="button" class="comp-dropdown-menu-item" role="menuitem">
+      <button type="button" class="dropdown-menu-item" role="menuitem">
         Delete
       </button>
     </li>
@@ -94,16 +94,30 @@ Menu list that drops down from button. Similar to popover but optimized for menu
 | `aria-expanded` | On trigger button | `"true"` or `"false"` |
 | `aria-labelledby` | Menu | ID of trigger button |
 
+## Tokens used
+
+| Token | Role | Notes |
+|-------|------|-------|
+| `--color-bg-surface` | Menu background | Auto-adapts to dark/high-contrast |
+| `--color-border-subtle` | Menu border | |
+| `--color-fg-default` | Menu item text | |
+| `--color-bg-hover` | Item hover/active background | |
+| `--space-2`, `--space-3` | Padding (item + container) | Scales with density |
+| `--radius-md` | Container border radius | Scales with shape |
+| `--shadow-md` | Floating elevation | Drop shadow |
+
 ## AI / machine-readable notes
 
-- **Selector pattern:** `comp-dropdown-menu` with `comp-dropdown-menu-item` children
+- **Selector pattern:** `dropdown-menu` container with `dropdown-menu-item` children (canonical — verify in `dist/contracts/selectors.json`)
 - **Keyboard:** Implement arrow key navigation and Enter to select
 - **Focus:** Highlight current item; move focus with arrow keys
 - **Click:** Close on item selection or click-outside
 - **Copy-paste use:** Update menu item text and action handlers
 
-## Related patterns
+## Related
 
-- **Popover:** Interactive floating panel (more flexible)
-- **Select:** Form field (built-in browser menu)
-- **Menu-bar:** Horizontal menu with keyboard navigation
+- **`popover`** — interactive floating panel (more flexible content)
+- **`context-menu`** — right-click triggered variant
+- **`split-button`** — button + dropdown combination
+- **`select`** — form field option picker
+- **`menu-bar`** — persistent horizontal menu with keyboard navigation

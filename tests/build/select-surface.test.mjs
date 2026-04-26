@@ -25,6 +25,14 @@ test("select surface: invalid/disabled selectors exist", async () => {
   assert.ok(distCss.includes(".select[disabled] {"));
 });
 
+test("select surface: size selectors exist", async () => {
+  const distCss = await readDistCss();
+
+  assert.ok(distCss.includes(".select-sm {"));
+  assert.ok(distCss.includes(".select-md {"));
+  assert.ok(distCss.includes(".select-lg {"));
+});
+
 test("select surface: no alias class leakage", async () => {
   const distCss = await readDistCss();
   const forbidden = [".dropdown", ".select-input", ".select-disabled", ".select-invalid"];

@@ -13,7 +13,7 @@ Time picker enables users to select or enter a specific time in HH:MM:SS format 
 - ✗ Don't use for timezone selection (separate component)
 - ✗ Don't use for interval-only selection (use segmented-control or radio)
 
-## Classes
+## Canonical anatomy
 
 | Class | Role | Modifiers |
 |-------|------|-----------|
@@ -195,6 +195,12 @@ Time picker does not define custom tone or style variants. Input and trigger use
 <button class="time-picker-trigger btn btn-sm btn-solid btn-primary">Clock</button>
 ```
 
+## CSS custom properties
+
+`time-picker` does not publish component-specific custom properties. Use the shared input, button, spacing, and surface tokens already consumed by the control.
+
+If you need to change panel density or input rhythm, prefer global tokens / density modes over ad hoc inline overrides.
+
 ## Disabled state
 
 ```html
@@ -292,7 +298,7 @@ Density is applied via `[data-density]` on parent or `--space-*` tokens.
 ## AI / machine-readable notes
 
 - **CSS selector surface:** canonical class is `.time-picker`, sub-classes are `.time-picker-input`, `.time-picker-panel`, `.time-picker-field`, etc.
-- **State indicators:** use `data-open="true|false"`, `aria-invalid="true|false"`, `aria-expanded="true|false"` attributes
+- **State indicators:** use `data-open="true"` to show the panel; remove the attribute to hide. Validation uses `aria-invalid="true"` on the input.
 - **Time format:** default is HH:MM:SS; can be restricted to HH:MM via panel/input configuration
 - **Spinner behavior:** increment/decrement steps are typically 1 hour/minute/second; can be configured to 15-minute steps
 - **Panel positioning:** popover-like behavior, should respect viewport boundaries and not obscure main input
@@ -332,7 +338,7 @@ Density is applied via `[data-density]` on parent or `--space-*` tokens.
 ```html
 <div class="field">
   <label class="label">Alarm time</label>
-  <div class="time-picker" data-open="false">
+  <div class="time-picker">
     <input class="time-picker-input input" placeholder="HH:MM:SS" />
     <button class="time-picker-trigger btn btn-sm btn-primary">
       Set time

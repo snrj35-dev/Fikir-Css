@@ -133,6 +133,110 @@ export function bindOverlayKeyboard(overlayEl, { onClose, closeOnBackdrop = true
   };
 }
 
+// ─── bindSidebarDrawer ────────────────────────────────────────────────────────
+
+/**
+ * Wire a responsive sidebar/drawer pair to a single trigger button.
+ *
+ * On narrow viewports (below `breakpoint`) the drawer is treated as an overlay:
+ * clicking the trigger toggles `data-open="true"` on the drawer root, traps focus,
+ * and binds Escape + backdrop click to close. On wide viewports the drawer stays
+ * hidden (no-op) because the inline sidebar is expected to be visible instead.
+ *
+ * Expected markup:
+ *   - `drawer` must follow the canonical `drawer` component anatomy with a
+ *     `drawer-backdrop` child.
+ *   - `trigger` should expose `aria-controls` pointing at the drawer id, plus
+ *     `aria-expanded` which this helper keeps in sync.
+ *
+ * @param {{
+ *   trigger: HTMLElement,
+ *   drawer: HTMLElement,
+ *   breakpoint?: string
+ * }} options
+ * @returns {{ open: () => void, close: () => void, destroy: () => void }}
+ *
+ * @example
+ * import { bindSidebarDrawer } from "fikir-css/helpers";
+ * bindSidebarDrawer({
+ *   trigger: document.querySelector('[data-action="open-drawer"]'),
+ *   drawer:  document.getElementById('mobile-nav'),
+ *   breakpoint: '60rem',
+ * });
+ */
+export function bindSidebarDrawer({ trigger, drawer, breakpoint = '60rem' }) {
+  const mql = typeof window !== 'undefined' && window.matchMedia
+    ? window.matchMedia(`(min-width: ${breakpoint})`)
+    : null;
+
+  const trap = createFocusTrap(drawer);
+  /** @type {{ destroy: () => void } | null} */
+  let keyboardBinding = null;
+
+  function isDesktop() {
+    return mql ? mql.matches : false;
+  }
+
+  function open() {
+    if (isDesktop()) return;
+    drawer.setAttribute('data-open', 'true');
+    trigger.setAttribute('aria-expanded', 'true');
+    trap.activate(trigger);
+    keyboardBinding = bindOverlayKeyboard(drawer, { onClose: close });
+  }
+
+  function close() {
+    drawer.removeAttribute('data-open');
+    trigger.setAttribute('aria-expanded', 'false');
+    trap.deactivate();
+    if (keyboardBinding) {
+      keyboardBinding.destroy();
+      keyboardBinding = null;
+    }
+  }
+
+  function handleTriggerClick() {
+    if (drawer.getAttribute('data-open') === 'true') close();
+    else open();
+  }
+
+  function handleViewportChange() {
+    // Auto-close drawer when crossing into desktop (sidebar takes over).
+    if (isDesktop() && drawer.getAttribute('data-open') === 'true') {
+      close();
+    }
+  }
+
+  trigger.addEventListener('click', handleTriggerClick);
+  if (mql) {
+    if (typeof mql.addEventListener === 'function') {
+      mql.addEventListener('change', handleViewportChange);
+    } else if (typeof mql.addListener === 'function') {
+      // Safari < 14 fallback
+      mql.addListener(handleViewportChange);
+    }
+  }
+
+  // Initial ARIA state
+  trigger.setAttribute('aria-expanded', 'false');
+
+  return {
+    open,
+    close,
+    destroy() {
+      close();
+      trigger.removeEventListener('click', handleTriggerClick);
+      if (mql) {
+        if (typeof mql.removeEventListener === 'function') {
+          mql.removeEventListener('change', handleViewportChange);
+        } else if (typeof mql.removeListener === 'function') {
+          mql.removeListener(handleViewportChange);
+        }
+      }
+    },
+  };
+}
+
 // ─── createRovingTabindex ─────────────────────────────────────────────────────
 
 /**

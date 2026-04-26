@@ -1,173 +1,115 @@
 # Select
 
-> Support level: **Supported** | Surface key: `component.select` | Canonical: `.select`
+> Support level: **Supported** | Surface key: `component.select` | Canonical root: `.select`
 
-## When to use
+## Status
 
-Dropdown list for selecting one option. Native HTML or custom styled.
+Supported. Use native `<select>` for single-choice inputs where search is unnecessary and browser semantics should remain intact.
 
-- ✓ Single option selection
-- ✓ Form field (required/optional)
-- ✓ Filtering/sorting dropdown
-- ✓ Option lists 3-20 items
-- ✗ Large lists (use combobox/autocomplete)
-- ✗ Multi-select (use checkboxes or multi-select)
+## Canonical anatomy
 
-## Classes
+| Class | Role | Element |
+|-------|------|---------|
+| `select` | Root select control | `select` |
+| `select-sm` | Small size modifier | `select` |
+| `select-md` | Medium size modifier | `select` |
+| `select-lg` | Large size modifier | `select` |
 
-| Class | Role | Modifiers |
-|-------|------|-----------|
-| `select` | Select input | n/a |
-| `select-sm` | Small size | Modifier |
-| `select-md` | Medium size (default) | Modifier |
-| `select-lg` | Large size | Modifier |
+## Form state contract
 
-## States
+| State | Trigger | CSS selector |
+|-------|---------|--------------|
+| Invalid | `aria-invalid="true"` | `.select[aria-invalid="true"]` |
+| Disabled | `disabled` | `.select[disabled]` |
+| Required | `required` | semantic/native form state |
 
-| State | Activation | HTML pattern |
-|-------|-----------|--------------|
-| Default | Initial | Placeholder shown |
-| Open | Click/focus | Options visible |
-| Selected | Option chosen | Value shown |
-| Disabled | Unavailable | Grayed out |
-| Error | Invalid | Red border, error text |
+For a full field-level error state, pair the control with `.field[data-invalid="true"]` and visible `.error-text`.
 
 ## Basic usage
 
 ```html
-<!-- Native select -->
-<div class="field" style="margin-bottom: 1.5rem;">
-  <label for="category" style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Category</label>
-  <select id="category" class="select select-md" style="width: 100%; padding: 0.75rem; border: 1px solid var(--color-border-subtle); border-radius: 0.5rem; font-size: 1rem;">
-    <option value="">Select a category...</option>
-    <option value="design">Design</option>
-    <option value="development">Development</option>
-    <option value="marketing">Marketing</option>
-    <option value="sales">Sales</option>
-  </select>
-  <div class="helper-text" style="margin-top: 0.5rem; font-size: 0.875rem; color: var(--color-fg-muted);">Choose your primary role</div>
-</div>
-
-<!-- Disabled select -->
-<select class="select" disabled style="width: 100%; padding: 0.75rem; border: 1px solid var(--color-border-subtle); border-radius: 0.5rem; opacity: 0.5; cursor: not-allowed;">
-  <option>Unavailable</option>
-</select>
-
-<!-- Select with error -->
 <div class="field">
-  <label for="status" style="display: block; margin-bottom: 0.5rem; font-weight: 500;">Status</label>
-  <select id="status" class="select" aria-invalid="true" aria-describedby="status-error" style="width: 100%; padding: 0.75rem; border: 2px solid var(--color-danger); border-radius: 0.5rem;">
-    <option value="">Select status...</option>
-    <option value="active">Active</option>
-    <option value="inactive">Inactive</option>
+  <label class="label" for="role">Role</label>
+  <select class="select select-md" id="role" aria-describedby="role-hint">
+    <option value="">Select a role</option>
+    <option value="admin">Admin</option>
+    <option value="editor">Editor</option>
+    <option value="viewer">Viewer</option>
   </select>
-  <div id="status-error" class="error-text" style="color: var(--color-danger); font-size: 0.875rem; margin-top: 0.5rem;">This field is required</div>
+  <p class="helper-text" id="role-hint">Choose the permission level for this user.</p>
 </div>
 ```
 
-## With grouped options
+## Invalid and required state
 
 ```html
-<select class="select" style="width: 100%; padding: 0.75rem; border: 1px solid var(--color-border-subtle); border-radius: 0.5rem;">
-  <optgroup label="Frontend">
-    <option value="react">React</option>
-    <option value="vue">Vue</option>
-    <option value="svelte">Svelte</option>
-  </optgroup>
-  <optgroup label="Backend">
-    <option value="node">Node.js</option>
-    <option value="python">Python</option>
-    <option value="rust">Rust</option>
-  </optgroup>
-</select>
+<div class="field" data-invalid="true">
+  <label class="label" for="status">Status</label>
+  <select class="select select-md"
+          id="status"
+          required
+          aria-invalid="true"
+          aria-describedby="status-error">
+    <option value="">Select status</option>
+    <option value="active">Active</option>
+    <option value="paused">Paused</option>
+  </select>
+  <p class="error-text" id="status-error" role="alert">Status is required.</p>
+</div>
 ```
 
-## Sizes
+## Disabled state
 
 ```html
-<!-- Small -->
-<select class="select-sm" style="padding: 0.5rem; font-size: 0.875rem;"><!-- options --></select>
-
-<!-- Medium (default) -->
-<select class="select-md" style="padding: 0.75rem; font-size: 1rem;"><!-- options --></select>
-
-<!-- Large -->
-<select class="select-lg" style="padding: 1rem; font-size: 1.125rem;"><!-- options --></select>
+<div class="field">
+  <label class="label" for="region">Region</label>
+  <select class="select select-md" id="region" disabled>
+    <option>Europe (locked)</option>
+  </select>
+</div>
 ```
 
-## Accessibility checklist
+## Size variants
 
-- [x] **Semantic:** Uses native `<select>` element
-- [x] **Label:** Associated `<label>` with `for` attribute
-- [x] **Required:** Required attribute set if needed
-- [x] **Disabled:** Disabled state properly indicated
-- [x] **Error:** aria-invalid="true" and aria-describedby
-- [x] **Keyboard:** Tab navigates, arrow keys select
-- [x] **Focus:** Visible focus indicator
+```html
+<select class="select select-sm" aria-label="Small select"></select>
+<select class="select select-md" aria-label="Medium select"></select>
+<select class="select select-lg" aria-label="Large select"></select>
+```
 
-## Keyboard behavior
+## CSS custom properties
 
-| Key | Action |
-|-----|--------|
-| `Tab` | Move to next field |
-| `↑/↓` | Navigate options (open) |
-| `Enter/Space` | Open/select option |
-| `Home/End` | First/last option |
-| `Type letter` | Jump to option starting with letter |
-
-## ARIA requirements
-
-| Role/Attribute | Purpose | Notes |
-|---|---|---|
-| `<label for="id">` | Associated label | Describes purpose |
-| `required` | Required field | HTML attribute |
-| `disabled` | Unavailable | HTML attribute |
-| `aria-invalid="true"` | Error state | Set on invalid |
-| `aria-describedby` | Error text | Links to error message |
+Select does not expose dedicated component variables.
 
 ## Tokens used
 
-| Token | Role | Notes |
-|-------|------|-------|
-| `--color-border-subtle` | Border color | Normal state |
-| `--color-danger` | Error color | Invalid state |
-| `--space-*` | Padding | Scales with density |
+| Token | Role |
+|-------|------|
+| `--color-bg-surface` | Control background |
+| `--color-fg-default` | Text color |
+| `--color-fg-muted` | Disabled text color |
+| `--color-border-subtle` | Default border |
+| `--color-accent` | Focus border |
+| `--color-danger` | Invalid border |
+| `--radius-md` | Border radius |
+| `--space-2` / `--space-3` / `--space-4` | Horizontal padding by size |
 
-## Variants
+## Accessibility checklist
 
-- **Native select:** Browser default (best for mobile)
-- **Custom styled:** CSS override of default
-- **With placeholder:** Empty option with placeholder text
-- **Grouped options:** `<optgroup>` for categories
-- **Large lists:** Consider combobox/autocomplete instead
+- Use a visible `<label>` linked with `for`/`id`.
+- Use `aria-invalid="true"` only when validation has actually failed.
+- Link helper/error text with `aria-describedby`.
+- Prefer native `<select>` semantics over custom menu behavior.
 
-## DO's and DON'Ts
+## AI notes
 
-✅ **DO:**
-- Use native `<select>` for accessibility
-- Include placeholder option
-- Group related options with `<optgroup>`
-- Label every select field
-- Show error states clearly
+- Canonical state contract is `aria-invalid`, `disabled`, and `required` on the native `<select>`.
+- Do not invent `data-disabled` or `data-readonly` for select.
+- Use `.field[data-invalid="true"]` for wrapper-level invalid state when showing error text.
 
-❌ **DON'T:**
-- Use select for >20 options (use combobox)
-- Hide the label
-- Remove focus indicator
-- Use select for always-expanded menu (use menu pattern)
-- Trigger actions on select (require explicit button)
+## Related components
 
-## AI / machine-readable notes
-
-- **Selector pattern:** `select` with optional size modifiers (sm/md/lg)
-- **Structure:** Native `<select>` with `<option>` children and `<optgroup>` for groups
-- **Label:** Associated via `<label for="id">`
-- **Error:** `aria-invalid="true"` + `aria-describedby` linking to error text
-- **Copy-paste use:** Update options, placeholder, and label
-
-## Related patterns
-
-- **Input:** Text input field
-- **Combobox:** Searchable select for large lists
-- **Radio:** Mutually exclusive selection (visible options)
-- **Checkbox:** Multi-select from options
+- `field`
+- `input`
+- `checkbox`
+- `combobox`

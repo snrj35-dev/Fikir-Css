@@ -6,13 +6,13 @@ import test from "node:test";
 const rootDir = resolve(process.cwd());
 const policyDocPath = resolve(rootDir, "docs/release/utility-surface-budget-policy.md");
 const fluidRfcPath = resolve(rootDir, "docs/rfcs/foundations/fluid-tokens-rfc.md");
-const tasklistPath = resolve(rootDir, "docs/roadmap/tasklist.md");
+const tasklistPath = resolve(rootDir, "docs/archive/tasklist-2026-04-14-v0.6-released.md");
 
 test("utility budget policy: document defines utility-growth guardrails", async () => {
   const content = await readFile(policyDocPath, "utf8");
 
   assert.ok(content.includes("Utility Surface Budget Policy"));
-  assert.ok(content.includes("P1 target: keep utility selector count under `40`."));
+  assert.ok(content.includes("P1 target: keep utility selector count under `45`."));
   assert.ok(content.includes("avoid adding more than `6` utility selectors"));
   assert.ok(content.includes("No utility addition without documenting why semantic or token-first usage is insufficient."));
 });

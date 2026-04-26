@@ -139,3 +139,9 @@ No CSS changes needed — tokens handle it automatically.
 - **State indicator:** `data-state="complete|active|upcoming"` on each `stepper-item`; `aria-current="step"` on the active item
 - **Read-only:** stepper has no interactive elements; navigation is external (Next/Back buttons)
 - **Copy-paste use:** duplicate `stepper-item` entries; update `data-state` and `aria-current` via JS
+
+## Related
+
+- **`accordion`** — collapsible vertical disclosure sections
+- **`tabs`** — horizontal section switching
+- **`progress`** — deterministic status indicator

@@ -1,12 +1,27 @@
 # Copy Button
 
-Panoya kopyalama geri bildirimi olan düğme pattern'i. `data-copied="true"` state'i uygulandığında ikon ve label'ı değiştirir.
+> Support level: **Supported** | Pattern key: `pattern.copyButton` | Canonical: `data-pattern="copy-button"`
 
 ## When to use
 
-- Kod bloğu veya snippet kopyalamak için
-- API key, token veya paylaşım URL'si kopyalamak için
-- Herhangi bir tek tıkla kopyalama aksiyonu için
+Interactive button pattern with built-in "copied" feedback state. Switches icons and labels when `data-copied="true"` is applied.
+
+- ✓ Copying code blocks or snippets
+- ✓ Copying API keys, tokens, or share URLs
+- ✓ Any single-click "copy to clipboard" action
+- ✗ Complex data export (use `data-table-toolbar` export)
+- ✗ Navigation buttons (use standard `btn`)
+
+## Canonical anatomy
+
+| Slot / Attribute | Role | Element |
+|------------------|------|---------|
+| `data-pattern` | Root container | `button` |
+| `data-copied` | `"true" \| "false"` | Active feedback state |
+| `data-icon="copy"` | Default icon | `span` (aria-hidden) |
+| `data-icon="check"`| Success icon | `span` (aria-hidden) |
+| `data-label="copy"`| Default text label | `span` |
+| `data-label="copied"`| Success text label | `span` |
 
 ## Basic usage
 
@@ -38,68 +53,32 @@ Panoya kopyalama geri bildirimi olan düğme pattern'i. `data-copied="true"` sta
 </button>
 ```
 
-## With tooltip feedback
+## Accessibility checklist
 
-```html
-<div style="position: relative; display: inline-block">
-  <button
-    class="btn btn-ghost btn-sm"
-    data-pattern="copy-button"
-    type="button"
-    aria-label="Copy"
-  >
-    <span data-icon="copy" aria-hidden="true">📋</span>
-    <span data-icon="check" aria-hidden="true">✓</span>
-    <span data-slot="feedback">Copied!</span>
-  </button>
-</div>
-```
+- [x] **Accessible Name:** Always provide a descriptive `aria-label` (e.g., "Copy API key")
+- [x] **State feedback:** Use a visually hidden `aria-live="polite"` region to announce "Copied!" to screen readers
+- [x] **Icons:** Marking decorative icons with `aria-hidden="true"`
+- [x] **Button semantics:** Uses native `<button>` element for keyboard accessibility
 
-## In a code block
+## Tokens used
 
-```html
-<div class="card card-flat" style="position: relative; padding: var(--space-3)">
-  <pre><code>npm install fikir-css</code></pre>
-  <button
-    class="btn btn-ghost btn-xs"
-    data-pattern="copy-button"
-    type="button"
-    aria-label="Copy command"
-    style="position: absolute; inset-block-start: var(--space-2); inset-inline-end: var(--space-2)"
-  >
-    <span data-icon="copy" aria-hidden="true">📋</span>
-    <span data-icon="check" aria-hidden="true">✓</span>
-  </button>
-</div>
-```
+| Token | Role | Notes |
+|-------|------|-------|
+| `--color-fg-default` | Icon/Label color | Inherited from button |
+| `--color-tone-success` | Success icon color | For "check" icon |
+| `--space-1`, `--space-2` | Icon-to-text gap | Scales with density |
 
-## Accessibility
+## AI / machine-readable notes
 
-- `aria-label` her zaman belirtilmeli.
-- Kopyalandıktan sonra bir `aria-live` region güncellenerek ekran okuyuculara bildirim yapılabilir.
+- **Pattern identifier:** `data-pattern="copy-button"`
+- **State model:** feedback triggered by `data-copied="true"`. CSS hides `[data-icon="copy"]` and `[data-label="copy"]` while showing `[data-icon="check"]` and `[data-label="copied"]`.
+- **Slots:** `data-icon="copy|check"`, `data-label="copy|copied"`
+- **Behavior:** Application must handle the Clipboard API and toggle `data-copied` for a duration (e.g., 2000ms)
+- **A11y:** Ensure `aria-label` reflects the target content description
 
-## JavaScript scaffold
+## Related
 
-```js
-document.querySelectorAll('[data-pattern="copy-button"]').forEach((btn) => {
-  const text = btn.dataset.copy
-    ?? btn.closest('[data-copy-target]')?.querySelector('code')?.textContent
-    ?? '';
-
-  btn.addEventListener('click', async () => {
-    try {
-      await navigator.clipboard.writeText(text);
-      btn.dataset.copied = 'true';
-      setTimeout(() => { btn.dataset.copied = 'false'; }, 2000);
-    } catch {
-      // Clipboard API not available
-    }
-  });
-});
-```
-
-## Related components
-
-- **Button** — base button styles
-- **Code Block** — use copy-button inside code blocks
-- **Tooltip** — alternative feedback mechanism
+- **`btn`** — the base component for styling
+- **`code-block`** — common container for copy-button usage
+- **`tooltip`** — for providing feedback when space is limited
+- **`toast`** — for global copy confirmations

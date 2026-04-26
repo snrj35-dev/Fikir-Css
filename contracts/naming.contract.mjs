@@ -419,6 +419,12 @@ export const namingContract = {
     "component.treeTableCell": { domain: "component", base: "tree-table-cell" },
     "component.treeTableCellTogglePlaceholder": { domain: "component", base: "tree-table-cell-toggle-placeholder" },
 
+    "component.chartFrame": { domain: "component", base: "chart-frame" },
+    "component.chartFrameTitle": { domain: "component", base: "chart-frame-title" },
+    "component.chartFrameBody": { domain: "component", base: "chart-frame-body" },
+    "component.chartFrameLegend": { domain: "component", base: "chart-frame-legend" },
+    "component.chartFrameLegendItem": { domain: "component", base: "chart-frame-legend-item" },
+
     // Utilities
     "utility.p0": { domain: "utility", base: "p-0" },
     "utility.p2": { domain: "utility", base: "p-2" },
@@ -427,8 +433,12 @@ export const namingContract = {
     "utility.py2": { domain: "utility", base: "py-2" },
     "utility.gap2": { domain: "utility", base: "gap-2" },
     "utility.gap4": { domain: "utility", base: "gap-4" },
+    "utility.gap6": { domain: "utility", base: "gap-6" },
     "utility.mt0": { domain: "utility", base: "mt-0" },
     "utility.forceMt0": { domain: "utility", base: "force-mt-0" },
+    "utility.flex1": { domain: "utility", base: "flex-1" },
+    "utility.minW0": { domain: "utility", base: "min-w-0" },
+    "utility.overflowAuto": { domain: "utility", base: "overflow-auto" },
 
     "utility.textXs": { domain: "utility", base: "text-xs" },
     "utility.textSm": { domain: "utility", base: "text-sm" },
