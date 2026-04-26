@@ -1,6 +1,6 @@
 # Starter Consumer Example
 
-Minimal plain-HTML consumer for `fikir-css@1.0.0`. No build step required.
+Minimal plain-HTML consumer for `fikir-css@1.1.0`. No build step required.
 
 ## Install
 
@@ -10,7 +10,7 @@ npm install fikir-css
 
 # Or from local tarball (from repo root first):
 npm pack
-npm install ../../fikir-css-1.0.0.tgz
+npm install ../../fikir-css-1.1.0.tgz
 ```
 
 ## Run
