@@ -53,8 +53,8 @@ Mevcut durumda `README.md` ve `SKILL.md` dosyaları AI entegrasyonu için endüs
   - AI'ın en büyük zaafı olan "BEM veya Tailwind class'ları uydurma" huyu, `selectors.json` zorunluluğu ve `data-*` attribute yönlendirmesiyle başarılı bir şekilde engellenmiştir.
   - `SKILL.md` dosyası, yapay zeka ajanları (agents) için harika bir "System Prompt" niteliği taşıyor ve proje tokenlarıyla tam uyumlu.
 - **Gelecek İyileştirmeler:**
-  - AI ajanlarının bazen eski dokümanlardan öğrendiği `comp-` ön eklerini (legacy prefix) uydurmasını kesin olarak yasaklayan kısa bir kuralın `SKILL.md` içine eklenmesi.
-  - Vibe coder'ların projeye anında adapte olabilmesi için `.cursorrules` (Cursor IDE) veya `.github/copilot-instructions.md` gibi yapay zeka özel config dosyalarının repo root dizinine dahil edilmesi.
+  - [x] AI ajanlarının bazen eski dokümanlardan öğrendiği `comp-` ön eklerini (legacy prefix) uydurmasını kesin olarak yasaklayan kısa bir kuralın `SKILL.md` içine eklenmesi.
+  - [x] Vibe coder'ların projeye anında adapte olabilmesi için `.cursorrules` (Cursor IDE) veya `.github/copilot-instructions.md` gibi yapay zeka özel config dosyalarının repo root dizinine dahil edilmesi.
 
 ---
 

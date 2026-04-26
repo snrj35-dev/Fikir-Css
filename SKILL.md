@@ -390,6 +390,10 @@ dist/contracts/selectors.json    ← selector manifest for tooling / AI
 
 <!-- ❌ Assuming a class name is the final selector without checking selectors.json -->
 <!-- The rendered selector for "btn" may be ".btn-_x1a2b" not ".btn" -->
+
+<!-- ❌ Using legacy prefixes — NEVER invent "comp-" or other prefixes. Use plain semantic names. -->
+<button class="comp-btn">...</button> <!-- WRONG -->
+<button class="btn">...</button>      <!-- CORRECT -->
 ```
 
 ---

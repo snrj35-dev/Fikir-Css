@@ -22,8 +22,8 @@
 ## M24 — v1.2.0 & Next-Gen Vision Tasks
 
 ### 1. AI, Agent ve DX İyileştirmeleri (Hızlı Kazanımlar - P1/P2)
-- [ ] `SKILL.md` güncellemesi: AI için "eski/legacy prefix uydurma" yasağının açıkça eklenmesi `(P2)`
-- [ ] `.cursorrules` (veya `.github/copilot-instructions.md`) dosyasının oluşturulması ve proje root dizinine eklenmesi `(P2)`
+- [x] `SKILL.md` güncellemesi: AI için "eski/legacy prefix uydurma" yasağının açıkça eklenmesi `(P2)`
+- [x] `.cursorrules` (veya `.github/copilot-instructions.md`) dosyasının oluşturulması ve proje root dizinine eklenmesi `(P2)`
 
 ### 2. Görsel Evrim ve Premium Hissiyat (P2)
 - [ ] **Glassmorphism:** `navbar`, `modal`, `app-shell` için `data-variant="glass"` varyasyonunun (backdrop-filter) uygulanması `(P2)`
