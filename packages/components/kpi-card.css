@@ -44,4 +44,41 @@
     background: var(--color-bg-default);
     color: var(--color-fg-default);
   }
+  {{component.kpiCard}}[data-variant="mesh"] {
+    background: 
+      radial-gradient(at 0% 0%, color-mix(in oklch, var(--color-primary-500) 15%, transparent) 0px, transparent 50%),
+      radial-gradient(at 100% 0%, color-mix(in oklch, var(--color-accent) 15%, transparent) 0px, transparent 50%),
+      var(--color-bg-surface);
+  }
+
+  {{component.kpiCard}}[data-variant="conic-border"] {
+    position: relative;
+    border-color: transparent;
+  }
+
+  {{component.kpiCard}}[data-variant="conic-border"]::before {
+    content: "";
+    position: absolute;
+    inset: -1px;
+    padding: 1px;
+    border-radius: inherit;
+    background: conic-gradient(from var(--angle, 0deg), var(--color-primary-500), var(--color-accent), var(--color-primary-500));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+    animation: rotate-border 4s linear infinite;
+  }
+
+  @keyframes rotate-border {
+    from { --angle: 0deg; }
+    to { --angle: 360deg; }
+  }
+}
+
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
 }

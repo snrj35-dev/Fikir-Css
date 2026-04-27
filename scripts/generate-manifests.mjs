@@ -326,7 +326,7 @@ async function buildVariantsManifest() {
     size_variants: sizeOnlyComponents,
     tone_overrides: {
       toast: {
-        note: "Toast tones applied via data-tone attribute or modifier class (toast--success etc.)",
+        note: "Toast tones applied via data-tone attribute or modifier class (toast-success etc.)",
         values: toastTones
       }
     }

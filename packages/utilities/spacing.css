@@ -1,42 +1,37 @@
 @layer utilities {
-  {{utility.p0}} {
-    padding: var(--space-0);
-  }
+  {{utility.p0}} { padding: 0; }
+  {{utility.p1}} { padding: var(--space-1); }
+  {{utility.p2}} { padding: var(--space-2); }
+  {{utility.p3}} { padding: var(--space-3); }
+  {{utility.p4}} { padding: var(--space-4); }
 
-  {{utility.p2}} {
-    padding: var(--space-2);
-  }
+  {{utility.px4}} { padding-inline: var(--space-4); }
+  {{utility.py2}} { padding-block: var(--space-2); }
 
-  {{utility.p4}} {
-    padding: var(--space-4);
-  }
+  {{utility.pt1}} { padding-block-start: var(--space-1); }
+  {{utility.pt2}} { padding-block-start: var(--space-2); }
+  {{utility.pt4}} { padding-block-start: var(--space-4); }
+  {{utility.pb1}} { padding-block-end: var(--space-1); }
+  {{utility.pb2}} { padding-block-end: var(--space-2); }
+  {{utility.pb4}} { padding-block-end: var(--space-4); }
 
-  {{utility.px4}} {
-    padding-inline: var(--space-4);
-  }
+  {{utility.m1}} { margin: var(--space-1); }
+  {{utility.m2}} { margin: var(--space-2); }
+  {{utility.m4}} { margin: var(--space-4); }
 
-  {{utility.py2}} {
-    padding-block: var(--space-2);
-  }
+  {{utility.mt0}} { margin-block-start: 0; }
+  {{utility.mt1}} { margin-block-start: var(--space-1); }
+  {{utility.mt2}} { margin-block-start: var(--space-2); }
+  {{utility.mt4}} { margin-block-start: var(--space-4); }
 
-  {{utility.gap2}} {
-    gap: var(--space-2);
-  }
+  {{utility.mb1}} { margin-block-end: var(--space-1); }
+  {{utility.mb2}} { margin-block-end: var(--space-2); }
+  {{utility.mb4}} { margin-block-end: var(--space-4); }
 
-  {{utility.gap4}} {
-    gap: var(--space-4);
-  }
-
-  {{utility.gap6}} {
-    gap: var(--space-6);
-  }
-
-  {{utility.mt0}} {
-    margin-block-start: 0;
-  }
+  {{utility.gap2}} { gap: var(--space-2); }
+  {{utility.gap4}} { gap: var(--space-4); }
+  {{utility.gap6}} { gap: var(--space-6); }
 
   /* Escape hatch: sınırlı ve bilinçli kullanım */
-  {{utility.forceMt0}} {
-    margin-block-start: 0 !important;
-  }
+  {{utility.forceMt0}} { margin-block-start: 0 !important; }
 }

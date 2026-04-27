@@ -621,7 +621,7 @@ export const anatomyContract = {
       { attr: "data-tone", on: "toast", values: ["danger", "success", "info", "warn", "error"], description: "Toast tone variant." }
     ],
     minimal_html: '<div class="toast-viewport" aria-live="polite">\n  <div class="toast" data-open="true" data-tone="success">\n    <p class="toast-title">Saved</p>\n    <p class="toast-description">Changes saved successfully.</p>\n    <button class="toast-close" aria-label="Dismiss">×</button>\n  </div>\n</div>',
-    notes: "toast-viewport is a fixed container. Each toast shows/hides via data-open. Tone also via class: toast--success | toast--info | toast--warn | toast--error."
+    notes: "toast-viewport is a fixed container. Each toast shows/hides via data-open. Tone also via class: toast-success | toast-info | toast-warn | toast-error."
   },
 
   progress: {
@@ -1059,7 +1059,9 @@ export const anatomyContract = {
       { selector: "app-shell-main", role: "main content area", element: "main" },
       { selector: "app-shell-content", role: "inner content wrapper", element: "div" }
     ],
-    data_attrs: [],
+    data_attrs: [
+      { attr: "data-variant", on: "root", values: ["fullscreen"], description: "Edge-to-edge full screen layout with zero border/radius and 100vh height." }
+    ],
     minimal_html: '<div class="app-shell">\n  <header class="app-shell-topbar">Topbar</header>\n  <div class="app-shell-content">\n    <aside class="app-shell-sidebar">Sidebar</aside>\n    <main class="app-shell-main">Page content</main>\n  </div>\n</div>',
     notes: "Full application layout shell using CSS Grid. app-shell-content wraps sidebar + main and becomes two columns at >= 64rem."
   },

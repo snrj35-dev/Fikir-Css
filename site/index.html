@@ -7,6 +7,10 @@
   <meta name="description" content="Contract-driven CSS design system. 99 UI surfaces, zero runtime, token-first." />
   <!-- CSS loaded from ./dist/fikir.css (copied by the deploy workflow). Run `npm run build` locally. -->
   <link rel="stylesheet" href="./dist/fikir.css" />
+  <link rel="stylesheet" href="./dist/themes/oled.css" />
+  <link rel="stylesheet" href="./dist/themes/high-contrast.css" />
+  <link rel="stylesheet" href="./dist/themes/compact.css" />
+  <link rel="stylesheet" href="./dist/themes/comfortable.css" />
   <style>
     /* ── Site chrome — not part of Fikir CSS ─────────────────────────── */
     *, *::before, *::after { box-sizing: border-box; }
@@ -291,7 +295,7 @@
       <span class="site-logo-mark" aria-hidden="true">◈</span>
       Fikir <em>CSS</em>
     </a>
-    <span class="badge badge-neutral" style="font-size:.65rem">v1.1.0</span>
+    <span class="badge badge-neutral" style="font-size:.65rem">v1.2.0</span>
   </div>
   <nav class="site-nav">
     <a href="https://github.com/snrj35-dev/Fikir-Css" target="_blank">GitHub</a>
@@ -473,6 +477,7 @@
       <div class="theme-switcher">
         <button class="btn btn-sm btn-outline btn-neutral theme-btn active" data-apply-theme="light" onclick="applyTheme(this)">Light</button>
         <button class="btn btn-sm btn-outline btn-neutral theme-btn" data-apply-theme="dark" onclick="applyTheme(this)">Dark</button>
+        <button class="btn btn-sm btn-outline btn-neutral theme-btn" data-apply-theme="oled" onclick="applyTheme(this)">OLED Dark</button>
         <button class="btn btn-sm btn-outline btn-neutral theme-btn" data-apply-theme="high-contrast" onclick="applyTheme(this)">High Contrast</button>
         <button class="btn btn-sm btn-outline btn-neutral theme-btn" data-apply-density="compact" onclick="applyDensity(this)">Compact</button>
         <button class="btn btn-sm btn-outline btn-neutral theme-btn" data-apply-density="comfortable" onclick="applyDensity(this)">Comfortable</button>
@@ -652,28 +657,28 @@
       <p class="section-desc">Normally positioned fixed; shown inline here for preview. Toggle <code class="code-chip">data-open="true"</code>.</p>
       <div class="preview-row" style="flex-direction: column; gap: var(--space-2)">
         <div class="item" style="width:100%">
-          <div class="toast toast--success" data-open="true" style="position:relative;inset:unset;translate:none;max-inline-size:100%;border-radius:var(--radius-md)">
+          <div class="toast toast-success" data-open="true" style="position:relative;inset:unset;translate:none;max-inline-size:100%;border-radius:var(--radius-md)">
             <p class="toast-title">Saved successfully</p>
           </div>
-          <span class="preview-label">toast toast--success</span>
+          <span class="preview-label">toast toast-success</span>
         </div>
         <div class="item" style="width:100%">
-          <div class="toast toast--error" data-open="true" style="position:relative;inset:unset;translate:none;max-inline-size:100%;border-radius:var(--radius-md)">
+          <div class="toast toast-error" data-open="true" style="position:relative;inset:unset;translate:none;max-inline-size:100%;border-radius:var(--radius-md)">
             <p class="toast-title">Upload failed</p>
           </div>
-          <span class="preview-label">toast toast--error</span>
+          <span class="preview-label">toast toast-error</span>
         </div>
         <div class="item" style="width:100%">
-          <div class="toast toast--warn" data-open="true" style="position:relative;inset:unset;translate:none;max-inline-size:100%;border-radius:var(--radius-md)">
+          <div class="toast toast-warn" data-open="true" style="position:relative;inset:unset;translate:none;max-inline-size:100%;border-radius:var(--radius-md)">
             <p class="toast-title">Session expiring soon</p>
           </div>
-          <span class="preview-label">toast toast--warn</span>
+          <span class="preview-label">toast toast-warn</span>
         </div>
         <div class="item" style="width:100%">
-          <div class="toast toast--info" data-style="outline" data-open="true" style="position:relative;inset:unset;translate:none;max-inline-size:100%;border-radius:var(--radius-md)">
+          <div class="toast toast-info" data-style="outline" data-open="true" style="position:relative;inset:unset;translate:none;max-inline-size:100%;border-radius:var(--radius-md)">
             <p class="toast-title">New version available</p>
           </div>
-          <span class="preview-label">toast toast--info data-style="outline"</span>
+          <span class="preview-label">toast toast-info data-style="outline"</span>
         </div>
       </div>
     </section>
@@ -1314,6 +1319,27 @@
     });
   }, { rootMargin: '-20% 0px -70% 0px', threshold: 0 });
   sections.forEach(s => observer.observe(s));
+
+  // Auto-inject Copy HTML buttons for component gallery
+  document.querySelectorAll('.preview-row .item').forEach(item => {
+    const component = Array.from(item.children).find(c => !c.classList.contains('preview-label'));
+    if (!component) return;
+
+    const copyBtn = document.createElement('button');
+    copyBtn.className = 'btn btn-outline btn-neutral btn-sm copy-btn';
+    copyBtn.style.marginTop = 'var(--space-1)';
+    copyBtn.textContent = 'Copy HTML';
+    copyBtn.onclick = () => {
+      // Small formatting cleanup for copy
+      const html = component.outerHTML.replace(/\s+style="[^"]*"/g, '');
+      navigator.clipboard.writeText(html).then(() => {
+        copyBtn.textContent = '✓ Copied';
+        copyBtn.classList.add('copied');
+        setTimeout(() => { copyBtn.textContent = 'Copy HTML'; copyBtn.classList.remove('copied'); }, 2000);
+      });
+    };
+    item.appendChild(copyBtn);
+  });
 </script>
 
 <!-- Modal demo — powered by fikir-css/helpers -->

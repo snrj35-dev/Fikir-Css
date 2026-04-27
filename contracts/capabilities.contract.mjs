@@ -1138,7 +1138,7 @@ export const capabilitiesContract = {
   },
 
   heading: {
-    status: "experimental",
+    status: "stable",
     does: [
       "Applies normalized heading typography and spacing"
     ],
@@ -1150,7 +1150,7 @@ export const capabilitiesContract = {
   },
 
   text: {
-    status: "experimental",
+    status: "stable",
     does: [
       "Applies normalized body-copy typography and readable line-height"
     ],
@@ -1161,7 +1161,7 @@ export const capabilitiesContract = {
   },
 
   quote: {
-    status: "experimental",
+    status: "stable",
     does: [
       "Applies quotation styling with accent border and spacing"
     ],
@@ -1173,7 +1173,7 @@ export const capabilitiesContract = {
   },
 
   kbd: {
-    status: "experimental",
+    status: "stable",
     does: [
       "Applies keyboard-key chip styling for inline shortcut notation"
     ],
@@ -1184,7 +1184,7 @@ export const capabilitiesContract = {
   },
 
   code: {
-    status: "experimental",
+    status: "stable",
     does: [
       "Applies inline code typography and background treatment"
     ],
@@ -1196,7 +1196,7 @@ export const capabilitiesContract = {
   },
 
   "code-block": {
-    status: "experimental",
+    status: "stable",
     does: [
       "Applies block code container styling with scrolling surface for multiline snippets"
     ],
@@ -1210,7 +1210,7 @@ export const capabilitiesContract = {
   },
 
   callout: {
-    status: "experimental",
+    status: "stable",
     does: [
       "Provides emphasized informational container styling for inline prose or guidance blocks"
     ],
@@ -1222,7 +1222,7 @@ export const capabilitiesContract = {
   },
 
   "markdown-surface": {
-    status: "experimental",
+    status: "stable",
     does: [
       "Provides readable typography, spacing, and element defaults for rendered markdown content"
     ],

@@ -24,9 +24,10 @@
           <h1 style="margin: 0">App Shell Example</h1>
           <p class="text-sm" style="margin: 0">Small product shell sample built with current v0.3 surface.</p>
         </div>
-        <div class="page-header-actions">
-          <button class="btn btn-outline btn-sm" type="button">Export</button>
-          <button class="btn btn-primary btn-sm" type="button">New item</button>
+        <div class="page-header-actions" style="display: flex; gap: var(--space-2);">
+          <button class="btn btn-outline btn-sm" onclick="document.documentElement.setAttribute('data-theme', 'light')">Light</button>
+          <button class="btn btn-outline btn-neutral btn-sm" onclick="document.documentElement.setAttribute('data-theme', 'dark')">Dark</button>
+          <button class="btn btn-solid btn-primary btn-sm" onclick="document.documentElement.setAttribute('data-theme', 'oled')">OLED</button>
         </div>
       </div>
 
@@ -39,8 +40,13 @@
       </nav>
 
       <div class="app-shell">
-        <header class="app-shell-topbar">
-          <strong>Workspace</strong>
+        <header class="app-shell-topbar" data-variant="glass">
+          <div style="display: flex; align-items: center; gap: var(--space-2);">
+            <button id="sidebar-toggle" class="btn btn-ghost btn-sm" type="button" aria-controls="mobile-sidebar" aria-expanded="false" style="padding-inline: var(--space-1); display: flex;">
+              <span aria-hidden="true" style="font-size: 1.2rem; line-height: 1;">≡</span>
+            </button>
+            <strong>Workspace</strong>
+          </div>
 
           <!-- Command bar pattern example -->
           <div data-pattern="command-bar" style="flex: 1 1 auto;">
@@ -61,7 +67,7 @@
         </header>
 
         <div class="app-shell-content">
-          <aside class="app-shell-sidebar">
+          <aside id="mobile-sidebar" class="app-shell-sidebar">
             <nav class="sidebar-nav" aria-label="Example sidebar navigation">
               <section class="sidebar-nav-section">
                 <a class="sidebar-nav-item" href="#" aria-current="page">Overview</a>
@@ -71,25 +77,27 @@
             </nav>
           </aside>
 
-          <main class="app-shell-main">
-            <section class="stack" style="--stack-gap: var(--space-2)" data-pattern="data-table-toolbar">
-              <div data-slot="controls">
-                <div data-slot="search">
-                  <form class="search-box" role="search" aria-label="Task search">
-                    <input class="search-box-input" type="search" aria-label="Search tasks" />
-                    <button class="search-box-action" type="submit">Search</button>
-                  </form>
-                </div>
-
-                <div data-slot="filters">
-                  <button class="btn btn-outline btn-sm" type="button">Filter</button>
-                </div>
-
-                <div data-slot="actions">
-                  <button class="btn btn-primary btn-sm" type="button">Create task</button>
-                </div>
+          <main class="app-shell-main stack" style="--stack-gap: var(--space-4)">
+            <div class="grid" style="--grid-min: 16rem; gap: var(--space-3);">
+              <div class="kpi-card" data-variant="mesh">
+                <h3 class="kpi-card-header">Total Revenue</h3>
+                <p class="kpi-card-value">$45,231.89</p>
+                <div class="kpi-card-trend">+20.1%</div>
+                <p class="kpi-card-meta">from last month</p>
               </div>
-            </section>
+              <div class="kpi-card" data-variant="conic-border">
+                <h3 class="kpi-card-header">Active Subscriptions</h3>
+                <p class="kpi-card-value">+2350</p>
+                <div class="kpi-card-trend">+180.1%</div>
+                <p class="kpi-card-meta">from last month</p>
+              </div>
+              <div class="kpi-card">
+                <h3 class="kpi-card-header">Sales</h3>
+                <p class="kpi-card-value">+12,234</p>
+                <div class="kpi-card-trend">+19%</div>
+                <p class="kpi-card-meta">from last month</p>
+              </div>
+            </div>
 
             <article class="section-block">
               <header class="section-header">
@@ -110,5 +118,26 @@
         </div>
       </div>
     </div>
+
+    <script src="../dist/fikir-helpers.js"></script>
+    <script>
+      // Bind mobile drawer behavior
+      const trigger = document.getElementById('sidebar-toggle');
+      const drawer = document.getElementById('mobile-sidebar');
+      
+      if (trigger && drawer && window.Fikir) {
+        window.Fikir.bindSidebarDrawer({
+          trigger,
+          drawer,
+          breakpoint: '64rem'
+        });
+      }
+      
+      // Hide toggle button on desktop where sidebar is always visible
+      const mql = window.matchMedia('(min-width: 64rem)');
+      const handleMq = (e) => trigger.style.display = e.matches ? 'none' : 'flex';
+      mql.addEventListener('change', handleMq);
+      handleMq(mql);
+    </script>
   </body>
 </html>

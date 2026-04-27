@@ -3,12 +3,22 @@
   This file is reserved for composition behavior that does not introduce new canonical selectors.
 */
 @layer components {
+  {{component.cardInteractive}} {
+    cursor: pointer;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+  }
+
   {{component.cardInteractive}}:hover,
   {{component.cardInteractive}}:focus-within {
     background: var(--card-hover-bg, var(--card-bg, var(--color-bg-surface)));
     border-color: var(--card-hover-border-color, var(--card-border-color, var(--color-border-subtle)));
-    box-shadow: var(--card-hover-shadow, var(--card-shadow, none));
-    transform: var(--card-hover-transform, none);
+    box-shadow: var(--shadow-lg);
+    transform: translateY(-2px);
+  }
+
+  {{component.cardInteractive}}:active {
+    transform: translateY(0) scale(0.98);
+    box-shadow: var(--shadow-md);
   }
 
   {{component.card}}[data-card-layout="stack"] > * + * {

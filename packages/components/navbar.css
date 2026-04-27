@@ -12,6 +12,12 @@
     padding: var(--space-3);
   }
 
+  {{component.navbar}}[data-variant="glass"] {
+    background: color-mix(in oklch, var(--color-bg-surface) 72%, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
   {{component.navbarBrand}} {
     display: inline-flex;
     align-items: center;

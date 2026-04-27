@@ -99,7 +99,7 @@ export function createFocusTrap(container) {
  * `onClose`. Pressing Escape anywhere triggers `onClose`.
  *
  * @param {HTMLElement} overlayEl - The backdrop/overlay wrapper element.
- * @param {{ onClose: () => void, closeOnBackdrop?: boolean }} options
+ * @param {{ onClose: () => void, closeOnBackdrop?: boolean, triggerEl?: HTMLElement | null }} options
  * @returns {{ destroy: () => void }} - Call `destroy()` to remove all listeners.
  *
  * @example
@@ -108,7 +108,7 @@ export function createFocusTrap(container) {
  *   { onClose: () => modal.setAttribute('data-open', 'false') }
  * );
  */
-export function bindOverlayKeyboard(overlayEl, { onClose, closeOnBackdrop = true }) {
+export function bindOverlayKeyboard(overlayEl, { onClose, closeOnBackdrop = true, triggerEl = null }) {
   function handleKeydown(e) {
     if (e.key === 'Escape') {
       e.stopPropagation();
@@ -116,19 +116,29 @@ export function bindOverlayKeyboard(overlayEl, { onClose, closeOnBackdrop = true
     }
   }
 
-  function handleBackdropClick(e) {
-    if (closeOnBackdrop && e.target === overlayEl) {
-      onClose();
+  function handleDocumentClick(e) {
+    if (!closeOnBackdrop) return;
+    
+    if (e.target === overlayEl) {
+      onClose(); // Clicked the wrapper directly
+    } else if (document.body.contains(e.target) && !overlayEl.contains(e.target)) {
+      if (triggerEl && triggerEl.contains(e.target)) return; // Let trigger handle it
+      onClose(); // Clicked completely outside the panel
     }
   }
 
   document.addEventListener('keydown', handleKeydown);
-  overlayEl.addEventListener('click', handleBackdropClick);
+  
+  // Delay click binding to avoid immediately capturing the click that opened it
+  const timer = setTimeout(() => {
+    document.addEventListener('click', handleDocumentClick);
+  }, 0);
 
   return {
     destroy() {
+      clearTimeout(timer);
       document.removeEventListener('keydown', handleKeydown);
-      overlayEl.removeEventListener('click', handleBackdropClick);
+      document.removeEventListener('click', handleDocumentClick);
     },
   };
 }
@@ -182,7 +192,7 @@ export function bindSidebarDrawer({ trigger, drawer, breakpoint = '60rem' }) {
     drawer.setAttribute('data-open', 'true');
     trigger.setAttribute('aria-expanded', 'true');
     trap.activate(trigger);
-    keyboardBinding = bindOverlayKeyboard(drawer, { onClose: close });
+    keyboardBinding = bindOverlayKeyboard(drawer, { onClose: close, triggerEl: trigger });
   }
 
   function close() {

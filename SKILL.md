@@ -66,6 +66,10 @@ import tokens from "fikir-css/tokens" assert { type: "json" };
 <div class="modal modal--open"></div>
 ```
 
+**State Consistency Rule:**
+- **Navigation Components** (`sidebar-nav`, `navbar`, `pagination`, `breadcrumb`) use `aria-current="page"` for active states. Do NOT use `data-active`.
+- **Interactive Items** (`tabs`, `combobox`, `command-palette`) use `data-active="true"` for active states.
+
 ### 2 — Variants use suffix notation (not BEM double-dash)
 
 ```html
@@ -231,7 +235,7 @@ document.querySelector('.modal').dataset.open = 'false'; // close
 ### Toast
 ```html
 <div class="toast-viewport" aria-live="polite">
-  <article class="toast toast--success" data-open="true">
+  <article class="toast toast-success" data-open="true">
     <p class="toast-title">Saved!</p>
   </article>
 </div>

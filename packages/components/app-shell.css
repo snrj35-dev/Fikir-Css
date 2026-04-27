@@ -9,6 +9,12 @@
     padding: var(--space-3);
   }
 
+  {{component.appShell}}[data-variant="fullscreen"] {
+    border: none;
+    border-radius: 0;
+    min-height: 100vh;
+  }
+
   {{component.appShellTopbar}} {
     display: flex;
     flex-wrap: wrap;
@@ -17,6 +23,12 @@
     gap: var(--space-2);
     border-bottom: 1px solid var(--color-border-subtle);
     padding-bottom: var(--space-2);
+  }
+
+  {{component.appShellTopbar}}[data-variant="glass"] {
+    background: color-mix(in oklch, var(--color-bg-surface) 72%, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
   }
 
   {{component.appShellContent}} {
@@ -37,6 +49,40 @@
     border-radius: var(--radius-md);
     padding: var(--space-3);
     background: var(--color-bg-default);
+  }
+
+  @media (max-width: 63.99rem) {
+    {{component.appShellSidebar}} {
+      position: fixed;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      z-index: 40;
+      width: min(100vw - 3rem, 20rem);
+      background: var(--color-bg-surface);
+      border: none;
+      border-radius: 0;
+      border-right: 1px solid var(--color-border-subtle);
+      overflow-y: auto;
+      transform: translateX(-100%);
+      box-shadow: 0 0 0 0 transparent;
+      transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), box-shadow 0.3s ease;
+      visibility: hidden;
+    }
+
+    {{component.appShellSidebar}}[data-open="true"] {
+      transform: translateX(0);
+      box-shadow: 0 0 0 100vmax color-mix(in oklch, var(--color-gray-900) 40%, transparent);
+      visibility: visible;
+    }
+  }
+
+  /* Border Soup Fix: Prevent double borders when sidebar-nav is placed in app-shell-sidebar */
+  {{component.appShellSidebar}} {{component.sidebarNav}} {
+    border: none;
+    border-radius: 0;
+    padding: 0;
+    background: transparent;
   }
 
   @media (min-width: 64rem) {

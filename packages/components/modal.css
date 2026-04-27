@@ -30,6 +30,12 @@
     box-shadow: var(--shadow-md);
   }
 
+  {{component.modalDialog}}[data-variant="glass"] {
+    background: color-mix(in oklch, var(--color-bg-surface) 72%, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+  }
+
   {{component.modalHeader}} {
     padding: var(--space-4);
     border-bottom: 1px solid var(--color-border-subtle);

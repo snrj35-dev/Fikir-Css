@@ -52,7 +52,7 @@ These changes require a MAJOR release, or a prior deprecation cycle if an alias 
 | Add `data-density="comfortable"` support to a component that already works without it | Additive | Opt-in only |
 | Rename `.btn-danger` to `.btn-critical` | Breaking | Existing supported markup stops matching |
 | Replace `data-open="true"` with `[open]` as the only supported open state | Breaking | Required state hook changed |
-| Add a new `toast--info` tone while keeping existing tones | Additive | Existing selectors preserved |
+| Add a new `toast-info` tone while keeping existing tones | Additive | Existing selectors preserved |
 | Require a new wrapper around `.modal-dialog` for all current modal markup | Breaking | Canonical structure changed |
 
 ## Release expectations for supported surfaces

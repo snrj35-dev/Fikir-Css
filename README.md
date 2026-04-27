@@ -4,7 +4,7 @@
 
 A single `fikir.css` file gives you 99 UI surfaces. No build step for consumers. State via `data-*` attributes, not class proliferation.
 
-**v1.1.0** &nbsp;·&nbsp; **~152 KB raw / ~18 KB gzip** &nbsp;·&nbsp; **99 surfaces** &nbsp;·&nbsp; [![npm](https://img.shields.io/npm/v/fikir-css)](https://www.npmjs.com/package/fikir-css)
+**v1.2.0** &nbsp;·&nbsp; **~158 KB raw / ~19 KB gzip** &nbsp;·&nbsp; **100+ surfaces** &nbsp;·&nbsp; [![npm](https://img.shields.io/npm/v/fikir-css)](https://www.npmjs.com/package/fikir-css)
 
 🔗 **[Live component gallery →](https://snrj35-dev.github.io/Fikir-Css/)** &nbsp;·&nbsp; [GitHub](https://github.com/snrj35-dev/Fikir-Css) &nbsp;·&nbsp; **[Contracts](https://snrj35-dev.github.io/Fikir-Css/dist/contracts/)** &nbsp;·&nbsp; [Selectors JSON](https://snrj35-dev.github.io/Fikir-Css/dist/contracts/selectors.json)
 
@@ -166,12 +166,13 @@ import "fikir-css/css";
 | Plain HTML | `<link rel="stylesheet" href="node_modules/fikir-css/dist/fikir.css" />` |
 | CDN | `<link rel="stylesheet" href="https://snrj35-dev.github.io/Fikir-Css/dist/fikir.css" />` |
 | Recipe resolvers (JS/TS) | `import { resolveBtn, resolveCard } from "fikir-css/tooling"` |
-| Overlay JS helpers | `import { createFocusTrap, bindOverlayKeyboard } from "fikir-css/helpers"` |
+| Overlay JS helpers (ESM) | `import { createFocusTrap, bindOverlayKeyboard } from "fikir-css/helpers"` |
+| Overlay JS helpers (CDN) | `<script src="https://snrj35-dev.github.io/Fikir-Css/dist/fikir-helpers.js"></script>` |
 | Design tokens (JSON) | `import tokens from "fikir-css/tokens" assert { type: "json" }` |
 | Slice (opt-in) | `import "fikir-css/slices/forms"` |
 | Theme layer | `import "fikir-css/themes/dark"` |
 
-> **One rule:** use `fikir-css/css` for the stylesheet everywhere. `fikir-css/tooling` for typed resolvers. `fikir-css/helpers` for overlay behavior. Nothing else needed to get started.
+> **One rule:** use `fikir-css/css` for the stylesheet everywhere. `fikir-css/tooling` for typed resolvers. `fikir-css/helpers` for overlay behavior (or use the CDN script `window.Fikir.*`). Nothing else needed to get started.
 
 ### Option 3 — Build from source
 
@@ -292,7 +293,7 @@ See the full matrix in [docs/roadmap/support-matrix.md](./docs/roadmap/support-m
 
   <!-- Toast -->
   <div class="toast-viewport" aria-live="polite">
-    <article class="toast toast--success" data-open="true">
+    <article class="toast toast-success" data-open="true">
       <p class="toast-title">Saved!</p>
     </article>
   </div>
@@ -330,8 +331,15 @@ Reload the window and you'll get completions for `class="btn btn-…"`, `data-th
 Fikir CSS ships a machine-readable selector manifest at `dist/contracts/selectors.json`. Drop it into your AI context to get accurate class-name completions:
 
 ```js
+// Local import
 import selectors from "fikir-css/contracts/selectors";
 // { "component.button": "btn", "component.buttonPrimary": "btn-primary", … }
+```
+
+**Agent/Bot Fetch Access:**
+The manifest is hosted on GitHub Pages with CORS enabled, allowing direct ingestion by tools like Cursor, Claude, or custom scripts:
+```bash
+curl -s https://snrj35-dev.github.io/Fikir-Css/dist/contracts/selectors.json
 ```
 
 **Key conventions for AI context:**

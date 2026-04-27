@@ -1,5 +1,22 @@
 @layer components {
-  {{component.btn}} { border: 1px solid transparent; background: transparent; color: var(--color-fg-default); text-decoration: none; text-underline-offset: 0.2em; }
+  {{component.btn}} {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    border: 1px solid transparent;
+    background: transparent;
+    color: var(--color-fg-default);
+    text-decoration: none;
+    text-underline-offset: 0.2em;
+    cursor: pointer;
+    font-weight: 600;
+    transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), background-color 120ms ease, color 120ms ease, border-color 120ms ease;
+  }
+
+  {{component.btn}}:active:not(:disabled) {
+    transform: scale(0.96);
+  }
 
   {{component.btnPrimary}} { --btn-tone: var(--color-primary); --btn-tone-subtle: var(--color-primary-subtle); --btn-contrast: var(--color-gray-50); --btn-outline-fg: var(--color-primary); --btn-plain-fg: var(--color-primary); }
   {{component.btnNeutral}} { --btn-tone: var(--color-border-subtle); --btn-tone-subtle: var(--color-neutral-subtle); --btn-contrast: var(--color-fg-default); --btn-outline-fg: var(--color-fg-default); --btn-plain-fg: var(--color-fg-muted); --btn-solid-border: var(--color-border-subtle); }
