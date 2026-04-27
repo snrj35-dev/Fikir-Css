@@ -17,7 +17,7 @@ Get a Fikir CSS page running in under 2 minutes — no build tool required.
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>My App</title>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fikir-css@1.0.0/dist/fikir.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fikir-css@latest/dist/fikir.css" />
 </head>
 <body class="surface" style="padding: 1rem">
   <!-- your content here -->
@@ -121,7 +121,7 @@ Without `data-theme`, color tokens fall back to system `prefers-color-scheme`.
 Add the compact stylesheet to enable `data-density="compact"`:
 
 ```html
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fikir-css@1.0.0/dist/themes/compact.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fikir-css@latest/dist/themes/compact.css" />
 ```
 
 ```js

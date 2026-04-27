@@ -32,7 +32,7 @@ import tokens from "fikir-css/tokens" assert { type: "json" };
 2. Open the plugin → **Sync** → **File / URL**
 3. Paste the URL to your hosted `tokens.json` (e.g. from your CDN or GitHub raw URL):
    ```
-   https://cdn.jsdelivr.net/npm/fikir-css@1.0.0/dist/tokens.json
+   https://cdn.jsdelivr.net/npm/fikir-css@latest/dist/tokens.json
    ```
 4. Click **Load** — tokens appear as Token Sets
 5. Map token sets to Figma Variables via **Variables** tab → **Apply**

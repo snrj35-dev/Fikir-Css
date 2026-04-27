@@ -16,7 +16,7 @@ Use the DTCG-format token file — `dist/tokens.json` ships with every release.
 
 Configure Tokens Studio with the GitHub sync to pull from:
 ```
-https://cdn.jsdelivr.net/npm/fikir-css@1.0.0/dist/tokens.json
+https://cdn.jsdelivr.net/npm/fikir-css@latest/dist/tokens.json
 ```
 
 ### 3. Token Collection Structure

@@ -27,7 +27,7 @@ The helpers module is a vanilla ESM file and loads directly from unpkg/jsdelivr:
 </script>
 ```
 
-For a reproducible build pin the version: `fikir-css@1.1.0/dist/helpers/index.mjs`.
+For a reproducible build pin the version: `fikir-css@latest/dist/helpers/index.mjs`.
 
 ---
 

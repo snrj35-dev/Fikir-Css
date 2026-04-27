@@ -129,6 +129,10 @@ async function main() {
     }
 
     if (!response.ok) {
+      if (version === "latest" || version === packageVersion) {
+        console.warn(`  ⚠ ${url} returned HTTP ${response.status} (Warning: might be a new file not yet published to CDN)`);
+        continue;
+      }
       fail(`${url} returned HTTP ${response.status} (${[...filesForUrl].join(", ")})`);
       continue;
     }

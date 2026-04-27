@@ -100,7 +100,7 @@ const tokens = JSON.parse(await readFile("node_modules/fikir-css/dist/tokens.jso
 ### CDN URL (jsDelivr)
 
 ```
-https://cdn.jsdelivr.net/npm/fikir-css@1.0.0/dist/tokens.json
+https://cdn.jsdelivr.net/npm/fikir-css@latest/dist/tokens.json
 ```
 
 ### Build-time token extraction
