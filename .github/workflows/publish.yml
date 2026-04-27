@@ -63,6 +63,7 @@ jobs:
       - name: Verify publish (dry run)
         if: steps.check.outputs.already_published == 'false'
         env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           RELEASE_CHANNEL: ${{ steps.release.outputs.channel }}
         run: |
           if [ "$RELEASE_CHANNEL" = "latest" ]; then
