@@ -1,6 +1,6 @@
 # Fikir CSS — Open Tasks
 
-> Son güncelleme: 2026-04-27  
+> Son güncelleme: 2026-04-28  
 > v1.2.0 "Premium & Ecosystem" tamamlandı ✅ — Detaylar için bkz. [archive](../archive/tasklist-2026-04-27-v1.2-completed.md)
 
 ---
@@ -15,7 +15,7 @@
 
 ## v1.1.0 Final Release Tasks
 
-- [ ] Tüm değişiklikler additive, breaking yok (Sürüm öncesi son kontrol) `(P1)`
+- [x] Tüm değişiklikler additive, breaking yok (Sürüm öncesi son kontrol) `(P1)`
 
 ---
 
@@ -48,6 +48,13 @@
 - [x] **JS Helpers:** Vanilla HTML kullanıcıları için interaktif bileşenleri (Modal, Toast, Drawer vs.) yönetecek bağımsız `fikir-helpers.js` betiğinin yayınlanması `(P2)`
 - [x] **İnteraktif Galeri:** Component Gallery sayfasına interaktif önizleme (Dark/Light/Compact toggle, Kodu Kopyala) özelliklerinin eklenmesi `(P2)`
 - [x] **Onboarding Eğitimi:** "5 Dakikada Dashboard" tutorial/onboarding dokümanının yazılması `(P3)`
+
+### 6. Dashboard & Composition Katmanı (AI Feedback - P1)
+- [x] **Referans Dashboard:** `examples/dashboard/` klasöründe sıfır custom CSS içeren tam dashboard örneğinin oluşturulması `(P1)`
+- [x] **Page-Level Şablonlar:** SaaS, CRM ve Analytics panel iskeletlerinin dokümantasyona eklenmesi `(P2)`
+- [x] **SKILL.md Snippets:** `kpi-card`, `stat`, `sidebar-nav` için HTML snippet'lerinin ve `data-*` rehberinin eklenmesi `(P1)`
+- [x] **Layout Primitifleri:** `sidebar-layout` ve `stat-grid` composition pattern'lerinin standardize edilmesi `(P2)`
+- [x] **Zero Custom CSS Testi:** Mevcut tüm dokümantasyon örneklerinin `<style>` içermeyecek şekilde revize edilmesi `(P2)`
 
 ---
 

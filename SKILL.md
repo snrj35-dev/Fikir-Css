@@ -85,7 +85,15 @@ import tokens from "fikir-css/tokens" assert { type: "json" };
 <div class="card--elevated"></div>
 ```
 
-### 3 — Theme and density on `<html>`, never inline
+### 3 — The "Zero Custom CSS" Goal
+
+If you find yourself opening a `<style>` tag to build a standard layout, you are likely missing a Fikir CSS surface.
+- Use `app-shell` for the page skeleton.
+- Use `stack`, `cluster`, and `grid` for layout.
+- Use `var(--space-*)` and `var(--color-*)` for any inline style adjustments.
+- **NEVER** use hardcoded hex codes or pixel values.
+
+### 4 — Theme and density on `<html>`, never inline
 
 ```html
 <html data-theme="light">          <!-- default -->
@@ -254,17 +262,50 @@ document.querySelector('.modal').dataset.open = 'false'; // close
 </div>
 ```
 
-### Layout (Stack + Cluster + Container)
+### Dashboard Composition (The "Gold Standard")
 ```html
-<div class="container">
-  <main class="stack" style="gap: var(--space-4)">
-    <!-- vertical stack of blocks -->
-    <div class="cluster" style="gap: var(--space-2)">
-      <!-- horizontal wrapping group -->
-      <button class="btn btn-primary">Save</button>
-      <button class="btn btn-outline btn-neutral">Cancel</button>
-    </div>
-  </main>
+<div class="app-shell" data-variant="fullscreen">
+  <header class="app-shell-topbar"> <!-- Brand & Actions --> </header>
+  <div class="app-shell-content">
+    <aside class="app-shell-sidebar">
+      <nav class="sidebar-nav">
+        <div class="sidebar-nav-section">
+          <a href="#" class="sidebar-nav-item" aria-current="page">Link</a>
+        </div>
+      </nav>
+    </aside>
+    <main class="app-shell-main">
+      <div class="stack" style="--stack-gap: var(--space-6)">
+        <header class="page-header"> ... </header>
+        <section data-pattern="kpi-grid">
+          <!-- KPI Cards -->
+        </section>
+      </div>
+    </main>
+  </div>
+</div>
+```
+
+### KPI Card
+```html
+<article class="kpi-card" data-variant="mesh">
+  <p class="kpi-card-header">Revenue</p>
+  <h2 class="kpi-card-value">$12k</h2>
+  <div class="cluster" style="justify-content: space-between">
+    <p class="kpi-card-meta">Monthly</p>
+    <span class="kpi-card-trend" style="color: var(--color-success)">↑ 10%</span>
+  </div>
+</article>
+```
+
+### Stat Group
+```html
+<div data-pattern="stat-group">
+  <article class="stat">
+    <p class="stat-label">Memory</p>
+    <p class="stat-value">4GB</p>
+    <div class="progress" style="--progress-value: 40"></div>
+  </article>
 </div>
 ```
 

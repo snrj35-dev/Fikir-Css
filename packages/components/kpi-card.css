@@ -9,6 +9,12 @@
     padding: var(--space-3);
   }
 
+  [data-pattern="kpi-grid"] {
+    display: grid;
+    gap: var(--space-4);
+    grid-template-columns: repeat(auto-fit, minmax(min(20rem, 100%), 1fr));
+  }
+
   {{component.kpiCardHeader}} {
     margin: 0;
     font-size: var(--font-size-sm);

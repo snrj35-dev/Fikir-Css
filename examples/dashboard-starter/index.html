@@ -24,33 +24,8 @@
     See docs/guides/dashboard-composition.md for the written walkthrough.
   -->
 
-  <!-- CDN (latest). For pinned version use: fikir-css@1.x.x -->
-  <link rel="stylesheet" href="https://unpkg.com/fikir-css@latest/dist/fikir.css" />
-
-  <style>
-    /* Only extend Fikir tokens — never create a parallel style system. */
-    :root { --color-accent: #6d28d9; }
-
-    /* Sidebar-only: visually hide on <960px and rely on a drawer if you add one.
-       Production note: pair with `drawer` component for mobile. */
-    @media (max-width: 60rem) {
-      [data-desktop-only] { display: none; }
-    }
-
-    /* Small brand mark, decorative */
-    .brand {
-      display: inline-flex;
-      align-items: center;
-      gap: var(--space-2);
-      font-weight: 700;
-    }
-    .brand-mark {
-      inline-size: 1.75rem;
-      block-size: 1.75rem;
-      border-radius: var(--radius-md);
-      background: linear-gradient(135deg, var(--color-accent), var(--color-success-500));
-    }
-  </style>
+  <!-- Local development link -->
+  <link rel="stylesheet" href="../../dist/fikir.css" />
 </head>
 
 <body>
@@ -61,10 +36,10 @@
 
   <!-- ────────── Topbar ────────── -->
   <header class="app-shell-topbar">
-    <span class="brand">
-      <span class="brand-mark" aria-hidden="true"></span>
-      Fikir Admin
-    </span>
+    <div class="cluster" style="--cluster-gap: var(--space-2); font-weight: 700; align-items: center">
+      <div style="inline-size: 1.75rem; block-size: 1.75rem; border-radius: var(--radius-md); background: linear-gradient(135deg, var(--color-accent, #6d28d9), var(--color-success))"></div>
+      <span>Fikir Admin</span>
+    </div>
 
     <div class="cluster" style="--cluster-gap: var(--space-2)">
       <div class="search-box" style="max-inline-size: 18rem">
@@ -130,31 +105,39 @@
           </div>
         </div>
 
-        <!-- KPI row — `grid` primitive handles 4-up → 2-up → 1-up -->
-        <div class="grid" style="--grid-min: 14rem">
+        <!-- KPI row — `data-pattern="kpi-grid"` handles 4-up → 2-up → 1-up -->
+        <div data-pattern="kpi-grid">
           <article class="kpi-card">
             <div class="kpi-card-header">Monthly Revenue</div>
             <p class="kpi-card-value">$45,231</p>
-            <p class="kpi-card-meta">vs last month</p>
-            <span class="kpi-card-trend">↑ 12%</span>
+            <div class="cluster" style="justify-content: space-between; align-items: center">
+              <p class="kpi-card-meta">vs last month</p>
+              <span class="kpi-card-trend" style="color: var(--color-success)">↑ 12%</span>
+            </div>
           </article>
           <article class="kpi-card">
             <div class="kpi-card-header">Active Users</div>
             <p class="kpi-card-value">3,482</p>
-            <p class="kpi-card-meta">last 7 days</p>
-            <span class="kpi-card-trend">↑ 8%</span>
+            <div class="cluster" style="justify-content: space-between; align-items: center">
+              <p class="kpi-card-meta">last 7 days</p>
+              <span class="kpi-card-trend" style="color: var(--color-success)">↑ 8%</span>
+            </div>
           </article>
           <article class="kpi-card">
             <div class="kpi-card-header">Churn</div>
             <p class="kpi-card-value">1.8%</p>
-            <p class="kpi-card-meta">monthly</p>
-            <span class="kpi-card-trend">↓ 0.3%</span>
+            <div class="cluster" style="justify-content: space-between; align-items: center">
+              <p class="kpi-card-meta">monthly</p>
+              <span class="kpi-card-trend" style="color: var(--color-danger)">↓ 0.3%</span>
+            </div>
           </article>
           <article class="kpi-card">
             <div class="kpi-card-header">NPS</div>
             <p class="kpi-card-value">72</p>
-            <p class="kpi-card-meta">Q2 survey</p>
-            <span class="kpi-card-trend">↑ 6</span>
+            <div class="cluster" style="justify-content: space-between; align-items: center">
+              <p class="kpi-card-meta">Q2 survey</p>
+              <span class="kpi-card-trend" style="color: var(--color-success)">↑ 6</span>
+            </div>
           </article>
         </div>
 
