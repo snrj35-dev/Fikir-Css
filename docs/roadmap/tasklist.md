@@ -1,7 +1,7 @@
 # Fikir CSS — Open Tasks
 
 > Son güncelleme: 2026-04-28  
-> v1.2.0 "Premium & Ecosystem" tamamlandı ✅ — Detaylar için bkz. [archive](../archive/tasklist-2026-04-27-v1.2-completed.md)
+> v1.2.1 "AI-Native Ecosystem" tamamlandı ✅ — Detaylar için bkz. [release notes](../release/v1.2.1-release-notes.md)
 
 ---
 
