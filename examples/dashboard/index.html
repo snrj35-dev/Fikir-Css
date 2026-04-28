@@ -1,221 +1,232 @@
 <!doctype html>
 <html lang="en" data-theme="light">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Fikir CSS — Gold Standard Dashboard</title>
-    <!-- Use the built CSS from the root dist folder -->
-    <link rel="stylesheet" href="../../dist/fikir.css" />
-  </head>
-  <body class="surface">
-    
-    <div class="app-shell" data-variant="fullscreen">
-      
-      <!-- Topbar -->
-      <header class="app-shell-topbar">
-        <div class="cluster" style="gap: var(--space-3); align-items: center">
-          <div style="width: 32px; height: 32px; background: var(--color-primary-500); border-radius: var(--radius-md)"></div>
-          <span style="font-weight: 800; font-size: var(--font-size-lg)">Fikir<span style="color: var(--color-primary-500)">OS</span></span>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fikir CSS — Gold Standard Dashboard</title>
+  <!-- Use the built CSS from the root dist folder -->
+  <link rel="stylesheet" href="../../dist/fikir.css" />
+</head>
+
+<body class="surface">
+
+  <div class="app-shell" data-variant="fullscreen">
+
+    <!-- Topbar -->
+    <header class="app-shell-topbar">
+      <div class="cluster" style="gap: var(--space-3); align-items: center">
+        <div style="width: 32px; height: 32px; background: var(--color-primary-500); border-radius: var(--radius-md)">
         </div>
-        
-        <div class="cluster" style="gap: var(--space-2); align-items: center">
-          <span class="badge badge-soft badge-neutral">v1.2.0</span>
-          <button class="btn btn-outline btn-neutral btn-sm" id="theme-toggle">🌙 Dark Mode</button>
-          <div class="avatar" style="--avatar-size: 32px">
-            <img src="https://ui-avatars.com/api/?name=Fikir+User&background=random" alt="User">
-          </div>
-        </div>
-      </header>
-
-      <div class="app-shell-content">
-        <!-- Sidebar -->
-        <aside class="app-shell-sidebar">
-          <nav class="sidebar-nav">
-            <div class="sidebar-nav-section">
-              <a href="#" class="sidebar-nav-item" aria-current="page">
-                <span>🏠</span>
-                <span>Dashboard</span>
-              </a>
-              <a href="#" class="sidebar-nav-item">
-                <span>📊</span>
-                <span>Analytics</span>
-              </a>
-              <a href="#" class="sidebar-nav-item">
-                <span>👥</span>
-                <span>Customers</span>
-              </a>
-            </div>
-            
-            <div class="sidebar-nav-section">
-              <p style="padding: 0 var(--space-3); font-size: var(--font-size-xs); color: var(--color-fg-muted); text-transform: uppercase; font-weight: 700">Settings</p>
-              <a href="#" class="sidebar-nav-item">
-                <span>⚙️</span>
-                <span>General</span>
-              </a>
-              <a href="#" class="sidebar-nav-item">
-                <span>🔒</span>
-                <span>Security</span>
-              </a>
-            </div>
-          </nav>
-        </aside>
-
-        <!-- Main Content -->
-        <main class="app-shell-main">
-          <div class="stack" style="--stack-gap: var(--space-6)">
-            
-            <!-- Page Header -->
-            <header class="page-header cluster" style="justify-content: space-between; align-items: flex-end">
-              <div class="stack" style="--stack-gap: var(--space-1)">
-                <h1 class="heading-2" style="margin: 0">System Overview</h1>
-                <p style="color: var(--color-fg-muted); margin: 0">Welcome back, here is what's happening today.</p>
-              </div>
-              <div class="cluster" style="gap: var(--space-2)">
-                <button class="btn btn-outline btn-neutral btn-md">Export Report</button>
-                <button class="btn btn-solid btn-primary btn-md">Generate New</button>
-              </div>
-            </header>
-
-            <!-- KPI Cards Grid -->
-            <section data-pattern="kpi-grid">
-              
-              <article class="kpi-card" data-variant="mesh">
-                <p class="kpi-card-header">Total Revenue</p>
-                <h2 class="kpi-card-value">$128,430.00</h2>
-                <div class="cluster" style="justify-content: space-between; align-items: center">
-                  <p class="kpi-card-meta">vs last month</p>
-                  <span class="kpi-card-trend" style="color: var(--color-success)">↑ 12.5%</span>
-                </div>
-              </article>
-
-              <article class="kpi-card">
-                <p class="kpi-card-header">Active Sessions</p>
-                <h2 class="kpi-card-value">1,240</h2>
-                <div class="cluster" style="justify-content: space-between; align-items: center">
-                  <p class="kpi-card-meta">Current live users</p>
-                  <span class="kpi-card-trend" style="color: var(--color-warning)">~ 0.2%</span>
-                </div>
-              </article>
-
-              <article class="kpi-card" data-variant="conic-border">
-                <p class="kpi-card-header">System Health</p>
-                <h2 class="kpi-card-value">99.9%</h2>
-                <div class="cluster" style="justify-content: space-between; align-items: center">
-                  <p class="kpi-card-meta">All systems operational</p>
-                  <span class="kpi-card-trend" style="color: var(--color-success)">Stable</span>
-                </div>
-              </article>
-
-              <article class="kpi-card">
-                <p class="kpi-card-header">New Customers</p>
-                <h2 class="kpi-card-value">+48</h2>
-                <div class="cluster" style="justify-content: space-between; align-items: center">
-                  <p class="kpi-card-meta">Joined this week</p>
-                  <span class="kpi-card-trend" style="color: var(--color-danger)">↓ 2.1%</span>
-                </div>
-              </article>
-
-            </section>
-
-            <!-- Secondary Metrics -->
-            <section class="grid" style="--grid-template-columns: 2fr 1fr; --grid-gap: var(--space-4)">
-              
-              <!-- Recent Orders Table -->
-              <article class="card card-elevated card-p-none overflow-hidden">
-                <div style="padding: var(--space-4); border-bottom: 1px solid var(--color-border-subtle)">
-                  <h3 class="heading-4" style="margin: 0">Recent Transactions</h3>
-                </div>
-                <div style="overflow-x: auto">
-                  <table class="table">
-                    <thead>
-                      <tr>
-                        <th>Customer</th>
-                        <th>Status</th>
-                        <th>Date</th>
-                        <th style="text-align: right">Amount</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>
-                          <div class="cluster" style="gap: var(--space-2); align-items: center">
-                            <div class="avatar" style="--avatar-size: 24px">JS</div>
-                            <span>John Smith</span>
-                          </div>
-                        </td>
-                        <td><span class="badge badge-soft badge-success">Completed</span></td>
-                        <td>Apr 28, 2026</td>
-                        <td style="text-align: right; font-weight: 700">$450.00</td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div class="cluster" style="gap: var(--space-2); align-items: center">
-                            <div class="avatar" style="--avatar-size: 24px">JD</div>
-                            <span>Jane Doe</span>
-                          </div>
-                        </td>
-                        <td><span class="badge badge-soft badge-warning">Pending</span></td>
-                        <td>Apr 27, 2026</td>
-                        <td style="text-align: right; font-weight: 700">$1,200.00</td>
-                      </tr>
-                      <tr>
-                        <td>
-                          <div class="cluster" style="gap: var(--space-2); align-items: center">
-                            <div class="avatar" style="--avatar-size: 24px">RK</div>
-                            <span>Robert King</span>
-                          </div>
-                        </td>
-                        <td><span class="badge badge-soft badge-danger">Failed</span></td>
-                        <td>Apr 27, 2026</td>
-                        <td style="text-align: right; font-weight: 700">$85.00</td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div style="padding: var(--space-3); text-align: center; border-top: 1px solid var(--color-border-subtle)">
-                  <a href="#" class="link" style="font-size: var(--font-size-sm)">View all transactions</a>
-                </div>
-              </article>
-
-              <!-- Stats Group -->
-              <div data-pattern="stat-group" data-variant="compact">
-                <article class="stat">
-                  <p class="stat-label">Server Load</p>
-                  <p class="stat-value">42%</p>
-                  <div class="progress" style="--progress-value: 42; height: 8px"></div>
-                  <p class="stat-meta">Healthy range</p>
-                </article>
-
-                <article class="stat">
-                  <p class="stat-label">Storage Used</p>
-                  <p class="stat-value">780 GB</p>
-                  <div class="progress" style="--progress-value: 78; height: 8px; --color-progress-fill: var(--color-warning)"></div>
-                  <p class="stat-meta">92% of 1TB limit</p>
-                </article>
-
-                <article class="card card-p-md stack" style="--stack-gap: var(--space-3); background: var(--color-accent); color: white; border: none">
-                  <h4 class="heading-4" style="margin: 0">Upgrade to Pro</h4>
-                  <p style="font-size: var(--font-size-sm); opacity: 0.9">Get unlimited storage and advanced analytics features.</p>
-                  <button class="btn btn-solid btn-neutral btn-sm" style="width: fit-content">Learn More</button>
-                </article>
-              </div>
-
-            </section>
-
-          </div>
-        </main>
+        <span style="font-weight: 800; font-size: var(--font-size-lg)">Fikir<span
+            style="color: var(--color-primary-500)">OS</span></span>
       </div>
-    </div>
 
-    <script>
-      const btn = document.getElementById("theme-toggle");
-      btn.addEventListener("click", () => {
-        const html = document.documentElement;
-        const current = html.getAttribute("data-theme");
-        const next = current === "light" ? "dark" : "light";
-        html.setAttribute("data-theme", next);
-        btn.textContent = next === "light" ? "🌙 Dark Mode" : "☀️ Light Mode";
-      });
-    </script>
-  </body>
+      <div class="cluster" style="gap: var(--space-2); align-items: center">
+        <span class="badge badge-soft badge-neutral">v1.2.1</span>
+        <button class="btn btn-outline btn-neutral btn-sm" id="theme-toggle">🌙 Dark Mode</button>
+        <div class="avatar" style="--avatar-size: 32px">
+          <img src="https://ui-avatars.com/api/?name=Fikir+User&background=random" alt="User">
+        </div>
+      </div>
+    </header>
+
+    <div class="app-shell-content">
+      <!-- Sidebar -->
+      <aside class="app-shell-sidebar">
+        <nav class="sidebar-nav">
+          <div class="sidebar-nav-section">
+            <a href="#" class="sidebar-nav-item" aria-current="page">
+              <span>🏠</span>
+              <span>Dashboard</span>
+            </a>
+            <a href="#" class="sidebar-nav-item">
+              <span>📊</span>
+              <span>Analytics</span>
+            </a>
+            <a href="#" class="sidebar-nav-item">
+              <span>👥</span>
+              <span>Customers</span>
+            </a>
+          </div>
+
+          <div class="sidebar-nav-section">
+            <p
+              style="padding: 0 var(--space-3); font-size: var(--font-size-xs); color: var(--color-fg-muted); text-transform: uppercase; font-weight: 700">
+              Settings</p>
+            <a href="#" class="sidebar-nav-item">
+              <span>⚙️</span>
+              <span>General</span>
+            </a>
+            <a href="#" class="sidebar-nav-item">
+              <span>🔒</span>
+              <span>Security</span>
+            </a>
+          </div>
+        </nav>
+      </aside>
+
+      <!-- Main Content -->
+      <main class="app-shell-main">
+        <div class="stack" style="--stack-gap: var(--space-6)">
+
+          <!-- Page Header -->
+          <header class="page-header cluster" style="justify-content: space-between; align-items: flex-end">
+            <div class="stack" style="--stack-gap: var(--space-1)">
+              <h1 class="heading-2" style="margin: 0">System Overview</h1>
+              <p style="color: var(--color-fg-muted); margin: 0">Welcome back, here is what's happening today.</p>
+            </div>
+            <div class="cluster" style="gap: var(--space-2)">
+              <button class="btn btn-outline btn-neutral btn-md">Export Report</button>
+              <button class="btn btn-solid btn-primary btn-md">Generate New</button>
+            </div>
+          </header>
+
+          <!-- KPI Cards Grid -->
+          <section data-pattern="kpi-grid">
+
+            <article class="kpi-card" data-variant="mesh">
+              <p class="kpi-card-header">Total Revenue</p>
+              <h2 class="kpi-card-value">$128,430.00</h2>
+              <div class="cluster" style="justify-content: space-between; align-items: center">
+                <p class="kpi-card-meta">vs last month</p>
+                <span class="kpi-card-trend" style="color: var(--color-success)">↑ 12.5%</span>
+              </div>
+            </article>
+
+            <article class="kpi-card">
+              <p class="kpi-card-header">Active Sessions</p>
+              <h2 class="kpi-card-value">1,240</h2>
+              <div class="cluster" style="justify-content: space-between; align-items: center">
+                <p class="kpi-card-meta">Current live users</p>
+                <span class="kpi-card-trend" style="color: var(--color-warning)">~ 0.2%</span>
+              </div>
+            </article>
+
+            <article class="kpi-card" data-variant="conic-border">
+              <p class="kpi-card-header">System Health</p>
+              <h2 class="kpi-card-value">99.9%</h2>
+              <div class="cluster" style="justify-content: space-between; align-items: center">
+                <p class="kpi-card-meta">All systems operational</p>
+                <span class="kpi-card-trend" style="color: var(--color-success)">Stable</span>
+              </div>
+            </article>
+
+            <article class="kpi-card">
+              <p class="kpi-card-header">New Customers</p>
+              <h2 class="kpi-card-value">+48</h2>
+              <div class="cluster" style="justify-content: space-between; align-items: center">
+                <p class="kpi-card-meta">Joined this week</p>
+                <span class="kpi-card-trend" style="color: var(--color-danger)">↓ 2.1%</span>
+              </div>
+            </article>
+
+          </section>
+
+          <!-- Secondary Metrics -->
+          <section class="grid" style="--grid-template-columns: 2fr 1fr; --grid-gap: var(--space-4)">
+
+            <!-- Recent Orders Table -->
+            <article class="card card-elevated card-p-none overflow-hidden">
+              <div style="padding: var(--space-4); border-bottom: 1px solid var(--color-border-subtle)">
+                <h3 class="heading-4" style="margin: 0">Recent Transactions</h3>
+              </div>
+              <div style="overflow-x: auto">
+                <table class="table">
+                  <thead>
+                    <tr>
+                      <th>Customer</th>
+                      <th>Status</th>
+                      <th>Date</th>
+                      <th style="text-align: right">Amount</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>
+                        <div class="cluster" style="gap: var(--space-2); align-items: center">
+                          <div class="avatar" style="--avatar-size: 24px">JS</div>
+                          <span>John Smith</span>
+                        </div>
+                      </td>
+                      <td><span class="badge badge-soft badge-success">Completed</span></td>
+                      <td>Apr 28, 2026</td>
+                      <td style="text-align: right; font-weight: 700">$450.00</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="cluster" style="gap: var(--space-2); align-items: center">
+                          <div class="avatar" style="--avatar-size: 24px">JD</div>
+                          <span>Jane Doe</span>
+                        </div>
+                      </td>
+                      <td><span class="badge badge-soft badge-warning">Pending</span></td>
+                      <td>Apr 27, 2026</td>
+                      <td style="text-align: right; font-weight: 700">$1,200.00</td>
+                    </tr>
+                    <tr>
+                      <td>
+                        <div class="cluster" style="gap: var(--space-2); align-items: center">
+                          <div class="avatar" style="--avatar-size: 24px">RK</div>
+                          <span>Robert King</span>
+                        </div>
+                      </td>
+                      <td><span class="badge badge-soft badge-danger">Failed</span></td>
+                      <td>Apr 27, 2026</td>
+                      <td style="text-align: right; font-weight: 700">$85.00</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <div
+                style="padding: var(--space-3); text-align: center; border-top: 1px solid var(--color-border-subtle)">
+                <a href="#" class="link" style="font-size: var(--font-size-sm)">View all transactions</a>
+              </div>
+            </article>
+
+            <!-- Stats Group -->
+            <div data-pattern="stat-group" data-variant="compact">
+              <article class="stat">
+                <p class="stat-label">Server Load</p>
+                <p class="stat-value">42%</p>
+                <div class="progress" style="--progress-value: 42; height: 8px"></div>
+                <p class="stat-meta">Healthy range</p>
+              </article>
+
+              <article class="stat">
+                <p class="stat-label">Storage Used</p>
+                <p class="stat-value">780 GB</p>
+                <div class="progress"
+                  style="--progress-value: 78; height: 8px; --color-progress-fill: var(--color-warning)"></div>
+                <p class="stat-meta">92% of 1TB limit</p>
+              </article>
+
+              <article class="card card-p-md stack"
+                style="--stack-gap: var(--space-3); background: var(--color-accent); color: white; border: none">
+                <h4 class="heading-4" style="margin: 0">Upgrade to Pro</h4>
+                <p style="font-size: var(--font-size-sm); opacity: 0.9">Get unlimited storage and advanced analytics
+                  features.</p>
+                <button class="btn btn-solid btn-neutral btn-sm" style="width: fit-content">Learn More</button>
+              </article>
+            </div>
+
+          </section>
+
+        </div>
+      </main>
+    </div>
+  </div>
+
+  <script>
+    const btn = document.getElementById("theme-toggle");
+    btn.addEventListener("click", () => {
+      const html = document.documentElement;
+      const current = html.getAttribute("data-theme");
+      const next = current === "light" ? "dark" : "light";
+      html.setAttribute("data-theme", next);
+      btn.textContent = next === "light" ? "🌙 Dark Mode" : "☀️ Light Mode";
+    });
+  </script>
+</body>
+
 </html>

@@ -1,19 +1,19 @@
 # Fikir CSS — Roadmap
 
-> Son güncelleme: 2026-04-27  
-> v1.2.0 sürüm hazırlıkları tamamlandı ✅ — Tüm v1.2 detayları için bkz. [archive](../archive/plan-2026-04-27-v1.2-completed.md)
+> Son güncelleme: 2026-04-28  
+> v1.2.1 sürüm hazırlıkları tamamlandı ✅ — Tüm v1.2 detayları için bkz. [archive](../archive/plan-2026-04-27-v1.2-completed.md)
 
 ---
 
 ## Özet
 
-Fikir CSS v1.2.0 "Premium & Ecosystem" hedeflerine ulaşıldı. Bu aşamada Glassmorphism, OLED Dark Mode, mikro-etkileşimler ve sınırlı utility katmanı sisteme entegre edildi.
+Fikir CSS v1.2.1 "AI-Native Ecosystem" hedeflerine ulaşıldı. Bu aşamada Glassmorphism, OLED Dark Mode, mikro-etkileşimler, sınırlı utility katmanı ve AI-native dashboard şablonları sisteme entegre edildi.
 
 ---
 
 ## M25 — v1.3.0 & Scale (Future)
 
-Bu aşamada v1.2.0 sürümünün yaygınlaştırılması ve kurumsal ölçekteki ihtiyaçlar planlanmaktadır.
+Bu aşamada v1.2.1 sürümünün yaygınlaştırılması ve kurumsal ölçekteki ihtiyaçlar planlanmaktadır.
 
 ### 24.1 — Sürüm Öncesi Son Kontroller (P1)
 
