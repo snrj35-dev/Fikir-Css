@@ -4,7 +4,7 @@
 
 A single `fikir.css` file gives you 99 UI surfaces. No build step for consumers. State via `data-*` attributes, not class proliferation.
 
-**v1.2.0** &nbsp;·&nbsp; **~158 KB raw / ~19 KB gzip** &nbsp;·&nbsp; **100+ surfaces** &nbsp;·&nbsp; [![npm](https://img.shields.io/npm/v/fikir-css)](https://www.npmjs.com/package/fikir-css)
+**v1.2.1** &nbsp;·&nbsp; **~159 KB raw / ~19 KB gzip** &nbsp;·&nbsp; **100+ surfaces** &nbsp;·&nbsp; [![npm](https://img.shields.io/npm/v/fikir-css)](https://www.npmjs.com/package/fikir-css)
 
 🔗 **[Live component gallery →](https://snrj35-dev.github.io/Fikir-Css/)** &nbsp;·&nbsp; [GitHub](https://github.com/snrj35-dev/Fikir-Css) &nbsp;·&nbsp; **[Contracts](https://snrj35-dev.github.io/Fikir-Css/dist/contracts/)** &nbsp;·&nbsp; [Selectors JSON](https://snrj35-dev.github.io/Fikir-Css/dist/contracts/selectors.json)
 
