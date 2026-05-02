@@ -11,16 +11,17 @@ description: >
 
 ## What Fikir CSS Is
 
-Fikir CSS is a **contract-driven CSS design system** — NOT a utility-first or component-class framework.
-One `fikir.css` file covers 99 UI surfaces. Zero runtime. Zero build step for consumers.
+Fikir CSS is a **contract-driven CSS design system** — NOT a utility-first, Bootstrap, Tailwind, or BEM framework.
+One `fikir.css` file covers 100+ UI surfaces and patterns. Zero runtime. Zero build step for consumers.
 
 ### The single most important rule
 
-`class="button"` **≠ the rendered selector.** Semantic class names map to generated selectors via the
-contract system. **Always check `selectors.json` before writing selectors in production code.**
+Never invent classes from memory. Public class names come from the contract system.
+**Always check `selectors.json` before writing selectors in production code.**
 
 - Live selector manifest: `https://snrj35-dev.github.io/Fikir-Css/dist/contracts/selectors.json`
 - Component gallery: `https://snrj35-dev.github.io/Fikir-Css/`
+- Page composition examples: `docs/guides/composition-patterns.md` and `examples/dashboard/`
 
 ---
 
@@ -53,16 +54,20 @@ import tokens from "fikir-css/tokens" assert { type: "json" };
 
 ## Core Mental Model
 
-### 1 — State lives in `data-*` attributes, NOT class modifiers
+### 1 — Separate visual variants from state
+
+- Visual variants, tones, and sizes use contract classes: `btn btn-primary btn-sm`, `card card-elevated card-p-md`.
+- State uses `data-*` and ARIA attributes: `data-open="true"`, `data-active="true"`, `aria-current="page"`.
+- Hide overlays by removing `data-open`; do not write `data-open="false"`.
 
 ```html
 <!-- ✅ CORRECT -->
-<button class="btn" data-variant="primary" data-size="sm">Click me</button>
+<button class="btn btn-primary btn-sm">Click me</button>
 <div class="modal" data-open="true" role="dialog" aria-modal="true"></div>
-<div class="toast" data-open="false"></div>
+<div class="toast"></div>
 
-<!-- ❌ WRONG — class modifiers do not control state -->
-<button class="btn-primary btn-sm">Click me</button>
+<!-- ❌ WRONG — guessed/BEM classes and false open state -->
+<button class="btn--primary button-small">Click me</button>
 <div class="modal modal--open"></div>
 ```
 
@@ -99,6 +104,7 @@ If you find yourself opening a `<style>` tag to build a standard layout, you are
 <html data-theme="light">          <!-- default -->
 <html data-theme="dark">           <!-- dark mode -->
 <html data-theme="high-contrast">  <!-- WCAG AAA -->
+<html data-theme="oled">           <!-- pure black dark theme -->
 <html data-density="compact">      <!-- compact spacing -->
 <html data-theme="dark" data-density="compact">  <!-- combine freely -->
 ```
@@ -225,7 +231,7 @@ custom properties — they break dark mode and high-contrast themes.
 
 ### Modal
 ```html
-<div class="modal" data-open="false" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+<div class="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
   <div class="modal-dialog">
     <h2 class="modal-title" id="modal-title">Dialog Title</h2>
     <p>Modal content.</p>
@@ -237,7 +243,7 @@ custom properties — they break dark mode and high-contrast themes.
 Toggle:
 ```js
 document.querySelector('.modal').dataset.open = 'true';  // open
-document.querySelector('.modal').dataset.open = 'false'; // close
+document.querySelector('.modal').removeAttribute('data-open'); // close
 ```
 
 ### Toast
@@ -317,7 +323,7 @@ Always fetch these when generating or verifying components:
 
 | File | URL | Purpose |
 |------|-----|---------|
-| `selectors.json` | `https://snrj35-dev.github.io/Fikir-Css/dist/contracts/selectors.json` | Semantic → generated selector map |
+| `selectors.json` | `https://snrj35-dev.github.io/Fikir-Css/dist/contracts/selectors.json` | Contract key → public class map |
 | `primitives.json` | `https://snrj35-dev.github.io/Fikir-Css/dist/contracts/primitives.json` | Base component primitives |
 | `variants.json` | `https://snrj35-dev.github.io/Fikir-Css/dist/contracts/variants.json` | All component variants |
 | `anatomy.json` | `https://snrj35-dev.github.io/Fikir-Css/dist/contracts/anatomy.json` | Component structure contracts |
@@ -350,14 +356,13 @@ import { createFocusTrap, bindOverlayKeyboard } from "fikir-css/helpers";
 const modal = document.querySelector('.modal');
 const trap = createFocusTrap(modal);
 
-// Open
 modal.dataset.open = 'true';
 trap.activate();
 
 // Close on Escape
 bindOverlayKeyboard(modal, {
   onClose: () => {
-    modal.dataset.open = 'false';
+    modal.removeAttribute('data-open');
     trap.deactivate();
   }
 });

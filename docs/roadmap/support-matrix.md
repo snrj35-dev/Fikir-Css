@@ -1,8 +1,8 @@
 # Fikir CSS — Support Matrix
 
-> Version: v1.0 preparation  
-> Baseline: v1.0.0  
-> Last updated: 2026-04-19 (M21.1 — support matrix final freeze)
+> Version: v1.2.1 current  
+> Stable baseline: v1.0.0 supported surface freeze  
+> Last updated: 2026-05-02 (AI/docs consistency pass)
 
 Stability levels are defined in [`docs/governance/semver-policy.md`](../governance/semver-policy.md).
 
@@ -13,9 +13,9 @@ Stability levels are defined in [`docs/governance/semver-policy.md`](../governan
 | experimental | No semver guarantee; may change or be removed at any time | ❌ Not recommended |
 | deprecated | Will be removed in next MAJOR; migration note provided | ❌ Migrate away |
 
-**Surface count (v1.0 freeze):** 69 supported · 22 beta · 10 experimental surfaces + 2 experimental patterns · 0 deprecated
+**Surface count (v1.2.1 current):** 69 supported · 22 beta · 10 experimental surfaces + 2 experimental patterns · 0 deprecated
 
-> **M21.1 FREEZE:** The `supported` list is final. No new surfaces will be added to `supported` without a MAJOR version bump.
+> **Stable baseline:** The v1.0.0 `supported` list remains the semver-protected baseline. v1.1/v1.2 additions are additive and remain classified below unless a promotion note explicitly moves them.
 
 ---
 
@@ -183,13 +183,13 @@ No semver guarantee. May change or be removed without notice. Not recommended fo
 
 ## Deprecated Surfaces
 
-None at v1.0.0.
+None at v1.2.1.
 
 ---
 
 ## Docs coverage
 
-As of v1.0 freeze, supported surface docs are **69 / 69**.
+As of v1.2.1, supported surface docs are **69 / 69**.
 
 All supported surfaces listed in the matrix above have a corresponding document under `docs/components/`. Beta surfaces have implementation docs; experimental surfaces have stub docs only.
 
@@ -201,4 +201,4 @@ All previously "not yet implemented" surfaces (M16.2–M16.11) are now implement
 - Demo coverage: `playground/index.html`, `site/index.html`
 - Test coverage: `tests/source/*.test.mjs`, `tests/build/*.test.mjs`
 - Semver rules: `docs/governance/semver-policy.md`
-- Roadmap: `docs/roadmap/plan.md §6`, `docs/roadmap/tasklist.md §M13–M15`
+- Roadmap: `docs/roadmap/plan.md`, `docs/roadmap/tasklist.md`

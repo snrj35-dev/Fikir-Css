@@ -2,7 +2,7 @@
 
 **Contract-driven CSS design system.** Zero-runtime. Predictable cascade. Token-first.
 
-A single `fikir.css` file gives you 99 UI surfaces. No build step for consumers. State via `data-*` attributes, not class proliferation.
+A single `fikir.css` file gives you 100+ UI surfaces and patterns. No build step for consumers. State flows through `data-*` and ARIA attributes; visual variants use contract classes.
 
 **v1.2.1** &nbsp;·&nbsp; **~159 KB raw / ~19 KB gzip** &nbsp;·&nbsp; **100+ surfaces** &nbsp;·&nbsp; [![npm](https://img.shields.io/npm/v/fikir-css)](https://www.npmjs.com/package/fikir-css)
 
@@ -14,10 +14,21 @@ A single `fikir.css` file gives you 99 UI surfaces. No build step for consumers.
 
 **If you're familiar with Bootstrap or Tailwind, read this first.**
 
-- **DO NOT** treat class names as final selectors. `class="button"` ≠ the rendered selector.
-- **Semantic class names** map to **generated selectors** via the contract system (see [contracts](./contracts/)).
-- **State lives in `data-*` attributes**, not class modifiers.
-- **Check [selectors.json](https://snrj35-dev.github.io/Fikir-Css/dist/contracts/selectors.json)** to see the actual selector contract before using a surface.
+- **DO NOT** invent class names from Bootstrap, Tailwind, BEM, or memory.
+- **Check [selectors.json](https://snrj35-dev.github.io/Fikir-Css/dist/contracts/selectors.json)** before using a surface. It is the source of truth for public classes.
+- **State lives in `data-*` and ARIA attributes**, not modifier classes: use `data-open="true"`, `aria-current="page"`, `data-active="true"`.
+- **Variants, tones, and sizes are contract classes**: use `btn btn-primary btn-sm`, `card card-elevated card-p-md`, `badge badge-success`.
+- **Hide overlays by removing `data-open`**, not by setting `data-open="false"`.
+
+## AI / Agent Read First
+
+If you are an AI assistant or code agent, follow this order before generating Fikir CSS markup:
+
+1. Read [`SKILL.md`](./SKILL.md) for the working rules and copy-paste snippets.
+2. Check [`dist/contracts/selectors.json`](https://snrj35-dev.github.io/Fikir-Css/dist/contracts/selectors.json) for exact class names.
+3. Check [`dist/contracts/anatomy.json`](https://snrj35-dev.github.io/Fikir-Css/dist/contracts/anatomy.json) for component structure.
+4. Use [`docs/guides/composition-patterns.md`](./docs/guides/composition-patterns.md) and [`examples/dashboard/`](./examples/dashboard/) for page-level layouts.
+5. Prefer existing surfaces and patterns over custom CSS. If a standard dashboard/page layout needs a `<style>` tag, look for a Fikir composition first.
 
 ---
 
@@ -25,21 +36,21 @@ A single `fikir.css` file gives you 99 UI surfaces. No build step for consumers.
 
 Fikir CSS is a contract-driven CSS design system for teams that want semantic selectors, token-based theming, and zero runtime by default.
 
-- One stylesheet covers 99 surfaces across component, layout, overlay, navigation, and data UI
+- One stylesheet covers 100+ surfaces and patterns across component, layout, overlay, navigation, and data UI
 - Public surfaces are explicitly labeled as `supported`, `beta`, `experimental`, or `deprecated`
 - Consumers can stay in plain HTML, or opt into resolvers and helpers only when needed
 
 ### Understanding the contract model
 
-Each surface has a **semantic class name** that maps to **generated selectors**:
+Each surface has a **semantic contract key** that maps to a public class name:
 
 ```
-semantic class → [contracts/*.mjs] → selectors.json → actual CSS selectors
+contract key → [contracts/*.mjs] → selectors.json → public class name
 ```
 
 **Example:** When you write `class="btn btn-primary"`:
 1. The contracts define what `btn` and `btn-primary` are
-2. `selectors.json` maps them to their actual generated selectors (e.g., `.btn-_x1a2b`, `.btn-primary_x3c4d`)
+2. `selectors.json` maps contract keys to public classes (e.g. `component.btnPrimary` → `btn-primary`)
 3. The CSS applies the styles
 
 **Always check [selectors.json](https://snrj35-dev.github.io/Fikir-Css/dist/contracts/selectors.json)** to verify a surface's actual selector contract before using it in production code.
@@ -49,7 +60,8 @@ semantic class → [contracts/*.mjs] → selectors.json → actual CSS selectors
 - No mandatory consumer build step for the default path
 - Theme, density, and motion are controlled with tokens and `data-*` attributes instead of framework-specific runtime APIs
 - The product story is explicit: supported surfaces are stable, beta surfaces are opt-in, experimental surfaces are not sold as ready
-- **State is data-driven**, not class-driven — use `data-variant="primary"` and `data-open="true"`, not class modifiers
+- **State is attribute-driven** — use `data-open="true"`, `aria-current="page"`, and `data-active="true"` for state
+- **Visual variants are class-driven contracts** — use `btn btn-primary btn-sm`, not `btn--primary` or guessed utility classes
 - **Contracts are the source of truth** — every selector is verifiable and predictable (not a black box)
 
 ---
@@ -60,14 +72,16 @@ When using Fikir CSS with AI assistants (Claude, ChatGPT, etc.):
 
 1. **Reference selectors.json** — Include the actual contract when asking for help: "I'm using Fikir CSS. Here's what [selectors.json](https://snrj35-dev.github.io/Fikir-Css/dist/contracts/selectors.json) shows for `btn`..."
 
-2. **Prefer data attributes for state** — Correct example:
+2. **Separate visual variants from state** — Correct example:
    ```html
    <!-- ✅ DO -->
-   <button class="btn" data-variant="primary" data-size="sm">Click me</button>
+   <button class="btn btn-primary btn-sm">Click me</button>
+   <div class="modal" data-open="true"></div>
    ```
    ```html
-   <!-- ❌ DON'T (won't work as expected) -->
-   <button class="btn-primary btn-sm">Click me</button>
+   <!-- ❌ DON'T -->
+   <button class="btn--primary button-small">Click me</button>
+   <div class="modal modal--open"></div>
    ```
 
 3. **State flows through attributes** — Not class modifiers:
@@ -170,7 +184,7 @@ import "fikir-css/css";
 | Overlay JS helpers (CDN) | `<script src="https://snrj35-dev.github.io/Fikir-Css/dist/fikir-helpers.js"></script>` |
 | Design tokens (JSON) | `import tokens from "fikir-css/tokens" assert { type: "json" }` |
 | Slice (opt-in) | `import "fikir-css/slices/forms"` |
-| Theme layer | `import "fikir-css/themes/dark"` |
+| Theme layer | `import "fikir-css/themes/dark"` or `import "fikir-css/themes/oled"` |
 
 > **One rule:** use `fikir-css/css` for the stylesheet everywhere. `fikir-css/tooling` for typed resolvers. `fikir-css/helpers` for overlay behavior (or use the CDN script `window.Fikir.*`). Nothing else needed to get started.
 
@@ -233,7 +247,7 @@ These are regenerated on each build to catch regressions:
 
 Themes are activated with attributes, not recompilation:
 
-- `data-theme="light|dark|high-contrast"`
+- `data-theme="light|dark|high-contrast|oled"`
 - `data-density="compact|comfortable"`
 - `data-motion="reduced"` when you need an explicit reduced-motion path
 
@@ -283,8 +297,8 @@ See the full matrix in [docs/roadmap/support-matrix.md](./docs/roadmap/support-m
     <p class="alert-description">Your session expires soon.</p>
   </div>
 
-  <!-- Modal (toggle data-open to open/close) -->
-  <div class="modal" data-open="false" role="dialog" aria-modal="true">
+  <!-- Modal (add data-open="true" to open; remove data-open to close) -->
+  <div class="modal" role="dialog" aria-modal="true">
     <div class="modal-dialog">
       <h2 class="modal-title">Hello</h2>
       <button class="icon-button" aria-label="Close">✕</button>
@@ -333,7 +347,7 @@ Fikir CSS ships a machine-readable selector manifest at `dist/contracts/selector
 ```js
 // Local import
 import selectors from "fikir-css/contracts/selectors";
-// { "component.button": "btn", "component.buttonPrimary": "btn-primary", … }
+// { "component.btn": "btn", "component.btnPrimary": "btn-primary", … }
 ```
 
 **Agent/Bot Fetch Access:**
@@ -343,10 +357,10 @@ curl -s https://snrj35-dev.github.io/Fikir-Css/dist/contracts/selectors.json
 ```
 
 **Key conventions for AI context:**
-- Theme: `data-theme="light|dark|high-contrast"` on `<html>`
+- Theme: `data-theme="light|dark|high-contrast|oled"` on `<html>`
 - Density: `data-density="compact|comfortable"` on `<html>`
-- State: `data-open="true|false"`, `data-active="true"`, `data-disabled="true"`
-- Variants: `btn-primary`, `btn-outline`, `btn-danger` (modifier suffix, not `btn--primary`)
+- State: `data-open="true"` for open overlays (remove the attribute to hide), `data-active="true"`, `data-disabled="true"`, `aria-current="page"`
+- Variants: `btn-primary`, `btn-outline`, `btn-danger`, `btn-sm` (contract classes, not `btn--primary`)
 - ARIA-first: components are styled off semantic HTML + ARIA attributes, not extra class toggles
 
 ### Token rules for custom CSS — MUST follow
@@ -425,7 +439,7 @@ Current tier summary, aligned with [`docs/roadmap/support-matrix.md`](./docs/roa
 | `supported` | 69 surfaces | Production-ready, selector contract frozen |
 | `beta` | 22 surfaces | Usable, but additive or compatibility changes may land in MINOR releases |
 | `experimental` | 10 surfaces + 2 patterns | No semver guarantee; not recommended for production |
-| `deprecated` | 0 | No deprecated public surface in the v1.0.0 baseline |
+| `deprecated` | 0 | No deprecated public surface in the v1.2.1 baseline |
 
 ### Supported families
 

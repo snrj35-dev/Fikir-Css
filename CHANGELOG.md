@@ -5,6 +5,56 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ---
 
+## [1.2.1] — 2026-04-28
+
+### Focus: AI-Native Ecosystem
+
+### Added
+- Zero-custom-CSS dashboard reference in `examples/dashboard/`.
+- Composition guidance in `docs/guides/composition-patterns.md`.
+- AI-focused SKILL updates for dashboard, `kpi-card`, `stat-group`, and `app-shell` usage.
+
+### Changed
+- Strengthened README/SKILL guidance so AI agents prefer existing surfaces and contracts before writing custom CSS.
+- Expanded dashboard and starter examples around page-level composition.
+
+---
+
+## [1.2.0] — 2026-04-27
+
+### Focus: Premium & Ecosystem
+
+### Added
+- OLED theme via `data-theme="oled"`.
+- Glass variants for `app-shell`, `modal`, and `navbar`.
+- Fullscreen app-shell variant for edge-to-edge dashboard layouts.
+- Limited spacing/layout utility layer.
+- Standalone helper bundle `fikir-helpers.js`.
+- Zero-to-dashboard and headless adapter guidance.
+
+### Changed
+- Typography surfaces (`heading`, `text`, `code`, `kbd`, `quote`, `callout`) were expanded in contracts but remain experimental until promotion evidence is complete.
+
+---
+
+## [1.1.0] — 2026-04-26
+
+### Focus: Maturity Gaps, Documentation, CI Hardening
+
+### Added
+- Canonical component documentation pass across 25+ components.
+- `SKILL.md` and `.github/copilot-instructions.md` for AI agent usage.
+- `density_effect` metadata in `capabilities.json`.
+- VS Code custom-data manifests as stable generated outputs.
+
+### Changed
+- Strengthened docs-selector consistency checks to reduce AI-facing documentation drift.
+
+### Fixed
+- Legacy `comp-surface` skeleton guidance replaced with the current `surface` class.
+
+---
+
 ## [1.0.0] — 2026-04-19
 
 ### Focus: Stable Release — AI Adoption, Framework Support, Quality Gates (M14–M21)

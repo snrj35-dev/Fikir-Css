@@ -17,7 +17,7 @@ Bu aşamada v1.2.1 sürümünün yaygınlaştırılması ve kurumsal ölçekteki
 
 ### 24.1 — Sürüm Öncesi Son Kontroller (P1)
 
-1.1.0 sürümü yayınlanmadan önce yapılması gereken kritik doğrulamalar:
+1.3.0 sürümü yayınlanmadan önce yapılması gereken kritik doğrulamalar:
 
 - [ ] Tüm değişiklikler additive, breaking yok (Sürüm öncesi son kontrol)
   - [ ] `selectors.json` ve `anatomy.json` üzerinde geriye dönük uyumluluk kontrolü
@@ -38,7 +38,7 @@ Fikir CSS'in mevcut temiz ve profesyonel görünümünü modern web trendleriyle
 
 ### 24.3 — Mimari ve İşlevsel Eksikliklerin Giderilmesi
 
-Mevcut 99 yüzey (surface) devasa bir alan kaplıyor. Ancak modern web uygulamalarının karmaşık ihtiyaçları için şu eksiklikler planlanmıştır:
+Mevcut 100+ yüzey ve pattern devasa bir alan kaplıyor. Ancak modern web uygulamalarının karmaşık ihtiyaçları için şu eksiklikler planlanmıştır:
 
 - **Headless UI Entegrasyon (Adapter) Rehberleri:** Fikir CSS sıfır-runtime (zero-runtime) olarak mükemmel çalışıyor. Ancak `date-range-picker`, `combobox`, `tree-view` gibi erişilebilirlik (a11y) açısından karmaşık state yönetimi gerektiren bileşenler için **Radix UI**, **Zag.js** veya **React Aria** ile entegrasyon (adapter) rehberlerinin yazılması.
 - **Çok Sınırlı "Utility" Kaçış Kapıları:** "Contract-driven" yapı korunmalı; ancak geliştiricilerin sadece basit bir `margin-top` veya `padding` vermek için inline-style (`style="..."`) yazmasını engellemek adına, çok katı kurallara bağlı sınırlı bir "spacing/layout utility" katmanının (örn: `p-4`, `mt-2`) projeye entegre edilmesi değerlendirilmelidir.
